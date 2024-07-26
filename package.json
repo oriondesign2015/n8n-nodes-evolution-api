@@ -42,9 +42,6 @@
       "dist/nodes/HttpBin/HttpBin.node.js"
     ]
   },
-  "dependencies": {
-    "axios": "^0.14.0" // versão do axios
-  },
   "devDependencies": {
     "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
@@ -52,8 +49,7 @@
     "gulp": "^4.0.2",
     "n8n-workflow": "*",
     "prettier": "^3.3.2",
-    "typescript": "^5.5.3",
-    "@types/axios": "^0.14.0" // versão dos tipos do axios
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
