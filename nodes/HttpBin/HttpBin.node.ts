@@ -11,14 +11,14 @@ export class HttpBin implements INodeType {
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Interact with Evolution API',
 		defaults: {
-			name: 'Evolution API',
+			name: 'HttpBin',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [
 			{
 				name: 'httpbinApi',
-				required: true,
+				required: false,
 			},
 		],
 		requestDefaults: {
