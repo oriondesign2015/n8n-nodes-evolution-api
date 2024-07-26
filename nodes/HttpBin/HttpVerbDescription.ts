@@ -10,34 +10,34 @@ export const httpVerbOperations: INodeProperties[] = [
 
 		displayOptions: {
 			show: {
-				resource: ['httpVerb'],
+				resource: ['create-instance'],
 			},
 		},
 		options: [
 			{
-				name: 'GET',
-				value: 'get',
-				description: 'Perform a GET request',
+				name: 'Instancia Basica',
+				value: 'instance-basic',
+				description: 'Criar uma instancia basica',
 				routing: {
 					request: {
-						method: 'GET',
-						url: '/get',
+						method: 'POST',
+						url: '/instance/create',
 					},
 				},
 			},
 			{
-				name: 'DELETE',
-				value: 'delete',
+				name: 'Instancia com Proxy',
+				value: 'instance-proxy',
 				description: 'Perform a DELETE request',
 				routing: {
 					request: {
-						method: 'DELETE',
-						url: '/delete',
+						method: 'GET',
+						url: '/instance/fetchInstances',
 					},
 				},
 			},
 		],
-		default: 'get',
+		default: 'instance-basic',
 	},
 ];
 
@@ -51,8 +51,8 @@ const getOperation: INodeProperties[] = [
 		description: 'Select type of data to send [Query Parameters]',
 		displayOptions: {
 			show: {
-				resource: ['httpVerb'],
-				operation: ['get'],
+				resource: ['create-instance'],
+				operation: ['instance-basic'],
 			},
 		},
 		type: 'options',

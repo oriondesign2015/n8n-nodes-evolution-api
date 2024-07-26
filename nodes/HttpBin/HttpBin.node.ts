@@ -48,11 +48,15 @@ export class HttpBin implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'HTTP Verb',
-						value: 'httpVerb',
+						name: 'Criar Instancias',
+						value: 'create-instance',
+					},
+					{
+						name: 'Buscar Instancias',
+						value: 'fetch-instances',
 					},
 				],
-				default: 'httpVerb',
+				default: 'create-instance',
 			},
 
 			...httpVerbOperations,
