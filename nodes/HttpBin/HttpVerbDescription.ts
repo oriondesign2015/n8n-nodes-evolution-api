@@ -28,7 +28,7 @@ export const httpVerbOperations: INodeProperties[] = [
 			{
 				name: 'Instancia com Proxy',
 				value: 'instance-proxy',
-				description: 'Perform a DELETE request',
+				description: 'Criar uma instancia com Proxy',
 				routing: {
 					request: {
 						method: 'GET',
@@ -109,6 +109,40 @@ const getOperation: INodeProperties[] = [
 		typeOptions: {
 			multipleValues: true,
 		},
+	},
+	// Adicionando novos campos para a instância básica
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância',
+	},
+	{
+		displayName: 'Token',
+		name: 'token',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o token',
+	},
+	{
+		displayName: 'Integração',
+		name: 'integration',
+		type: 'options',
+		options: [
+			{
+				name: 'WHATSAPP-BAILEYS',
+				value: 'whatsapp-baileys',
+			},
+			{
+				name: 'WHATSAPP-BUSINESS',
+				value: 'whatsapp-business',
+			},
+		],
+		default: 'whatsapp-baileys',
+		description: 'Escolha a integração',
 	},
 ];
 
