@@ -45,26 +45,6 @@ export const httpVerbOperations: INodeProperties[] = [
 // We do that by adding `operation: ["get"]` to `displayOptions.show`
 const getOperation: INodeProperties[] = [
 	{
-		displayName: 'Type of Data',
-		name: 'typeofData',
-		default: 'queryParameter',
-		description: 'Select type of data to send [Query Parameters]',
-		displayOptions: {
-			show: {
-				resource: ['create-instance'],
-				operation: ['instance-basic'],
-			},
-		},
-		type: 'options',
-		options: [
-			{
-				name: 'Query',
-				value: 'queryParameter',
-			},
-		],
-		required: true,
-	},
-	{
 		displayName: 'Query Parameters',
 		name: 'arguments',
 		default: {},
@@ -118,6 +98,11 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'Digite o nome da instância',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+			},
+		},
 	},
 	{
 		displayName: 'Token',
@@ -126,6 +111,11 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'Digite o token',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+			},
+		},
 	},
 	{
 		displayName: 'Integração',
@@ -143,6 +133,11 @@ const getOperation: INodeProperties[] = [
 		],
 		default: 'whatsapp-baileys',
 		description: 'Escolha a integração',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+			},
+		},
 	},
 ];
 

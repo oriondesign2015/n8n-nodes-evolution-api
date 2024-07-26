@@ -1,5 +1,6 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
+import axios from 'axios';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
@@ -63,4 +64,25 @@ export class HttpBin implements INodeType {
 			...httpVerbFields,
 		],
 	};
+
+	async execute(this: IExecuteFunctions) {
+		const credentials = this.getCredentials('httpbinApi');
+		const instanceName = this.getNodeParameter('instanceName', 0) as string;
+		const token = this.getNodeParameter('token', 0) as string;
+		const integration = this.getNodeParameter('integration', 0) as string;
+
+		const url = `https://${credentials["server-url"]}/instance/create`;
+		const headers = {
+			apikey: credentials.apikey,
+		};
+
+		const body = {
+			instanceName,
+			token,
+			integration,
+		};
+
+		const response = await axios.post(url, body, { headers });
+		return response.data;
+	}
 }
