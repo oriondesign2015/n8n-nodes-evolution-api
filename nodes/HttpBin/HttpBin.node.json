@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-evolution-api",
+	"node": "n8n-nodes-base.httpbin",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Development", "Developer Tools"],

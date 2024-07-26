@@ -3,15 +3,15 @@ import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Evolution API',
+		displayName: 'HttpBin',
 		name: 'httpBin',
-		icon: 'file:evolutionapi.svg',
+		icon: 'file:httpbin.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Envie mensagem na Evolution API',
+		description: 'Interact with HttpBin API',
 		defaults: {
-			name: 'Evolution API',
+			name: 'HttpBin',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
