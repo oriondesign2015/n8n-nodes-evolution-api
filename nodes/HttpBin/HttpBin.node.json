@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://doc.evolution-api.com/api-reference"
+				"url": "http://httpbin.org/#/Auth/get_bearer"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://doc.evolution-api.com/api-reference"
+				"url": "http://httpbin.org/"
 			}
 		]
 	}
