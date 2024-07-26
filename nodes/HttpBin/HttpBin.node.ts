@@ -3,26 +3,26 @@ import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'HttpBin',
+		displayName: 'Evolution API',
 		name: 'httpBin',
 		icon: 'file:evolutionapi.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Interact with HttpBin API',
+		description: 'Interact with Evolution API',
 		defaults: {
-			name: 'HttpBin',
+			name: 'Evolution API',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [
 			{
 				name: 'httpbinApi',
-				required: false,
+				required: true,
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://httpbin.org',
+			baseURL: 'https://doc.evolution-api.com/api-reference',
 			url: '',
 			headers: {
 				Accept: 'application/json',
