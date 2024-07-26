@@ -10,14 +10,14 @@ export const httpVerbOperations: INodeProperties[] = [
 
 		displayOptions: {
 			show: {
-				resource: ['httpVerb'],
+				resource: ['create-instance'],
 			},
 		},
 		options: [
 			{
-				name: 'GET',
-				value: 'get',
-				description: 'Perform a GET request',
+				name: 'Instancia Basica',
+				value: 'create-instance-basic',
+				description: 'Criar uma instancia Basica',
 				routing: {
 					request: {
 						method: 'GET',
@@ -36,8 +36,27 @@ export const httpVerbOperations: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				name: 'Create Instance',
+				value: 'create-instance',
+				description: 'Create a new instance',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"]}}/instance/create',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							instanceName: '={{$parameter["instanceName"]}}',
+							token: '={{$parameter["token"]}}',
+							integration: '={{$parameter["integration"]}}',
+						},
+					},
+				},
+			},
 		],
-		default: 'get',
+		default: 'create-instance',
 	},
 ];
 
@@ -235,6 +254,57 @@ const deleteOperation: INodeProperties[] = [
 	},
 ];
 
+// Here we define what to show when the `create-instance` operation is selected.
+// We do that by adding `operation: ["create-instance"]` to `displayOptions.show`
+const createInstanceOperation: INodeProperties[] = [
+	{
+		displayName: 'Instance Name',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['httpVerb'],
+				operation: ['create-instance'],
+			},
+		},
+	},
+	{
+		displayName: 'Token',
+		name: 'token',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['httpVerb'],
+				operation: ['create-instance'],
+			},
+		},
+	},
+	{
+		displayName: 'Integration',
+		name: 'integration',
+		type: 'options',
+		options: [
+			{
+				name: 'WHATSAPP-BAILEYS',
+				value: 'WHATSAPP-BAILEYS',
+			},
+			{
+				name: 'WHATSAPP-BUSINESS',
+				value: 'WHATSAPP-BUSINESS',
+			},
+		],
+		default: 'WHATSAPP-BAILEYS',
+		displayOptions: {
+			show: {
+				resource: ['httpVerb'],
+				operation: ['create-instance'],
+			},
+		},
+	},
+];
+
 export const httpVerbFields: INodeProperties[] = [
 	/* -------------------------------------------------------------------------- */
 	/*                                httpVerb:get                                */
@@ -245,4 +315,9 @@ export const httpVerbFields: INodeProperties[] = [
 	/*                              httpVerb:delete                               */
 	/* -------------------------------------------------------------------------- */
 	...deleteOperation,
+
+	/* -------------------------------------------------------------------------- */
+	/*                           httpVerb:create-instance                         */
+	/* -------------------------------------------------------------------------- */
+	...createInstanceOperation,
 ];

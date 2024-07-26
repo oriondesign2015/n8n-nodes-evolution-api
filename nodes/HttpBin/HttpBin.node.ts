@@ -42,17 +42,17 @@ export class HttpBin implements INodeType {
 		 */
 		properties: [
 			{
-				displayName: 'Resource',
+				displayName: 'Recurso',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,
 				options: [
 					{
-						name: 'HTTP Verb',
-						value: 'httpVerb',
+						name: 'Criar instancia',
+						value: 'create-instance',
 					},
 				],
-				default: 'httpVerb',
+				default: 'create-instance',
 			},
 
 			...httpVerbOperations,
