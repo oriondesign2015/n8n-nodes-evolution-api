@@ -7,44 +7,43 @@ import {
 
 export class HttpBinApi implements ICredentialType {
 	name = 'httpbinApi';
-	displayName = 'HttpBin API';
+	displayName = 'Evolution API';
 	documentationUrl = 'https://doc.evolution-api.com/pt';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'Token',
-			name: 'token',
+			displayName: 'Server Url',
+			name: 'server-url',
+			type: 'string',
+			default: '',
+		},
+		{
+			displayName: 'ApiKey',
+			name: 'apikey',
 			type: 'string',
 			default: '',
 			typeOptions: {
 				password: true,
 			}
 		},
-		{
-			displayName: 'Domain',
-			name: 'domain',
-			type: 'string',
-			default: 'https://httpbin.org',
-		},
 	];
 
-	// This allows the credential to be used by other parts of n8n
-	// stating how this credential is injected as part of the request
-	// An example is the Http Request node that can make generic calls
-	// reusing this credential
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
 			headers: {
-				Authorization: '={{"Bearer " + $credentials.token}}',
+				apikey: '={{$credentials.apikey}}',
 			},
 		},
 	};
 
-	// The block below tells how this credential can be tested
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials?.domain}}',
-			url: '/bearer',
+			baseURL: '={{$credentials["server-url"]}}',
+			url: '/instance/fetchInstances',
+			method: 'GET',
+			headers: {
+				apikey: '={{$credentials.apikey}}',
+			},
 		},
 	};
 }
