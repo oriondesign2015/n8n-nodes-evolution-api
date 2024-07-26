@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, ICredentialDataDecryptedObject } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 import axios from 'axios';
 
@@ -22,25 +22,6 @@ export class HttpBin implements INodeType {
 				required: true,
 			},
 		],
-		requestDefaults: {
-			baseURL: 'https://doc.evolution-api.com/api-reference',
-			url: '',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-		},
-		/**
-		 * In the properties array we have two mandatory options objects required
-		 *
-		 * [Resource & Operation]
-		 *
-		 * https://docs.n8n.io/integrations/creating-nodes/code/create-first-node/#resources-and-operations
-		 *
-		 * In our example, the operations are separated into their own file (HTTPVerbDescription.ts)
-		 * to keep this class easy to read.
-		 *
-		 */
 		properties: [
 			{
 				displayName: 'Resource',
@@ -59,14 +40,13 @@ export class HttpBin implements INodeType {
 				],
 				default: 'create-instance',
 			},
-
 			...httpVerbOperations,
 			...httpVerbFields,
 		],
 	};
 
 	async execute(this: IExecuteFunctions) {
-		const credentials = this.getCredentials('httpbinApi');
+		const credentials = await this.getCredentials('httpbinApi') as ICredentialDataDecryptedObject;
 		const instanceName = this.getNodeParameter('instanceName', 0) as string;
 		const token = this.getNodeParameter('token', 0) as string;
 		const integration = this.getNodeParameter('integration', 0) as string;
