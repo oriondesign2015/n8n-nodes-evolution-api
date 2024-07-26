@@ -38,7 +38,7 @@ export class HttpBinApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials["server-url"]}}',
+			baseURL: '={{ constructBaseUrl($credentials["server-url"]) }}',
 			url: '/instance/fetchInstances',
 			method: 'GET',
 			headers: {
@@ -46,4 +46,12 @@ export class HttpBinApi implements ICredentialType {
 			},
 		},
 	};
+}
+
+// Função para construir a URL base com HTTPS se necessário
+function constructBaseUrl(url: string): string {
+	if (!/^https?:\/\//i.test(url)) {
+		url = 'https://' + url;
+	}
+	return url;
 }
