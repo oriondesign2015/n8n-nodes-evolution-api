@@ -931,7 +931,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: '��udio',
+		displayName: 'Audio',
 		name: 'media',
 		type: 'string',
 		default: '',
@@ -1142,17 +1142,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Rejeitar Chamadas',
 		name: 'rejectCall',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: true,
 		description: 'Whether to reject calls or not.',
 		displayOptions: {
@@ -1179,17 +1169,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Ignorar Grupos',
 		name: 'groupsIgnore',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: false,
 		description: 'Whether to ignore groups or not.',
 		displayOptions: {
@@ -1202,17 +1182,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Sempre Online',
 		name: 'alwaysOnline',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: true,
 		description: 'Whether the instance should always be online or not.',
 		displayOptions: {
@@ -1225,17 +1195,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Ler Mensagens',
 		name: 'readMessages',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: false,
 		description: 'Whether to read messages or not.',
 		displayOptions: {
@@ -1248,17 +1208,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Sincronizar Histórico Completo',
 		name: 'syncFullHistory',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: false,
 		description: 'Whether to sync the full history or not.',
 		displayOptions: {
@@ -1271,17 +1221,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Ler Status',
 		name: 'readStatus',
-		type: 'options',
-		options: [
-			{
-				name: 'Sim',
-				value: true,
-			},
-			{
-				name: 'Não',
-				value: false,
-			},
-		],
+		type: 'boolean',
 		default: false,
 		description: 'Whether to read status or not.',
 		displayOptions: {
