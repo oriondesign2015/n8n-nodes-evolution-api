@@ -228,6 +228,31 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Enviar mensagem de audio
+		if (resource === 'messages-api' && operation === 'sendAudio') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const media = this.getNodeParameter('midia', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendWhatsAppAudio/${instanceName}`,
+				body: {
+					number: remoteJid,
+					midia: media,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}

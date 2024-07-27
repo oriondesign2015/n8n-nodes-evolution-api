@@ -690,92 +690,49 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+	// Campos = Enviar Audio
 	{
-				displayName: 'Nome da Instância',
-				name: 'instanceName',
-				type: 'string',
-				default: '',
-				required: false,
-				description: 'Digite o nome da instância que vai enviar o áudio',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai enviar o áudio',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendAudio'],
 			},
-			{
-				displayName: 'Número do Destinatário',
-				name: 'remoteJid',
-				type: 'string',
-				default: '',
-				required: true,
-				description: 'Número do destinatário',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
+		},
+	},
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendAudio'],
 			},
-			{
-				displayName: 'Áudio',
-				name: 'midia',
-				type: 'string',
-				default: '',
-				required: true,
-				description: 'URL ou base64 do áudio',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
+		},
+	},
+	{
+		displayName: 'Áudio',
+		name: 'midia',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'URL ou base64 do áudio',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendAudio'],
 			},
-
-			// Campos = Enviar Audio
-			{
-				displayName: 'Nome da Instância',
-				name: 'instanceName',
-				type: 'string',
-				default: '',
-				required: false,
-				description: 'Digite o nome da instância que vai enviar o áudio',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
-			},
-			{
-				displayName: 'Número do Destinatário',
-				name: 'remoteJid',
-				type: 'string',
-				default: '',
-				required: true,
-				description: 'Número do destinatário',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
-			},
-			{
-				displayName: 'Áudio',
-				name: 'midia',
-				type: 'string',
-				default: '',
-				required: true,
-				description: 'URL ou base64 do áudio',
-				displayOptions: {
-					show: {
-						resource: ['messages-api'],
-						operation: ['sendAudio'],
-					},
-				},
-			},
+		},
+	},
 
 
 ];
