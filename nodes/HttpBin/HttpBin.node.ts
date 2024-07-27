@@ -64,32 +64,6 @@ export class HttpBin implements INodeType {
 		let responseData;
 
 		// Criar instancia basica
-		if (resource === 'instances-api' && operation === 'fetch-instances') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-
-			const options: IRequestOptions = {
-				method: 'GET' as IHttpRequestMethods,
-				headers: {
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/instance/fetchInstances`,
-				json: true,
-			};
-
-			responseData = await this.helpers.request(options);
-			const instances: Instance[] = responseData.instances; // Supondo que a resposta tenha um campo 'instances'
-
-			const instanceOptions = instances.map((instance: Instance) => ({
-				name: instance.name,
-				value: instance.id,
-			}));
-
-			return [this.helpers.returnJsonArray(instanceOptions)];
-		}
-
-		// Criar instancia basica
 		if (resource === 'instances-api' && operation === 'instance-basic') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
@@ -149,6 +123,25 @@ export class HttpBin implements INodeType {
 						password: proxyPassword,
 					},
 				},
+				json: true,
+			};
+
+			responseData = await this.helpers.request(options);
+		}
+
+		// Buscar Instancia
+		if (resource === 'instances-api' && operation === 'fetch-instances') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+
+			const options: IRequestOptions = {
+				method: 'GET' as IHttpRequestMethods,
+				headers: {
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/fetchInstances${instanceName ? `?instanceName=${instanceName}` : ''}`,
 				json: true,
 			};
 

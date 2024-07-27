@@ -375,6 +375,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 	// Campos = Buscar Instancia
 	{
 		displayName: 'Nome da Instância',
@@ -390,7 +391,6 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
-
 
 	// Campos = Enviar mensagem de texto
 	{
