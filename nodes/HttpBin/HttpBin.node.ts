@@ -188,6 +188,7 @@ export class HttpBin implements INodeType {
 				uri: `${serverUrl}/message/sendMedia/${instanceName}`,
 				body: {
 					number: remoteJid,
+					'mediatype': 'image',
 					media: media,
 					mimetype: mimetype,
 					caption: caption,
