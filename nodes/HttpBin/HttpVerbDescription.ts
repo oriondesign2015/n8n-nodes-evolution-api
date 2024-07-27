@@ -508,7 +508,7 @@ const getOperation: INodeProperties[] = [
 	// Campos = Conectar Instância
 	{
 		displayName: 'Nome da Instância',
-		name: 'instance-connect',
+		name: 'instanceName',
 		type: 'string',
 		default: '',
 		required: true,
@@ -516,7 +516,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['fetch-instances'],
+				operation: ['instance-connect'],
 			},
 		},
 	},
