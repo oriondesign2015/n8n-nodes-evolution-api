@@ -1,6 +1,11 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
+interface Instance {
+    id: string; // ou o tipo correto
+    name: string; // ou o tipo correto
+}
+
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Evolution API',
@@ -95,15 +100,13 @@ export class HttpBin implements INodeType {
 			};
 
 			responseData = await this.helpers.request(options);
-			const instances = responseData.instances; // Supondo que a resposta tenha um campo 'instances'
+			const instances: Instance[] = responseData.instances; // Supondo que a resposta tenha um campo 'instances'
 
-			// Preencher as opções
-			const instanceOptions = instances.map(instance => ({
-				name: instance.name, // Nome da instância
-				value: instance.id, // ID da instância
+			const instanceOptions = instances.map((instance: Instance) => ({
+				name: instance.name,
+				value: instance.id,
 			}));
 
-			// Retornar as opções para o campo
 			return [this.helpers.returnJsonArray(instanceOptions)];
 		}
 
