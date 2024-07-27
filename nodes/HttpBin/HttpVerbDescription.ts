@@ -22,6 +22,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Criar Instancia Basica',
 				value: 'instance-basic',
 				description: 'Criar uma instancia basica',
+				action: 'Criar instancia Basica',
 				routing: {
 					request: {
 						method: 'POST',

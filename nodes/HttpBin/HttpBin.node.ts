@@ -8,7 +8,7 @@ export class HttpBin implements INodeType {
 		icon: 'file:evolutionapi.svg',
 		group: ['transform'],
 		version: 1,
-		subtitle: '={{$parameter["resource"]}}', // + ": " + $parameter["operation"]}}
+		subtitle: '={{$parameter["operation"]}}', // + ": " + $parameter["operation"]}}
 		description: 'Interact with Evolution API',
 		defaults: {
 			name: 'Evolution API',
