@@ -178,6 +178,7 @@ export class HttpBin implements INodeType {
 			const media = this.getNodeParameter('media', 0);
 			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
+			const fileName = this.getNodeParameter('fileName', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -192,6 +193,8 @@ export class HttpBin implements INodeType {
 					media: media,
 					mimetype: mimetype,
 					caption: caption,
+					fileName: fileName,
+
 				},
 				json: true,
 			};
@@ -208,6 +211,7 @@ export class HttpBin implements INodeType {
 			const media = this.getNodeParameter('media', 0);
 			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
+			const fileName = this.getNodeParameter('fileName', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -222,6 +226,8 @@ export class HttpBin implements INodeType {
 					media: media,
 					mimetype: mimetype,
 					caption: caption,
+					fileName: fileName,
+
 				},
 				json: true,
 			};
@@ -263,6 +269,7 @@ export class HttpBin implements INodeType {
 			const media = this.getNodeParameter('media', 0);
 			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
+			const fileName = this.getNodeParameter('fileName', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -277,6 +284,7 @@ export class HttpBin implements INodeType {
 					media: media,
 					mimetype: mimetype,
 					caption: caption,
+					fileName: fileName,
 				},
 				json: true,
 			};
