@@ -286,7 +286,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o nome da instância',
 		displayOptions: {
 			show: {
-				resource: ['httpVerb'],
+				resource: ['fetch-instances'],
 				operation: ['fetch-instances'],
 			},
 		},
