@@ -64,19 +64,20 @@ export class HttpBin implements INodeType {
 		],
 	};
 
-	async execute(this: IExecuteFunctions) {
+	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
 		const operation = this.getNodeParameter('operation', 0);
 
 		let responseData;
 
 		if (resource === 'fetch-instances' && operation === 'fetch-instances') {
-			const serverUrl = this.getCredentials('httpbinApi').server-url;
-			const apiKey = this.getCredentials('httpbinApi').apikey;
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 
-			const options = {
-				method: 'GET',
+			const options: IRequestOptions = {
+				method: 'GET' as IHttpRequestMethods,
 				headers: {
 					apikey: apiKey,
 				},
@@ -88,6 +89,6 @@ export class HttpBin implements INodeType {
 		}
 
 		// Retornar apenas o JSON
-		return this.helpers.returnJsonArray(responseData);
+		return [this.helpers.returnJsonArray(responseData)];
 	}
 }
