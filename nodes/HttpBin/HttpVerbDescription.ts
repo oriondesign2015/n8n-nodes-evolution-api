@@ -871,7 +871,9 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['instances-api'],
 				operation: ['instanceSettings'],
-				'rejectCall': true,
+				'rejectCall': [
+					true,
+				],
 			},
 		},
 	},
