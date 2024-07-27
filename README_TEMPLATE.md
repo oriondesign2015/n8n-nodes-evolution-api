@@ -5,8 +5,8 @@ Instancias: <br>
 ✅ Criação de Instancias com Proxy; (by Orion)<br>
 ✅ Busca por instancias (com e sem filtro); (by Orion)<br>
 ✅ Configurações da instancia; (by Orion)<br>
-✅ Conexão de instância;<br>
-❌ Reiniciar instancia;<br>
+✅ Conexão de instância; (by Orion)<br>
+✅ Reiniciar instancia;<br>
 ❌ Desconectar instancia;<br>
 ❌ Deletar instancia;<br>
 <br>

@@ -143,6 +143,25 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Reiniciar Instancia
+		if (resource === 'instances-api' && operation === 'restart-instance') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+
+			const options: IRequestOptions = {
+				method: 'PUT' as IHttpRequestMethods,
+				headers: {
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/restart/${instanceName}`,
+				json: true,
+			};
+
+			responseData = await this.helpers.request(options);
+		}
+
 		// Buscar Instancia
 		if (resource === 'instances-api' && operation === 'fetch-instances') {
 			const credentials = await this.getCredentials('httpbinApi');
