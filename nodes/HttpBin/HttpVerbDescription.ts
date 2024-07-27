@@ -41,7 +41,23 @@ export const httpVerbOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'POST',
-						url: '/instance/create',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
+						headers: {
+							'Content-Type': 'application/json',
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							instanceName: '={{$node["Nome da Instância"].instanceName}}',
+							token: '={{$node["Token"].token}}',
+							integration: 'WHATSAPP-BAILEYS',
+							proxy: {
+								host: '={{$node["Proxy Host"].proxyHost}}',
+								port: '={{$node["Proxy Port"].proxyPort}}',
+								protocol: '={{$node["Proxy Protocol"].proxyProtocol}}',
+								username: '={{$node["Proxy Username"].proxyUsername}}',
+								password: '={{$node["Proxy Password"].proxyPassword}}',
+							},
+						},
 					},
 				},
 			},
@@ -163,7 +179,7 @@ const getOperation: INodeProperties[] = [
 		name: 'token',
 		type: 'string',
 		default: '',
-		required: true,
+		required: false,
 		description: 'Digite o token',
 		displayOptions: {
 			show: {
@@ -215,7 +231,7 @@ const getOperation: INodeProperties[] = [
 		name: 'token',
 		type: 'string',
 		default: '',
-		required: true,
+		required: false,
 		description: 'Digite o token',
 		displayOptions: {
 			show: {
@@ -303,7 +319,7 @@ const getOperation: INodeProperties[] = [
 		name: 'proxyUsername',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome de usuário do proxy',
 		displayOptions: {
 			show: {
@@ -317,7 +333,7 @@ const getOperation: INodeProperties[] = [
 		name: 'proxyPassword',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		typeOptions: {
 			password: true,
 		},
