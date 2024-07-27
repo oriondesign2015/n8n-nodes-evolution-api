@@ -246,7 +246,7 @@ export class HttpBin implements INodeType {
 				uri: `${serverUrl}/message/sendWhatsAppAudio/${instanceName}`,
 				body: {
 					number: remoteJid,
-					midia: media,
+					audio: media,
 				},
 				json: true,
 			};
