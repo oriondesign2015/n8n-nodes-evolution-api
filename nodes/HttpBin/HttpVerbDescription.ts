@@ -433,10 +433,6 @@ const getOperation: INodeProperties[] = [
 				operation: ['sendText'],
 			},
 		},
-
-		// Coloquei 5 linhas para ficar com mais cara de campo de texto
-		rows: 5,
-
 	},
 
 ];
