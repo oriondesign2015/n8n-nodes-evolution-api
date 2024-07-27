@@ -143,6 +143,7 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Confiturações da instancia
 		if (resource === 'instances-api' && operation === 'instanceSettings') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
@@ -156,6 +157,20 @@ export class HttpBin implements INodeType {
 			const syncFullHistory = this.getNodeParameter('syncFullHistory', 0);
 			const readStatus = this.getNodeParameter('readStatus', 0);
 
+			const body: any = {
+				rejectCall,
+				groupsIgnore,
+				alwaysOnline,
+				readMessages,
+				syncFullHistory,
+				readStatus,
+			};
+
+			// Adiciona msgCall apenas se rejectCall for true
+			if (rejectCall) {
+				body.msgCall = msgCall || '';
+			}
+
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
 				headers: {
@@ -163,15 +178,7 @@ export class HttpBin implements INodeType {
 					apikey: apiKey,
 				},
 				uri: `${serverUrl}/settings/set/${instanceName}`,
-				body: {
-					rejectCall: rejectCall,
-					msgCall: msgCall || '',
-					groupsIgnore: groupsIgnore,
-					alwaysOnline: alwaysOnline,
-					readMessages: readMessages,
-					syncFullHistory: syncFullHistory,
-					readStatus: readStatus,
-				},
+				body,
 				json: true,
 			};
 			responseData = await this.helpers.request(options);
