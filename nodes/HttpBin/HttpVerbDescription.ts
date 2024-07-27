@@ -92,7 +92,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Definir configurações',
 				value: 'instanceSettings',
 				description: 'Define o comportamento da instancia',
-				action: 'Buscar Instancias',
+				action: 'Definir configurações',
 				routing: {
 					request: {
 						method: 'POST',
@@ -837,6 +837,20 @@ const getOperation: INodeProperties[] = [
 	},
 
 	// Campos = Definir configurações
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome para a instância',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instance-basic'],
+			},
+		},
+	},
 	{
 		displayName: 'Rejeitar Chamadas',
 		name: 'rejectCall',
