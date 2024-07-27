@@ -385,11 +385,12 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o nome da instância',
 		displayOptions: {
 			show: {
-				resource: ['fetch-instances'],
-				operation: ['instances-api'],
+				resource: ['instances-api'],
+				operation: ['fetch-instances'],
 			},
 		},
 	},
+
 
 	// Campos = Enviar mensagem de texto
 	{

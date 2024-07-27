@@ -150,7 +150,7 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
-			const mensagem = this.getNodeParameter('mensagem', 0);
+			const messageText = this.getNodeParameter('messageText', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -161,7 +161,7 @@ export class HttpBin implements INodeType {
 				uri: `${serverUrl}/message/sendText/${instanceName}`,
 				body: {
 					number: remoteJid,
-					text: mensagem,
+					text: messageText,
 				},
 				json: true,
 			};
