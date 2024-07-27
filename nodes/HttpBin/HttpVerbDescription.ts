@@ -336,7 +336,7 @@ const getOperation: INodeProperties[] = [
 		required: true,
 		//typeOptions: {
 		//	password: false,
-		},
+		//},
 		description: 'Digite a senha do proxy',
 		displayOptions: {
 			show: {
