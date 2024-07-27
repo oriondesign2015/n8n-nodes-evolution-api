@@ -212,7 +212,7 @@ export const httpVerbOperations: INodeProperties[] = [
 							number: '={{$node["Número"].number}}',
 							mediatype: 'document',
 							media: '={{$node["Documento"].media}}',
-							text: '={{$node["Mensagem"].text}}',
+							caption: '={{$node["Mensagem"].caption}}',
 						},
 					},
 				},
@@ -780,7 +780,7 @@ const getOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'Mensagem',
-		name: 'text',
+		name: 'caption',
 		type: 'string',
 		default: '',
 		required: false,
