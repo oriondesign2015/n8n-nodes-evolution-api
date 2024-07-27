@@ -425,6 +425,11 @@ export class HttpBin implements INodeType {
 			const caption = this.getNodeParameter('caption', 0);
 			const values = this.getNodeParameter('values', 0);
 
+			// Verifica se values é nulo ou indefinido
+			if (!values || !Array.isArray(values.metadataValues)) {
+				throw new NodeApiError(this.getNode(), 'As opções devem ser fornecidas como um array de metadataValues.');
+			}
+
 			// Extrair os optionValue do fixedCollection
 			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
 
