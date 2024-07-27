@@ -707,7 +707,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mencionar todos? (grupos)',
+		description: 'Mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
