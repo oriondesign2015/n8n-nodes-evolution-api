@@ -900,6 +900,19 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendAudio'],
+			},
+		},
+	},
 
 	// Campos = Enviar Audio
 	{

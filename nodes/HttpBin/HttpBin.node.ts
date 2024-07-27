@@ -424,7 +424,14 @@ export class HttpBin implements INodeType {
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const values = this.getNodeParameter('values', 0);
-			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
+
+			// Extrair os optionValue do fixedCollection
+			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
+
+			// Validação para garantir que parsedValues tenha pelo menos 2 opções
+			if (parsedValues.length < 2) {
+				throw new Error('A lista de valores deve conter pelo menos 2 opções.');
+			}
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -436,9 +443,9 @@ export class HttpBin implements INodeType {
 				body: {
 					number: remoteJid,
 					name: caption,
-					values: typeof values === 'string' ? values.split(',').map(value => ({ optionValue: value.trim() })) : [],
-					selectableCount: 1, // Alterado para número
-					mentionsEveryOne: mentionsEveryOne,
+					values: parsedValues,
+					selectableCount: 1,
+					mentionsEveryOne: this.getNodeParameter('mentionsEveryOne', 0),
 				},
 				json: true,
 			};
