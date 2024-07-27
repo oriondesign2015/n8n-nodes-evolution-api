@@ -22,7 +22,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Criar Instancia Basica',
 				value: 'instance-basic',
 				description: 'Criar uma instancia basica',
-				action: 'Criar instancia Basica',
+				action: 'Criar Instancia Basica',
 				routing: {
 					request: {
 						method: 'POST',
@@ -45,6 +45,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Criar Instancia com Proxy',
 				value: 'instance-proxy',
 				description: 'Criar uma instancia com Proxy',
+				action: 'Criar Instancia com Proxy',
 				routing: {
 					request: {
 						method: 'POST',
@@ -74,6 +75,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Buscar Instancias',
 				value: 'fetch-instances',
 				description: 'Buscar instancias existentes',
+				action: 'Buscar Instancias',
 				routing: {
 					request: {
 						method: 'GET',
@@ -106,6 +108,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Enviar Texto',
 				value: 'sendText',
 				description: 'Enviar mensagem de texto',
+				action: 'Enviar Texto',
 				routing: {
 					request: {
 						method: 'POST',
@@ -126,6 +129,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				name: 'Enviar Midia',
 				value: 'sendMedia',
 				description: 'Buscar instâncias existentes',
+				action: 'Enviar Midia',
 				routing: {
 					request: {
 						method: 'GET',
