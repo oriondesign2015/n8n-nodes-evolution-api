@@ -12,7 +12,7 @@ Instancias: <br>
 <br>
 Mensagens:<br>
 ✅ Enviar mensagem de texto;<br>
-❌ Enviar mensagem de imagem;<br>
+✅ Enviar mensagem de imagem;<br>
 ❌ Enviar mensagem de video;<br>
 ❌ Enviar mensagem de audio;<br>
 ❌ Enviar mensagem de documentos;<br>
