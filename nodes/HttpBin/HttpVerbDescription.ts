@@ -423,7 +423,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Mensagem',
 		name: 'messageText',
-		type: 'textarea',
+		type: 'string',
 		default: '',
 		required: true,
 		description: 'Digite a mensagem de texto que será enviado',
@@ -433,7 +433,12 @@ const getOperation: INodeProperties[] = [
 				operation: ['sendText'],
 			},
 		},
+
+		// Coloquei 5 linhas para ficar com mais cara de campo de texto
+		rows: 5,
+
 	},
+
 ];
 
 
