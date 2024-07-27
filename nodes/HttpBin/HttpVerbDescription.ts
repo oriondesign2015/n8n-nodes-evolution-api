@@ -1043,20 +1043,6 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
-
-	// Campos = Enviar Enquete
-	{
-		displayName: 'Max: 12 opções',
-		name: 'notice',
-		type: 'notice',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendPoll'],
-			},
-		},
-	},
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -1092,6 +1078,19 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'Digite o titulo da sua enquete',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
+	// Campos = Enviar Enquete
+	{
+		displayName: 'Mínimo 2 opções, Máximo 12. Cada opção deve ser única.',
+		name: 'notice',
+		type: 'notice',
+		default: '',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],

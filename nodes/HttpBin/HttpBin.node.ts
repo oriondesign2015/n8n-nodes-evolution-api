@@ -436,8 +436,8 @@ export class HttpBin implements INodeType {
 				body: {
 					number: remoteJid,
 					name: caption,
-					values: typeof values === 'string' ? values.split(',') : [], // Verifica se é string antes de dividir
-					'selectableCount': '1',
+					values: typeof values === 'string' ? values.split(',').map(value => ({ optionValue: value.trim() })) : [],
+					selectableCount: 1, // Alterado para número
 					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
