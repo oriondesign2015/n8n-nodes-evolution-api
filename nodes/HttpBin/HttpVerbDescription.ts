@@ -31,8 +31,8 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Criar uma instancia com Proxy',
 				routing: {
 					request: {
-						method: 'GET',
-						url: '/instance/fetchInstances',
+						method: 'POST',
+						url: '/instance/create',
 					},
 				},
 			},
@@ -44,26 +44,6 @@ export const httpVerbOperations: INodeProperties[] = [
 // Here we define what to show when the `get` operation is selected.
 // We do that by adding `operation: ["get"]` to `displayOptions.show`
 const getOperation: INodeProperties[] = [
-	{
-		displayName: 'Type of Data',
-		name: 'typeofData',
-		default: 'queryParameter',
-		description: 'Select type of data to send [Query Parameters]',
-		displayOptions: {
-			show: {
-				resource: ['create-instance'],
-				operation: ['instance-basic'],
-			},
-		},
-		type: 'options',
-		options: [
-			{
-				name: 'Query',
-				value: 'queryParameter',
-			},
-		],
-		required: true,
-	},
 	{
 		displayName: 'Query Parameters',
 		name: 'arguments',
@@ -118,6 +98,12 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'Digite o nome da instância',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-basic'],
+			},
+		},
 	},
 	{
 		displayName: 'Token',
@@ -126,6 +112,12 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'Digite o token',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-basic'],
+			},
+		},
 	},
 	{
 		displayName: 'Integração',
@@ -143,36 +135,152 @@ const getOperation: INodeProperties[] = [
 		],
 		default: 'whatsapp-baileys',
 		description: 'Escolha a integração',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-basic'],
+			},
+		},
+	},
+	// Adicionando novos campos para a instância com Proxy
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Token',
+		name: 'token',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o token',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Integração',
+		name: 'integration',
+		type: 'options',
+		options: [
+			{
+				name: 'WHATSAPP-BAILEYS',
+				value: 'whatsapp-baileys',
+			},
+			{
+				name: 'WHATSAPP-BUSINESS',
+				value: 'whatsapp-business',
+			},
+		],
+		default: 'whatsapp-baileys',
+		description: 'Escolha a integração',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Proxy Host',
+		name: 'proxyHost',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o host do proxy',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Proxy Port',
+		name: 'proxyPort',
+		type: 'number',
+		default: 8080,
+		required: true,
+		description: 'Digite a porta do proxy',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Proxy Protocol',
+		name: 'proxyProtocol',
+		type: 'options',
+		options: [
+			{
+				name: 'HTTP',
+				value: 'http',
+			},
+			{
+				name: 'HTTPS',
+				value: 'https',
+			},
+		],
+		default: 'http',
+		description: 'Escolha o protocolo do proxy',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Proxy Username',
+		name: 'proxyUsername',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome de usuário do proxy',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Proxy Password',
+		name: 'proxyPassword',
+		type: 'string',
+		default: '',
+		required: false,
+		typeOptions: {
+			password: true,
+		},
+		description: 'Digite a senha do proxy',
+		displayOptions: {
+			show: {
+				resource: ['create-instance'],
+				operation: ['instance-proxy'],
+			},
+		},
 	},
 ];
 
 // Here we define what to show when the DELETE Operation is selected.
 // We do that by adding `operation: ["delete"]` to `displayOptions.show`
 const deleteOperation: INodeProperties[] = [
-	{
-		displayName: 'Type of Data',
-		name: 'typeofData',
-		default: 'queryParameter',
-		description: 'Select type of data to send [Query Parameter Arguments, JSON-Body]',
-		displayOptions: {
-			show: {
-				resource: ['httpVerb'],
-				operation: ['delete'],
-			},
-		},
-		options: [
-			{
-				name: 'Query',
-				value: 'queryParameter',
-			},
-			{
-				name: 'JSON',
-				value: 'jsonData',
-			},
-		],
-		required: true,
-		type: 'options',
-	},
 	{
 		displayName: 'Query Parameters',
 		name: 'arguments',
@@ -182,7 +290,6 @@ const deleteOperation: INodeProperties[] = [
 			show: {
 				resource: ['httpVerb'],
 				operation: ['delete'],
-				typeofData: ['queryParameter'],
 			},
 		},
 		options: [
@@ -229,7 +336,6 @@ const deleteOperation: INodeProperties[] = [
 			show: {
 				resource: ['httpVerb'],
 				operation: ['delete'],
-				typeofData: ['jsonData'],
 			},
 		},
 		options: [
