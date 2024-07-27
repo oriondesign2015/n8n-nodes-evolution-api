@@ -189,7 +189,7 @@ export const httpVerbOperations: INodeProperties[] = [
 						},
 						body: {
 							number: '={{$node["Número"].number}}',
-							midia: '={{$node["Audio"].midia}}',
+							media: '={{$node["Audio"].media}}',
 						},
 					},
 				},
@@ -211,7 +211,7 @@ export const httpVerbOperations: INodeProperties[] = [
 						body: {
 							number: '={{$node["Número"].number}}',
 							mediatype: 'document',
-							midia: '={{$node["Documento"].midia}}',
+							media: '={{$node["Documento"].media}}',
 							text: '={{$node["Mensagem"].text}}',
 						},
 					},
@@ -766,7 +766,7 @@ const getOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'Documento',
-		name: 'midia',
+		name: 'media',
 		type: 'string',
 		default: '',
 		required: true,
