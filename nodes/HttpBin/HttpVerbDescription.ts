@@ -59,7 +59,10 @@ export const httpVerbOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/instance/fetchInstances',
+						url: '={{$credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
 					},
 				},
 			},
@@ -309,7 +312,7 @@ const getOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: true,
+		required: false,
 		description: 'Digite o nome da instância',
 		displayOptions: {
 			show: {
