@@ -159,7 +159,7 @@ export class HttpBin implements INodeType {
 
 			const body: any = {
 				rejectCall,
-				msgCall, // Inclui msgCall no corpo
+				msgCall: msgCall || '',
 				groupsIgnore,
 				alwaysOnline,
 				readMessages,
