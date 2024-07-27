@@ -72,7 +72,7 @@ export const httpVerbOperations: INodeProperties[] = [
 			{
 				name: 'Buscar Instâncias',
 				value: 'fetch-instances',
-				description: 'Buscar instâncias existentes',
+				description: 'Buscar instancias existentes',
 				routing: {
 					request: {
 						method: 'GET',
