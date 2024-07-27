@@ -427,11 +427,6 @@ export class HttpBin implements INodeType {
 
 			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
 
-			// Validação para garantir que parsedValues tenha pelo menos 2 opções
-			if (parsedValues.length < 2) {
-				throw new NodeApiError(this.getNode(), 'A lista de valores deve conter pelo menos 2 opções.');
-			}
-
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
 				headers: {
