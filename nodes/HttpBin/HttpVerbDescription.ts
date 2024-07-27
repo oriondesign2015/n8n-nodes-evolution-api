@@ -415,6 +415,7 @@ const getOperation: INodeProperties[] = [
 				headers: {
 					apikey: '={{$credentials.apikey}}',
 				},
+			},
 		},
 	},
 	{
