@@ -70,6 +70,23 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 
+			// Conectar Instância
+			{
+				name: 'Conectar Instancia',
+				value: 'instance-connect',
+				description: 'Status da instancia',
+				action: 'Conectar Instancia',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/connect/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+					},
+				},
+			},
+
 			// Buscar Instancia
 			{
 				name: 'Buscar Instancias',
@@ -484,6 +501,22 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['instances-api'],
 				operation: ['instance-proxy'],
+			},
+		},
+	},
+
+	// Campos = Conectar Instância
+	{
+		displayName: 'Nome da Instância',
+		name: 'instance-connect',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que deseja pesquisar',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['fetch-instances'],
 			},
 		},
 	},
