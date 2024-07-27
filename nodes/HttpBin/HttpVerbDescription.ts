@@ -806,7 +806,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mencionar todos? (grupos)',
+		description: 'Whether to mention everyone or not.',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -931,7 +931,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Áudio',
+		displayName: '��udio',
 		name: 'media',
 		type: 'string',
 		default: '',
@@ -949,7 +949,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mencionar todos? (grupos)',
+		description: 'Whether to mention everyone or not.',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1035,7 +1035,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mencionar todos? (grupos)',
+		description: 'Whether to mention everyone or not.',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1115,7 +1115,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mencionar todos? (grupos)',
+		description: 'Whether to mention everyone or not.',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1154,7 +1154,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: true,
-		description: 'Defina se as chamadas devem ser rejeitadas.',
+		description: 'Whether to reject calls or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1191,7 +1191,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: false,
-		description: 'Defina se os grupos devem ser ignorados.',
+		description: 'Whether to ignore groups or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1214,7 +1214,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: true,
-		description: 'Defina se a instância deve estar sempre online.',
+		description: 'Whether the instance should always be online or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1237,7 +1237,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: false,
-		description: 'Defina se as mensagens devem ser lidas.',
+		description: 'Whether to read messages or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1260,7 +1260,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: false,
-		description: 'Defina se o histórico completo deve ser sincronizado.',
+		description: 'Whether to sync the full history or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1283,7 +1283,7 @@ const getOperation: INodeProperties[] = [
 			},
 		],
 		default: false,
-		description: 'Defina se os status devem ser lidos.',
+		description: 'Whether to read status or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
