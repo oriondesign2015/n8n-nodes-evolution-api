@@ -423,25 +423,26 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const pollTitle = this.getNodeParameter('caption', 0);
-			const options = this.getNodeParameter('options_display.metadataValues', 0);
+			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[]; // Definindo o tipo
 			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
-			const pollOptions = options.map(option => option.optionValue);
+			// Verifica se options é um array e não está vazio
+			const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
 
 			const requestOptions: IRequestOptions = {
-					method: 'POST' as IHttpRequestMethods,
-					headers: {
-							'Content-Type': 'application/json',
-							apikey: apiKey,
-					},
-					uri: `${serverUrl}/message/sendPoll/${instanceName}`,
-					body: {
-							number: remoteJid,
-							name: pollTitle,
-							values: pollOptions,
-							mentionsEveryOne: mentionsEveryOne,
-					},
-					json: true,
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+				body: {
+					number: remoteJid,
+					name: pollTitle,
+					values: pollOptions,
+					mentionsEveryOne: mentionsEveryOne,
+				},
+				json: true,
 			};
 			responseData = await this.helpers.request(requestOptions);
 		}
