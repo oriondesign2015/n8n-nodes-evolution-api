@@ -39,6 +39,33 @@ export const httpVerbOperations: INodeProperties[] = [
 		],
 		default: 'instance-basic',
 	},
+
+	// Aqui vai mostrar a segunda parte (Buscar Instanica)
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['fetch-instances'],
+			},
+		},
+		options: [
+			{
+				name: 'Buscar Instâncias',
+				value: 'fetch-instances',
+				description: 'Buscar instâncias existentes',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/instance/fetchInstances',
+					},
+				},
+			},
+		],
+		default: 'fetch-instances',
+	},
 ];
 
 // Here we define what to show when the `get` operation is selected.
