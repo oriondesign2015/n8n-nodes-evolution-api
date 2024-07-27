@@ -276,6 +276,21 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+	// Adicionando novos campos para a operação fetch-instances
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância',
+		displayOptions: {
+			show: {
+				resource: ['httpVerb'],
+				operation: ['fetch-instances'],
+			},
+		},
+	},
 ];
 
 // Here we define what to show when the DELETE Operation is selected.
