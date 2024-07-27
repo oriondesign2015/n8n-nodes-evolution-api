@@ -143,32 +143,34 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Enviar mensagem de texto
+		if (resource === 'messages-api' && operation === 'sendText') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instance = this.getNodeParameter('instance', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const mensagem = this.getNodeParameter('mensagem', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendText/${instance}`,
+				body: {
+					number: remoteJid,
+					text: mensagem,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
 
-	// Enviar mensagem de texto
-	if (resource === 'messages-api' && operation === 'sendText') {
-		const credentials = await this.getCredentials('httpbinApi');
-		const serverUrl = credentials['server-url'];
-		const apiKey = credentials.apikey;
-		const instance = this.getNodeParameter('instance', 0);
-		const remoteJid = this.getNodeParameter('remoteJid', 0);
-		const mensagem = this.getNodeParameter('mensagem', 0);
 
-		const options: IRequestOptions = {
-			method: 'POST' as IHttpRequestMethods,
-			headers: {
-				'Content-Type': 'application/json',
-				apikey: apiKey,
-			},
-			uri: `${serverUrl}/message/sendText/${instance}`,
-			body: {
-				number: remoteJid,
-				text: mensagem,
-			},
-			json: true,
-		};
-		responseData = await this.helpers.request(options);
-	}
 }
