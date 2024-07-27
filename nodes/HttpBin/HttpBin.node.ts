@@ -165,7 +165,7 @@ export class HttpBin implements INodeType {
 				uri: `${serverUrl}/settings/set/${instanceName}`,
 				body: {
 					rejectCall: rejectCall,
-					msgCall: msgCall,
+					msgCall: msgCall || '',
 					groupsIgnore: groupsIgnore,
 					alwaysOnline: alwaysOnline,
 					readMessages: readMessages,
