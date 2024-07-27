@@ -1,9 +1,9 @@
 **[ Features do Node ]**
 
 Instancias: <br>
-✅ Criação de Instancias Básicas;<br>
-✅ Criação de Instancias com Proxy;<br>
-✅ Busca por instancias (com e sem filtro);<br>
+✅ Criação de Instancias Básicas;<br> (by Orion)
+✅ Criação de Instancias com Proxy;<br> (by Orion)
+✅ Busca por instancias (com e sem filtro);<br> (by Orion)
 ❌ Configurações da instancia;<br>
 ❌ Conexão de instância;<br>
 ❌ Reiniciar instancia;<br>
@@ -11,9 +11,9 @@ Instancias: <br>
 ❌ Deletar instancia;<br>
 <br>
 Mensagens:<br>
-✅ Enviar mensagem de texto;<br>
-✅ Enviar mensagem de imagem;<br>
-❌ Enviar mensagem de video;<br>
+✅ Enviar mensagem de texto;<br> (by Orion)
+✅ Enviar mensagem de imagem;<br> (by Orion)
+✅ Enviar mensagem de video;<br> (by Orion)
 ❌ Enviar mensagem de audio;<br>
 ❌ Enviar mensagem de documentos;<br>
 ❌ Enviar mensagem de status;<br>

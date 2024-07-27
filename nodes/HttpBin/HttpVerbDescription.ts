@@ -164,8 +164,11 @@ export const httpVerbOperations: INodeProperties[] = [
 						},
 						body: {
 							number: '={{$node["Número"].number}}',
-							midia: '={{$node["Video"].midia}}',
-							text: '={{$node["Mensagem"].text}}',
+							mediatype: 'video',
+							mimetype: '={{$node["Mimetype"].mimetype || "video/mp4"}}',
+							caption: '={{$node["Caption"].caption || "Teste de caption"}}',
+							media: '={{$node["Imagem"].media}}',
+							fileName: '={{$node["FileName"].fileName || "Video.mp4"}}',
 						},
 					},
 				},
@@ -559,12 +562,12 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mimetype',
-		name: 'mimetype',
+		displayName: 'Caption',
+		name: 'caption',
 		type: 'string',
-		default: 'image/png',
+		default: '',
 		required: false,
-		description: 'Tipo MIME da imagem',
+		description: 'Texto a ser enviado junto a imagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -573,12 +576,12 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Caption',
-		name: 'caption',
+		displayName: 'Mimetype',
+		name: 'mimetype',
 		type: 'string',
-		default: '',
+		default: 'image/png',
 		required: false,
-		description: 'Texto a ser enviado junto a imagem',
+		description: 'Tipo MIME da imagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -600,6 +603,94 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// Campos = Enviar Video
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai enviar o vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+	{
+		displayName: 'Vídeo',
+		name: 'media',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'URL ou base64 do vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+	{
+		displayName: 'Caption',
+		name: 'caption',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Texto a ser enviado junto ao vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+	{
+		displayName: 'Mimetype',
+		name: 'mimetype',
+		type: 'string',
+		default: 'video/mp4',
+		required: false,
+		description: 'Tipo MIME do vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome do Arquivo',
+		name: 'fileName',
+		type: 'string',
+		default: 'Video.mp4',
+		required: false,
+		description: 'Nome do arquivo do vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendVideo'],
+			},
+		},
+	},
+
+
 ];
 
 
