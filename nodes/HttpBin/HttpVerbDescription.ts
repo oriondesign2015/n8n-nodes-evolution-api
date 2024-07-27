@@ -707,7 +707,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Mention them all',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -806,7 +806,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to mention everyone or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -949,7 +949,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to mention everyone or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1035,7 +1035,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to mention everyone or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1115,7 +1115,7 @@ const getOperation: INodeProperties[] = [
 		name: 'mentionsEveryOne',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to mention everyone or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1171,7 +1171,7 @@ const getOperation: INodeProperties[] = [
 		name: 'groupsIgnore',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to ignore groups or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1197,7 +1197,7 @@ const getOperation: INodeProperties[] = [
 		name: 'readMessages',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to read messages or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1210,7 +1210,7 @@ const getOperation: INodeProperties[] = [
 		name: 'syncFullHistory',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to sync the full history or not.',
+		description: 'Want to mention them all history or not.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -1223,7 +1223,7 @@ const getOperation: INodeProperties[] = [
 		name: 'readStatus',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to read status or not.',
+		description: 'Want to mention them all',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
