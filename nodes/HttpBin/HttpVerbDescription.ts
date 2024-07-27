@@ -70,7 +70,7 @@ export const httpVerbOperations: INodeProperties[] = [
 
 			// Buscar Instancia
 			{
-				name: 'Buscar Instâncias',
+				name: 'Buscar Instancias',
 				value: 'fetch-instances',
 				description: 'Buscar instancias existentes',
 				routing: {
