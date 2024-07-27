@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
@@ -425,7 +425,7 @@ export class HttpBin implements INodeType {
 			const caption = this.getNodeParameter('caption', 0);
 			const values = this.getNodeParameter('values', 0);
 
-			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
+			const parsedValues = (values.metadataValues || []).map((value: { optionValue: string }) => value.optionValue);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
