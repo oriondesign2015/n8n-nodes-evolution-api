@@ -15,7 +15,7 @@ Mensagens:<br>
 ✅ Enviar mensagem de imagem;<br> (by Orion)
 ✅ Enviar mensagem de video;<br> (by Orion)
 ✅ Enviar mensagem de audio;<br> (by Orion)
-❌ Enviar mensagem de documentos;<br> (by Orion)
+✅ Enviar mensagem de documentos;<br> (by Orion)
 ❌ Enviar mensagem de status;<br>
 ❌ Enviar mensagem de enquete;<br>
 ❌ Enviar mensagem de lista;<br>

@@ -210,6 +210,7 @@ export const httpVerbOperations: INodeProperties[] = [
 						},
 						body: {
 							number: '={{$node["Número"].number}}',
+							mediatype: 'document',
 							midia: '={{$node["Documento"].midia}}',
 							text: '={{$node["Mensagem"].text}}',
 						},
@@ -730,6 +731,92 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendAudio'],
+			},
+		},
+	},
+
+	// Campos = Enviar Documento
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai enviar o documento',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
+			},
+		},
+	},
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
+			},
+		},
+	},
+	{
+		displayName: 'Documento',
+		name: 'midia',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'URL ou base64 do documento',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
+			},
+		},
+	},
+	{
+		displayName: 'Mensagem',
+		name: 'text',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Texto a ser enviado junto ao documento',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
+			},
+		},
+	},
+	{
+		displayName: 'Mimetype',
+		name: 'mimetype',
+		type: 'string',
+		default: 'document/pdf',
+		required: false,
+		description: 'Tipo MIME do vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome do Arquivo',
+		name: 'fileName',
+		type: 'string',
+		default: 'Arquivo.pdf',
+		required: false,
+		description: 'Nome do arquivo do vídeo',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendDocumento'],
 			},
 		},
 	},
