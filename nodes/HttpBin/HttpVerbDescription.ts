@@ -396,25 +396,14 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
-		type: 'options', // Mude de 'string' para 'options'
+		type: 'string',
 		default: '',
 		required: false,
-		description: 'Selecione a instância que vai enviar a mensagem',
+		description: 'Digite o nome da instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendText'],
-			},
-		},
-		options: [], // Inicialmente vazio, será preenchido dinamicamente
-		// Adicione a função para buscar as instâncias
-		routing: {
-			request: {
-				method: 'GET',
-				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
-				headers: {
-					apikey: '={{$credentials.apikey}}',
-				},
 			},
 		},
 	},

@@ -54,27 +54,6 @@ export class HttpBin implements INodeType {
 			},
 			...httpVerbOperations,
 			...httpVerbFields,
-			{
-				displayName: 'Nome da Instância',
-				name: 'instanceName',
-				type: 'options',
-				default: '',
-				required: false,
-				description: 'Selecione a instância que vai enviar a mensagem',
-				displayOptions: {
-					show: {
-						resource: ['instances-api'],
-						operation: ['fetch-instances'],
-					},
-				},
-				options: [],
-				routing: {
-					send: {
-						property: '={{$parameter.instanceName}}',
-						type: 'query',
-					},
-				},
-			},
 		],
 	};
 
