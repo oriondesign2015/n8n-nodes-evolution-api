@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
@@ -63,4 +63,31 @@ export class HttpBin implements INodeType {
 			...httpVerbFields,
 		],
 	};
+
+	async execute(this: IExecuteFunctions) {
+		const resource = this.getNodeParameter('resource', 0);
+		const operation = this.getNodeParameter('operation', 0);
+
+		let responseData;
+
+		if (resource === 'fetch-instances' && operation === 'fetch-instances') {
+			const serverUrl = this.getCredentials('httpbinApi').server-url;
+			const apiKey = this.getCredentials('httpbinApi').apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+
+			const options = {
+				method: 'GET',
+				headers: {
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/fetchInstances${instanceName ? `?instanceName=${instanceName}` : ''}`,
+				json: true,
+			};
+
+			responseData = await this.helpers.request(options);
+		}
+
+		// Retornar apenas o JSON
+		return this.helpers.returnJsonArray(responseData);
+	}
 }
