@@ -711,7 +711,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['sendText'],
 			},
 		},
 	},
@@ -810,7 +810,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['sendImage'],
 			},
 		},
 	},
@@ -953,7 +953,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['sendAudio'],
 			},
 		},
 	},
@@ -1039,7 +1039,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['sendDocumento'],
 			},
 		},
 	},
@@ -1050,6 +1050,12 @@ const getOperation: INodeProperties[] = [
 		name: 'notice',
 		type: 'notice',
 		default: '',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
 	},
 	{
 		displayName: 'Nome da Instância',
@@ -1080,12 +1086,12 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem da Enquete',
+		displayName: 'Titulo da Enquete',
 		name: 'caption',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Digite a mensagem da enquete',
+		description: 'Digite o titulo da sua enquete',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1096,18 +1102,32 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Opções',
 		name: 'values',
-		type: 'string',
+		type: 'fixedCollection',
 		default: '',
 		required: true,
-		description: 'Digite as opções da enquete (mínimo 2, máximo 12)',
+		typeOptions: {
+			multipleValues: true,
+		},
+		description: 'Digite as opções da enquete (mínimo 2, máximo 12). Cada opção deve ser única.',
+		options: [
+			{
+				name: 'metadataValues',
+				displayName: 'Metadata',
+				values: [
+					{
+						displayName: 'Opção',
+						name: 'optionValue',
+						type: 'string',
+						default: '',
+					},
+				],
+			},
+		],
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendPoll'],
 			},
-		},
-		typeOptions: {
-			multipleValues: true,
 		},
 	},
 	{

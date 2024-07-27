@@ -436,7 +436,7 @@ export class HttpBin implements INodeType {
 				body: {
 					number: remoteJid,
 					name: caption,
-					values: values,
+					values: values.split(','), // Ajuste para enviar valores como array
 					'selectableCount': '1',
 					mentionsEveryOne: mentionsEveryOne,
 				},
