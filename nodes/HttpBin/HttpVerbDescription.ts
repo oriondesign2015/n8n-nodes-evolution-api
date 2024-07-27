@@ -721,7 +721,7 @@ const getOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'Áudio',
-		name: 'midia',
+		name: 'media',
 		type: 'string',
 		default: '',
 		required: true,
