@@ -409,10 +409,12 @@ const getOperation: INodeProperties[] = [
 		options: [], // Inicialmente vazio, será preenchido dinamicamente
 		// Adicione a função para buscar as instâncias
 		routing: {
-			send: {
-				property: '={{$parameter.instanceName}}',
-				type: 'query',
-			},
+			request: {
+				method: 'GET',
+				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+				headers: {
+					apikey: '={{$credentials.apikey}}',
+				},
 		},
 	},
 	{
