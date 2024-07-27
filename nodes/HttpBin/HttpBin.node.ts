@@ -1,11 +1,6 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
-interface Instance {
-    id: string; // ou o tipo correto
-    name: string; // ou o tipo correto
-}
-
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Evolution API',
