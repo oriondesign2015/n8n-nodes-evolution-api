@@ -166,7 +166,7 @@ const getOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Digite o nome da instância',
+		description: 'Digite o nome para a instância',
 		displayOptions: {
 			show: {
 				resource: ['create-instance'],
@@ -180,7 +180,7 @@ const getOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		description: 'Digite o token',
+		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
 				resource: ['create-instance'],
@@ -335,7 +335,7 @@ const getOperation: INodeProperties[] = [
 		default: '',
 		required: true,
 		typeOptions: {
-			password: true,
+			password: false,
 		},
 		description: 'Digite a senha do proxy',
 		displayOptions: {
