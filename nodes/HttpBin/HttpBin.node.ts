@@ -37,15 +37,15 @@ export class HttpBin implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Criar Instancias',
-						value: 'create-instance',
+						name: 'Instancias',
+						value: 'instances-api',
 					},
 					{
-						name: 'Buscar Instancias',
-						value: 'fetch-instances',
+						name: 'Mensagens',
+						value: 'messages-api',
 					},
 				],
-				default: 'create-instance',
+				default: 'instances-api',
 			},
 			...httpVerbOperations,
 			...httpVerbFields,
@@ -78,7 +78,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Criar instancia basica
-		if (resource === 'create-instance' && operation === 'instance-basic') {
+		if (resource === 'instances-api' && operation === 'instance-basic') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -105,7 +105,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Criar instancia com Proxy
-		if (resource === 'create-instance' && operation === 'instance-proxy') {
+		if (resource === 'instances-api' && operation === 'instance-proxy') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -145,5 +145,30 @@ export class HttpBin implements INodeType {
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
+	}
+
+	// Enviar mensagem de texto
+	if (resource === 'messages-api' && operation === 'sendText') {
+		const credentials = await this.getCredentials('httpbinApi');
+		const serverUrl = credentials['server-url'];
+		const apiKey = credentials.apikey;
+		const instance = this.getNodeParameter('instance', 0);
+		const remoteJid = this.getNodeParameter('remoteJid', 0);
+		const mensagem = this.getNodeParameter('mensagem', 0);
+
+		const options: IRequestOptions = {
+			method: 'POST' as IHttpRequestMethods,
+			headers: {
+				'Content-Type': 'application/json',
+				apikey: apiKey,
+			},
+			uri: `${serverUrl}/message/sendText/${instance}`,
+			body: {
+				number: remoteJid,
+				text: mensagem,
+			},
+			json: true,
+		};
+		responseData = await this.helpers.request(options);
 	}
 }

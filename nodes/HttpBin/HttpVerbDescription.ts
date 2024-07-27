@@ -2,6 +2,8 @@ import { INodeProperties } from 'n8n-workflow';
 
 // When the resource `httpVerb` is selected, this `operation` parameter will be shown.
 export const httpVerbOperations: INodeProperties[] = [
+
+	// Carregar novo "módulo" de operação = Instancias
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -10,12 +12,14 @@ export const httpVerbOperations: INodeProperties[] = [
 
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 			},
 		},
 		options: [
+
+			// Criar instancia basica
 			{
-				name: 'Instancia Basica',
+				name: 'Criar Instancia Basica',
 				value: 'instance-basic',
 				description: 'Criar uma instancia basica',
 				routing: {
@@ -34,8 +38,10 @@ export const httpVerbOperations: INodeProperties[] = [
 					},
 				},
 			},
+
+			// Criar instancia com proxy
 			{
-				name: 'Instancia com Proxy',
+				name: 'Criar Instancia com Proxy',
 				value: 'instance-proxy',
 				description: 'Criar uma instancia com Proxy',
 				routing: {
@@ -61,11 +67,27 @@ export const httpVerbOperations: INodeProperties[] = [
 					},
 				},
 			},
+
+			// Buscar Instancia
+			{
+				name: 'Buscar Instâncias',
+				value: 'fetch-instances',
+				description: 'Buscar instâncias existentes',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+					},
+				},
+			},
 		],
 		default: 'instance-basic',
 	},
 
-	// Aqui vai mostrar a segunda parte (Buscar Instanica)
+	// Carregar novo "módulo" de operação = Mensagens
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -73,27 +95,35 @@ export const httpVerbOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['fetch-instances'],
+				resource: ['messages-api'],
 			},
 		},
 		options: [
+
+			// Enviar mensagem de Texto
 			{
-				name: 'Buscar Instâncias',
-				value: 'fetch-instances',
-				description: 'Buscar instâncias existentes',
+				name: 'Enviar Texto',
+				value: 'sendText',
+				description: 'Enviar mensagem de texto',
 				routing: {
 					request: {
-						method: 'GET',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendText/{{$parameter.instance}}',
 						headers: {
 							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							text: '={{$node["Mensagem"].text}}',
 						},
 					},
 				},
 			},
+
+			// Enviar mensagem de Midia
 			{
-				name: 'Buscar Instâncias',
-				value: 'fetch-instances',
+				name: 'Enviar Midia',
+				value: 'sendMedia',
 				description: 'Buscar instâncias existentes',
 				routing: {
 					request: {
@@ -106,12 +136,11 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 		],
-		default: 'fetch-instances',
+		default: 'sendText',
 	},
 ];
 
-// Here we define what to show when the `get` operation is selected.
-// We do that by adding `operation: ["get"]` to `displayOptions.show`
+// Opções que aparecem em cada módulo
 const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Query Parameters',
@@ -159,7 +188,8 @@ const getOperation: INodeProperties[] = [
 			multipleValues: true,
 		},
 	},
-	// Adicionando novos campos para a instância básica
+
+	// Campos = Criar Instancia Basica
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -169,7 +199,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o nome para a instância',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-basic'],
 			},
 		},
@@ -183,7 +213,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-basic'],
 			},
 		},
@@ -206,12 +236,12 @@ const getOperation: INodeProperties[] = [
 		description: 'Escolha a integração',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-basic'],
 			},
 		},
 	},
-	// Adicionando novos campos para a instância com Proxy
+	// Campos = Criar Instancia com Proxy
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -221,7 +251,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o nome da instância',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -235,7 +265,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o token',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -258,7 +288,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Escolha a integração',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -272,7 +302,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o host do proxy',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -286,7 +316,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite a porta do proxy',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -309,7 +339,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Escolha o protocolo do proxy',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -323,7 +353,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite o nome de usuário do proxy',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
@@ -340,12 +370,12 @@ const getOperation: INodeProperties[] = [
 		description: 'Digite a senha do proxy',
 		displayOptions: {
 			show: {
-				resource: ['create-instance'],
+				resource: ['instances-api'],
 				operation: ['instance-proxy'],
 			},
 		},
 	},
-	// Adicionando novos campos para a operação fetch-instances
+	// Campos = Buscar Instancia
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -360,7 +390,52 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// Campos = Enviar mensagem de texto
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendText'],
+			},
+		},
+	},
+	{
+		displayName: 'Numero do destinatario',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'remoteJid do destinarario',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendText'],
+			},
+		},
+	},
+	{
+		displayName: 'Mensagem',
+		name: 'messageText',
+		type: 'textarea',
+		default: '',
+		required: true,
+		description: 'Digite a mensagem de texto que será enviado',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendText'],
+			},
+		},
+	},
 ];
+
 
 // Here we define what to show when the DELETE Operation is selected.
 // We do that by adding `operation: ["delete"]` to `displayOptions.show`
