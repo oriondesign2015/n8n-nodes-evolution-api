@@ -8,7 +8,7 @@ Instancias: <br>
 ✅ Conexão de instância; (by Orion)<br>
 ✅ Reiniciar instancia; (by Orion)<br>
 ✅ Desconectar instancia; (by Orion)<br>
-❌ Deletar instancia;<br>
+✅ Deletar instancia; (by Orion)<br>
 <br>
 Mensagens:<br>
 ✅ Enviar mensagem de texto; (by Orion) <br>

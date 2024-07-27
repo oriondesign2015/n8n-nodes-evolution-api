@@ -6,9 +6,9 @@ Instancias: <br>
 ✅ Busca por instancias (com e sem filtro); (by Orion)<br>
 ✅ Configurações da instancia; (by Orion)<br>
 ✅ Conexão de instância; (by Orion)<br>
-✅ Reiniciar instancia;<br>
-❌ Desconectar instancia;<br>
-❌ Deletar instancia;<br>
+✅ Reiniciar instancia; (by Orion)<br>
+✅ Desconectar instancia; (by Orion)<br>
+✅ Deletar instancia; (by Orion)<br>
 <br>
 Mensagens:<br>
 ✅ Enviar mensagem de texto; (by Orion) <br>
