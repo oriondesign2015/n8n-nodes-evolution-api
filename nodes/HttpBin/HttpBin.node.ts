@@ -150,7 +150,7 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const rejectCall = this.getNodeParameter('rejectCall', 0);
-			const msgCall = this.getNodeParameter('msgCall', 0);
+			const msgCall = this.getNodeParameter('msgCall', 0) || ''; // Define um valor padrão
 			const groupsIgnore = this.getNodeParameter('groupsIgnore', 0);
 			const alwaysOnline = this.getNodeParameter('alwaysOnline', 0);
 			const readMessages = this.getNodeParameter('readMessages', 0);
@@ -159,17 +159,13 @@ export class HttpBin implements INodeType {
 
 			const body: any = {
 				rejectCall,
+				msgCall, // Inclui msgCall no corpo
 				groupsIgnore,
 				alwaysOnline,
 				readMessages,
 				syncFullHistory,
 				readStatus,
 			};
-
-			// Adiciona msgCall apenas se rejectCall for true
-			if (rejectCall) {
-				body.msgCall = msgCall || '';
-			}
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -182,6 +178,10 @@ export class HttpBin implements INodeType {
 				json: true,
 			};
 			responseData = await this.helpers.request(options);
+			// Adiciona msgCall apenas se rejectCall for true
+			if (rejectCall) {
+				body.msgCall = msgCall || '';
+			}
 		}
 
 		// Enviar mensagem de texto
