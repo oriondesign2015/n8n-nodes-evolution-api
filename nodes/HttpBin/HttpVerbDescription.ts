@@ -909,7 +909,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendAudio'],
+				operation: ['sendVideo'],
 			},
 		},
 	},
