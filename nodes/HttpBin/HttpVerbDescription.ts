@@ -847,7 +847,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instance-basic'],
+				operation: ['instanceSettings'],
 			},
 		},
 	},
