@@ -440,8 +440,8 @@ export class HttpBin implements INodeType {
 					number: remoteJid,
 					name: pollTitle,
 					values: pollOptions,
-					mentionsEveryOne: mentionsEveryOne,
 					selectableCount: pollOptions.length, // Adicionando o campo selectableCount
+					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
 			};
