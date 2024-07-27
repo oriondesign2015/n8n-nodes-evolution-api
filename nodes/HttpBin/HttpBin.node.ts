@@ -441,6 +441,7 @@ export class HttpBin implements INodeType {
 					name: pollTitle,
 					values: pollOptions,
 					mentionsEveryOne: mentionsEveryOne,
+					selectableCount: pollOptions.length, // Adicionando o campo selectableCount
 				},
 				json: true,
 			};
