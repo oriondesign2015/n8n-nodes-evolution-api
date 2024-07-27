@@ -878,38 +878,14 @@ const getOperation: INodeProperties[] = [
 		displayName: 'Mensagem de Chamadas',
 		name: 'msgCall',
 		type: 'string',
-		default: '',
+		default: 'Não aceitamos ligações telefônicas.',
 		required: false,
 		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
 				operation: ['instanceSettings'],
-				'rejectCall': [
-					true,
-				],
 			},
-		},
-	},
-	{
-		displayName: 'Mensagem de Chamadas',
-		name: 'msgCallEmpty',
-		type: 'string',
-		default: '', // String vazia
-		required: false,
-		description: 'Mensagem vazia para chamadas rejeitadas.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-				'rejectCall': [
-					false, // Aparece apenas quando rejectCall for false
-				],
-			},
-		},
-		typeOptions: {
-			// Impede que o usuário preencha algo
-			disabled: true, // Campo desabilitado
 		},
 	},
 	{
