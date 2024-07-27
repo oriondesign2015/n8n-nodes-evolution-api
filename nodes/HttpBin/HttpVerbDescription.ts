@@ -382,7 +382,7 @@ const getOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		description: 'Digite o nome da instância',
+		description: 'Digite o nome da instância que deseja pesquisar',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -396,14 +396,22 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
-		type: 'string',
+		type: 'options', // Mude de 'string' para 'options'
 		default: '',
-		required: true,
-		description: 'Digite o nome da instância',
+		required: false,
+		description: 'Selecione a instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendText'],
+			},
+		},
+		options: [], // Inicialmente vazio, será preenchido dinamicamente
+		// Adicione a função para buscar as instâncias
+		routing: {
+			send: {
+				property: '={{$parameter.instanceName}}',
+				type: 'query',
 			},
 		},
 	},
