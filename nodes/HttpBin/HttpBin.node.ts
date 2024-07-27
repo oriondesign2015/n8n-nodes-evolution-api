@@ -148,7 +148,7 @@ export class HttpBin implements INodeType {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
-			const instance = this.getNodeParameter('instance', 0);
+			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const mensagem = this.getNodeParameter('mensagem', 0);
 
@@ -158,7 +158,7 @@ export class HttpBin implements INodeType {
 					'Content-Type': 'application/json',
 					apikey: apiKey,
 				},
-				uri: `${serverUrl}/message/sendText/${instance}`,
+				uri: `${serverUrl}/message/sendText/${instanceName}`,
 				body: {
 					number: remoteJid,
 					text: mensagem,

@@ -386,7 +386,7 @@ const getOperation: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['fetch-instances'],
-				operation: ['fetch-instances'],
+				operation: ['instances-api'],
 			},
 		},
 	},
