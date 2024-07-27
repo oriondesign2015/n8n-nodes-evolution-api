@@ -473,7 +473,7 @@ const getOperation: INodeProperties[] = [
 
 	// Campos = Enviar mensagem de texto
 	{
-		displayName: 'Nome da Inst��ncia',
+		displayName: 'Nome da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -516,6 +516,20 @@ const getOperation: INodeProperties[] = [
 	},
 
 	// Campos = Enviar Imagem
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendText'],
+			},
+		},
+	},
 	{
 		displayName: 'Número do Destinatário',
 		name: 'remoteJid',
@@ -562,9 +576,9 @@ const getOperation: INodeProperties[] = [
 		displayName: 'Caption',
 		name: 'caption',
 		type: 'string',
-		default: 'Teste de caption',
+		default: '',
 		required: false,
-		description: 'Legenda da imagem',
+		description: 'Texto a ser enviado junto a imagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
