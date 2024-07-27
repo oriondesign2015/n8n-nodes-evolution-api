@@ -162,6 +162,25 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Desconectar instancia
+		if (resource === 'instances-api' && operation === 'logout-instance') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+
+			const options: IRequestOptions = {
+				method: 'DELETE' as IHttpRequestMethods,
+				headers: {
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/logout/${instanceName}`,
+				json: true,
+			};
+
+			responseData = await this.helpers.request(options);
+		}
+
 		// Buscar Instancia
 		if (resource === 'instances-api' && operation === 'fetch-instances') {
 			const credentials = await this.getCredentials('httpbinApi');

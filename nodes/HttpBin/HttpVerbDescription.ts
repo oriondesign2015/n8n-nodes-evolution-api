@@ -104,6 +104,23 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 
+			// Desconectar instancia
+			{
+				name: 'Desconectar Instancia',
+				value: 'logout-instance',
+				description: 'Desconecta o WhatsApp da instancia',
+				action: 'Desconectar Instancia',
+				routing: {
+					request: {
+						method: 'DELETE',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/logout/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+					},
+				},
+			},
+
 			// Buscar Instancia
 			{
 				name: 'Buscar Instancias',
@@ -550,6 +567,22 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['instances-api'],
 				operation: ['restart-instance'],
+			},
+		},
+	},
+
+	// Campos = Reiniciar instancia
+	{
+		displayName: 'Nome da Insticância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que deseja pesquisar',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['logout-instance'],
 			},
 		},
 	},

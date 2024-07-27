@@ -6,8 +6,8 @@ Instancias: <br>
 ✅ Busca por instancias (com e sem filtro); (by Orion)<br>
 ✅ Configurações da instancia; (by Orion)<br>
 ✅ Conexão de instância; (by Orion)<br>
-✅ Reiniciar instancia;<br>
-❌ Desconectar instancia;<br>
+✅ Reiniciar instancia; (by Orion)<br>
+✅ Desconectar instancia; (by Orion)<br>
 ❌ Deletar instancia;<br>
 <br>
 Mensagens:<br>
