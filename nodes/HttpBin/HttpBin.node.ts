@@ -151,7 +151,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 
 			const options: IRequestOptions = {
-				method: 'PUT' as IHttpRequestMethods,
+				method: 'POST' as IHttpRequestMethods,
 				headers: {
 					apikey: apiKey,
 				},
