@@ -76,6 +76,32 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		if (resource === 'create-instance' && operation === 'instance-basic') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const token = this.getNodeParameter('token', 0);
+			const integration = this.getNodeParameter('integration', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/create`,
+				body: {
+					instanceName,
+					token,
+					integration,
+				},
+				json: true,
+			};
+
+			responseData = await this.helpers.request(options);
+		}
+
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}

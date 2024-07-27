@@ -21,7 +21,16 @@ export const httpVerbOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'POST',
-						url: '/instance/create',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
+						headers: {
+							'Content-Type': 'application/json',
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							instanceName: '={{$node["Nome da Instância"].instanceName}}',
+							token: '={{$node["Token"].token}}',
+							integration: '={{$node["Integração"].integration}}',
+						},
 					},
 				},
 			},
@@ -59,7 +68,21 @@ export const httpVerbOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '={{$credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+					},
+				},
+			},
+			{
+				name: 'Buscar Instâncias',
+				value: 'fetch-instances',
+				description: 'Buscar instâncias existentes',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
 						headers: {
 							apikey: '={{$credentials.apikey}}',
 						},
