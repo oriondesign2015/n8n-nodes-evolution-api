@@ -124,22 +124,96 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 
-			// Enviar mensagem de Midia
+			// Enviar Imagem
 			{
-				name: 'Enviar Midia',
-				value: 'sendMedia',
-				description: 'Buscar instâncias existentes',
-				action: 'Enviar Midia',
+				name: 'Enviar Imagem',
+				value: 'sendImage',
+				description: 'Enviar mensagem de imagem',
+				action: 'Enviar Imagem',
 				routing: {
 					request: {
-						method: 'GET',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
 						headers: {
 							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							mediatype: 'image',
+							mimetype: '={{$node["Mimetype"].mimetype || "image/png"}}',
+							caption: '={{$node["Caption"].caption || "Teste de caption"}}',
+							media: '={{$node["Imagem"].media}}',
+							fileName: '={{$node["FileName"].fileName || "Imagem.png"}}',
 						},
 					},
 				},
 			},
+
+			// Enviar Video
+			{
+				name: 'Enviar Video',
+				value: 'sendVideo',
+				description: 'Enviar mensagem de video',
+				action: 'Enviar Video',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							midia: '={{$node["Video"].midia}}',
+							text: '={{$node["Mensagem"].text}}',
+						},
+					},
+				},
+			},
+
+			// Enviar Audio
+			{
+				name: 'Enviar Audio',
+				value: 'sendAudio',
+				description: 'Enviar mensagem de audio',
+				action: 'Enviar Audio',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendWhatsAppAudio/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							midia: '={{$node["Audio"].midia}}',
+						},
+					},
+				},
+			},
+
+			// Enviar Documento
+			{
+				name: 'Enviar Documento',
+				value: 'sendDocumento',
+				description: 'Enviar mensagem de video',
+				action: 'Enviar Documento',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							midia: '={{$node["Documento"].midia}}',
+							text: '={{$node["Mensagem"].text}}',
+						},
+					},
+				},
+			},
+
 		],
 		default: 'sendText',
 	},
@@ -399,7 +473,7 @@ const getOperation: INodeProperties[] = [
 
 	// Campos = Enviar mensagem de texto
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome da Inst��ncia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -441,6 +515,77 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+	// Campos = Enviar Imagem
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Imagem',
+		name: 'media',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'URL ou base64 da imagem',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Mimetype',
+		name: 'mimetype',
+		type: 'string',
+		default: 'image/png',
+		required: false,
+		description: 'Tipo MIME da imagem',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Caption',
+		name: 'caption',
+		type: 'string',
+		default: 'Teste de caption',
+		required: false,
+		description: 'Legenda da imagem',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome do Arquivo',
+		name: 'fileName',
+		type: 'string',
+		default: 'Imagem.png',
+		required: false,
+		description: 'Nome do arquivo da imagem',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendImage'],
+			},
+		},
+	},
 ];
 
 

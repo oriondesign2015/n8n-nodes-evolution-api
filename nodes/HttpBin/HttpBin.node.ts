@@ -168,6 +168,35 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Enviar mensagem de imagem
+		if (resource === 'messages-api' && operation === 'sendImage') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const media = this.getNodeParameter('media', 0);
+			const mimetype = this.getNodeParameter('mimetype', 0);
+			const caption = this.getNodeParameter('caption', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendMedia/${instanceName}`,
+				body: {
+					number: remoteJid,
+					media: media,
+					mimetype: mimetype,
+					caption: caption,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
