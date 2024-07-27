@@ -268,6 +268,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const messageText = this.getNodeParameter('messageText', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -279,6 +280,7 @@ export class HttpBin implements INodeType {
 				body: {
 					number: remoteJid,
 					text: messageText,
+					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
 			};
@@ -296,6 +298,7 @@ export class HttpBin implements INodeType {
 			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const fileName = this.getNodeParameter('fileName', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -311,6 +314,7 @@ export class HttpBin implements INodeType {
 					mimetype: mimetype,
 					caption: caption,
 					fileName: fileName,
+					mentionsEveryOne: mentionsEveryOne,
 
 				},
 				json: true,
@@ -329,6 +333,7 @@ export class HttpBin implements INodeType {
 			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const fileName = this.getNodeParameter('fileName', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -344,7 +349,7 @@ export class HttpBin implements INodeType {
 					mimetype: mimetype,
 					caption: caption,
 					fileName: fileName,
-
+					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
 			};
@@ -359,6 +364,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const media = this.getNodeParameter('media', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -370,6 +376,7 @@ export class HttpBin implements INodeType {
 				body: {
 					number: remoteJid,
 					audio: media,
+					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
 			};
@@ -386,6 +393,7 @@ export class HttpBin implements INodeType {
 			const media = this.getNodeParameter('media', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const fileName = this.getNodeParameter('fileName', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -400,6 +408,37 @@ export class HttpBin implements INodeType {
 					media: media,
 					caption: caption,
 					fileName: fileName,
+					mentionsEveryOne: mentionsEveryOne,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
+		// Enviar enquete
+		if (resource === 'messages-api' && operation === 'sendPoll') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const caption = this.getNodeParameter('caption', 0);
+			const values = this.getNodeParameter('values', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+				body: {
+					number: remoteJid,
+					name: caption,
+					values: values,
+					'selectableCount': '1',
+					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
 			};

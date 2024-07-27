@@ -315,6 +315,29 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 
+			// Enviar Enquete
+			{
+				name: 'Enviar Enquete',
+				value: 'sendPoll',
+				description: 'Envia uma enquete de até 12 opções',
+				action: 'Enviar Enquete',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendPoll/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							name: '={{$node["Mensagem"].caption}}',
+							values: '={{$node["Opções"].values}}',
+							mentionsEveryOne: '={{$node["Mencionar Todos"].mentionsEveryOne}}',
+						},
+					},
+				},
+			},
+
 		],
 		default: 'sendText',
 	},
@@ -679,6 +702,19 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Mencionar todos? (grupos)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
 
 	// Campos = Enviar Imagem
 	{
@@ -762,6 +798,19 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Mencionar todos? (grupos)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
 			},
 		},
 	},
@@ -895,6 +944,19 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Mencionar todos? (grupos)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
 
 	// Campos = Enviar Documento
 	{
@@ -964,6 +1026,100 @@ const getOperation: INodeProperties[] = [
 			show: {
 				resource: ['messages-api'],
 				operation: ['sendDocumento'],
+			},
+		},
+	},
+
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Mencionar todos? (grupos)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
+
+	// Campos = Enviar Enquete
+	{
+		displayName: 'Max: 12 opções',
+		name: 'notice',
+		type: 'notice',
+		default: '',
+	},
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai enviar a enquete',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
+	{
+		displayName: 'Mensagem da Enquete',
+		name: 'caption',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a mensagem da enquete',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+	},
+	{
+		displayName: 'Opções',
+		name: 'values',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite as opções da enquete (mínimo 2, máximo 12)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
+			},
+		},
+		typeOptions: {
+			multipleValues: true,
+		},
+	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Mencionar todos? (grupos)',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendPoll'],
 			},
 		},
 	},
