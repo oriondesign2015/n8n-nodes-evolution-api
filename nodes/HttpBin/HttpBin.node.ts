@@ -143,6 +143,40 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		if (resource === 'instances-api' && operation === 'instanceSettings') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const rejectCall = this.getNodeParameter('rejectCall', 0);
+			const msgCall = this.getNodeParameter('msgCall', 0);
+			const groupsIgnore = this.getNodeParameter('groupsIgnore', 0);
+			const alwaysOnline = this.getNodeParameter('alwaysOnline', 0);
+			const readMessages = this.getNodeParameter('readMessages', 0);
+			const syncFullHistory = this.getNodeParameter('syncFullHistory', 0);
+			const readStatus = this.getNodeParameter('readStatus', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/settings/set/${instanceName}`,
+				body: {
+					rejectCall: rejectCall,
+					msgCall: msgCall,
+					groupsIgnore: groupsIgnore,
+					alwaysOnline: alwaysOnline,
+					readMessages: readMessages,
+					syncFullHistory: syncFullHistory,
+					readStatus: readStatus,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Enviar mensagem de texto
 		if (resource === 'messages-api' && operation === 'sendText') {
 			const credentials = await this.getCredentials('httpbinApi');
@@ -267,7 +301,6 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const media = this.getNodeParameter('media', 0);
-			const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const fileName = this.getNodeParameter('fileName', 0);
 
@@ -282,7 +315,6 @@ export class HttpBin implements INodeType {
 					number: remoteJid,
 					'mediatype': 'document',
 					media: media,
-					mimetype: mimetype,
 					caption: caption,
 					fileName: fileName,
 				},

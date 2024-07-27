@@ -86,6 +86,35 @@ export const httpVerbOperations: INodeProperties[] = [
 					},
 				},
 			},
+
+			// Definir configurações da instancia
+			{
+				name: 'Definir configurações',
+				value: 'instanceSettings',
+				description: 'Define o comportamento da instancia',
+				action: 'Buscar Instancias',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/settings/set{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
+						headers: {
+							'Content-Type': 'application/json',
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							rejectCall: '={{$node["Reject Call"].rejectCall}}',
+							msgCall: '={{$node["Message Call"].msgCall}}',
+							groupsIgnore: '={{$node["Groups Ignore"].groupsIgnore}}',
+							alwaysOnline: '={{$node["Always Online"].alwaysOnline}}',
+							readMessages: '={{$node["Read Messages"].readMessages}}',
+							syncFullHistory: '={{$node["Sync Full History"].syncFullHistory}}',
+							readStatus: '={{$node["Read Status"].readStatus}}',
+						},
+					},
+				},
+			},
+
+
 		],
 		default: 'instance-basic',
 	},
@@ -793,12 +822,12 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mimetype',
-		name: 'mimetype',
+		displayName: 'Nome do Arquivo',
+		name: 'fileName',
 		type: 'string',
-		default: 'document/pdf',
+		default: '',
 		required: false,
-		description: 'Tipo MIME do vídeo',
+		description: 'Nome do arquivo do vídeo',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -806,17 +835,158 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// Campos = Definir configurações
 	{
-		displayName: 'Nome do Arquivo',
-		name: 'fileName',
-		type: 'string',
-		default: 'Arquivo.pdf',
-		required: false,
-		description: 'Nome do arquivo do vídeo',
+		displayName: 'Rejeitar Chamadas',
+		name: 'rejectCall',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: true,
+		description: 'Defina se as chamadas devem ser rejeitadas.',
 		displayOptions: {
 			show: {
-				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Mensagem de Chamadas',
+		name: 'msgCall',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+				'rejectCall': true,
+			},
+		},
+	},
+	{
+		displayName: 'Ignorar Grupos',
+		name: 'groupsIgnore',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: false,
+		description: 'Defina se os grupos devem ser ignorados.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Sempre Online',
+		name: 'alwaysOnline',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: true,
+		description: 'Defina se a instância deve estar sempre online.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Ler Mensagens',
+		name: 'readMessages',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: false,
+		description: 'Defina se as mensagens devem ser lidas.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Sincronizar Histórico Completo',
+		name: 'syncFullHistory',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: false,
+		description: 'Defina se o histórico completo deve ser sincronizado.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Ler Status',
+		name: 'readStatus',
+		type: 'options',
+		options: [
+			{
+				name: 'Sim',
+				value: true,
+			},
+			{
+				name: 'Não',
+				value: false,
+			},
+		],
+		default: false,
+		description: 'Defina se os status devem ser lidos.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
 			},
 		},
 	},
