@@ -1113,7 +1113,7 @@ const getOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'Opções',
-		name: 'values',
+		name: 'options_display',
 		type: 'fixedCollection',
 		default: '',
 		required: true,

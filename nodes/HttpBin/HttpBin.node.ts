@@ -415,41 +415,37 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
-		// Enviar enquete
+		// Enviar Enquete
 		if (resource === 'messages-api' && operation === 'sendPoll') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
-			const caption = this.getNodeParameter('caption', 0);
-			const values = this.getNodeParameter('values', 0);
+			const pollTitle = this.getNodeParameter('caption', 0);
+			const options = this.getNodeParameter('options_display.metadataValues', 0);
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
-			// Verifica se values é um objeto e contém metadataValues
-			if (!values || typeof values !== 'object' || !Array.isArray(values.metadataValues)) {
-				throw new NodeApiError(this.getNode(), 'As opções devem ser fornecidas como um array de metadataValues.');
-			}
+			const pollOptions = options.map(option => option.optionValue);
 
-			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
-
-			const options: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/message/sendPoll/${instanceName}`,
-				body: {
-					number: remoteJid,
-					name: caption,
-					values: parsedValues,
-					selectableCount: 1,
-					mentionsEveryOne: this.getNodeParameter('mentionsEveryOne', 0),
-				},
-				json: true,
+			const requestOptions: IRequestOptions = {
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+							'Content-Type': 'application/json',
+							apikey: apiKey,
+					},
+					uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+					body: {
+							number: remoteJid,
+							name: pollTitle,
+							values: pollOptions,
+							mentionsEveryOne: mentionsEveryOne,
+					},
+					json: true,
 			};
-			responseData = await this.helpers.request(options);
+			responseData = await this.helpers.request(requestOptions);
 		}
+
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
