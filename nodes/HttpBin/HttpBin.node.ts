@@ -425,7 +425,12 @@ export class HttpBin implements INodeType {
 			const caption = this.getNodeParameter('caption', 0);
 			const values = this.getNodeParameter('values', 0);
 
-			const parsedValues = (values.metadataValues || []).map((value: { optionValue: string }) => value.optionValue);
+			// Verifica se values é um objeto e contém metadataValues
+			if (!values || typeof values !== 'object' || !Array.isArray(values.metadataValues)) {
+				throw new NodeApiError(this.getNode(), 'As opções devem ser fornecidas como um array de metadataValues.');
+			}
+
+			const parsedValues = values.metadataValues.map((value: { optionValue: string }) => value.optionValue);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
