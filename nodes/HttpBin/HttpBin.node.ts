@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
@@ -430,7 +430,7 @@ export class HttpBin implements INodeType {
 
 			// Validação para garantir que parsedValues tenha pelo menos 2 opções
 			if (parsedValues.length < 2) {
-				throw new Error('A lista de valores deve conter pelo menos 2 opções.');
+				throw new NodeApiError(this.getNode(), 'A lista de valores deve conter pelo menos 2 opções.');
 			}
 
 			const options: IRequestOptions = {
