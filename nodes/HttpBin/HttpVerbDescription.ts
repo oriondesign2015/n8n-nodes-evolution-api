@@ -657,26 +657,6 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
-	// Campos = Deletar instancia
-	{
-		displayName: 'Nome da Instância',
-		name: 'instanceName',
-		type: 'options',
-		default: '',
-		required: true,
-		description: 'Selecione a instância que deseja deletar',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['delete-instance'],
-			},
-		},
-		typeOptions: {
-			loadOptionsDependsOn: ['operation'], // Dependendo da operação selecionada
-			loadOptionsMethod: 'getInstances', // Método que irá buscar as instâncias
-		},
-	},
-
 	// Campos = Buscar Instancia
 	{
 		displayName: 'Nome da Instância',
@@ -1430,32 +1410,18 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
-	// Campos = Deletar instancia
-	{
-		displayName: 'Nome da Instância',
-		name: 'instanceName',
-		type: 'options',
-		default: '',
-		required: true,
-		description: 'Selecione a instância que deseja deletar',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['delete-instance'],
-			},
-		},
-		typeOptions: {
-			loadOptionsDependsOn: ['operation'],
-			loadOptionsMethod: 'getInstances',
-		},
-	},
-
 	// Adicione isso na seção de operações
 	{
 		displayName: 'Deletar Instância',
 		name: 'delete-instance',
 		type: 'options',
 		description: 'Deletar uma instância existente',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['delete-instance'],
+			},
+		},
 		//action: 'Deletar Instância',
 		routing: {
 			request: {
