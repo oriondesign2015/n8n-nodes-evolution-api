@@ -671,7 +671,8 @@ const getOperation: INodeProperties[] = [
 				operation: ['delete-instance'],
 			},
 		},
-		options: async function(this: IExecuteFunctions) {
+		options: async function(this: ILoadOptionsFunctions) {
+			const returnData: INodePropertyOptions[] = [];
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -685,10 +686,13 @@ const getOperation: INodeProperties[] = [
 			});
 
 			const instances = JSON.parse(response);
-			return instances.map((instance: any) => ({
-				name: instance.instance.instanceName,
-				value: instance.instance.instanceName,
-			}));
+			for (const instance of instances) {
+				returnData.push({
+					name: instance.instance.instanceName,
+					value: instance.instance.instanceName,
+				});
+			}
+			return returnData;
 		},
 	},
 

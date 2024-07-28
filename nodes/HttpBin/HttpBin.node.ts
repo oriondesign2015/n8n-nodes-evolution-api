@@ -197,7 +197,11 @@ export class HttpBin implements INodeType {
 				json: true,
 			};
 
-			responseData = await this.helpers.request(requestOptions);
+			try {
+				responseData = await this.helpers.request(requestOptions);
+			} catch (error) {
+				throw new Error(`Erro ao deletar a instância: ${error.message}`);
+			}
 		}
 
 		// Buscar Instancia
