@@ -338,6 +338,36 @@ export const httpVerbOperations: INodeProperties[] = [
 				},
 			},
 
+			// Enviar Lista
+			{
+				name: 'Enviar Lista',
+				value: 'sendList',
+				description: 'Envia uma lista de opções',
+				action: 'Enviar Lista',
+				routing: {
+					request: {
+						method: 'POST',
+						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendList/{{$parameter.instance}}',
+						headers: {
+							apikey: '={{$credentials.apikey}}',
+						},
+						body: {
+							number: '={{$node["Número"].number}}',
+							title: '={{$node["Título"].title}}',
+							description: '={{$node["Descrição"].description}}',
+							buttonText: '={{$node["Texto do Botão"].buttonText}}',
+							footerText: '={{$node["Texto do Rodapé"].footerText}}',
+							sections: [
+								{
+									title: '={{$node["Título da Seção"].sectionTitle}}',
+									rows: '={{$node["Opções"].values}}', // Aqui você deve definir a fixedCollection para as opções
+								},
+							],
+						},
+					},
+				},
+			},
+
 		],
 		default: 'sendText',
 	},
@@ -1156,6 +1186,151 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+	// Campos = Enviar Lista
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a lista',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Número do Destinatário',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do destinatário',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Título',
+		name: 'title',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Título da lista',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Descrição',
+		name: 'description',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Descrição da lista',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Texto do Rodapé',
+		name: 'footerText',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Texto do rodapé da lista',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Texto do Botão',
+		name: 'buttonText',
+		type: 'string',
+		default: 'Selecionar opção',
+		required: true,
+		description: 'Texto do botão da lista',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Opções',
+		name: 'options_display',
+		type: 'fixedCollection',
+		default: '',
+		required: true,
+		typeOptions: {
+			multipleValues: true,
+		},
+		description: 'Digite as opções da lista (mínimo 1). Cada opção deve ser única.',
+		options: [
+			{
+				name: 'metadataValues',
+				displayName: 'Metadata',
+				values: [
+					{
+						displayName: 'Título da Opção',
+						name: 'optionTitle',
+						type: 'string',
+						default: '',
+						required: true,
+					},
+					{
+						displayName: 'Descrição da Opção',
+						name: 'optionDescription',
+						type: 'string',
+						default: '',
+						required: false,
+					},
+					{
+						displayName: 'ID da Linha',
+						name: 'rowId',
+						type: 'string',
+						default: '',
+						required: true,
+					},
+				],
+			},
+		],
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+	{
+		displayName: 'Enviar com Marcação Fantasma?',
+		name: 'mentionsEveryOne',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendList'],
+			},
+		},
+	},
+
 	// Campos = Definir configurações
 	{
 		displayName: 'Nome da Instância',
@@ -1263,6 +1438,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 
 ];

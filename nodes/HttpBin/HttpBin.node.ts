@@ -37,11 +37,11 @@ export class HttpBin implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Instancias',
+						name: 'Instancia',
 						value: 'instances-api',
 					},
 					{
-						name: 'Mensagens',
+						name: 'Mensagem',
 						value: 'messages-api',
 					},
 				],
@@ -441,6 +441,39 @@ export class HttpBin implements INodeType {
 					name: pollTitle,
 					values: pollOptions,
 					selectableCount: pollOptions.length, // Adicionando o campo selectableCount
+					mentionsEveryOne: mentionsEveryOne,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(requestOptions);
+		}
+
+		// Enviar Lista
+		if (resource === 'messages-api' && operation === 'sendList') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const listTitle = this.getNodeParameter('title', 0); // Alterado de 'caption' para 'title'
+			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[]; // Definindo o tipo
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
+
+			// Verifica se options é um array e não está vazio
+			const listOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
+
+			const requestOptions: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendList/${instanceName}`,
+				body: {
+					number: remoteJid,
+					name: listTitle, // Aqui está correto
+					values: listOptions,
+					selectableCount: listOptions.length, // Adicionando o campo selectableCount
 					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
