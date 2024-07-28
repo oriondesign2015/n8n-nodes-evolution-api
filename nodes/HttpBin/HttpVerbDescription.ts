@@ -644,7 +644,7 @@ async function getInstances(this: IExecuteFunctions): Promise<INodePropertyOptio
 	}
 
 	return returnData; // Retorna as opções para o campo
-}
+},
 
 // Campos = Deletar instancia
 {
