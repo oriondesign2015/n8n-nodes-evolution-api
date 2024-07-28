@@ -248,11 +248,14 @@ const instanceOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Token',
+		displayName: 'Apikey para instancia',
 		name: 'token',
 		type: 'string',
 		default: '',
 		required: false,
+		typeOptions: {
+			password: false,
+		},
 		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
@@ -302,12 +305,15 @@ const instanceOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Token',
+		displayName: 'Apikey para instancia',
 		name: 'token',
 		type: 'string',
 		default: '',
 		required: false,
-		description: 'Digite o token',
+		typeOptions: {
+			password: false,
+		},
+		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -408,10 +414,10 @@ const instanceOperation: INodeProperties[] = [
 		name: 'proxyPassword',
 		type: 'string',
 		default: '',
-		required: true,
-		//typeOptions: {
-		//	password: false,
-		//},
+		required: false,
+		typeOptions: {
+			password: false,
+		},
 		description: 'Digite a senha do proxy',
 		displayOptions: {
 			show: {
@@ -599,7 +605,7 @@ const instanceOperation: INodeProperties[] = [
 	},
 
 
-	// Campos = Deletar instancia (TESTANDO)
+	// Campos = Deletar instancia
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
