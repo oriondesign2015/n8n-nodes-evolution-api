@@ -188,8 +188,8 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 
-			const options: IRequestOptions = {
-				method: 'DELETE' as IHttpRequestMethods,
+			const requestOptions: IRequestOptions = {
+				method: 'DELETE',
 				headers: {
 					apikey: apiKey,
 				},
@@ -197,7 +197,7 @@ export class HttpBin implements INodeType {
 				json: true,
 			};
 
-			responseData = await this.helpers.request(options);
+			responseData = await this.helpers.request(requestOptions);
 		}
 
 		// Buscar Instancia

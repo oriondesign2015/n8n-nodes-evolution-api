@@ -659,17 +659,36 @@ const getOperation: INodeProperties[] = [
 
 	// Campos = Deletar instancia
 	{
-		displayName: 'Nome da Insticância',
+		displayName: 'Nome da Instância',
 		name: 'instanceName',
-		type: 'string',
+		type: 'options', // Mude de 'string' para 'options'
 		default: '',
 		required: true,
-		description: 'Digite o nome da instância que deseja pesquisar',
+		description: 'Selecione a instância que deseja deletar',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
 				operation: ['delete-instance'],
 			},
+		},
+		options: async function(this: IExecuteFunctions) {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const response = await this.helpers.request({
+				method: 'GET',
+				url: `${serverUrl}/instance/fetchInstances`,
+				headers: {
+					apikey: apiKey,
+				},
+			});
+
+			const instances = JSON.parse(response);
+			return instances.map((instance: any) => ({
+				name: instance.instance.instanceName,
+				value: instance.instance.instanceName,
+			}));
 		},
 	},
 
