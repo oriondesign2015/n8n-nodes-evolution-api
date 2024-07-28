@@ -456,7 +456,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const listTitle = this.getNodeParameter('title', 0);
-			const listDescription = this.getNodeParameter('description', 0);
+			const listDescription = this.getNodeParameter('description', 0) || ''; // Permite que description seja vazia
 			const footerText = this.getNodeParameter('footerText', 0);
 			const buttonText = this.getNodeParameter('buttonText', 0);
 			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, optionDescription: string, rowId: string }[];
