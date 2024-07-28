@@ -662,7 +662,7 @@ const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
-		type: 'options', // Mude de 'string' para 'options'
+		type: 'options',
 		default: '',
 		required: true,
 		description: 'Selecione a instância que deseja deletar',
@@ -672,28 +672,9 @@ const getOperation: INodeProperties[] = [
 				operation: ['delete-instance'],
 			},
 		},
-		options: async function(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-			const returnData: INodePropertyOptions[] = [];
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-
-			const response = await this.helpers.request({
-				method: 'GET',
-				url: `${serverUrl}/instance/fetchInstances`,
-				headers: {
-					apikey: apiKey,
-				},
-			});
-
-			const instances = JSON.parse(response);
-			for (const instance of instances) {
-				returnData.push({
-					name: instance.instance.instanceName,
-					value: instance.instance.instanceName,
-				});
-			}
-			return returnData;
+		typeOptions: {
+			loadOptionsDependsOn: ['otherParameter'], // Substitua 'otherParameter' pelo parâmetro que você deseja usar como dependência
+			loadOptionsMethod: 'getInstances', // Método que irá buscar as instâncias
 		},
 	},
 
