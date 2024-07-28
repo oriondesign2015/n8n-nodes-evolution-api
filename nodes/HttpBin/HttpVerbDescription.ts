@@ -671,7 +671,7 @@ const getOperation: INodeProperties[] = [
 				operation: ['delete-instance'],
 			},
 		},
-		options: async function(this: ILoadOptionsFunctions) {
+		options: async function(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 			const returnData: INodePropertyOptions[] = [];
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
