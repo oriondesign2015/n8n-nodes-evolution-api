@@ -1,5 +1,4 @@
 import { INodeProperties } from 'n8n-workflow';
-import { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 
 // When the resource `httpVerb` is selected, this `operation` parameter will be shown.
 export const httpVerbOperations: INodeProperties[] = [
@@ -1249,7 +1248,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Texto do Rodapé',
+		displayName: 'Texto do Rodap��',
 		name: 'footerText',
 		type: 'string',
 		default: '',
