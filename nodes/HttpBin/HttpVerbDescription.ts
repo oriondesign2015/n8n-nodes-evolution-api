@@ -21,7 +21,7 @@ import { IExecuteFunctions, INodeProperties, INodePropertyOptions } from 'n8n-wo
 //   • Criar instancia com proxy;
 //   • Conectar instancia;
 
-/ Função para buscar instâncias
+// Função para buscar instâncias
 async function getInstances(this: IExecuteFunctions): Promise<INodePropertyOptions[]> {
     const returnData: INodePropertyOptions[] = [];
     const credentials = await this.getCredentials('httpbinApi'); // Obtém as credenciais
