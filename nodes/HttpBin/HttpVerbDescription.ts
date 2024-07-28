@@ -1,4 +1,4 @@
-import { INodeProperties } from 'n8n-workflow';
+import { IExecuteFunctions, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 // Observação deste documento:
 // Este documento serve para a Definição de Operações que devem aparecer
