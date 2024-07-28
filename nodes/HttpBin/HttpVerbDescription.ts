@@ -1456,7 +1456,7 @@ const getOperation: INodeProperties[] = [
 		name: 'delete-instance',
 		type: 'options',
 		description: 'Deletar uma instância existente',
-		action: 'Deletar Instância',
+		//action: 'Deletar Instância',
 		routing: {
 			request: {
 				method: 'DELETE',

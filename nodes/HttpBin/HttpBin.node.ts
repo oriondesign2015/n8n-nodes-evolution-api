@@ -1,6 +1,5 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
-import { NodeApiError } from 'n8n-workflow';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
