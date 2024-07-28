@@ -1,9 +1,31 @@
 import { INodeProperties } from 'n8n-workflow';
 
-// When the resource `httpVerb` is selected, this `operation` parameter will be shown.
+// Observação deste documento:
+// Este documento serve para a Definição de Operações que devem aparecer
+// em cada Resource, incluindo a criação de novos campos para cada Operation
+
+//  ██████╗ ██████╗ ███████╗██████╗  █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+// ██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+// ██║   ██║██████╔╝█████╗  ██████╔╝███████║   ██║   ██║██║   ██║██╔██╗ ██║
+// ██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+// ╚██████╔╝██║     ███████╗██║  ██║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+//  ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+
+// Operation = Funções/Opções de cada Resource (Instancias, Mensagens, Integrações, Conversas, Perfil e Grupo)
+
+// "O que cada Resource vai apresentar ao ser selecionado"
+
+// Exemplo:
+// Instancias:
+//   • Criar instncia;
+//   • Criar instancia com proxy;
+//   • Conectar instancia;
+
+
 export const httpVerbOperations: INodeProperties[] = [
 
-	// Carregar novo "módulo" de operação = Instancias
+// Cada Resource adicionada tera um desse para listar as opções/funções de cada Resource
+// Opções da instances-api (Instancias)
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -12,182 +34,97 @@ export const httpVerbOperations: INodeProperties[] = [
 
 		displayOptions: {
 			show: {
-				resource: ['instances-api'],
+				resource: ['instances-api'], // Value do Resource
 			},
 		},
+
+		// Opções que serão vinculadas a Operação "Instancia"
 		options: [
 
-			// Criar instancia basica
+			// Opção = Criar instancia
 			{
-				name: 'Criar Instancia Basica',
+				// Create Instance Basic
+				name: 'Criar Instancia',
+				action: 'Criar Instancia',
+				description: 'Cria uma nova Instancia',
 				value: 'instance-basic',
-				description: 'Criar uma instancia basica',
-				action: 'Criar Instancia Basica',
-				//routing: {
-				//	request: {
-				//		method: 'POST',
-				//		url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
-				//		headers: {
-				//			'Content-Type': 'application/json',
-				//			apikey: '={{$credentials.apikey}}',
-				//		},
-				//		body: {
-				//			instanceName: '={{$node["Nome da Instância"].instanceName}}',
-				//			token: '={{$node["Token"].token}}',
-				//			integration: '={{$node["Integração"].integration}}',
-				//		},
-				//	},
-				//},
 			},
 
-			// Criar instancia com proxy
+			// Opção = Criar instancia com proxy
 			{
+				// Create Instance Basic
 				name: 'Criar Instancia com Proxy',
-				value: 'instance-proxy',
-				description: 'Criar uma instancia com Proxy',
 				action: 'Criar Instancia com Proxy',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
-						headers: {
-							'Content-Type': 'application/json',
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							instanceName: '={{$node["Nome da Instância"].instanceName}}',
-							token: '={{$node["Token"].token}}',
-							integration: 'WHATSAPP-BAILEYS',
-							proxy: {
-								host: '={{$node["Proxy Host"].proxyHost}}',
-								port: '={{$node["Proxy Port"].proxyPort}}',
-								protocol: '={{$node["Proxy Protocol"].proxyProtocol}}',
-								username: '={{$node["Proxy Username"].proxyUsername}}',
-								password: '={{$node["Proxy Password"].proxyPassword}}',
-							},
-						},
-					},
-				},
+				description: 'Cria uma nova Instancia com Proxy',
+				value: 'instance-proxy',
 			},
 
-			// Conectar Instância
+			// Opção = Conectar Instância
 			{
+				// Instance Connect
 				name: 'Conectar Instancia',
-				value: 'instance-connect',
-				description: 'Status da instancia',
 				action: 'Conectar Instancia',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/connect/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-					},
-				},
+				description: 'Gera a conexão de uma Instancia (QR ou Base64)',
+				value: 'instance-connect',
 			},
 
-			// Reiniciar instancia
+			// Opção = Reiniciar instancia
 			{
+				// Restart Instance
 				name: 'Reiniciar Instancia',
-				value: 'restart-instance',
-				description: 'Reinicia a instancia',
 				action: 'Reiniciar Instancia',
-				routing: {
-					request: {
-						method: 'PUT',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/connect/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-					},
-				},
+				description: 'Reinicia o socket da Instancia',
+				value: 'restart-instance',
 			},
 
-			// Desconectar instancia
+			// Opção = Desconectar instancia
 			{
+				// Logout Instance
 				name: 'Desconectar Instancia',
-				value: 'logout-instance',
-				description: 'Desconecta o WhatsApp da instancia',
 				action: 'Desconectar Instancia',
-				routing: {
-					request: {
-						method: 'DELETE',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/logout/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-					},
-				},
+				description: 'Desconecta o WhatsApp da Instancia',
+				value: 'logout-instance',
 			},
 
-			// Deletar instancia
+			// Opção = Deletar instancia
 			{
-				name: 'Deletar Instância',
+				// Delete Instance
+				name: 'Deletar Instancia',
+				action: 'Deletar Instancia',
+				description: 'Deleta uma Instancia',
 				value: 'delete-instance',
-				description: 'Deletar uma instância existente',
-				action: 'Deletar Instância',
-				routing: {
-					request: {
-						method: 'DELETE',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/delete/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-					},
-				},
 			},
 
-			// Buscar Instancia
+			// Opção = Buscar Instancia
 			{
-				name: 'Buscar Instancias',
+				// Fetch Instances
+				name: 'Buscar Instancia',
+				action: 'Buscar Instancia',
+				description: 'Busca e lista as Instancias criadas',
 				value: 'fetch-instances',
-				description: 'Buscar instancias existentes',
-				action: 'Buscar Instancias',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-					},
-				},
 			},
 
-			// Definir configurações da instancia
+			// Opção = Definir configurações da instancia
 			{
-				name: 'Definir configurações',
-				value: 'instanceSettings',
+				name: 'Definir Configurações',
+				action: 'Definir Configurações',
 				description: 'Define o comportamento da instancia',
-				action: 'Definir configurações',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/settings/set{{$parameter.instanceName ? "?instanceName=" + $parameter.instanceName : ""}}',
-						headers: {
-							'Content-Type': 'application/json',
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							rejectCall: '={{$node["Reject Call"].rejectCall}}',
-							msgCall: '={{$node["Message Call"].msgCall}}',
-							groupsIgnore: '={{$node["Groups Ignore"].groupsIgnore}}',
-							alwaysOnline: '={{$node["Always Online"].alwaysOnline}}',
-							readMessages: '={{$node["Read Messages"].readMessages}}',
-							syncFullHistory: '={{$node["Sync Full History"].syncFullHistory}}',
-							readStatus: '={{$node["Read Status"].readStatus}}',
-						},
-					},
-				},
+				value: 'instanceSettings',
 			},
 
 
 		],
+		// Definindo como padrão a opção "Criar Instancia"
 		default: 'instance-basic',
 	},
 
-	// Carregar novo "módulo" de operação = Mensagens
+
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+
+
+	// Opções da messages-api (Mensagens)
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -195,234 +132,107 @@ export const httpVerbOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['messages-api'],
+				resource: ['messages-api'], // Value do Resource
 			},
 		},
 		options: [
 
-			// Enviar mensagem de Texto
+			// Opção = Enviar mensagem de Texto
 			{
+				// Send Text
 				name: 'Enviar Texto',
-				value: 'sendText',
-				description: 'Enviar mensagem de texto',
 				action: 'Enviar Texto',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendText/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							text: '={{$node["Mensagem"].text}}',
-						},
-					},
-				},
+				description: 'Envia mensagem de Texto',
+				value: 'sendText',
 			},
 
-			// Enviar Imagem
+			// Opção = Enviar Imagem
 			{
+				// Send Media
 				name: 'Enviar Imagem',
-				value: 'sendImage',
-				description: 'Enviar mensagem de imagem',
 				action: 'Enviar Imagem',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							mediatype: 'image',
-							mimetype: '={{$node["Mimetype"].mimetype || "image/png"}}',
-							caption: '={{$node["Caption"].caption || "Teste de caption"}}',
-							media: '={{$node["Imagem"].media}}',
-							fileName: '={{$node["FileName"].fileName || "Imagem.png"}}',
-						},
-					},
-				},
+				description: 'Envia mensagem de Imagem',
+				value: 'sendImage',
 			},
 
-			// Enviar Video
+			// Opção = Enviar Video
 			{
+				// Send Media
 				name: 'Enviar Video',
 				value: 'sendVideo',
-				description: 'Enviar mensagem de video',
+				description: 'Enviar mensagem de Video',
 				action: 'Enviar Video',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							mediatype: 'video',
-							mimetype: '={{$node["Mimetype"].mimetype || "video/mp4"}}',
-							caption: '={{$node["Caption"].caption || "Teste de caption"}}',
-							media: '={{$node["Imagem"].media}}',
-							fileName: '={{$node["FileName"].fileName || "Video.mp4"}}',
-						},
-					},
-				},
 			},
 
-			// Enviar Audio
+			// Opção = Enviar Audio
 			{
+				// Send Narrated Audio
 				name: 'Enviar Audio',
-				value: 'sendAudio',
-				description: 'Enviar mensagem de audio',
 				action: 'Enviar Audio',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendWhatsAppAudio/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							media: '={{$node["Audio"].media}}',
-						},
-					},
-				},
+				description: 'Enviar mensagem de Audio',
+				value: 'sendAudio',
 			},
 
-			// Enviar Documento
+			// Opção = Enviar Documento
 			{
+				// Send Media
 				name: 'Enviar Documento',
-				value: 'sendDocumento',
-				description: 'Enviar mensagem de video',
 				action: 'Enviar Documento',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendMedia/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							mediatype: 'document',
-							media: '={{$node["Documento"].media}}',
-							caption: '={{$node["Mensagem"].caption}}',
-						},
-					},
-				},
+				description: 'Enviar mensagem de Video',
+				value: 'sendDocumento',
 			},
 
-			// Enviar Enquete
+			// Opção = Enviar Enquete
 			{
+				// Send Poll
 				name: 'Enviar Enquete',
-				value: 'sendPoll',
-				description: 'Envia uma enquete de até 12 opções',
 				action: 'Enviar Enquete',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendPoll/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							name: '={{$node["Mensagem"].caption}}',
-							values: '={{$node["Opções"].values}}',
-							mentionsEveryOne: '={{$node["Mencionar Todos"].mentionsEveryOne}}',
-						},
-					},
-				},
+				description: 'Envia uma Enquete de até 12 opções',
+				value: 'sendPoll',
 			},
 
-			// Enviar Lista
+			// Opção = Enviar Lista
 			{
+				// Send List
 				name: 'Enviar Lista',
-				value: 'sendList',
-				description: 'Envia uma lista de opções',
 				action: 'Enviar Lista',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/message/sendList/{{$parameter.instance}}',
-						headers: {
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							number: '={{$node["Número"].number}}',
-							title: '={{$node["Título"].title}}',
-							description: '={{$node["Descrição"].description}}',
-							buttonText: '={{$node["Texto do Botão"].buttonText}}',
-							footerText: '={{$node["Texto do Rodapé"].footerText}}',
-							sections: [
-								{
-									title: '={{$node["Título da Seção"].sectionTitle}}',
-									rows: '={{$node["Opções"].values}}', // Aqui você deve definir a fixedCollection para as opções
-								},
-							],
-						},
-					},
-				},
+				description: 'Envia uma Lista de opções',
+				value: 'sendList',
 			},
 
 		],
+		// Definindo como padrão a opção "Enviar Texto"
 		default: 'sendText',
 	},
 ];
 
-// Opções que aparecem em cada módulo
-const getOperation: INodeProperties[] = [
-	{
-		displayName: 'Query Parameters',
-		name: 'arguments',
-		default: {},
-		description: "The request's query parameters",
-		displayOptions: {
-			show: {
-				resource: ['httpVerb'],
-				operation: ['get'],
-			},
-		},
-		options: [
-			{
-				name: 'keyvalue',
-				displayName: 'Key:Value',
-				values: [
-					{
-						displayName: 'Key',
-						name: 'key',
-						type: 'string',
-						default: '',
-						required: true,
-						description: 'Key of query parameter',
-					},
-					{
-						displayName: 'Value',
-						name: 'value',
-						type: 'string',
-						default: '',
-						routing: {
-							send: {
-								property: '={{$parent.key}}',
-								type: 'query',
-							},
-						},
-						required: true,
-						description: 'Value of query parameter',
-					},
-				],
-			},
-		],
-		type: 'fixedCollection',
-		typeOptions: {
-			multipleValues: true,
-		},
-	},
 
-	// Campos = Criar Instancia Basica
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+
+
+//	███████╗██╗     ███████╗███╗   ███╗███████╗███╗   ██╗████████╗███████╗
+//	██╔════╝██║     ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝██╔════╝
+//	█████╗  ██║     █████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ███████╗
+//	██╔══╝  ██║     ██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
+//	███████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████║
+//	╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
+
+// Elements = Os campos que aparecem em cada Operation
+
+// "Cada Operation (ex: Enviar mensagem de Texto) tem campos que precisam ser preenchido para fazer uma requisição"
+
+// Exemplo:
+// Enviar Mensagem de Texto:
+//   • Instancia que vai enviar;
+//   • RemoteJid do destinatario;
+//   • Mensagem que vai ser enviada;
+
+// Campos das instancias
+const instanceOperation: INodeProperties[] = [
+
+	// Campos = Criar Instancia
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -474,6 +284,8 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+
 	// Campos = Criar Instancia com Proxy
 	{
 		displayName: 'Nome da Instância',
@@ -609,6 +421,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+
 	// Campos = Conectar Instância
 	{
 		displayName: 'Nome da Instância',
@@ -624,6 +437,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 	// Campos = Reiniciar instancia
 	{
@@ -641,6 +455,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+
 	// Campos = Desconectar instancia
 	{
 		displayName: 'Nome da Insticância',
@@ -656,6 +471,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 	// Campos = Buscar Instancia
 	{
@@ -673,6 +489,136 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+
+	// Campos = Definir configurações
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome para a instância',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Rejeitar Chamadas',
+		name: 'rejectCall',
+		type: 'boolean',
+		default: true,
+		description: 'Whether to reject calls or not.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Mensagem de Chamadas',
+		name: 'msgCall',
+		type: 'string',
+		default: 'Não aceitamos ligações telefônicas.',
+		required: false,
+		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Ignorar Grupos',
+		name: 'groupsIgnore',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Sempre Online',
+		name: 'alwaysOnline',
+		type: 'boolean',
+		default: true,
+		description: 'Whether the instance should always be online or not.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Ler Mensagens',
+		name: 'readMessages',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Sincronizar Histórico Completo',
+		name: 'syncFullHistory',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all history or not.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+	{
+		displayName: 'Ler Status',
+		name: 'readStatus',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to mention them all',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instanceSettings'],
+			},
+		},
+	},
+
+
+	// Campos = Deletar instancia (TESTANDO)
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome para a instância',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['delete-instance'],
+			},
+		},
+	},
+
+];
+
+// Campo das Mensagens
+const messageOperation: INodeProperties[] = [
 	// Campos = Enviar mensagem de texto
 	{
 		displayName: 'Nome da Instancia',
@@ -729,6 +675,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 	// Campos = Enviar Imagem
 	{
@@ -829,6 +776,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+
 	// Campos = Enviar Video
 	{
 		displayName: 'Nome da Instância',
@@ -928,6 +876,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+
 	// Campos = Enviar Audio
 	{
 		displayName: 'Nome da Instância',
@@ -984,6 +933,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 	// Campos = Enviar Documento
 	{
@@ -1056,7 +1006,6 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
-
 	{
 		displayName: 'Enviar com Marcação Fantasma?',
 		name: 'mentionsEveryOne',
@@ -1070,6 +1019,9 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+
+	// Campos = Enviar Enquete
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -1112,7 +1064,6 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
-	// Campos = Enviar Enquete
 	{
 		displayName: 'Mínimo 2 opções, Máximo 12. Cada opção deve ser única.',
 		name: 'notice',
@@ -1169,6 +1120,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 
 	// Campos = Enviar Lista
 	{
@@ -1302,248 +1254,17 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
-	// Campos = Definir configurações
-	{
-		displayName: 'Nome da Instância',
-		name: 'instanceName',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o nome para a instância',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Rejeitar Chamadas',
-		name: 'rejectCall',
-		type: 'boolean',
-		default: true,
-		description: 'Whether to reject calls or not.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Mensagem de Chamadas',
-		name: 'msgCall',
-		type: 'string',
-		default: 'Não aceitamos ligações telefônicas.',
-		required: false,
-		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Ignorar Grupos',
-		name: 'groupsIgnore',
-		type: 'boolean',
-		default: false,
-		description: 'Whether to mention them all',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Sempre Online',
-		name: 'alwaysOnline',
-		type: 'boolean',
-		default: true,
-		description: 'Whether the instance should always be online or not.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Ler Mensagens',
-		name: 'readMessages',
-		type: 'boolean',
-		default: false,
-		description: 'Whether to mention them all',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Sincronizar Histórico Completo',
-		name: 'syncFullHistory',
-		type: 'boolean',
-		default: false,
-		description: 'Whether to mention them all history or not.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
-	{
-		displayName: 'Ler Status',
-		name: 'readStatus',
-		type: 'boolean',
-		default: false,
-		description: 'Whether to mention them all',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['instanceSettings'],
-			},
-		},
-	},
 
-	// Novo campo para selecionar a instância a ser deletada
-	{
-		displayName: 'Selecione a Instância',
-		name: 'instanceName',
-		type: 'options',
-		description: 'Selecione a instância a ser deletada.',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['delete-instance'],
-			},
-		},
-		routing: {
-			request: {
-				method: 'GET',
-				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances',
-				headers: {
-					apikey: '={{$credentials.apikey}}',
-				},
-			},
-		},
-		options: [], // Inicialmente vazio, será preenchido com as instâncias
-		// Adiciona um método para processar a resposta e preencher as opções
-		// Isso deve ser feito no método de execução do nó
-	},
-
-];
-
-
-// Here we define what to show when the DELETE Operation is selected.
-// We do that by adding `operation: ["delete"]` to `displayOptions.show`
-const deleteOperation: INodeProperties[] = [
-	{
-		displayName: 'Query Parameters',
-		name: 'arguments',
-		default: {},
-		description: "The request's query parameters",
-		displayOptions: {
-			show: {
-				resource: ['httpVerb'],
-				operation: ['delete'],
-			},
-		},
-		options: [
-			{
-				name: 'keyvalue',
-				displayName: 'Key:Value',
-				values: [
-					{
-						displayName: 'Key',
-						name: 'key',
-						type: 'string',
-						default: '',
-						required: true,
-						description: 'Key of query parameter',
-					},
-					{
-						displayName: 'Value',
-						name: 'value',
-						type: 'string',
-						default: '',
-						routing: {
-							send: {
-								property: '={{$parent.key}}',
-								type: 'query',
-							},
-						},
-						required: true,
-						description: 'Value of query parameter',
-					},
-				],
-			},
-		],
-		type: 'fixedCollection',
-		typeOptions: {
-			multipleValues: true,
-		},
-	},
-	{
-		displayName: 'JSON Object',
-		name: 'arguments',
-		default: {},
-		description: "The request's JSON properties",
-		displayOptions: {
-			show: {
-				resource: ['httpVerb'],
-				operation: ['delete'],
-			},
-		},
-		options: [
-			{
-				name: 'keyvalue',
-				displayName: 'Key:Value',
-				values: [
-					{
-						displayName: 'Key',
-						name: 'key',
-						type: 'string',
-						default: '',
-						required: true,
-						description: 'Key of JSON property',
-					},
-					{
-						displayName: 'Value',
-						name: 'value',
-						type: 'string',
-						default: '',
-						routing: {
-							send: {
-								property: '={{$parent.key}}',
-								type: 'body',
-							},
-						},
-						required: true,
-						description: 'Value of JSON property',
-					},
-				],
-			},
-		],
-		type: 'fixedCollection',
-		typeOptions: {
-			multipleValues: true,
-		},
-	},
 ];
 
 export const httpVerbFields: INodeProperties[] = [
 	/* -------------------------------------------------------------------------- */
 	/*                                httpVerb:get                                */
 	/* -------------------------------------------------------------------------- */
-	...getOperation,
+	...instanceOperation,
 
 	/* -------------------------------------------------------------------------- */
 	/*                              httpVerb:delete                               */
 	/* -------------------------------------------------------------------------- */
-	...deleteOperation,
+	...messageOperation,
 ];
