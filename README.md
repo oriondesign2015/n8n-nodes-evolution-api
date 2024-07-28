@@ -11,13 +11,14 @@ Instancias: <br>
 ✅ Deletar instancia; (by Orion)<br>
 <br>
 Mensagens:<br>
-✅ Enviar mensagem de Texto; (by Orion) <br>
-✅ Enviar mensagem de Imagem; (by Orion) <br>
-✅ Enviar mensagem de Video; (by Orion) <br>
-✅ Enviar mensagem de Audio; (by Orion) <br>
-✅ Enviar mensagem de Documentos; (by Orion) <br>
-✅ Enviar mensagem de Enquete; (by Orion)<br>
+✅ Enviar Texto; (by Orion) <br>
+✅ Enviar Imagem; (by Orion) <br>
+✅ Enviar Video; (by Orion) <br>
+✅ Enviar Audio; (by Orion) <br>
+✅ Enviar Documentos; (by Orion) <br>
+✅ Enviar Enquete; (by Orion)<br>
+✅ Enviar Lista; (by Orion)<br>
 ✅ Marcação fantasma; (by Orion) <br>
 ❌ Enviar Status;<br>
-❌ Enviar Lista;<br>
+
 

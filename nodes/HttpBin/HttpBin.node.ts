@@ -459,11 +459,12 @@ export class HttpBin implements INodeType {
 			const listDescription = this.getNodeParameter('description', 0);
 			const footerText = this.getNodeParameter('footerText', 0);
 			const buttonText = this.getNodeParameter('buttonText', 0);
-			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, rowId: string }[];
+			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, optionDescription: string, rowId: string }[];
 
 			// Verifica se options é um array e não está vazio
 			const listOptions = Array.isArray(options) ? options.map(option => ({
 				title: option.optionTitle,
+				description: option.optionDescription,
 				rowId: option.rowId,
 			})) : [];
 
@@ -483,10 +484,10 @@ export class HttpBin implements INodeType {
 					sections: [
 						{
 							title: listTitle,
+							description: listOptions.map(option => option.description),
 							rows: listOptions,
 						},
 					],
-					mentionsEveryOne: this.getNodeParameter('mentionsEveryOne', 0),
 				},
 				json: true,
 			};
