@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
@@ -51,6 +51,36 @@ export class HttpBin implements INodeType {
 			...httpVerbFields,
 		],
 	};
+
+	// Método para buscar instâncias
+	async getInstances(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+		const returnData: INodePropertyOptions[] = [];
+		const credentials = await this.getCredentials('httpbinApi');
+		const serverUrl = credentials['server-url'];
+		const apiKey = credentials.apikey;
+
+		try {
+			const response = await this.helpers.request({
+				method: 'GET',
+				url: `${serverUrl}/instance/fetchInstances`,
+				headers: {
+					apikey: apiKey,
+				},
+			});
+
+			const instances = JSON.parse(response);
+			for (const instance of instances) {
+				returnData.push({
+					name: instance.instanceName, // Ajuste conforme a estrutura do seu objeto
+					value: instance.instanceName, // Ajuste conforme a estrutura do seu objeto
+				});
+			}
+		} catch (error) {
+			throw new Error(`Error fetching instances: ${error.message}`);
+		}
+
+		return returnData;
+	}
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);

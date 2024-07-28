@@ -123,10 +123,10 @@ export const httpVerbOperations: INodeProperties[] = [
 
 			// Deletar instancia
 			{
-				name: 'Deletar Instancia',
+				name: 'Deletar Instância',
 				value: 'delete-instance',
-				description: 'Desconecta o WhatsApp da instancia',
-				action: 'Desconectar Instancia',
+				description: 'Deletar uma instância existente',
+				action: 'Deletar Instância',
 				routing: {
 					request: {
 						method: 'DELETE',
@@ -672,7 +672,7 @@ const getOperation: INodeProperties[] = [
 			},
 		},
 		typeOptions: {
-			loadOptionsDependsOn: ['otherParameter'], // Substitua 'otherParameter' pelo parâmetro que você deseja usar como dependência
+			loadOptionsDependsOn: ['operation'], // Dependendo da operação selecionada
 			loadOptionsMethod: 'getInstances', // Método que irá buscar as instâncias
 		},
 	},
@@ -1248,7 +1248,7 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Texto do Rodap��',
+		displayName: 'Texto do Rodapé',
 		name: 'footerText',
 		type: 'string',
 		default: '',
@@ -1430,7 +1430,43 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
+	// Campos = Deletar instancia
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'options',
+		default: '',
+		required: true,
+		description: 'Selecione a instância que deseja deletar',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['delete-instance'],
+			},
+		},
+		typeOptions: {
+			loadOptionsDependsOn: ['operation'],
+			loadOptionsMethod: 'getInstances',
+		},
+	},
 
+	// Adicione isso na seção de operações
+	{
+		displayName: 'Deletar Instância',
+		name: 'delete-instance',
+		type: 'options',
+		description: 'Deletar uma instância existente',
+		action: 'Deletar Instância',
+		routing: {
+			request: {
+				method: 'DELETE',
+				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/delete/{{$parameter.instance}}',
+				headers: {
+					apikey: '={{$credentials.apikey}}',
+				},
+			},
+		},
+	},
 
 ];
 
