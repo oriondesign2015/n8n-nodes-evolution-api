@@ -253,9 +253,6 @@ const instanceOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		typeOptions: {
-			password: false,
-		},
 		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
@@ -310,9 +307,6 @@ const instanceOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		typeOptions: {
-			password: false,
-		},
 		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
@@ -415,9 +409,6 @@ const instanceOperation: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		typeOptions: {
-			password: false,
-		},
 		description: 'Digite a senha do proxy',
 		displayOptions: {
 			show: {
