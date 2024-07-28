@@ -23,21 +23,21 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'instance-basic',
 				description: 'Criar uma instancia basica',
 				action: 'Criar Instancia Basica',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
-						headers: {
-							'Content-Type': 'application/json',
-							apikey: '={{$credentials.apikey}}',
-						},
-						body: {
-							instanceName: '={{$node["Nome da Instância"].instanceName}}',
-							token: '={{$node["Token"].token}}',
-							integration: '={{$node["Integração"].integration}}',
-						},
-					},
-				},
+				//routing: {
+				//	request: {
+				//		method: 'POST',
+				//		url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/create',
+				//		headers: {
+				//			'Content-Type': 'application/json',
+				//			apikey: '={{$credentials.apikey}}',
+				//		},
+				//		body: {
+				//			instanceName: '={{$node["Nome da Instância"].instanceName}}',
+				//			token: '={{$node["Token"].token}}',
+				//			integration: '={{$node["Integração"].integration}}',
+				//		},
+				//	},
+				//},
 			},
 
 			// Criar instancia com proxy
@@ -1410,28 +1410,30 @@ const getOperation: INodeProperties[] = [
 		},
 	},
 
-	// Adicione isso na seção de operações
+	// Novo campo para selecionar a instância a ser deletada
 	{
-		displayName: 'Deletar Instância',
-		name: 'delete-instance',
+		displayName: 'Selecione a Instância',
+		name: 'instanceName',
 		type: 'options',
-		description: 'Deletar uma instância existente',
+		description: 'Selecione a instância a ser deletada.',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
 				operation: ['delete-instance'],
 			},
 		},
-		//action: 'Deletar Instância',
 		routing: {
 			request: {
-				method: 'DELETE',
-				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/delete/{{$parameter.instance}}',
+				method: 'GET',
+				url: '={{$credentials["server-url"].startsWith("https://") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}/instance/fetchInstances',
 				headers: {
 					apikey: '={{$credentials.apikey}}',
 				},
 			},
 		},
+		options: [], // Inicialmente vazio, será preenchido com as instâncias
+		// Adiciona um método para processar a resposta e preencher as opções
+		// Isso deve ser feito no método de execução do nó
 	},
 
 ];
