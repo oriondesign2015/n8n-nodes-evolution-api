@@ -455,12 +455,17 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
-			const listTitle = this.getNodeParameter('title', 0); // Alterado de 'caption' para 'title'
-			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[]; // Definindo o tipo
-			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
+			const listTitle = this.getNodeParameter('title', 0);
+			const listDescription = this.getNodeParameter('description', 0);
+			const footerText = this.getNodeParameter('footerText', 0);
+			const buttonText = this.getNodeParameter('buttonText', 0);
+			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, rowId: string }[];
 
 			// Verifica se options é um array e não está vazio
-			const listOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
+			const listOptions = Array.isArray(options) ? options.map(option => ({
+				title: option.optionTitle,
+				rowId: option.rowId,
+			})) : [];
 
 			const requestOptions: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -471,10 +476,17 @@ export class HttpBin implements INodeType {
 				uri: `${serverUrl}/message/sendList/${instanceName}`,
 				body: {
 					number: remoteJid,
-					name: listTitle, // Aqui está correto
-					values: listOptions,
-					selectableCount: listOptions.length, // Adicionando o campo selectableCount
-					mentionsEveryOne: mentionsEveryOne,
+					title: listTitle,
+					description: listDescription,
+					footerText: footerText,
+					buttonText: buttonText,
+					sections: [
+						{
+							title: listTitle,
+							rows: listOptions,
+						},
+					],
+					mentionsEveryOne: this.getNodeParameter('mentionsEveryOne', 0),
 				},
 				json: true,
 			};
