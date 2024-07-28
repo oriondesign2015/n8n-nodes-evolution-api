@@ -200,7 +200,7 @@ export class HttpBin implements INodeType {
 			try {
 				responseData = await this.helpers.request(requestOptions);
 			} catch (error) {
-				throw new Error(`Erro ao deletar a instância: ${error.message}`);
+				throw new NodeApiError(this.getNode(), error);
 			}
 		}
 
