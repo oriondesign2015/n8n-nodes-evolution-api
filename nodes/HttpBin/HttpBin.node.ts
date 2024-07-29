@@ -1,5 +1,6 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
+import { getInstances } from './HttpVerbDescription'; // Certifique-se de que a função getInstances está exportada
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
@@ -52,39 +53,15 @@ export class HttpBin implements INodeType {
 		],
 	};
 
-	// Método para buscar instâncias
-	async getInstances(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-		const returnData: INodePropertyOptions[] = [];
-		const credentials = await this.getCredentials('httpbinApi');
-		const serverUrl = credentials['server-url'];
-		const apiKey = credentials.apikey;
-
-		try {
-			const response = await this.helpers.request({
-				method: 'GET',
-				url: `${serverUrl}/instance/fetchInstances`,
-				headers: {
-					apikey: apiKey,
-				},
-			});
-
-			const instances = JSON.parse(response);
-			for (const instance of instances) {
-				returnData.push({
-					name: instance.instanceName, // Ajuste conforme a estrutura do seu objeto
-					value: instance.instanceName, // Ajuste conforme a estrutura do seu objeto
-				});
-			}
-		} catch (error) {
-			throw new NodeApiError(this.getNode(), error); // Use NodeApiError aqui
-		}
-
-		return returnData;
-	}
-
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
 		const operation = this.getNodeParameter('operation', 0);
+
+		// Verifica se o recurso e a operação são os esperados
+		if (resource === 'instances-api' && operation === 'delete-instance') {
+			const instanceOptions = await getInstances.call(this); // Chama a função para obter as opções
+			this.setNodeParameter('instanceName', 0, instanceOptions); // Define as opções no parâmetro
+		}
 
 		let responseData;
 

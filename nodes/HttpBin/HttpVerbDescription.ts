@@ -23,36 +23,36 @@ import { IExecuteFunctions, INodeProperties, INodePropertyOptions } from 'n8n-wo
 
 // Função para buscar instâncias
 async function getInstances(this: IExecuteFunctions): Promise<INodePropertyOptions[]> {
-    const returnData: INodePropertyOptions[] = [];
-    const credentials = await this.getCredentials('httpbinApi'); // Obtém as credenciais
-    const serverUrl = credentials['server-url']; // URL do servidor
-    const apiKey = credentials.apikey; // API Key
+	const returnData: INodePropertyOptions[] = [];
+	const credentials = await this.getCredentials('httpbinApi'); // Obtém as credenciais
+	const serverUrl = credentials['server-url']; // URL do servidor
+	const apiKey = credentials.apikey; // API Key
 
-    try {
-        // Faz a requisição para buscar as instâncias
-        const response = await this.helpers.request({
-            method: 'GET',
-            url: `${serverUrl}/instance/fetchInstances`,
-            headers: {
-                apikey: apiKey,
-            },
-        });
+	try {
+			// Faz a requisição para buscar as instâncias
+			const response = await this.helpers.request({
+					method: 'GET',
+					url: `${serverUrl}/instance/fetchInstances`,
+					headers: {
+							apikey: apiKey,
+					},
+			});
 
-        // Parseia a resposta JSON
-        const instances = JSON.parse(response);
+			// Parseia a resposta JSON
+			const instances = JSON.parse(response);
 
-        // Itera sobre as instâncias e adiciona à lista de opções
-        for (const instance of instances) {
-            returnData.push({
-                name: instance.name, // Nome da instância a ser exibido
-                value: instance.id, // ID da instância como valor
-            });
-        }
-    } catch (error) {
-        throw new Error(`Erro ao buscar instâncias: ${error.message}`); // Lida com erros
-    }
+			// Itera sobre as instâncias e adiciona à lista de opções
+			for (const instance of instances) {
+					returnData.push({
+							name: instance.name, // Nome da instância a ser exibido
+							value: instance.id, // ID da instância como valor
+					});
+			}
+	} catch (error) {
+			throw new Error(`Erro ao buscar instâncias: ${error.message}`); // Lida com erros
+	}
 
-    return returnData; // Retorna as opções para o campo
+	return returnData; // Retorna as opções para o campo
 }
 
 export const httpVerbOperations: INodeProperties[] = [
@@ -645,22 +645,22 @@ const instanceOperation: INodeProperties[] = [
 	//	},
 	//},
 
-// Campos = Deletar instancia
-{
-	displayName: 'Nome da Instância',
-	name: 'instanceName',
-	type: 'options', // Mudamos o tipo para 'options' para permitir seleção
-	default: '',
-	required: true,
-	description: 'Selecione a instância que deseja deletar',
-	displayOptions: {
-			show: {
-					resource: ['instances-api'],
-					operation: ['delete-instance'],
-			},
+	// Campos = Deletar instancia
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'options', // Mudamos o tipo para 'options' para permitir seleção
+		default: '',
+		required: true,
+		description: 'Selecione a instância que deseja deletar',
+		displayOptions: {
+				show: {
+						resource: ['instances-api'],
+						operation: ['delete-instance'],
+				},
+		},
+		options: [], // Inicialmente vazio
 	},
-	options: getInstances.bind(this), // Chama a função para obter as opções
-},
 
 ];
 
