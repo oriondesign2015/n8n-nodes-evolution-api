@@ -22,7 +22,7 @@ import { IExecuteFunctions, INodeProperties, INodePropertyOptions } from 'n8n-wo
 //   • Conectar instancia;
 
 // Função para buscar instâncias
-async function getInstances(this: IExecuteFunctions): Promise<INodePropertyOptions[]> {
+export async function getInstances(this: IExecuteFunctions): Promise<INodePropertyOptions[]> {
 	const returnData: INodePropertyOptions[] = [];
 	const credentials = await this.getCredentials('httpbinApi'); // Obtém as credenciais
 	const serverUrl = credentials['server-url']; // URL do servidor
@@ -630,22 +630,6 @@ const instanceOperation: INodeProperties[] = [
 
 
 	// Campos = Deletar instancia
-	//{
-	//	displayName: 'Nome da Instância',
-	//	name: 'instanceName',
-	//	type: 'string',
-	//	default: '',
-	//	required: true,
-	//	description: 'Digite o nome para a instância',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['instances-api'],
-	//			operation: ['delete-instance'],
-	//		},
-	//	},
-	//},
-
-	// Campos = Deletar instancia
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -654,10 +638,10 @@ const instanceOperation: INodeProperties[] = [
 		required: true,
 		description: 'Selecione a instância que deseja deletar',
 		displayOptions: {
-				show: {
-						resource: ['instances-api'],
-						operation: ['delete-instance'],
-				},
+			show: {
+				resource: ['instances-api'],
+				operation: ['delete-instance'],
+			},
 		},
 		options: [], // Inicialmente vazio
 	},

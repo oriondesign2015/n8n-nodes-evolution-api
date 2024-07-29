@@ -1,6 +1,5 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError, ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
-import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
-import { getInstances } from './HttpVerbDescription'; // Certifique-se de que a função getInstances está exportada
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
+import { httpVerbFields, httpVerbOperations, getInstances } from './HttpVerbDescription'; // Certifique-se de que a função getInstances está exportada
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
@@ -9,7 +8,7 @@ export class HttpBin implements INodeType {
 		icon: 'file:evolutionapi.svg',
 		group: ['transform'],
 		version: 1,
-		subtitle: '={{$parameter["operation"]}}', // + ": " + $parameter["operation"]}}
+		subtitle: '={{$parameter["operation"]}}',
 		description: 'Interact with Evolution API',
 		defaults: {
 			name: 'Evolution API',
@@ -60,7 +59,7 @@ export class HttpBin implements INodeType {
 		// Verifica se o recurso e a operação são os esperados
 		if (resource === 'instances-api' && operation === 'delete-instance') {
 			const instanceOptions = await getInstances.call(this); // Chama a função para obter as opções
-			this.setNodeParameter('instanceName', 0, instanceOptions); // Define as opções no parâmetro
+			this.getNodeParameter('instanceName', 0, instanceOptions); // Define as opções no parâmetro
 		}
 
 		let responseData;
