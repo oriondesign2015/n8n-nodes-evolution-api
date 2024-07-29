@@ -505,7 +505,7 @@ const instanceOperation: INodeProperties[] = [
 		displayName: 'Rejeitar Chamadas',
 		name: 'rejectCall',
 		type: 'boolean',
-		default: true,
+		default: false,
 		description: 'Whether to reject calls or not.',
 		displayOptions: {
 			show: {
@@ -545,7 +545,7 @@ const instanceOperation: INodeProperties[] = [
 		displayName: 'Sempre Online',
 		name: 'alwaysOnline',
 		type: 'boolean',
-		default: true,
+		default: false,
 		description: 'Whether the instance should always be online or not.',
 		displayOptions: {
 			show: {
