@@ -1,5 +1,5 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
-import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
+import { httpVerbFields, httpVerbOperations, getInstances } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
@@ -50,9 +50,12 @@ export class HttpBin implements INodeType {
 			...httpVerbOperations,
 			...httpVerbFields,
 		],
+		methods: {
+			loadOptions: {
+				getInstances, // Adicione a função getInstances aqui
+			},
+		},
 	};
-
-
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
@@ -421,8 +424,7 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
-		// Enviar Enquete
-		if (resource === 'messages-api' && operation === 'sendPoll') {
+		// Enviar		if (resource === 'messages-api' && operation === 'sendPoll') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -530,6 +532,4 @@ export class HttpBin implements INodeType {
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
-
-
 }
