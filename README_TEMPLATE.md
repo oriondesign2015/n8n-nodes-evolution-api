@@ -28,7 +28,7 @@ Este Community Nodes é uma solução 100% gratuita, criada com o intuito de sim
 ✅ Enviar Enquete;<br>
 ✅ Enviar Lista;<br>
 ✅ Marcação fantasma; <br>
-❌ Enviar Status;<br>
+✅ Enviar Status;<br>
 <br>
 <b>Integrações:</b> <br>
 ❌ Chatwoot:<br>
