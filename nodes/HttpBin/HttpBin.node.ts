@@ -522,7 +522,7 @@ export class HttpBin implements INodeType {
 					caption: caption,
 					backgroundColor: backgroundColor,
 					font: font,
-					'allContacts': 'true',
+					'allContacts': true,
 				},
 				json: true,
 			};
