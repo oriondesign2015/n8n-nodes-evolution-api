@@ -50,14 +50,7 @@ export class HttpBin implements INodeType {
 			...httpVerbOperations,
 			...httpVerbFields,
 		],
-		methods: {
-			loadOptions: {
-				getInstances, // Adicione a função getInstances aqui
-			},
-		},
 	};
-
-
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
@@ -507,32 +500,10 @@ export class HttpBin implements INodeType {
 
 		// Buscar Lista Dinâmica
 		if (resource === 'instances-api' && operation === 'fetchDynamicList') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-
-			const options: IRequestOptions = {
-				method: 'GET', // as IHttpRequestMethods,
-				headers: {
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/instance/fetchInstances`, // URL da API para buscar a lista
-				json: true,
-			};
-
-			try {
-				const response = await this.helpers.request(options);
-
-				// Processar a resposta para retornar apenas os nomes
-				const processedData = response.map((item: any) => item.name); // Retorna apenas o "name"
-
-				responseData = processedData; // Atribui o array processado à resposta
-			} catch (error) {
-				throw new NodeApiError(this.getNode(), error);
-			}
+			responseData = await getInstances.call(this);
 		}
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
-		}
-		}
+	}
+}
