@@ -85,6 +85,15 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'logout-instance',
 			},
 
+			// Opção = Definir presença
+			{
+				// Set Presence
+				name: 'Definir Presença',
+				action: 'Definir Presença',
+				description: 'Define a presença na instancia',
+				value: 'setPresence',
+			},
+
 			// Opção = Deletar instancia
 			{
 				// Delete Instance
@@ -601,6 +610,45 @@ const instanceOperation: INodeProperties[] = [
 				operation: ['instanceSettings'],
 			},
 		},
+	},
+
+	// Campos = Definir presença
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o nome da instância que vai ser deletada',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['setPresence'],
+			},
+		},
+	},
+	{
+		displayName: 'Presença',
+		name: 'presence',
+		type: 'options',
+		description: 'Define o status da presença na instancia',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['setPresence'],
+			},
+		},
+		options: [
+			{
+				name: 'Disponivel',
+				value: 'available',
+			},
+			{
+				name: 'Indisponível',
+				value: 'unavailable',
+			},
+		],
+		default: 'available',
 	},
 
 

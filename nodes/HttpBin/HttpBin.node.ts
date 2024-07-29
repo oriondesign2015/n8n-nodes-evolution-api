@@ -184,6 +184,29 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Definir presença
+		if (resource === 'instances-api' && operation === 'setPresence') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const presence = this.getNodeParameter('presence', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/setPresence/${instanceName}`,
+				body: {
+					presence: presence,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Deletar instancia
 		if (resource === 'instances-api' && operation === 'delete-instance') {
 			const credentials = await this.getCredentials('httpbinApi');
