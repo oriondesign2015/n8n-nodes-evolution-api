@@ -500,7 +500,7 @@ export class HttpBin implements INodeType {
 				json: true,
 			};
 			responseData = await this.helpers.request(requestOptions);
-		}
+		},
 
 		// Buscar Lista Dinâmica
 		if (resource === 'instances-api' && operation === 'fetchDynamicList') {
@@ -531,5 +531,5 @@ export class HttpBin implements INodeType {
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
-	},
+	}
 }
