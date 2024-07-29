@@ -199,6 +199,15 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'sendList',
 			},
 
+			// Opção = Enviar Status
+			{
+				// Send Status/Stories
+				name: 'Enviar Status',
+				action: 'Enviar Status',
+				description: 'Publicar um Status/Stories',
+				value: 'sendStories',
+			},
+
 		],
 		// Definindo como padrão a opção "Enviar Texto"
 		default: 'sendText',
@@ -1249,6 +1258,128 @@ const messageOperation: INodeProperties[] = [
 			},
 		},
 	},
+	// Campos = Enviar Status
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar o status',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo do status',
+		name: 'type',
+		type: 'options',
+		description: 'Escolha o tipo de status você vai postar',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+		options: [
+			{
+				name: 'Status de Texto',
+				value: 'text',
+			},
+			{
+				name: 'Status de imagem',
+				value: 'image',
+			},
+			{
+				name: 'Status de Video',
+				value: 'video',
+			},
+			{
+				name: 'Status de Audio',
+				value: 'audio',
+			},
+		],
+		default: 'text',
+	},
+	{
+		displayName: 'Conteudo ou URL',
+		name: 'content',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o conteudo ou Url da imagem/video/audio a ser postado',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+	},
+	{
+		displayName: 'Texto para status de Imagem/Video',
+		name: 'caption',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o texto para status de Imagem/Video',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+	},
+	{
+		displayName: 'Cor do Background',
+		name: 'backgroundColor',
+		type: 'color',
+		default: '#000000',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+	},
+	{
+		displayName: 'Font do texto',
+		name: 'font',
+		type: 'options',
+		description: 'Escolha o tipo da font do seu texto',
+		displayOptions: {
+			show: {
+				resource: ['messages-api'],
+				operation: ['sendStories'],
+			},
+		},
+		options: [
+			{
+				name: 'SERIF',
+				value: '1',
+			},
+			{
+				name: 'NORICAN REGULAR',
+				value: '2',
+			},
+			{
+				name: 'BRYNDAN WRITE',
+				value: '3',
+			},
+			{
+				name: 'BEBASNEUE REGULAR',
+				value: '4',
+			},
+			{
+				name: 'OSWALD HEAVY',
+				value: '5',
+			},
+		],
+		default: '1',
+	},
+
 
 
 ];
