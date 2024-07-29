@@ -633,7 +633,7 @@ const instanceOperation: INodeProperties[] = [
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
-		type: 'options', // Mudamos o tipo para 'options' para permitir seleção
+		type: 'options',
 		default: '',
 		required: true,
 		description: 'Selecione a instância que deseja deletar',
@@ -644,6 +644,9 @@ const instanceOperation: INodeProperties[] = [
 			},
 		},
 		options: [], // Inicialmente vazio
+		typeOptions: {
+			loadOptionsMethod: 'getInstances', // Chama a função getInstances para preencher as opções
+		},
 	},
 
 ];

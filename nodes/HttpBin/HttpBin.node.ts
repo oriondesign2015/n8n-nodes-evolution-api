@@ -1,5 +1,5 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
-import { httpVerbFields, httpVerbOperations, getInstances } from './HttpVerbDescription'; // Certifique-se de que a função getInstances está exportada
+import { httpVerbFields, httpVerbOperations, getInstances } from './HttpVerbDescription';
 
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
@@ -8,7 +8,7 @@ export class HttpBin implements INodeType {
 		icon: 'file:evolutionapi.svg',
 		group: ['transform'],
 		version: 1,
-		subtitle: '={{$parameter["operation"]}}',
+		subtitle: '={{$parameter["operation"]}}', // + ": " + $parameter["operation"]}}
 		description: 'Interact with Evolution API',
 		defaults: {
 			name: 'Evolution API',
@@ -52,15 +52,11 @@ export class HttpBin implements INodeType {
 		],
 	};
 
+
+
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
 		const operation = this.getNodeParameter('operation', 0);
-
-		// Verifica se o recurso e a operação são os esperados
-		if (resource === 'instances-api' && operation === 'delete-instance') {
-			const instanceOptions = await getInstances.call(this); // Chama a função para obter as opções
-			this.getNodeParameter('instanceName', 0, instanceOptions); // Define as opções no parâmetro
-		}
 
 		let responseData;
 
@@ -504,6 +500,50 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(requestOptions);
 		}
 
+		// Buscar Lista Dinâmica
+		if (resource === 'instances-api' && operation === 'fetchDynamicList') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const options: IRequestOptions = {
+				method: 'GET' as IHttpRequestMethods,
+				headers: {
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/dynamic/list`, // URL da API para buscar a lista
+				json: true,
+			};
+
+			try {
+				const response = await this.helpers.request(options);
+
+				// Processar a resposta para retornar um array de informações
+				const processedData = response.map((item: any) => ({
+					id: item.id,
+					name: item.name,
+					connectionStatus: item.connectionStatus,
+					ownerJid: item.ownerJid,
+					profileName: item.profileName,
+					profilePicUrl: item.profilePicUrl,
+					integration: item.integration,
+					token: item.token,
+					createdAt: item.createdAt,
+					updatedAt: item.updatedAt,
+					setting: {
+						rejectCall: item.Setting.rejectCall,
+						msgCall: item.Setting.msgCall,
+						alwaysOnline: item.Setting.alwaysOnline,
+						readMessages: item.Setting.readMessages,
+						syncFullHistory: item.Setting.syncFullHistory,
+					},
+				}));
+
+				responseData = processedData; // Atribui o array processado à resposta
+			} catch (error) {
+				throw new NodeApiError(this.getNode(), error);
+			}
+		}
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
