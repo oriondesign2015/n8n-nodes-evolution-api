@@ -1358,26 +1358,26 @@ const messageOperation: INodeProperties[] = [
 		options: [
 			{
 				name: 'SERIF',
-				value: '1',
+				value: 1,
 			},
 			{
 				name: 'NORICAN REGULAR',
-				value: '2',
+				value: 2,
 			},
 			{
 				name: 'BRYNDAN WRITE',
-				value: '3',
+				value: 3,
 			},
 			{
 				name: 'BEBASNEUE REGULAR',
-				value: '4',
+				value: 4,
 			},
 			{
 				name: 'OSWALD HEAVY',
-				value: '5',
+				value: 5,
 			},
 		],
-		default: '1',
+		default: 1,
 	},
 
 
