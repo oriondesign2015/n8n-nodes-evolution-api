@@ -498,7 +498,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Enviar status
-		if (resource === 'messages-api' && operation === 'sendList') {
+		if (resource === 'messages-api' && operation === 'sendStories') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;

@@ -17,7 +17,7 @@ Este Community Nodes é uma solução 100% gratuita, criada com o intuito de sim
 ✅ Reiniciar Instancia;<br>
 ✅ Desconectar Instancia;<br>
 ✅ Deletar Instancia;<br>
-✅ Set Presence;<br>
+❌ Set Presence;<br>
 <br>
 <b>Mensagens:</b> <br>
 ✅ Enviar Texto; <br>
