@@ -507,7 +507,7 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 
 			const options: IRequestOptions = {
-				method: 'GET' // as IHttpRequestMethods,
+				method: 'GET', // as IHttpRequestMethods,
 				headers: {
 					apikey: apiKey,
 				},
