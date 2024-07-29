@@ -523,8 +523,7 @@ export class HttpBin implements INodeType {
 
 				responseData = processedData; // Atribui o array processado à resposta
 			} catch (error) {
-				//throw new NodeApiError(this.getNode(), error);
-				throw new Error(`Erro ao buscar instâncias: ${error.message}`);
+				throw new NodeApiError(this.getNode(), error);
 			}
 		}
 
