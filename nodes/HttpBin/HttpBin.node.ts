@@ -519,7 +519,6 @@ export class HttpBin implements INodeType {
 				body: {
 					type: type,
 					content: content,
-					media: media,
 					caption: caption,
 					backgroundColor: backgroundColor,
 					font: font,
