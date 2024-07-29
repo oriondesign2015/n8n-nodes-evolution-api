@@ -57,6 +57,8 @@ export class HttpBin implements INodeType {
 		},
 	};
 
+
+
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const resource = this.getNodeParameter('resource', 0);
 		const operation = this.getNodeParameter('operation', 0);
@@ -424,7 +426,8 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
-		// Enviar		if (resource === 'messages-api' && operation === 'sendPoll') {
+		// Enviar Enquete
+		if (resource === 'messages-api' && operation === 'sendPoll') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -532,4 +535,7 @@ export class HttpBin implements INodeType {
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
+
+
+}
 }
