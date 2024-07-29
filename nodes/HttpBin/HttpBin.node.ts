@@ -534,8 +534,5 @@ export class HttpBin implements INodeType {
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
-			}
-
-
-}
-}
+		}
+		}
