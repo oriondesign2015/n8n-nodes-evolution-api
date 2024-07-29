@@ -507,7 +507,7 @@ export class HttpBin implements INodeType {
 			const content = this.getNodeParameter('content', 0);
 			const caption = this.getNodeParameter('caption', 0);
 			const backgroundColor = this.getNodeParameter('backgroundColor', 0);
-			const font = this.getNodeParameter('font', 0);
+			const font = parseInt(this.getNodeParameter('font', 0), 10);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -521,7 +521,7 @@ export class HttpBin implements INodeType {
 					content: content,
 					caption: caption,
 					backgroundColor: backgroundColor,
-					font: font,
+					font: font, // Agora é um inteiro
 					'allContacts': true,
 				},
 				json: true,
