@@ -511,37 +511,20 @@ export class HttpBin implements INodeType {
 				headers: {
 					apikey: apiKey,
 				},
-				uri: `${serverUrl}/dynamic/list`, // URL da API para buscar a lista
+				uri: `${serverUrl}/instance/fetchInstances`, // URL da API para buscar a lista
 				json: true,
 			};
 
 			try {
 				const response = await this.helpers.request(options);
 
-				// Processar a resposta para retornar um array de informações
-				const processedData = response.map((item: any) => ({
-					id: item.id,
-					name: item.name,
-					connectionStatus: item.connectionStatus,
-					ownerJid: item.ownerJid,
-					profileName: item.profileName,
-					profilePicUrl: item.profilePicUrl,
-					integration: item.integration,
-					token: item.token,
-					createdAt: item.createdAt,
-					updatedAt: item.updatedAt,
-					setting: {
-						rejectCall: item.Setting.rejectCall,
-						msgCall: item.Setting.msgCall,
-						alwaysOnline: item.Setting.alwaysOnline,
-						readMessages: item.Setting.readMessages,
-						syncFullHistory: item.Setting.syncFullHistory,
-					},
-				}));
+				// Processar a resposta para retornar apenas os nomes
+				const processedData = response.map((item: any) => item.name); // Retorna apenas o "name"
 
 				responseData = processedData; // Atribui o array processado à resposta
 			} catch (error) {
-				throw new NodeApiError(this.getNode(), error);
+				//throw new NodeApiError(this.getNode(), error);
+				throw new Error(`Erro ao buscar instâncias: ${error.message}`);
 			}
 		}
 
