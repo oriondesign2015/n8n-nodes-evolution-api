@@ -88,17 +88,11 @@ export class HttpBin implements INodeType {
 			if (optionsCreateInstance.instanceSettings) {
 				const settings = (optionsCreateInstance.instanceSettings as IDataObject).settings as IDataObject;
 				if (settings) {
-					requestBody.settings = {
-						rejectCall: settings.rejectCall as boolean,
-						groupsIgnore: settings.groupsIgnore as boolean,
-						alwaysOnline: settings.alwaysOnline as boolean,
-						readMessages: settings.readMessages as boolean,
-						readStatus: settings.readStatus as boolean,
-						syncFullHistory: settings.syncFullHistory as boolean,
-					};
-
-					if ('msgCall' in settings) {
-						(requestBody.settings as IDataObject).msgCall = settings.msgCall as string;
+					requestBody.settings = {};
+					for (const [key, value] of Object.entries(settings)) {
+						if (value !== undefined && value !== '') {
+							(requestBody.settings as IDataObject)[key] = value;
+						}
 					}
 				}
 			}
@@ -106,49 +100,36 @@ export class HttpBin implements INodeType {
 			if (optionsCreateInstance.proxy) {
 				const proxySettings = (optionsCreateInstance.proxy as IDataObject).proxySettings as IDataObject;
 				if (proxySettings) {
-					requestBody.proxy = {
-						host: proxySettings.proxyHost as string,
-						port: proxySettings.proxyPort as number,
-						protocol: proxySettings.proxyProtocol as string,
-						username: proxySettings.proxyUsername as string,
-						password: proxySettings.proxyPassword as string,
-					};
+					requestBody.proxy = {};
+					for (const [key, value] of Object.entries(proxySettings)) {
+						if (value !== undefined && value !== '') {
+							(requestBody.proxy as IDataObject)[key] = value;
+						}
+					}
 				}
 			}
 
 			if (optionsCreateInstance.chatwoot) {
 				const chatwootSettings = (optionsCreateInstance.chatwoot as IDataObject).chatwootSettings as IDataObject;
 				if (chatwootSettings) {
-					requestBody.chatwoot = {
-						accountId: chatwootSettings.chatwootAccountId as number,
-						token: chatwootSettings.chatwootToken as string,
-						url: chatwootSettings.chatwootUrl as string,
-						signMsg: chatwootSettings.chatwootSignMsg as boolean,
-						reopenConversation: chatwootSettings.chatwootReopenConversation as boolean,
-						conversationPending: chatwootSettings.chatwootConversationPending as boolean,
-						importContacts: chatwootSettings.chatwootImportContacts as boolean,
-						nameInbox: chatwootSettings.chatwootNameInbox as string,
-						mergeBrazilContacts: chatwootSettings.chatwootMergeBrazilContacts as boolean,
-						importMessages: chatwootSettings.chatwootImportMessages as boolean,
-						daysLimitImportMessages: chatwootSettings.chatwootDaysLimitImportMessages as number,
-						organization: chatwootSettings.chatwootOrganization as string,
-						logo: chatwootSettings.chatwootLogo as string,
-					};
+					requestBody.chatwoot = {};
+					for (const [key, value] of Object.entries(chatwootSettings)) {
+						if (value !== undefined && value !== '') {
+							(requestBody.chatwoot as IDataObject)[key] = value;
+						}
+					}
 				}
 			}
 
 			if (optionsCreateInstance.typebot) {
 				const typebotSettings = (optionsCreateInstance.typebot as IDataObject).typebotSettings as IDataObject;
 				if (typebotSettings) {
-					requestBody.typebot = {
-						url: typebotSettings.typebotUrl as string,
-						typebot: typebotSettings.typebot as string,
-						expire: typebotSettings.typebotExpire as number,
-						keywordFinish: typebotSettings.typebotKeywordFinish as string,
-						delayMessage: typebotSettings.typebotDelayMessage as number,
-						unknownMessage: typebotSettings.typebotUnknownMessage as string,
-						listeningFromMe: typebotSettings.typebotListeningFromMe as boolean,
-					};
+					requestBody.typebot = {};
+					for (const [key, value] of Object.entries(typebotSettings)) {
+						if (value !== undefined && value !== '') {
+							(requestBody.typebot as IDataObject)[key] = value;
+						}
+					}
 				}
 			}
 
