@@ -72,11 +72,11 @@ export class HttpBin implements INodeType {
 			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
 
 			// Obter configurações da instância
-			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as object || {};
-			const instanceSettings = (optionsCreateInstance.instanceSettings as object) || {};
+			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
+			const instanceSettings = optionsCreateInstance.instanceSettings as IDataObject || {};
 
 			const rejectCall = instanceSettings.rejectCall as boolean;
-			const msgCall = (instanceSettings.msgCall as string) || '';
+			const msgCall = instanceSettings.msgCall as string || '';
 			const groupsIgnore = instanceSettings.groupsIgnore as boolean;
 			const alwaysOnline = instanceSettings.alwaysOnline as boolean;
 			const readMessages = instanceSettings.readMessages as boolean;
@@ -84,7 +84,7 @@ export class HttpBin implements INodeType {
 			const syncFullHistory = instanceSettings.syncFullHistory as boolean;
 
 			// Obter configurações do proxy
-			const proxy = (optionsCreateInstance.proxy as object) || {};
+			const proxy = optionsCreateInstance.proxy as IDataObject || {};
 			const proxyHost = proxy.proxyHost as string;
 			const proxyPort = proxy.proxyPort as number;
 			const proxyProtocol = proxy.proxyProtocol as string;
@@ -92,7 +92,7 @@ export class HttpBin implements INodeType {
 			const proxyPassword = proxy.proxyPassword as string;
 
 			// Obter configurações do Chatwoot
-			const chatwoot = (optionsCreateInstance.chatwoot as object) || {};
+			const chatwoot = optionsCreateInstance.chatwoot as IDataObject || {};
 			const chatwootAccountId = chatwoot.chatwootAccountId as string;
 			const chatwootToken = chatwoot.chatwootToken as string;
 			const chatwootUrl = chatwoot.chatwootUrl as string;
@@ -100,24 +100,24 @@ export class HttpBin implements INodeType {
 			const chatwootReopenConversation = chatwoot.chatwootReopenConversation as boolean;
 			const chatwootConversationPending = chatwoot.chatwootConversationPending as boolean;
 			const chatwootImportContacts = chatwoot.chatwootImportContacts as boolean;
-			const chatwootNameInbox = (chatwoot.chatwootNameInbox as string) || '';
+			const chatwootNameInbox = chatwoot.chatwootNameInbox as string || '';
 			const chatwootMergeBrazilContacts = chatwoot.chatwootMergeBrazilContacts as boolean;
 			const chatwootImportMessages = chatwoot.chatwootImportMessages as boolean;
-			const chatwootDaysLimitImportMessages = (chatwoot.chatwootDaysLimitImportMessages as string) || '';
-			const chatwootOrganization = (chatwoot.chatwootOrganization as string) || '';
-			const chatwootLogo = (chatwoot.chatwootLogo as string) || '';
+			const chatwootDaysLimitImportMessages = chatwoot.chatwootDaysLimitImportMessages as string || '';
+			const chatwootOrganization = chatwoot.chatwootOrganization as string || '';
+			const chatwootLogo = chatwoot.chatwootLogo as string || '';
 
 			// Obter configurações do Typebot
-			const typebot = (optionsCreateInstance.typebot as object) || {};
+			const typebot = optionsCreateInstance.typebot as IDataObject || {};
 			const typebotUrl = typebot.typebotUrl as string;
-			const typebotTypebot = (typebot.typebot as string) || '';
+			const typebotTypebot = typebot.typebot as string || '';
 			const typebotExpire = typebot.typebotExpire as string;
 			const typebotKeywordFinish = typebot.typebotKeywordFinish as string;
 			const typebotDelayMessage = typebot.typebotDelayMessage as string;
 			const typebotUnknownMessage = typebot.typebotUnknownMessage as string;
 			const typebotListeningFromMe = typebot.typebotListeningFromMe as string;
 
-			const body: object = {
+			const body: IDataObject = {
 				instanceName,
 				token,
 				number,
