@@ -72,8 +72,8 @@ export class HttpBin implements INodeType {
 			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
 
 			// Obter configurações da instância
-			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject || {}; // Adiciona type assertion
-			const instanceSettings = (optionsCreateInstance.instanceSettings as IDataObject) || {};
+			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as object || {};
+			const instanceSettings = (optionsCreateInstance.instanceSettings as object) || {};
 
 			const rejectCall = instanceSettings.rejectCall as boolean;
 			const msgCall = (instanceSettings.msgCall as string) || '';
@@ -84,7 +84,7 @@ export class HttpBin implements INodeType {
 			const syncFullHistory = instanceSettings.syncFullHistory as boolean;
 
 			// Obter configurações do proxy
-			const proxy = (optionsCreateInstance.proxy as IDataObject) || {};
+			const proxy = (optionsCreateInstance.proxy as object) || {};
 			const proxyHost = proxy.proxyHost as string;
 			const proxyPort = proxy.proxyPort as number;
 			const proxyProtocol = proxy.proxyProtocol as string;
@@ -92,7 +92,7 @@ export class HttpBin implements INodeType {
 			const proxyPassword = proxy.proxyPassword as string;
 
 			// Obter configurações do Chatwoot
-			const chatwoot = (optionsCreateInstance.chatwoot as IDataObject) || {};
+			const chatwoot = (optionsCreateInstance.chatwoot as object) || {};
 			const chatwootAccountId = chatwoot.chatwootAccountId as string;
 			const chatwootToken = chatwoot.chatwootToken as string;
 			const chatwootUrl = chatwoot.chatwootUrl as string;
@@ -108,7 +108,7 @@ export class HttpBin implements INodeType {
 			const chatwootLogo = (chatwoot.chatwootLogo as string) || '';
 
 			// Obter configurações do Typebot
-			const typebot = (optionsCreateInstance.typebot as IDataObject) || {};
+			const typebot = (optionsCreateInstance.typebot as object) || {};
 			const typebotUrl = typebot.typebotUrl as string;
 			const typebotTypebot = (typebot.typebot as string) || '';
 			const typebotExpire = typebot.typebotExpire as string;
@@ -117,7 +117,7 @@ export class HttpBin implements INodeType {
 			const typebotUnknownMessage = typebot.typebotUnknownMessage as string;
 			const typebotListeningFromMe = typebot.typebotListeningFromMe as string;
 
-			const body: IDataObject = {
+			const body: object = {
 				instanceName,
 				token,
 				number,
