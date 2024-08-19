@@ -89,7 +89,7 @@ export class HttpBin implements INodeType {
 			if (optionsCreateInstance) {
 				// Configurações da instância
 				if (optionsCreateInstance.instanceSettings && typeof optionsCreateInstance.instanceSettings === 'object') {
-					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject;
+					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject | undefined;
 					if (settings) {
 						requestBody.settings = {};
 						for (const [key, value] of Object.entries(settings)) {
@@ -102,7 +102,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Proxy
 				if (optionsCreateInstance.proxy && typeof optionsCreateInstance.proxy === 'object') {
-					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject;
+					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject | undefined;
 					if (proxySettings) {
 						requestBody.proxy = {};
 						for (const [key, value] of Object.entries(proxySettings)) {
@@ -115,7 +115,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Chatwoot
 				if (optionsCreateInstance.chatwoot && typeof optionsCreateInstance.chatwoot === 'object') {
-					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject;
+					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject | undefined;
 					if (chatwootSettings) {
 						requestBody.chatwoot = {};
 						for (const [key, value] of Object.entries(chatwootSettings)) {
@@ -128,7 +128,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Typebot
 				if (optionsCreateInstance.typebot && typeof optionsCreateInstance.typebot === 'object') {
-					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject;
+					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject | undefined;
 					if (typebotSettings) {
 						requestBody.typebot = {};
 						for (const [key, value] of Object.entries(typebotSettings)) {
