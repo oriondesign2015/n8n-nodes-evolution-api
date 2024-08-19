@@ -116,7 +116,7 @@ export class HttpBin implements INodeType {
 
 			// Verifica se optionsCreateInstance é um objeto
 			if (typeof optionsCreateInstance !== 'object' || optionsCreateInstance === null) {
-				throw new NodeApiError(this.getNode(), 'options_Create_instance deve ser um objeto.');
+				throw new NodeApiError(this.getNode(), { message: 'options_Create_instance deve ser um objeto.' });
 			}
 
 			const requestBody: IDataObject = {
