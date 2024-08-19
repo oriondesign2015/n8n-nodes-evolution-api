@@ -321,12 +321,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to automatically reject incoming calls',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Mensagem Ao Rejeitar',
@@ -334,12 +328,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'string',
 								default: '',
 								description: 'Whether to send a message after rejecting a call, and if so, what message',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Ignorar Grupos',
@@ -347,12 +335,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to ignore messages from groups',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Sempre Online',
@@ -360,12 +342,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to keep the status always set to Online',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Ler Mensagens',
@@ -373,12 +349,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to automatically mark messages as read',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Ler Status',
@@ -386,12 +356,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to allow the API to view the Status of added contacts',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 							{
 								displayName: 'Sincronizar Histórico',
@@ -399,12 +363,6 @@ const instanceOperation: INodeProperties[] = [
 								type: 'boolean',
 								default: false,
 								description: 'Whether to synchronize the full message history with the API',
-								displayOptions: {
-									show: {
-										resource: ['instances-api'],
-										operation: ['instance-basic'],
-									},
-								},
 							},
 						],
 					},

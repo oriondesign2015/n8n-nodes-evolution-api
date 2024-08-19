@@ -68,11 +68,12 @@ export class HttpBin implements INodeType {
 			const apiKey = credentials.apikey;
 
 			const instanceName = this.getNodeParameter('instanceName', 0);
-			const token = this.getNodeParameter('token', 0);
+			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
+			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
 
 			// Obter configurações da instância
 			const rejectCall = this.getNodeParameter('options_Create_instance.instanceSettings.rejectCall', 0);
-			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.msgCall', 0);
+			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.msgCall', 0) || '';
 			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.groupsIgnore', 0);
 			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.alwaysOnline', 0);
 			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.readMessages', 0);
@@ -94,12 +95,12 @@ export class HttpBin implements INodeType {
 			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.chatwootReopenConversation', 0);
 			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.chatwootConversationPending', 0);
 			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootImportContacts', 0);
-			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwootNameInbox', 0);
+			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwootNameInbox', 0) || '';
 			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootMergeBrazilContacts', 0);
 			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootImportMessages', 0);
-			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootDaysLimitImportMessages', 0);
-			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootOrganization', 0);
-			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootLogo', 0);
+			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootDaysLimitImportMessages', 0) || '';
+			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootOrganization', 0) || '';
+			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootLogo', 0) || '';
 
 			// Obter configurações do Typebot
 			const typebotUrl = this.getNodeParameter('options_Create_instance.typebot.typebotUrl', 0);
@@ -110,6 +111,53 @@ export class HttpBin implements INodeType {
 			const typebotUnknownMessage = this.getNodeParameter('options_Create_instance.typebot.typebotUnknownMessage', 0);
 			const typebotListeningFromMe = this.getNodeParameter('options_Create_instance.typebot.typebotListeningFromMe', 0);
 
+			const body: any = {
+				instanceName,
+				token,
+				number,
+				'integration': 'WHATSAPP-BAILEYS',
+			};
+
+			// Adiciona configurações da instância se selecionadas
+			if (rejectCall) body.rejectCall = rejectCall;
+			if (msgCall) body.msgCall = msgCall;
+			if (groupsIgnore) body.groupsIgnore = groupsIgnore;
+			if (alwaysOnline) body.alwaysOnline = alwaysOnline;
+			if (readMessages) body.readMessages = readMessages;
+			if (readStatus) body.readStatus = readStatus;
+			if (syncFullHistory) body.syncFullHistory = syncFullHistory;
+
+			// Adiciona configurações do proxy se selecionadas
+			if (proxyHost) body.host = proxyHost;
+			if (proxyPort) body.port = proxyPort;
+			if (proxyProtocol) body.protocol = proxyProtocol;
+			if (proxyUsername) body.username = proxyUsername;
+			if (proxyPassword) body.password = proxyPassword;
+
+			// Adiciona configurações do Chatwoot se selecionadas
+			if (chatwootAccountId) body.chatwootAccountId = chatwootAccountId;
+			if (chatwootToken) body.chatwootToken = chatwootToken;
+			if (chatwootUrl) body.chatwootUrl = chatwootUrl;
+			if (chatwootSignMsg) body.chatwootSignMsg = chatwootSignMsg;
+			if (chatwootReopenConversation) body.chatwootReopenConversation = chatwootReopenConversation;
+			if (chatwootConversationPending) body.chatwootConversationPending = chatwootConversationPending;
+			if (chatwootImportContacts) body.chatwootImportContacts = chatwootImportContacts;
+			if (chatwootNameInbox) body.chatwootNameInbox = chatwootNameInbox;
+			if (chatwootMergeBrazilContacts) body.chatwootMergeBrazilContacts = chatwootMergeBrazilContacts;
+			if (chatwootImportMessages) body.chatwootImportMessages = chatwootImportMessages;
+			if (chatwootDaysLimitImportMessages) body.chatwootDaysLimitImportMessages = chatwootDaysLimitImportMessages;
+			if (chatwootOrganization) body.chatwootOrganization = chatwootOrganization;
+			if (chatwootLogo) body.chatwootLogo = chatwootLogo;
+
+			// Adiciona configurações do Typebot se selecionadas
+			if (typebotUrl) body.typebotUrl = typebotUrl;
+			if (typebot) body.typebot = typebot;
+			if (typebotExpire) body.typebotExpire = typebotExpire;
+			if (typebotKeywordFinish) body.typebotKeywordFinish = typebotKeywordFinish;
+			if (typebotDelayMessage) body.typebotDelayMessage = typebotDelayMessage;
+			if (typebotUnknownMessage) body.typebotUnknownMessage = typebotUnknownMessage;
+			if (typebotListeningFromMe) body.typebotListeningFromMe = typebotListeningFromMe;
+
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
 				headers: {
@@ -117,49 +165,7 @@ export class HttpBin implements INodeType {
 					apikey: apiKey,
 				},
 				uri: `${serverUrl}/instance/create`,
-				body: {
-					instanceName,
-					token,
-					'integration': 'WHATSAPP-BAILEYS',
-					rejectCall,
-					msgCall,
-					groupsIgnore,
-					alwaysOnline,
-					readMessages,
-					readStatus,
-					syncFullHistory,
-					proxy: {
-						host: proxyHost,
-						port: proxyPort,
-						protocol: proxyProtocol,
-						username: proxyUsername,
-						password: proxyPassword,
-					},
-					chatwoot: {
-						chatwootAccountId,
-						chatwootToken,
-						chatwootUrl,
-						chatwootSignMsg,
-						chatwootReopenConversation,
-						chatwootConversationPending,
-						chatwootImportContacts,
-						chatwootNameInbox,
-						chatwootMergeBrazilContacts,
-						chatwootImportMessages,
-						chatwootDaysLimitImportMessages,
-						chatwootOrganization,
-						chatwootLogo,
-					},
-					typebot: {
-						typebotUrl,
-						typebot,
-						typebotExpire,
-						typebotKeywordFinish,
-						typebotDelayMessage,
-						typebotUnknownMessage,
-						typebotListeningFromMe,
-					},
-				},
+				body,
 				json: true,
 			};
 
@@ -172,7 +178,7 @@ export class HttpBin implements INodeType {
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0);
-			const token = this.getNodeParameter('token', 0);
+			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
 			const integration = this.getNodeParameter('integration', 0);
 			const proxyHost = this.getNodeParameter('proxyHost', 0);
 			const proxyPort = this.getNodeParameter('proxyPort', 0);
