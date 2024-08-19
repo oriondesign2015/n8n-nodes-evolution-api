@@ -297,7 +297,7 @@ const instanceOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'Opções',
-		name: 'optionsCreateInstance',
+		name: 'options_Create_instance',
 		type: 'collection',
 		placeholder: 'Adicionar Campo',
 		default: {},
