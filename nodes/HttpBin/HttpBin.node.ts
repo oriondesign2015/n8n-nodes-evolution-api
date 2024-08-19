@@ -88,7 +88,7 @@ export class HttpBin implements INodeType {
 			// Verifica e adiciona as configurações se existirem
 			if (optionsCreateInstance) {
 				// Configurações da instância
-				if (optionsCreateInstance.instanceSettings) {
+				if (optionsCreateInstance.instanceSettings && typeof optionsCreateInstance.instanceSettings === 'object') {
 					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject;
 					if (settings) {
 						requestBody.settings = {};
@@ -101,7 +101,7 @@ export class HttpBin implements INodeType {
 				}
 
 				// Configurações do Proxy
-				if (optionsCreateInstance.proxy) {
+				if (optionsCreateInstance.proxy && typeof optionsCreateInstance.proxy === 'object') {
 					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject;
 					if (proxySettings) {
 						requestBody.proxy = {};
@@ -114,7 +114,7 @@ export class HttpBin implements INodeType {
 				}
 
 				// Configurações do Chatwoot
-				if (optionsCreateInstance.chatwoot) {
+				if (optionsCreateInstance.chatwoot && typeof optionsCreateInstance.chatwoot === 'object') {
 					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject;
 					if (chatwootSettings) {
 						requestBody.chatwoot = {};
@@ -127,7 +127,7 @@ export class HttpBin implements INodeType {
 				}
 
 				// Configurações do Typebot
-				if (optionsCreateInstance.typebot) {
+				if (optionsCreateInstance.typebot && typeof optionsCreateInstance.typebot === 'object') {
 					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject;
 					if (typebotSettings) {
 						requestBody.typebot = {};
