@@ -105,7 +105,7 @@ export class HttpBin implements INodeType {
 					};
 
 					if (settings.msgCall) {
-						requestBody.settings.msgCall = settings.msgCall as string;
+						requestBody.settings.msgCall = (settings as IDataObject).msgCall as string;
 					}
 				}
 			}
