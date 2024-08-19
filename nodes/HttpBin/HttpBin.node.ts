@@ -61,7 +61,6 @@ export class HttpBin implements INodeType {
 
 		let responseData;
 
-		// Criar instancia basica
 		if (resource === 'instances-api' && operation === 'instance-basic') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
@@ -85,11 +84,10 @@ export class HttpBin implements INodeType {
 
 			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
 
-			// Verifica e adiciona as configurações se existirem
 			if (optionsCreateInstance) {
 				// Configurações da instância
 				if (optionsCreateInstance.instanceSettings && typeof optionsCreateInstance.instanceSettings === 'object') {
-					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject | undefined;
+					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject;
 					if (settings) {
 						requestBody.settings = {};
 						for (const [key, value] of Object.entries(settings)) {
@@ -102,7 +100,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Proxy
 				if (optionsCreateInstance.proxy && typeof optionsCreateInstance.proxy === 'object') {
-					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject | undefined;
+					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject;
 					if (proxySettings) {
 						requestBody.proxy = {};
 						for (const [key, value] of Object.entries(proxySettings)) {
@@ -115,7 +113,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Chatwoot
 				if (optionsCreateInstance.chatwoot && typeof optionsCreateInstance.chatwoot === 'object') {
-					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject | undefined;
+					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject;
 					if (chatwootSettings) {
 						requestBody.chatwoot = {};
 						for (const [key, value] of Object.entries(chatwootSettings)) {
@@ -128,7 +126,7 @@ export class HttpBin implements INodeType {
 
 				// Configurações do Typebot
 				if (optionsCreateInstance.typebot && typeof optionsCreateInstance.typebot === 'object') {
-					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject | undefined;
+					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject;
 					if (typebotSettings) {
 						requestBody.typebot = {};
 						for (const [key, value] of Object.entries(typebotSettings)) {
