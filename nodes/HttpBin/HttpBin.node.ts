@@ -87,17 +87,6 @@ export class HttpBin implements INodeType {
 			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
 			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
 
-			if (this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, false)) {
-
-				const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0) || '';
-				const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0);
-				const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
-				const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
-				const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
-				const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
-
-			}
-
 			// Obter configurações do proxy
 			console.log(this.getNodeParameter('options_Create_instance.proxy', 0));
 			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.settings.proxyHost', 0);
