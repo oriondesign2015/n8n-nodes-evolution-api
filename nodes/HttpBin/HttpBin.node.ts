@@ -67,8 +67,125 @@ export class HttpBin implements INodeType {
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
 			const instanceName = this.getNodeParameter('instanceName', 0) as string;
-			const token = this.getNodeParameter('token', 0) as string;
-			const number = this.getNodeParameter('number', 0) as string;
+			const token = this.getNodeParameter('token', 0, '') as string;
+			const number = this.getNodeParameter('number', 0, '') as string;
+
+			const requestBody: IDataObject = {
+				instanceName,
+				'integration': 'whatsapp-baileys',
+			};
+
+			if (token) {
+				requestBody.token = token;
+			}
+
+			if (number) {
+				requestBody.number = number;
+			}
+
+			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
+
+			if (optionsCreateInstance.instanceSettings) {
+				const settings = (optionsCreateInstance.instanceSettings as IDataObject).settings as IDataObject;
+				if (settings) {
+					const rejectCall = settings.rejectCall as boolean;
+					const groupsIgnore = settings.groupsIgnore as boolean;
+					const alwaysOnline = settings.alwaysOnline as boolean;
+					const readMessages = settings.readMessages as boolean;
+					const readStatus = settings.readStatus as boolean;
+					const syncFullHistory = settings.syncFullHistory as boolean;
+
+					requestBody.settings = {
+						rejectCall,
+						groupsIgnore,
+						alwaysOnline,
+						readMessages,
+						readStatus,
+						syncFullHistory,
+					};
+
+					if (settings.msgCall) {
+						requestBody.settings.msgCall = settings.msgCall as string;
+					}
+				}
+			}
+
+			if (optionsCreateInstance.proxy) {
+				const proxySettings = (optionsCreateInstance.proxy as IDataObject).proxySettings as IDataObject;
+				if (proxySettings) {
+					const proxyHost = proxySettings.proxyHost as string;
+					const proxyPort = proxySettings.proxyPort as number;
+					const proxyProtocol = proxySettings.proxyProtocol as string;
+					const proxyUsername = proxySettings.proxyUsername as string;
+					const proxyPassword = proxySettings.proxyPassword as string;
+
+					requestBody.proxy = {
+						host: proxyHost,
+						port: proxyPort,
+						protocol: proxyProtocol,
+						username: proxyUsername,
+						password: proxyPassword,
+					};
+				}
+			}
+
+			if (optionsCreateInstance.chatwoot) {
+				const chatwootSettings = (optionsCreateInstance.chatwoot as IDataObject).chatwootSettings as IDataObject;
+				if (chatwootSettings) {
+					const chatwootAccountId = chatwootSettings.chatwootAccountId as number;
+					const chatwootToken = chatwootSettings.chatwootToken as string;
+					const chatwootUrl = chatwootSettings.chatwootUrl as string;
+					const chatwootSignMsg = chatwootSettings.chatwootSignMsg as boolean;
+					const chatwootReopenConversation = chatwootSettings.chatwootReopenConversation as boolean;
+					const chatwootConversationPending = chatwootSettings.chatwootConversationPending as boolean;
+					const chatwootImportContacts = chatwootSettings.chatwootImportContacts as boolean;
+					const chatwootNameInbox = chatwootSettings.chatwootNameInbox as string;
+					const chatwootMergeBrazilContacts = chatwootSettings.chatwootMergeBrazilContacts as boolean;
+					const chatwootImportMessages = chatwootSettings.chatwootImportMessages as boolean;
+					const chatwootDaysLimitImportMessages = chatwootSettings.chatwootDaysLimitImportMessages as number;
+					const chatwootOrganization = chatwootSettings.chatwootOrganization as string;
+					const chatwootLogo = chatwootSettings.chatwootLogo as string;
+
+					requestBody.chatwoot = {
+						accountId: chatwootAccountId,
+						token: chatwootToken,
+						url: chatwootUrl,
+						signMsg: chatwootSignMsg,
+						reopenConversation: chatwootReopenConversation,
+						conversationPending: chatwootConversationPending,
+						importContacts: chatwootImportContacts,
+						nameInbox: chatwootNameInbox,
+						mergeBrazilContacts: chatwootMergeBrazilContacts,
+						importMessages: chatwootImportMessages,
+						daysLimitImportMessages: chatwootDaysLimitImportMessages,
+						organization: chatwootOrganization,
+						logo: chatwootLogo,
+					};
+				}
+			}
+
+			if (optionsCreateInstance.typebot) {
+				const typebotSettings = (optionsCreateInstance.typebot as IDataObject).typebotSettings as IDataObject;
+				if (typebotSettings) {
+					const typebotUrl = typebotSettings.typebotUrl as string;
+					const typebot = typebotSettings.typebot as string;
+					const typebotExpire = typebotSettings.typebotExpire as number;
+					const typebotKeywordFinish = typebotSettings.typebotKeywordFinish as string;
+					const typebotDelayMessage = typebotSettings.typebotDelayMessage as number;
+					const typebotUnknownMessage = typebotSettings.typebotUnknownMessage as string;
+					const typebotListeningFromMe = typebotSettings.typebotListeningFromMe as boolean;
+
+					requestBody.typebot = {
+						url: typebotUrl,
+						typebot,
+						expire: typebotExpire,
+						keywordFinish: typebotKeywordFinish,
+						delayMessage: typebotDelayMessage,
+						unknownMessage: typebotUnknownMessage,
+						listeningFromMe: typebotListeningFromMe,
+					};
+				}
+			}
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -77,44 +194,9 @@ export class HttpBin implements INodeType {
 					apikey: apiKey,
 				},
 				uri: `${serverUrl}/instance/create`,
-				body: {
-					instanceName,
-					token,
-					number,
-					'integration': 'whatsapp-baileys',
-				},
+				body: requestBody,
 				json: true,
 			};
-
-			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
-
-			if (optionsCreateInstance.instanceSettings) {
-				const settings = (optionsCreateInstance.instanceSettings as IDataObject).settings as IDataObject;
-				if (settings) {
-					options.body.settings = settings;
-				}
-			}
-
-			if (optionsCreateInstance.proxy) {
-				const proxySettings = (optionsCreateInstance.proxy as IDataObject).proxySettings as IDataObject;
-				if (proxySettings) {
-					options.body.proxy = proxySettings;
-				}
-			}
-
-			if (optionsCreateInstance.chatwoot) {
-				const chatwootSettings = (optionsCreateInstance.chatwoot as IDataObject).chatwootSettings as IDataObject;
-				if (chatwootSettings) {
-					options.body.chatwoot = chatwootSettings;
-				}
-			}
-
-			if (optionsCreateInstance.typebot) {
-				const typebotSettings = (optionsCreateInstance.typebot as IDataObject).typebotSettings as IDataObject;
-				if (typebotSettings) {
-					options.body.typebot = typebotSettings;
-				}
-			}
 
 			responseData = await this.helpers.request(options);
 		}
