@@ -72,7 +72,7 @@ export class HttpBin implements INodeType {
 
 			const requestBody: IDataObject = {
 				instanceName,
-				'integration': 'whatsapp-baileys',
+				integration: 'whatsapp-baileys',
 			};
 
 			if (token) {
@@ -85,49 +85,56 @@ export class HttpBin implements INodeType {
 
 			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
 
-			if (optionsCreateInstance.instanceSettings) {
-				const settings = (optionsCreateInstance.instanceSettings as IDataObject).settings as IDataObject;
-				if (settings) {
-					requestBody.settings = {};
-					for (const [key, value] of Object.entries(settings)) {
-						if (value !== undefined && value !== '') {
-							(requestBody.settings as IDataObject)[key] = value;
+			// Verifica e adiciona as configurações se existirem
+			if (optionsCreateInstance) {
+				// Configurações da instância
+				if (optionsCreateInstance.instanceSettings) {
+					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject;
+					if (settings) {
+						requestBody.settings = {};
+						for (const [key, value] of Object.entries(settings)) {
+							if (value !== undefined && value !== '') {
+								requestBody.settings[key] = value;
+							}
 						}
 					}
 				}
-			}
 
-			if (optionsCreateInstance.proxy) {
-				const proxySettings = (optionsCreateInstance.proxy as IDataObject).proxySettings as IDataObject;
-				if (proxySettings) {
-					requestBody.proxy = {};
-					for (const [key, value] of Object.entries(proxySettings)) {
-						if (value !== undefined && value !== '') {
-							(requestBody.proxy as IDataObject)[key] = value;
+				// Configurações do Proxy
+				if (optionsCreateInstance.proxy) {
+					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject;
+					if (proxySettings) {
+						requestBody.proxy = {};
+						for (const [key, value] of Object.entries(proxySettings)) {
+							if (value !== undefined && value !== '') {
+								requestBody.proxy[key] = value;
+							}
 						}
 					}
 				}
-			}
 
-			if (optionsCreateInstance.chatwoot) {
-				const chatwootSettings = (optionsCreateInstance.chatwoot as IDataObject).chatwootSettings as IDataObject;
-				if (chatwootSettings) {
-					requestBody.chatwoot = {};
-					for (const [key, value] of Object.entries(chatwootSettings)) {
-						if (value !== undefined && value !== '') {
-							(requestBody.chatwoot as IDataObject)[key] = value;
+				// Configurações do Chatwoot
+				if (optionsCreateInstance.chatwoot) {
+					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject;
+					if (chatwootSettings) {
+						requestBody.chatwoot = {};
+						for (const [key, value] of Object.entries(chatwootSettings)) {
+							if (value !== undefined && value !== '') {
+								requestBody.chatwoot[key] = value;
+							}
 						}
 					}
 				}
-			}
 
-			if (optionsCreateInstance.typebot) {
-				const typebotSettings = (optionsCreateInstance.typebot as IDataObject).typebotSettings as IDataObject;
-				if (typebotSettings) {
-					requestBody.typebot = {};
-					for (const [key, value] of Object.entries(typebotSettings)) {
-						if (value !== undefined && value !== '') {
-							(requestBody.typebot as IDataObject)[key] = value;
+				// Configurações do Typebot
+				if (optionsCreateInstance.typebot) {
+					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject;
+					if (typebotSettings) {
+						requestBody.typebot = {};
+						for (const [key, value] of Object.entries(typebotSettings)) {
+							if (value !== undefined && value !== '') {
+								requestBody.typebot[key] = value;
+							}
 						}
 					}
 				}
