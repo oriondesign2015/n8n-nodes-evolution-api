@@ -76,44 +76,44 @@ export class HttpBin implements INodeType {
 			const rejectCall = typeof instanceSettings === 'object' && instanceSettings !== null && 'rejectCall' in instanceSettings
 				? instanceSettings.rejectCall
 				: undefined; // ou um valor padrão, se necessário
-			console.log(this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0));
-			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.msgCall', 0) || '';
-			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.groupsIgnore', 0);
-			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.alwaysOnline', 0);
-			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.readMessages', 0);
-			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.readStatus', 0);
-			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.syncFullHistory', 0);
+			// console.log(this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0));
+			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0) || '';
+			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0);
+			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
+			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
+			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
+			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
 
 			// Obter configurações do proxy
-			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.proxyHost', 0);
-			const proxyPort = this.getNodeParameter('options_Create_instance.proxy.proxyPort', 0);
-			const proxyProtocol = this.getNodeParameter('options_Create_instance.proxy.proxyProtocol', 0);
-			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.proxyUsername', 0);
-			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.proxyPassword', 0);
+			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.settings.proxyHost', 0);
+			const proxyPort = this.getNodeParameter('options_Create_instance.proxy.settings.proxyPort', 0);
+			const proxyProtocol = this.getNodeParameter('options_Create_instance.proxy.settings.proxyProtocol', 0);
+			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.settings.proxyUsername', 0);
+			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.settings.proxyPassword', 0);
 
 			// Obter configurações do Chatwoot
-			const chatwootAccountId = this.getNodeParameter('options_Create_instance.chatwoot.chatwootAccountId', 0);
-			const chatwootToken = this.getNodeParameter('options_Create_instance.chatwoot.chatwootToken', 0);
-			const chatwootUrl = this.getNodeParameter('options_Create_instance.chatwoot.chatwootUrl', 0);
-			const chatwootSignMsg = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSignMsg', 0);
-			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.chatwootReopenConversation', 0);
-			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.chatwootConversationPending', 0);
-			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootImportContacts', 0);
-			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwootNameInbox', 0) || '';
-			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootMergeBrazilContacts', 0);
-			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootImportMessages', 0);
-			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootDaysLimitImportMessages', 0) || '';
-			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootOrganization', 0) || '';
-			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootLogo', 0) || '';
+			const chatwootAccountId = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootAccountId', 0);
+			const chatwootToken = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootToken', 0);
+			const chatwootUrl = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootUrl', 0);
+			const chatwootSignMsg = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootSignMsg', 0);
+			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootReopenConversation', 0);
+			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootConversationPending', 0);
+			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootImportContacts', 0);
+			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootNameInbox', 0) || '';
+			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootMergeBrazilContacts', 0);
+			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootImportMessages', 0);
+			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootDaysLimitImportMessages', 0) || '';
+			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootOrganization', 0) || '';
+			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.settings.chatwootLogo', 0) || '';
 
 			// Obter configurações do Typebot
-			const typebotUrl = this.getNodeParameter('options_Create_instance.typebot.typebotUrl', 0);
-			const typebot = this.getNodeParameter('options_Create_instance.typebot.typebot', 0);
-			const typebotExpire = this.getNodeParameter('options_Create_instance.typebot.typebotExpire', 0);
-			const typebotKeywordFinish = this.getNodeParameter('options_Create_instance.typebot.typebotKeywordFinish', 0);
-			const typebotDelayMessage = this.getNodeParameter('options_Create_instance.typebot.typebotDelayMessage', 0);
-			const typebotUnknownMessage = this.getNodeParameter('options_Create_instance.typebot.typebotUnknownMessage', 0);
-			const typebotListeningFromMe = this.getNodeParameter('options_Create_instance.typebot.typebotListeningFromMe', 0);
+			const typebotUrl = this.getNodeParameter('options_Create_instance.typebot.settings.typebotUrl', 0);
+			const typebot = this.getNodeParameter('options_Create_instance.typebot.settings.typebot', 0);
+			const typebotExpire = this.getNodeParameter('options_Create_instance.typebot.settings.typebotExpire', 0);
+			const typebotKeywordFinish = this.getNodeParameter('options_Create_instance.typebot.settings.typebotKeywordFinish', 0);
+			const typebotDelayMessage = this.getNodeParameter('options_Create_instance.typebot.settings.typebotDelayMessage', 0);
+			const typebotUnknownMessage = this.getNodeParameter('options_Create_instance.typebot.settings.typebotUnknownMessage', 0);
+			const typebotListeningFromMe = this.getNodeParameter('options_Create_instance.typebot.settings.typebotListeningFromMe', 0);
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
