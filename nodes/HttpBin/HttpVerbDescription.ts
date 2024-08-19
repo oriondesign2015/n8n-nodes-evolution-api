@@ -94,14 +94,6 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'setPresence',
 			},
 
-			// Opção = Deletar instancia
-			{
-				// Delete Instance
-				name: 'Deletar Instancia',
-				action: 'Deletar Instancia',
-				description: 'Deleta uma Instancia',
-				value: 'delete-instance',
-			},
 
 			// Opção = Buscar Instancia
 			{
@@ -118,6 +110,14 @@ export const httpVerbOperations: INodeProperties[] = [
 				action: 'Definir Configurações',
 				description: 'Define o comportamento da instancia',
 				value: 'instanceSettings',
+			},
+			// Opção = Deletar instancia
+			{
+				// Delete Instance
+				name: 'Deletar Instancia',
+				action: 'Deletar Instancia',
+				description: 'Deleta uma Instancia',
+				value: 'delete-instance',
 			},
 
 
