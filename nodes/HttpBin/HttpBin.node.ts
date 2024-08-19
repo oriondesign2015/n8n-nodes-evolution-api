@@ -69,74 +69,50 @@ export class HttpBin implements INodeType {
 			const token = this.getNodeParameter('token', 0, '') as string;
 			const number = this.getNodeParameter('number', 0, '') as string;
 
-			const requestBody: IDataObject = {
-				instanceName,
-				integration: 'whatsapp-baileys',
-			};
-
-			if (token) {
-				requestBody.token = token;
-			}
-
-			if (number) {
-				requestBody.number = number;
-			}
-
 			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
 
-			if (optionsCreateInstance) {
-				// Configurações da instância
-				if (optionsCreateInstance.instanceSettings && typeof optionsCreateInstance.instanceSettings === 'object') {
-					const settings = optionsCreateInstance.instanceSettings.settings as IDataObject;
-					if (settings) {
-						requestBody.settings = {};
-						for (const [key, value] of Object.entries(settings)) {
-							if (value !== undefined && value !== '') {
-								requestBody.settings[key] = value;
-							}
-						}
-					}
-				}
-
-				// Configurações do Proxy
-				if (optionsCreateInstance.proxy && typeof optionsCreateInstance.proxy === 'object') {
-					const proxySettings = optionsCreateInstance.proxy.proxySettings as IDataObject;
-					if (proxySettings) {
-						requestBody.proxy = {};
-						for (const [key, value] of Object.entries(proxySettings)) {
-							if (value !== undefined && value !== '') {
-								requestBody.proxy[key] = value;
-							}
-						}
-					}
-				}
-
-				// Configurações do Chatwoot
-				if (optionsCreateInstance.chatwoot && typeof optionsCreateInstance.chatwoot === 'object') {
-					const chatwootSettings = optionsCreateInstance.chatwoot.chatwootSettings as IDataObject;
-					if (chatwootSettings) {
-						requestBody.chatwoot = {};
-						for (const [key, value] of Object.entries(chatwootSettings)) {
-							if (value !== undefined && value !== '') {
-								requestBody.chatwoot[key] = value;
-							}
-						}
-					}
-				}
-
-				// Configurações do Typebot
-				if (optionsCreateInstance.typebot && typeof optionsCreateInstance.typebot === 'object') {
-					const typebotSettings = optionsCreateInstance.typebot.typebotSettings as IDataObject;
-					if (typebotSettings) {
-						requestBody.typebot = {};
-						for (const [key, value] of Object.entries(typebotSettings)) {
-							if (value !== undefined && value !== '') {
-								requestBody.typebot[key] = value;
-							}
-						}
-					}
-				}
-			}
+			const requestBody: IDataObject = {
+				instanceName,
+				token: token || undefined,
+				number: number || undefined,
+				integration: 'whatsapp-baileys', // ou outro valor conforme necessário
+				// Campos do Proxy
+				proxyHost: optionsCreateInstance.proxy?.proxyHost || undefined,
+				proxyPort: optionsCreateInstance.proxy?.proxyPort || undefined,
+				proxyProtocol: optionsCreateInstance.proxy?.proxyProtocol || undefined,
+				proxyUsername: optionsCreateInstance.proxy?.proxyUsername || undefined,
+				proxyPassword: optionsCreateInstance.proxy?.proxyPassword || undefined,
+				// Campos do Chatwoot
+				chatwootAccountId: optionsCreateInstance.chatwoot?.chatwootAccountId || undefined,
+				chatwootToken: optionsCreateInstance.chatwoot?.chatwootToken || undefined,
+				chatwootUrl: optionsCreateInstance.chatwoot?.chatwootUrl || undefined,
+				chatwootSignMsg: optionsCreateInstance.chatwoot?.chatwootSignMsg || undefined,
+				chatwootReopenConversation: optionsCreateInstance.chatwoot?.chatwootReopenConversation || undefined,
+				chatwootConversationPending: optionsCreateInstance.chatwoot?.chatwootConversationPending || undefined,
+				chatwootImportContacts: optionsCreateInstance.chatwoot?.chatwootImportContacts || undefined,
+				chatwootNameInbox: optionsCreateInstance.chatwoot?.chatwootNameInbox || undefined,
+				chatwootMergeBrazilContacts: optionsCreateInstance.chatwoot?.chatwootMergeBrazilContacts || undefined,
+				chatwootImportMessages: optionsCreateInstance.chatwoot?.chatwootImportMessages || undefined,
+				chatwootDaysLimitImportMessages: optionsCreateInstance.chatwoot?.chatwootDaysLimitImportMessages || undefined,
+				chatwootOrganization: optionsCreateInstance.chatwoot?.chatwootOrganization || undefined,
+				chatwootLogo: optionsCreateInstance.chatwoot?.chatwootLogo || undefined,
+				// Campos do Typebot
+				typebotUrl: optionsCreateInstance.typebot?.typebotUrl || undefined,
+				typebot: optionsCreateInstance.typebot?.typebot || undefined,
+				typebotExpire: optionsCreateInstance.typebot?.typebotExpire || undefined,
+				typebotKeywordFinish: optionsCreateInstance.typebot?.typebotKeywordFinish || undefined,
+				typebotDelayMessage: optionsCreateInstance.typebot?.typebotDelayMessage || undefined,
+				typebotUnknownMessage: optionsCreateInstance.typebot?.typebotUnknownMessage || undefined,
+				typebotListeningFromMe: optionsCreateInstance.typebot?.typebotListeningFromMe || undefined,
+				// Outros campos adicionais
+				rejectCall: optionsCreateInstance.instanceSettings?.rejectCall || undefined,
+				msgCall: optionsCreateInstance.instanceSettings?.msgCall || undefined,
+				groupsIgnore: optionsCreateInstance.instanceSettings?.groupsIgnore || undefined,
+				alwaysOnline: optionsCreateInstance.instanceSettings?.alwaysOnline || undefined,
+				readMessages: optionsCreateInstance.instanceSettings?.readMessages || undefined,
+				readStatus: optionsCreateInstance.instanceSettings?.readStatus || undefined,
+				syncFullHistory: optionsCreateInstance.instanceSettings?.syncFullHistory || undefined,
+			};
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -177,13 +153,11 @@ export class HttpBin implements INodeType {
 					instanceName,
 					token,
 					integration,
-					proxy: {
-						host: proxyHost,
-						port: proxyPort,
-						protocol: proxyProtocol,
-						username: proxyUsername,
-						password: proxyPassword,
-					},
+					proxyHost,
+					proxyPort,
+					proxyProtocol,
+					proxyUsername,
+					proxyPassword,
 				},
 				json: true,
 			};
