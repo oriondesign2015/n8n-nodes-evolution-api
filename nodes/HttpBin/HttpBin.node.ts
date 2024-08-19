@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, IDataObject } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, IDataObject, NodeApiError } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 // Observação deste documento:
 // Este documento serve para a realizar as requisições do node
@@ -71,47 +71,52 @@ export class HttpBin implements INodeType {
 
 			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
 
+			// Verifica se optionsCreateInstance é um objeto
+			if (typeof optionsCreateInstance !== 'object' || optionsCreateInstance === null) {
+				throw new NodeApiError(this.getNode(), 'options_Create_instance deve ser um objeto.');
+			}
+
 			const requestBody: IDataObject = {
 				instanceName,
 				token: token || undefined,
 				number: number || undefined,
 				integration: 'whatsapp-baileys', // ou outro valor conforme necessário
 				// Campos do Proxy
-				proxyHost: optionsCreateInstance.proxy?.proxyHost || undefined,
-				proxyPort: optionsCreateInstance.proxy?.proxyPort || undefined,
-				proxyProtocol: optionsCreateInstance.proxy?.proxyProtocol || undefined,
-				proxyUsername: optionsCreateInstance.proxy?.proxyUsername || undefined,
-				proxyPassword: optionsCreateInstance.proxy?.proxyPassword || undefined,
+				proxyHost: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyHost) || undefined,
+				proxyPort: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyPort) || undefined,
+				proxyProtocol: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyProtocol) || undefined,
+				proxyUsername: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyUsername) || undefined,
+				proxyPassword: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyPassword) || undefined,
 				// Campos do Chatwoot
-				chatwootAccountId: optionsCreateInstance.chatwoot?.chatwootAccountId || undefined,
-				chatwootToken: optionsCreateInstance.chatwoot?.chatwootToken || undefined,
-				chatwootUrl: optionsCreateInstance.chatwoot?.chatwootUrl || undefined,
-				chatwootSignMsg: optionsCreateInstance.chatwoot?.chatwootSignMsg || undefined,
-				chatwootReopenConversation: optionsCreateInstance.chatwoot?.chatwootReopenConversation || undefined,
-				chatwootConversationPending: optionsCreateInstance.chatwoot?.chatwootConversationPending || undefined,
-				chatwootImportContacts: optionsCreateInstance.chatwoot?.chatwootImportContacts || undefined,
-				chatwootNameInbox: optionsCreateInstance.chatwoot?.chatwootNameInbox || undefined,
-				chatwootMergeBrazilContacts: optionsCreateInstance.chatwoot?.chatwootMergeBrazilContacts || undefined,
-				chatwootImportMessages: optionsCreateInstance.chatwoot?.chatwootImportMessages || undefined,
-				chatwootDaysLimitImportMessages: optionsCreateInstance.chatwoot?.chatwootDaysLimitImportMessages || undefined,
-				chatwootOrganization: optionsCreateInstance.chatwoot?.chatwootOrganization || undefined,
-				chatwootLogo: optionsCreateInstance.chatwoot?.chatwootLogo || undefined,
+				chatwootAccountId: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootAccountId) || undefined,
+				chatwootToken: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootToken) || undefined,
+				chatwootUrl: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootUrl) || undefined,
+				chatwootSignMsg: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootSignMsg) || undefined,
+				chatwootReopenConversation: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootReopenConversation) || undefined,
+				chatwootConversationPending: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootConversationPending) || undefined,
+				chatwootImportContacts: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootImportContacts) || undefined,
+				chatwootNameInbox: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootNameInbox) || undefined,
+				chatwootMergeBrazilContacts: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootMergeBrazilContacts) || undefined,
+				chatwootImportMessages: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootImportMessages) || undefined,
+				chatwootDaysLimitImportMessages: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootDaysLimitImportMessages) || undefined,
+				chatwootOrganization: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootOrganization) || undefined,
+				chatwootLogo: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootLogo) || undefined,
 				// Campos do Typebot
-				typebotUrl: optionsCreateInstance.typebot?.typebotUrl || undefined,
-				typebot: optionsCreateInstance.typebot?.typebot || undefined,
-				typebotExpire: optionsCreateInstance.typebot?.typebotExpire || undefined,
-				typebotKeywordFinish: optionsCreateInstance.typebot?.typebotKeywordFinish || undefined,
-				typebotDelayMessage: optionsCreateInstance.typebot?.typebotDelayMessage || undefined,
-				typebotUnknownMessage: optionsCreateInstance.typebot?.typebotUnknownMessage || undefined,
-				typebotListeningFromMe: optionsCreateInstance.typebot?.typebotListeningFromMe || undefined,
+				typebotUrl: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotUrl) || undefined,
+				typebot: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebot) || undefined,
+				typebotExpire: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotExpire) || undefined,
+				typebotKeywordFinish: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotKeywordFinish) || undefined,
+				typebotDelayMessage: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotDelayMessage) || undefined,
+				typebotUnknownMessage: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotUnknownMessage) || undefined,
+				typebotListeningFromMe: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotListeningFromMe) || undefined,
 				// Outros campos adicionais
-				rejectCall: optionsCreateInstance.instanceSettings?.rejectCall || undefined,
-				msgCall: optionsCreateInstance.instanceSettings?.msgCall || undefined,
-				groupsIgnore: optionsCreateInstance.instanceSettings?.groupsIgnore || undefined,
-				alwaysOnline: optionsCreateInstance.instanceSettings?.alwaysOnline || undefined,
-				readMessages: optionsCreateInstance.instanceSettings?.readMessages || undefined,
-				readStatus: optionsCreateInstance.instanceSettings?.readStatus || undefined,
-				syncFullHistory: optionsCreateInstance.instanceSettings?.syncFullHistory || undefined,
+				rejectCall: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.rejectCall) || undefined,
+				msgCall: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.msgCall) || undefined,
+				groupsIgnore: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.groupsIgnore) || undefined,
+				alwaysOnline: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.alwaysOnline) || undefined,
+				readMessages: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.readMessages) || undefined,
+				readStatus: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.readStatus) || undefined,
+				syncFullHistory: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.syncFullHistory) || undefined,
 			};
 
 			const options: IRequestOptions = {
