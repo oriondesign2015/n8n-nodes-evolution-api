@@ -69,7 +69,6 @@ export class HttpBin implements INodeType {
 
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const token = this.getNodeParameter('token', 0);
-			const integration = this.getNodeParameter('integration', 0);
 
 			// Obter configurações da instância
 			const rejectCall = this.getNodeParameter('options_Create_instance.instanceSettings.rejectCall', 0);
@@ -121,7 +120,7 @@ export class HttpBin implements INodeType {
 				body: {
 					instanceName,
 					token,
-					integration,
+					'integration': 'WHATSAPP-BAILEYS',
 					rejectCall,
 					msgCall,
 					groupsIgnore,
