@@ -66,9 +66,9 @@ export class HttpBin implements INodeType {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const token = this.getNodeParameter('token', 0);
-			const integration = this.getNodeParameter('integration', 0);
+			const instanceName = this.getNodeParameter('instanceName', 0) as string;
+			const token = this.getNodeParameter('token', 0) as string;
+			const number = this.getNodeParameter('number', 0) as string;
 
 			const options: IRequestOptions = {
 				method: 'POST' as IHttpRequestMethods,
@@ -80,10 +80,41 @@ export class HttpBin implements INodeType {
 				body: {
 					instanceName,
 					token,
-					integration,
+					number,
+					'integration': 'whatsapp-baileys',
 				},
 				json: true,
 			};
+
+			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
+
+			if (optionsCreateInstance.instanceSettings) {
+				const settings = (optionsCreateInstance.instanceSettings as IDataObject).settings as IDataObject;
+				if (settings) {
+					options.body.settings = settings;
+				}
+			}
+
+			if (optionsCreateInstance.proxy) {
+				const proxySettings = (optionsCreateInstance.proxy as IDataObject).proxySettings as IDataObject;
+				if (proxySettings) {
+					options.body.proxy = proxySettings;
+				}
+			}
+
+			if (optionsCreateInstance.chatwoot) {
+				const chatwootSettings = (optionsCreateInstance.chatwoot as IDataObject).chatwootSettings as IDataObject;
+				if (chatwootSettings) {
+					options.body.chatwoot = chatwootSettings;
+				}
+			}
+
+			if (optionsCreateInstance.typebot) {
+				const typebotSettings = (optionsCreateInstance.typebot as IDataObject).typebotSettings as IDataObject;
+				if (typebotSettings) {
+					options.body.typebot = typebotSettings;
+				}
+			}
 
 			responseData = await this.helpers.request(options);
 		}

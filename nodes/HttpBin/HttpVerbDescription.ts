@@ -268,6 +268,9 @@ const instanceOperation: INodeProperties[] = [
 		displayName: 'Apikey para instancia',
 		name: 'token',
 		type: 'string',
+		typeOptions: {
+			password: true,
+		},
 		default: '',
 		required: false,
 		description: 'Opicional: Digite um Token para a instancia',
@@ -279,21 +282,12 @@ const instanceOperation: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Integração',
-		name: 'integration',
-		type: 'options',
-		options: [
-			{
-				name: 'WHATSAPP-BAILEYS',
-				value: 'whatsapp-baileys',
-			},
-			{
-				name: 'WHATSAPP-BUSINESS',
-				value: 'whatsapp-business',
-			},
-		],
-		default: 'whatsapp-baileys',
-		description: 'Escolha a integração',
+		displayName: 'Número do WhatsApp',
+		name: 'number',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Opicional: Numero que vai ser conectado na instancia, para receber o Código de pareamento',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -301,7 +295,333 @@ const instanceOperation: INodeProperties[] = [
 			},
 		},
 	},
-
+	{
+		displayName: 'Opções',
+		name: 'options_Create_instance',
+		type: 'collection',
+		placeholder: 'Adicionar Campo',
+		default: {},
+		options: [
+			{
+				displayName: 'Configurações',
+				name: 'instanceSettings',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: { settings: {} },
+				options: [
+					{
+						displayName: 'Configurações',
+						name: 'settings',
+						values: [
+							{
+								displayName: 'Rejeitar Ligações',
+								name: 'rejectCall',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to automatically reject incoming calls',
+							},
+							{
+								displayName: 'Mensagem Ao Rejeitar',
+								name: 'msgCall',
+								type: 'string',
+								default: '',
+								description: 'Whether to send a message after rejecting a call, and if so, what message',
+							},
+							{
+								displayName: 'Ignorar Grupos',
+								name: 'groupsIgnore',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to ignore messages from groups',
+							},
+							{
+								displayName: 'Sempre Online',
+								name: 'alwaysOnline',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to keep the status always set to Online',
+							},
+							{
+								displayName: 'Ler Mensagens',
+								name: 'readMessages',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to automatically mark messages as read',
+							},
+							{
+								displayName: 'Ler Status',
+								name: 'readStatus',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to allow the API to view the Status of added contacts',
+							},
+							{
+								displayName: 'Sincronizar Histórico',
+								name: 'syncFullHistory',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to synchronize the full message history with the API',
+							},
+						],
+					},
+				],
+				description: 'Configurações da instância',
+			},
+			{
+				displayName: 'Proxy',
+				name: 'proxy',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: {},
+				options: [
+					{
+						displayName: 'Configurações Do Proxy',
+						name: 'proxySettings',
+						values: [
+							{
+								displayName: 'Host Do Proxy',
+								name: 'proxyHost',
+								type: 'string',
+								default: '',
+								description: 'Digite o host do proxy',
+							},
+							{
+								displayName: 'Porta Do Proxy',
+								name: 'proxyPort',
+								type: 'number',
+								default: 0,
+								description: 'Digite a porta do proxy',
+							},
+							{
+								displayName: 'Protocolo Do Proxy',
+								name: 'proxyProtocol',
+								type: 'options',
+								options: [
+									{
+										name: 'HTTP',
+										value: 'http',
+									},
+									{
+										name: 'HTTPS',
+										value: 'https',
+									},
+								],
+								default: 'http',
+								description: 'Selecione o protocolo do proxy',
+							},
+							{
+								displayName: 'Usuário Do Proxy',
+								name: 'proxyUsername',
+								type: 'string',
+								default: '',
+								description: 'Digite o usuário do proxy',
+							},
+							{
+								displayName: 'Senha Do Proxy',
+								name: 'proxyPassword',
+								type: 'string',
+								typeOptions: {
+									password: true,
+								},
+								default: '',
+								description: 'Digite a senha do proxy',
+							},
+						],
+					},
+				],
+				description: 'Configurações do proxy',
+			},
+			{
+				displayName: 'Chatwoot',
+				name: 'chatwoot',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: {},
+				options: [
+					{
+						displayName: 'Configurações Do Chatwoot',
+						name: 'chatwootSettings',
+						values: [
+							{
+								displayName: 'ID Da Conta Do Chatwoot',
+								name: 'chatwootAccountId',
+								type: 'number',
+								default: 0,
+								description: 'Digite o ID da conta do Chatwoot',
+							},
+							{
+								displayName: 'Token De Admin Do Chatwoot',
+								name: 'chatwootToken',
+								type: 'string',
+								typeOptions: {
+									password: true,
+								},
+								default: '',
+								description: 'Digite o token de admin do Chatwoot',
+							},
+							{
+								displayName: 'Link Do Chatwoot',
+								name: 'chatwootUrl',
+								type: 'string',
+								default: '',
+								description: 'Digite o link do Chatwoot',
+							},
+							{
+								displayName: 'Assinatura Do Agente Do Chatwoot',
+								name: 'chatwootSignMsg',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to enable or disable the Chatwoot agent signature',
+							},
+							{
+								displayName: 'Reabrir Mensagens No Chatwoot',
+								name: 'chatwootReopenConversation',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to enable or disable reopening messages in Chatwoot',
+							},
+							{
+								displayName: 'Iniciar Conversas Como Pendentes No Chatwoot',
+								name: 'chatwootConversationPending',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to start conversations as pending in Chatwoot',
+							},
+							{
+								displayName: 'Importar Contatos Para O Chatwoot',
+								name: 'chatwootImportContacts',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to import contacts to Chatwoot',
+							},
+							{
+								displayName: 'Nome Da Inbox Do Chatwoot',
+								name: 'chatwootNameInbox',
+								type: 'string',
+								default: '',
+								description: 'Digite o nome da Inbox do Chatwoot',
+							},
+							{
+								displayName: 'Mesclar Contatos Brasileiros No Chatwoot',
+								name: 'chatwootMergeBrazilContacts',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to merge Brazilian contacts in Chatwoot',
+							},
+							{
+								displayName: 'Importar Mensagens Para O Chatwoot',
+								name: 'chatwootImportMessages',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to import messages to Chatwoot',
+							},
+							{
+								displayName: 'Importar Mensagens De Quantos Dias Para O Chatwoot',
+								name: 'chatwootDaysLimitImportMessages',
+								type: 'number',
+								default: 0,
+								description: 'Digite o número de dias para limitar a importação de mensagens para o Chatwoot',
+							},
+							{
+								displayName: 'Nome Do Contato De QRCode No Chatwoot',
+								name: 'chatwootOrganization',
+								type: 'string',
+								default: '',
+								description: 'Digite o nome do contato de QRCode no Chatwoot',
+							},
+							{
+								displayName: 'Url Do Logo Para O Contato No Chatwoot',
+								name: 'chatwootLogo',
+								type: 'string',
+								default: 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63',
+								description: 'Digite a URL do logo para o contato no Chatwoot',
+							},
+						],
+					},
+				],
+				description: 'Configurações do Chatwoot',
+			},
+			{
+				displayName: 'Typebot',
+				name: 'typebot',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: {},
+				options: [
+					{
+						displayName: 'Configurações Do Typebot',
+						name: 'typebotSettings',
+						values: [
+							{
+								displayName: 'URL Da API Do Typebot',
+								name: 'typebotUrl',
+								type: 'string',
+								default: '',
+								description: 'Digite a URL da API do Typebot',
+							},
+							{
+								displayName: 'Nome Do Typebot',
+								name: 'typebot',
+								type: 'string',
+								default: '',
+								description: 'Digite o nome do Typebot',
+							},
+							{
+								displayName: 'Expira Em (Minutos)',
+								name: 'typebotExpire',
+								type: 'number',
+								default: 0,
+								description: 'Digite o tempo de expiração em minutos',
+							},
+							{
+								displayName: 'Palavra Chave De Finalização',
+								name: 'typebotKeywordFinish',
+								type: 'string',
+								default: '',
+								description: 'Digite a palavra-chave para finalizar',
+							},
+							{
+								displayName: 'Delay Padrão Da Mensagem',
+								name: 'typebotDelayMessage',
+								type: 'number',
+								default: 0,
+								description: 'Digite o delay padrão da mensagem',
+							},
+							{
+								displayName: 'Mensagem Para Tipo Desconhecido',
+								name: 'typebotUnknownMessage',
+								type: 'string',
+								default: '',
+								description: 'Digite a mensagem para tipo desconhecido',
+							},
+							{
+								displayName: 'Escuta Mensagens Enviadas Por Mim',
+								name: 'typebotListeningFromMe',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to listen to messages sent by me',
+							},
+						],
+					},
+				],
+				description: 'Configurações do Typebot',
+			},
+		],
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['instance-basic'],
+			},
+		},
+	},
 
 	// Campos = Criar Instancia com Proxy
 	{
