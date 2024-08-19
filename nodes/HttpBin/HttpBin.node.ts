@@ -104,8 +104,8 @@ export class HttpBin implements INodeType {
 						syncFullHistory,
 					};
 
-					if (settings.msgCall) {
-						requestBody.settings.msgCall = (settings as IDataObject).msgCall as string;
+					if ('msgCall' in settings) {
+						(requestBody.settings as IDataObject).msgCall = settings.msgCall as string;
 					}
 				}
 			}
