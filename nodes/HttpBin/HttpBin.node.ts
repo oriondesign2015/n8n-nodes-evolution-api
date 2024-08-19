@@ -71,18 +71,31 @@ export class HttpBin implements INodeType {
 			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
 			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
 
+			let requestBody = new Object();
+
+			requestBody.instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings', 0);
+
+			console.log(requestBody);
+
 			// Obter configurações da instância
 			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings', 0); // Obter instanceSettings
 			const rejectCall = typeof instanceSettings === 'object' && instanceSettings !== null && 'rejectCall' in instanceSettings
 				? instanceSettings.rejectCall
 				: undefined; // ou um valor padrão, se necessário
 			// console.log(this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0));
-			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0) || '';
-			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0);
-			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
-			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
-			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
-			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
+
+			if (this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, false)) {
+
+				requestBody.msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0);
+
+				const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0) || '';
+				const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0);
+				const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
+				const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
+				const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
+				const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
+
+			}
 
 			// Obter configurações do proxy
 			console.log(this.getNodeParameter('options_Create_instance.proxy', 0));
