@@ -4,6 +4,49 @@ import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 // Este documento serve para a realizar as requisições do node
 // Utilizando os campos definidos no HttpVerbDescription.ts
 
+interface OptionsCreateInstance {
+	proxy?: {
+		proxyHost?: string;
+		proxyPort?: number;
+		proxyProtocol?: string;
+		proxyUsername?: string;
+		proxyPassword?: string;
+	};
+	chatwoot?: {
+		chatwootAccountId?: string;
+		chatwootToken?: string;
+		chatwootUrl?: string;
+		chatwootSignMsg?: string;
+		chatwootReopenConversation?: boolean;
+		chatwootConversationPending?: boolean;
+		chatwootImportContacts?: boolean;
+		chatwootNameInbox?: string;
+		chatwootMergeBrazilContacts?: boolean;
+		chatwootImportMessages?: boolean;
+		chatwootDaysLimitImportMessages?: number;
+		chatwootOrganization?: string;
+		chatwootLogo?: string;
+	};
+	typebot?: {
+		typebotUrl?: string;
+		typebot?: string;
+		typebotExpire?: number;
+		typebotKeywordFinish?: string;
+		typebotDelayMessage?: number;
+		typebotUnknownMessage?: string;
+		typebotListeningFromMe?: boolean;
+	};
+	instanceSettings?: {
+		rejectCall?: boolean;
+		msgCall?: string;
+		groupsIgnore?: string[];
+		alwaysOnline?: boolean;
+		readMessages?: boolean;
+		readStatus?: boolean;
+		syncFullHistory?: boolean;
+	};
+}
+
 export class HttpBin implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Evolution API',
@@ -69,7 +112,7 @@ export class HttpBin implements INodeType {
 			const token = this.getNodeParameter('token', 0, '') as string;
 			const number = this.getNodeParameter('number', 0, '') as string;
 
-			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as IDataObject;
+			const optionsCreateInstance = this.getNodeParameter('options_Create_instance', 0) as OptionsCreateInstance;
 
 			// Verifica se optionsCreateInstance é um objeto
 			if (typeof optionsCreateInstance !== 'object' || optionsCreateInstance === null) {
@@ -80,43 +123,39 @@ export class HttpBin implements INodeType {
 				instanceName,
 				token: token || undefined,
 				number: number || undefined,
-				integration: 'whatsapp-baileys', // ou outro valor conforme necessário
-				// Campos do Proxy
-				proxyHost: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyHost) || undefined,
-				proxyPort: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyPort) || undefined,
-				proxyProtocol: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyProtocol) || undefined,
-				proxyUsername: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyUsername) || undefined,
-				proxyPassword: (optionsCreateInstance.proxy && optionsCreateInstance.proxy.proxyPassword) || undefined,
-				// Campos do Chatwoot
-				chatwootAccountId: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootAccountId) || undefined,
-				chatwootToken: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootToken) || undefined,
-				chatwootUrl: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootUrl) || undefined,
-				chatwootSignMsg: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootSignMsg) || undefined,
-				chatwootReopenConversation: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootReopenConversation) || undefined,
-				chatwootConversationPending: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootConversationPending) || undefined,
-				chatwootImportContacts: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootImportContacts) || undefined,
-				chatwootNameInbox: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootNameInbox) || undefined,
-				chatwootMergeBrazilContacts: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootMergeBrazilContacts) || undefined,
-				chatwootImportMessages: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootImportMessages) || undefined,
-				chatwootDaysLimitImportMessages: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootDaysLimitImportMessages) || undefined,
-				chatwootOrganization: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootOrganization) || undefined,
-				chatwootLogo: (optionsCreateInstance.chatwoot && optionsCreateInstance.chatwoot.chatwootLogo) || undefined,
-				// Campos do Typebot
-				typebotUrl: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotUrl) || undefined,
-				typebot: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebot) || undefined,
-				typebotExpire: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotExpire) || undefined,
-				typebotKeywordFinish: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotKeywordFinish) || undefined,
-				typebotDelayMessage: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotDelayMessage) || undefined,
-				typebotUnknownMessage: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotUnknownMessage) || undefined,
-				typebotListeningFromMe: (optionsCreateInstance.typebot && optionsCreateInstance.typebot.typebotListeningFromMe) || undefined,
-				// Outros campos adicionais
-				rejectCall: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.rejectCall) || undefined,
-				msgCall: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.msgCall) || undefined,
-				groupsIgnore: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.groupsIgnore) || undefined,
-				alwaysOnline: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.alwaysOnline) || undefined,
-				readMessages: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.readMessages) || undefined,
-				readStatus: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.readStatus) || undefined,
-				syncFullHistory: (optionsCreateInstance.instanceSettings && optionsCreateInstance.instanceSettings.syncFullHistory) || undefined,
+				integration: 'whatsapp-baileys',
+				proxyHost: optionsCreateInstance.proxy?.proxyHost || undefined,
+				proxyPort: optionsCreateInstance.proxy?.proxyPort || undefined,
+				proxyProtocol: optionsCreateInstance.proxy?.proxyProtocol || undefined,
+				proxyUsername: optionsCreateInstance.proxy?.proxyUsername || undefined,
+				proxyPassword: optionsCreateInstance.proxy?.proxyPassword || undefined,
+				chatwootAccountId: optionsCreateInstance.chatwoot?.chatwootAccountId || undefined,
+				chatwootToken: optionsCreateInstance.chatwoot?.chatwootToken || undefined,
+				chatwootUrl: optionsCreateInstance.chatwoot?.chatwootUrl || undefined,
+				chatwootSignMsg: optionsCreateInstance.chatwoot?.chatwootSignMsg || undefined,
+				chatwootReopenConversation: optionsCreateInstance.chatwoot?.chatwootReopenConversation || undefined,
+				chatwootConversationPending: optionsCreateInstance.chatwoot?.chatwootConversationPending || undefined,
+				chatwootImportContacts: optionsCreateInstance.chatwoot?.chatwootImportContacts || undefined,
+				chatwootNameInbox: optionsCreateInstance.chatwoot?.chatwootNameInbox || undefined,
+				chatwootMergeBrazilContacts: optionsCreateInstance.chatwoot?.chatwootMergeBrazilContacts || undefined,
+				chatwootImportMessages: optionsCreateInstance.chatwoot?.chatwootImportMessages || undefined,
+				chatwootDaysLimitImportMessages: optionsCreateInstance.chatwoot?.chatwootDaysLimitImportMessages || undefined,
+				chatwootOrganization: optionsCreateInstance.chatwoot?.chatwootOrganization || undefined,
+				chatwootLogo: optionsCreateInstance.chatwoot?.chatwootLogo || undefined,
+				typebotUrl: optionsCreateInstance.typebot?.typebotUrl || undefined,
+				typebot: optionsCreateInstance.typebot?.typebot || undefined,
+				typebotExpire: optionsCreateInstance.typebot?.typebotExpire || undefined,
+				typebotKeywordFinish: optionsCreateInstance.typebot?.typebotKeywordFinish || undefined,
+				typebotDelayMessage: optionsCreateInstance.typebot?.typebotDelayMessage || undefined,
+				typebotUnknownMessage: optionsCreateInstance.typebot?.typebotUnknownMessage || undefined,
+				typebotListeningFromMe: optionsCreateInstance.typebot?.typebotListeningFromMe || undefined,
+				rejectCall: optionsCreateInstance.instanceSettings?.rejectCall || undefined,
+				msgCall: optionsCreateInstance.instanceSettings?.msgCall || undefined,
+				groupsIgnore: optionsCreateInstance.instanceSettings?.groupsIgnore || undefined,
+				alwaysOnline: optionsCreateInstance.instanceSettings?.alwaysOnline || undefined,
+				readMessages: optionsCreateInstance.instanceSettings?.readMessages || undefined,
+				readStatus: optionsCreateInstance.instanceSettings?.readStatus || undefined,
+				syncFullHistory: optionsCreateInstance.instanceSettings?.syncFullHistory || undefined,
 			};
 
 			const options: IRequestOptions = {
