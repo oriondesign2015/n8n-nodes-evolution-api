@@ -73,7 +73,9 @@ export class HttpBin implements INodeType {
 
 			// Obter configurações da instância
 			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings', 0); // Obter instanceSettings
-			const rejectCall = instanceSettings?.rejectCall; // Acessando rejectCall de instanceSettings
+			const rejectCall = typeof instanceSettings === 'object' && instanceSettings !== null && 'rejectCall' in instanceSettings
+				? instanceSettings.rejectCall
+				: undefined; // ou um valor padrão, se necessário
 			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.msgCall', 0) || '';
 			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.groupsIgnore', 0);
 			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.alwaysOnline', 0);
