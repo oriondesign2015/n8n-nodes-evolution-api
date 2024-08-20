@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeApiError } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 // Observação deste documento:
 // Este documento serve para a realizar as requisições do node
