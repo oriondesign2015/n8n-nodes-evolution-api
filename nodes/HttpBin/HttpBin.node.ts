@@ -113,7 +113,7 @@ export class HttpBin implements INodeType {
 
 			// Verifica e adiciona configurações do Chatwoot se existirem
 			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {}) as {
-				chatwootAccountId?: number;
+				chatwootAccountId?: string;
 				chatwootToken?: string;
 				chatwootUrl?: string;
 				chatwootSignMsg?: boolean;
