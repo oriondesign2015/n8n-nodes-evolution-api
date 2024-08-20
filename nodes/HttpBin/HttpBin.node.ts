@@ -74,10 +74,15 @@ export class HttpBin implements INodeType {
 			// Inicializa o corpo básico da requisição
 			const body: any = {
 				instanceName,
-				token,
-				number,
-				'integration': 'WHATSAPP-BAILEYS',
+				integration: 'WHATSAPP-BAILEYS',
 			};
+
+			if (token) {
+				body.token = token;
+			}
+			if (number) {
+				body.number = number;
+			}
 
 			// Verifica e adiciona configurações da instância se existirem
 			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {}) as {
@@ -128,21 +133,45 @@ export class HttpBin implements INodeType {
 				chatwootLogo?: string;
 			};
 			if (chatwootSettings && Object.keys(chatwootSettings).length > 0) {
-				Object.assign(body, {
-					chatwootAccountId: chatwootSettings.chatwootAccountId || undefined,
-					chatwootToken: chatwootSettings.chatwootToken || undefined,
-					chatwootUrl: chatwootSettings.chatwootUrl || undefined,
-					chatwootSignMsg: chatwootSettings.chatwootSignMsg || undefined,
-					chatwootReopenConversation: chatwootSettings.chatwootReopenConversation || undefined,
-					chatwootConversationPending: chatwootSettings.chatwootConversationPending || undefined,
-					chatwootImportContacts: chatwootSettings.chatwootImportContacts || undefined,
-					chatwootNameInbox: chatwootSettings.chatwootNameInbox || undefined,
-					chatwootMergeBrazilContacts: chatwootSettings.chatwootMergeBrazilContacts || undefined,
-					chatwootImportMessages: chatwootSettings.chatwootImportMessages || undefined,
-					chatwootDaysLimitImportMessages: chatwootSettings.chatwootDaysLimitImportMessages || undefined,
-					chatwootOrganization: chatwootSettings.chatwootOrganization || undefined,
-					chatwootLogo: chatwootSettings.chatwootLogo || undefined,
-				});
+				if (chatwootSettings.chatwootAccountId) {
+					body.chatwootAccountId = chatwootSettings.chatwootAccountId;
+				}
+				if (chatwootSettings.chatwootToken) {
+					body.chatwootToken = chatwootSettings.chatwootToken;
+				}
+				if (chatwootSettings.chatwootUrl) {
+					body.chatwootUrl = chatwootSettings.chatwootUrl;
+				}
+				if (chatwootSettings.chatwootSignMsg) {
+					body.chatwootSignMsg = chatwootSettings.chatwootSignMsg;
+				}
+				if (chatwootSettings.chatwootReopenConversation) {
+					body.chatwootReopenConversation = chatwootSettings.chatwootReopenConversation;
+				}
+				if (chatwootSettings.chatwootConversationPending) {
+					body.chatwootConversationPending = chatwootSettings.chatwootConversationPending;
+				}
+				if (chatwootSettings.chatwootImportContacts) {
+					body.chatwootImportContacts = chatwootSettings.chatwootImportContacts;
+				}
+				if (chatwootSettings.chatwootNameInbox) {
+					body.chatwootNameInbox = chatwootSettings.chatwootNameInbox;
+				}
+				if (chatwootSettings.chatwootMergeBrazilContacts) {
+					body.chatwootMergeBrazilContacts = chatwootSettings.chatwootMergeBrazilContacts;
+				}
+				if (chatwootSettings.chatwootImportMessages) {
+					body.chatwootImportMessages = chatwootSettings.chatwootImportMessages;
+				}
+				if (chatwootSettings.chatwootDaysLimitImportMessages) {
+					body.chatwootDaysLimitImportMessages = chatwootSettings.chatwootDaysLimitImportMessages;
+				}
+				if (chatwootSettings.chatwootOrganization) {
+					body.chatwootOrganization = chatwootSettings.chatwootOrganization;
+				}
+				if (chatwootSettings.chatwootLogo) {
+					body.chatwootLogo = chatwootSettings.chatwootLogo;
+				}
 			}
 
 			const options: IRequestOptions = {
