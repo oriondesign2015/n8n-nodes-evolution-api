@@ -80,14 +80,28 @@ export class HttpBin implements INodeType {
 			};
 
 			// Verifica e adiciona configurações da instância se existirem
-			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {});
+			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {}) as {
+				rejectCall?: boolean;
+				msgCall?: string;
+				groupsIgnore?: boolean;
+				alwaysOnline?: boolean;
+				readMessages?: boolean;
+				readStatus?: boolean;
+				syncFullHistory?: boolean;
+			};
 			if (instanceSettings && Object.keys(instanceSettings).length > 0) {
 				Object.assign(body, instanceSettings);
 			}
 
 			// Verifica e adiciona configurações de proxy se existirem
-			const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {});
-			if (proxySettings && typeof proxySettings === 'object' && Object.keys(proxySettings).length > 0) {
+			const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {}) as {
+				proxyHost?: string;
+				proxyPort?: number;
+				proxyProtocol?: string;
+				proxyUsername?: string;
+				proxyPassword?: string;
+			};
+			if (proxySettings && Object.keys(proxySettings).length > 0) {
 				Object.assign(body, {
 					host: proxySettings.proxyHost || undefined,
 					port: proxySettings.proxyPort || undefined,
@@ -98,8 +112,22 @@ export class HttpBin implements INodeType {
 			}
 
 			// Verifica e adiciona configurações do Chatwoot se existirem
-			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {});
-			if (chatwootSettings && typeof chatwootSettings === 'object' && Object.keys(chatwootSettings).length > 0) {
+			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {}) as {
+				chatwootAccountId?: number;
+				chatwootToken?: string;
+				chatwootUrl?: string;
+				chatwootSignMsg?: boolean;
+				chatwootReopenConversation?: boolean;
+				chatwootConversationPending?: boolean;
+				chatwootImportContacts?: boolean;
+				chatwootNameInbox?: string;
+				chatwootMergeBrazilContacts?: boolean;
+				chatwootImportMessages?: boolean;
+				chatwootDaysLimitImportMessages?: number;
+				chatwootOrganization?: string;
+				chatwootLogo?: string;
+			};
+			if (chatwootSettings && Object.keys(chatwootSettings).length > 0) {
 				Object.assign(body, {
 					chatwootAccountId: chatwootSettings.chatwootAccountId || undefined,
 					chatwootToken: chatwootSettings.chatwootToken || undefined,
