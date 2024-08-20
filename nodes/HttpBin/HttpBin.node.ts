@@ -506,6 +506,7 @@ export class HttpBin implements INodeType {
 				},
 				json: true,
 			};
+			console.log('Body da requisição:', requestOptions.body);
 			responseData = await this.helpers.request(requestOptions);
 		}
 
