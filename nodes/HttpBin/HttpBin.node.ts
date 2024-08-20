@@ -87,16 +87,27 @@ export class HttpBin implements INodeType {
 			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
 			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
 
-			if (rejectCall || msgCall || groupsIgnore || alwaysOnline || readMessages || readStatus || syncFullHistory) {
-				Object.assign(body, {
-					rejectCall,
-					msgCall,
-					groupsIgnore,
-					alwaysOnline,
-					readMessages,
-					readStatus,
-					syncFullHistory,
-				});
+			// Adiciona apenas se os parâmetros estiverem definidos
+			if (rejectCall) {
+				body.rejectCall = rejectCall;
+			}
+			if (msgCall) {
+				body.msgCall = msgCall;
+			}
+			if (groupsIgnore) {
+				body.groupsIgnore = groupsIgnore;
+			}
+			if (alwaysOnline) {
+				body.alwaysOnline = alwaysOnline;
+			}
+			if (readMessages) {
+				body.readMessages = readMessages;
+			}
+			if (readStatus) {
+				body.readStatus = readStatus;
+			}
+			if (syncFullHistory) {
+				body.syncFullHistory = syncFullHistory;
 			}
 
 			// Obter configurações do proxy
@@ -106,14 +117,21 @@ export class HttpBin implements INodeType {
 			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyUsername', 0);
 			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyPassword', 0);
 
-			if (proxyHost || proxyPort || proxyProtocol || proxyUsername || proxyPassword) {
-				Object.assign(body, {
-					host: proxyHost,
-					port: proxyPort,
-					protocol: proxyProtocol,
-					username: proxyUsername,
-					password: proxyPassword,
-				});
+			// Adiciona apenas se os parâmetros do proxy estiverem definidos
+			if (proxyHost) {
+				body.host = proxyHost;
+			}
+			if (proxyPort) {
+				body.port = proxyPort;
+			}
+			if (proxyProtocol) {
+				body.protocol = proxyProtocol;
+			}
+			if (proxyUsername) {
+				body.username = proxyUsername;
+			}
+			if (proxyPassword) {
+				body.password = proxyPassword;
 			}
 
 			// Obter configurações do Chatwoot
@@ -131,22 +149,45 @@ export class HttpBin implements INodeType {
 			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootOrganization', 0) || '';
 			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootLogo', 0) || '';
 
-			if (chatwootAccountId || chatwootToken || chatwootUrl || chatwootSignMsg || chatwootReopenConversation || chatwootConversationPending || chatwootImportContacts || chatwootNameInbox || chatwootMergeBrazilContacts || chatwootImportMessages || chatwootDaysLimitImportMessages || chatwootOrganization || chatwootLogo) {
-				Object.assign(body, {
-					chatwootAccountId,
-					chatwootToken,
-					chatwootUrl,
-					chatwootSignMsg,
-					chatwootReopenConversation,
-					chatwootConversationPending,
-					chatwootImportContacts,
-					chatwootNameInbox,
-					chatwootMergeBrazilContacts,
-					chatwootImportMessages,
-					chatwootDaysLimitImportMessages,
-					chatwootOrganization,
-					chatwootLogo,
-				});
+			// Adiciona apenas se os parâmetros do Chatwoot estiverem definidos
+			if (chatwootAccountId) {
+				body.chatwootAccountId = chatwootAccountId;
+			}
+			if (chatwootToken) {
+				body.chatwootToken = chatwootToken;
+			}
+			if (chatwootUrl) {
+				body.chatwootUrl = chatwootUrl;
+			}
+			if (chatwootSignMsg) {
+				body.chatwootSignMsg = chatwootSignMsg;
+			}
+			if (chatwootReopenConversation) {
+				body.chatwootReopenConversation = chatwootReopenConversation;
+			}
+			if (chatwootConversationPending) {
+				body.chatwootConversationPending = chatwootConversationPending;
+			}
+			if (chatwootImportContacts) {
+				body.chatwootImportContacts = chatwootImportContacts;
+			}
+			if (chatwootNameInbox) {
+				body.chatwootNameInbox = chatwootNameInbox;
+			}
+			if (chatwootMergeBrazilContacts) {
+				body.chatwootMergeBrazilContacts = chatwootMergeBrazilContacts;
+			}
+			if (chatwootImportMessages) {
+				body.chatwootImportMessages = chatwootImportMessages;
+			}
+			if (chatwootDaysLimitImportMessages) {
+				body.chatwootDaysLimitImportMessages = chatwootDaysLimitImportMessages;
+			}
+			if (chatwootOrganization) {
+				body.chatwootOrganization = chatwootOrganization;
+			}
+			if (chatwootLogo) {
+				body.chatwootLogo = chatwootLogo;
 			}
 
 			const options: IRequestOptions = {
