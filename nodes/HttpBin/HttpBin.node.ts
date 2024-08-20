@@ -71,67 +71,24 @@ export class HttpBin implements INodeType {
 			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
 			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
 
+			const body: any = {
+				instanceName,
+				token,
+				number,
+				'integration': 'WHATSAPP-BAILEYS',
+			};
 
 			// Obter configurações da instância
-			//const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings', 0); // Obter instanceSettings
-			//const rejectCall = typeof instanceSettings === 'object' && instanceSettings !== null && 'rejectCall' in instanceSettings
-			//	? instanceSettings.rejectCall
-			//	: undefined; // ou um valor padrão, se necessário
-
+			const rejectCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.rejectCall', 0, false);
 			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0, 'teste');
-			console.log(msgCall);
-
-			const rejectCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.rejectCall', 0);
-			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0);
+			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0, false);
 			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
 			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
 			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
 			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
 
-			// Obter configurações do proxy
-			console.log(this.getNodeParameter('options_Create_instance.proxy', 0));
-			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.proxy.proxyHost', 0);
-			const proxyPort = this.getNodeParameter('options_Create_instance.proxy.proxy.proxyPort', 0);
-			const proxyProtocol = this.getNodeParameter('options_Create_instance.proxy.proxy.proxyProtocol', 0);
-			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.proxy.proxyUsername', 0);
-			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.proxy.proxyPassword', 0);
-
-			// Obter configurações do Chatwoot
-			const chatwootAccountId = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootAccountId', 0);
-			const chatwootToken = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootToken', 0);
-			const chatwootUrl = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootUrl', 0);
-			const chatwootSignMsg = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootSignMsg', 0);
-			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootReopenConversation', 0);
-			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootConversationPending', 0);
-			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootImportContacts', 0);
-			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootNameInbox', 0) || '';
-			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootMergeBrazilContacts', 0);
-			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootImportMessages', 0);
-			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootDaysLimitImportMessages', 0) || '';
-			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootOrganization', 0) || '';
-			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwoot.chatwootLogo', 0) || '';
-
-			// Obter configurações do Typebot
-			const typebotUrl = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotUrl', 0);
-			const typebot = this.getNodeParameter('options_Create_instance.typebot.typebot.typebot', 0);
-			const typebotExpire = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotExpire', 0);
-			const typebotKeywordFinish = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotKeywordFinish', 0);
-			const typebotDelayMessage = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotDelayMessage', 0);
-			const typebotUnknownMessage = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotUnknownMessage', 0);
-			const typebotListeningFromMe = this.getNodeParameter('options_Create_instance.typebot.typebot.typebotListeningFromMe', 0);
-
-			const options: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/instance/create`,
-				body: {
-					instanceName,
-					token,
-					number,
-					'integration': 'WHATSAPP-BAILEYS',
+			if (rejectCall || msgCall || groupsIgnore || alwaysOnline || readMessages || readStatus || syncFullHistory) {
+				Object.assign(body, {
 					rejectCall,
 					msgCall,
 					groupsIgnore,
@@ -139,11 +96,43 @@ export class HttpBin implements INodeType {
 					readMessages,
 					readStatus,
 					syncFullHistory,
+				});
+			}
+
+			// Obter configurações do proxy
+			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyHost', 0);
+			const proxyPort = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyPort', 0);
+			const proxyProtocol = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyProtocol', 0);
+			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyUsername', 0);
+			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyPassword', 0);
+
+			if (proxyHost || proxyPort || proxyProtocol || proxyUsername || proxyPassword) {
+				Object.assign(body, {
 					host: proxyHost,
 					port: proxyPort,
 					protocol: proxyProtocol,
 					username: proxyUsername,
 					password: proxyPassword,
+				});
+			}
+
+			// Obter configurações do Chatwoot
+			const chatwootAccountId = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootAccountId', 0);
+			const chatwootToken = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootToken', 0);
+			const chatwootUrl = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootUrl', 0);
+			const chatwootSignMsg = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootSignMsg', 0);
+			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootReopenConversation', 0);
+			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootConversationPending', 0);
+			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootImportContacts', 0);
+			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootNameInbox', 0) || '';
+			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootMergeBrazilContacts', 0);
+			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootImportMessages', 0);
+			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootDaysLimitImportMessages', 0) || '';
+			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootOrganization', 0) || '';
+			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootLogo', 0) || '';
+
+			if (chatwootAccountId || chatwootToken || chatwootUrl || chatwootSignMsg || chatwootReopenConversation || chatwootConversationPending || chatwootImportContacts || chatwootNameInbox || chatwootMergeBrazilContacts || chatwootImportMessages || chatwootDaysLimitImportMessages || chatwootOrganization || chatwootLogo) {
+				Object.assign(body, {
 					chatwootAccountId,
 					chatwootToken,
 					chatwootUrl,
@@ -157,14 +146,17 @@ export class HttpBin implements INodeType {
 					chatwootDaysLimitImportMessages,
 					chatwootOrganization,
 					chatwootLogo,
-					typebotUrl,
-					typebot,
-					typebotExpire,
-					typebotKeywordFinish,
-					typebotDelayMessage,
-					typebotUnknownMessage,
-					typebotListeningFromMe,
+				});
+			}
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
 				},
+				uri: `${serverUrl}/instance/create`,
+				body,
 				json: true,
 			};
 
