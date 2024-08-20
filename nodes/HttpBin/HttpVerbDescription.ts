@@ -451,7 +451,7 @@ const instanceOperation: INodeProperties[] = [
 							{
 								displayName: 'ID Da Conta Do Chatwoot',
 								name: 'chatwootAccountId',
-								type: 'number',
+								type: 'string',
 								default: 0,
 								description: 'Digite o ID da conta do Chatwoot',
 							},
