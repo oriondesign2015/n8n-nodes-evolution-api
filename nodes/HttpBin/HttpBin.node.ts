@@ -101,18 +101,18 @@ export class HttpBin implements INodeType {
 			// Verifica e adiciona configurações de proxy se existirem
 			const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {}) as {
 				proxyHost?: string;
-				proxyPort?: number;
+				proxyPort?: string;
 				proxyProtocol?: string;
 				proxyUsername?: string;
 				proxyPassword?: string;
 			};
 			if (proxySettings && Object.keys(proxySettings).length > 0) {
 				Object.assign(body, {
-					host: proxySettings.proxyHost || undefined,
-					port: proxySettings.proxyPort || undefined,
-					protocol: proxySettings.proxyProtocol || undefined,
-					username: proxySettings.proxyUsername || undefined,
-					password: proxySettings.proxyPassword || undefined,
+					host: proxySettings.proxyHost || "",
+					port: proxySettings.proxyPort || "",
+					protocol: proxySettings.proxyProtocol || "",
+					username: proxySettings.proxyUsername || "",
+					password: proxySettings.proxyPassword || "",
 				});
 			}
 
@@ -133,18 +133,18 @@ export class HttpBin implements INodeType {
 				chatwootLogo?: string;
 			};
 
-			// Adiciona todos os campos do Chatwoot ao corpo, mesmo que estejam vazios
+			// Adiciona todos os campos do Chatwoot
 			body.chatwootAccountId = chatwootSettings.chatwootAccountId || '';
 			body.chatwootToken = chatwootSettings.chatwootToken || '';
 			body.chatwootUrl = chatwootSettings.chatwootUrl || '';
-			body.chatwootSignMsg = chatwootSettings.chatwootSignMsg !== undefined ? chatwootSettings.chatwootSignMsg : false; // Define um valor padrão
+			body.chatwootSignMsg = chatwootSettings.chatwootSignMsg !== undefined ? chatwootSettings.chatwootSignMsg : false;
 			body.chatwootReopenConversation = chatwootSettings.chatwootReopenConversation || false;
 			body.chatwootConversationPending = chatwootSettings.chatwootConversationPending || false;
 			body.chatwootImportContacts = chatwootSettings.chatwootImportContacts || false;
 			body.chatwootNameInbox = chatwootSettings.chatwootNameInbox || '';
 			body.chatwootMergeBrazilContacts = chatwootSettings.chatwootMergeBrazilContacts || false;
 			body.chatwootImportMessages = chatwootSettings.chatwootImportMessages || false;
-			body.chatwootDaysLimitImportMessages = chatwootSettings.chatwootDaysLimitImportMessages || null; // ou 0, dependendo do que faz sentido
+			body.chatwootDaysLimitImportMessages = chatwootSettings.chatwootDaysLimitImportMessages || 0;
 			body.chatwootOrganization = chatwootSettings.chatwootOrganization || '';
 			body.chatwootLogo = chatwootSettings.chatwootLogo || '';
 
