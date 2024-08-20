@@ -478,39 +478,55 @@ export class HttpBin implements INodeType {
 
 		// Enviar Enquete
 		if (resource === 'messages-api' && operation === 'sendPoll') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const remoteJid = this.getNodeParameter('remoteJid', 0);
-			const pollTitle = this.getNodeParameter('caption', 0);
-			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[];
-			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
+			try {
+					console.log('Iniciando o envio da enquete...');
 
-			// Log para verificar o valor de options
-			console.log('Opções da Enquete:', options);
+					const credentials = await this.getCredentials('httpbinApi');
+					console.log('Credenciais obtidas:', credentials);
 
-			// Verifica se options é um array e não está vazio
-			const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
+					const serverUrl = credentials['server-url'];
+					const apiKey = credentials.apikey;
+					console.log('URL do servidor:', serverUrl);
+					console.log('API Key:', apiKey);
 
-			const requestOptions: IRequestOptions = {
-					method: 'POST' as IHttpRequestMethods,
-					headers: {
-							'Content-Type': 'application/json',
-							apikey: apiKey,
-					},
-					uri: `${serverUrl}/message/sendPoll/${instanceName}`,
-					body: {
-							number: remoteJid,
-							name: pollTitle,
-							selectableCount: 1,
-							mentionsEveryOne: mentionsEveryOne,
-							values: pollOptions,
-					},
-					json: true,
-			};
+					const instanceName = this.getNodeParameter('instanceName', 0);
+					const remoteJid = this.getNodeParameter('remoteJid', 0);
+					const pollTitle = this.getNodeParameter('caption', 0);
+					const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[];
+					const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
-			responseData = await this.helpers.request(requestOptions);
+					// Log para verificar os valores
+					console.log('Valores recebidos:', { instanceName, remoteJid, pollTitle, options, mentionsEveryOne });
+
+					// Verifica se options é um array e não está vazio
+					const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
+					console.log('Opções da enquete:', pollOptions);
+
+					const requestOptions: IRequestOptions = {
+							method: 'POST' as IHttpRequestMethods,
+							headers: {
+									'Content-Type': 'application/json',
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+							body: {
+									number: remoteJid,
+									name: pollTitle,
+									selectableCount: 1, // Definido como 1
+									mentionsEveryOne: mentionsEveryOne,
+									values: pollOptions,
+							},
+							json: true,
+					};
+
+					console.log('Opções da requisição:', requestOptions);
+
+					responseData = await this.helpers.request(requestOptions);
+					console.log('Resposta da API:', responseData);
+			} catch (error) {
+					console.error('Erro ao enviar a enquete:', error);
+					throw new Error(`Erro ao enviar a enquete: ${error.message}`);
+			}
 		}
 
 		//// Enviar Lista
