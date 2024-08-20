@@ -95,10 +95,10 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'fetch-instances',
 			},
 
-			// Opção = Definir configurações da instancia
+			// Opção = Definir Comportamento da instancia
 			{
-				name: 'Definir Configurações',
-				action: 'Definir Configurações',
+				name: 'Definir Comportamento',
+				action: 'Definir Comportamento',
 				description: 'Define o comportamento da instancia',
 				value: 'instanceSettings',
 			},
@@ -189,15 +189,6 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Envia uma Enquete de até 12 opções',
 				value: 'sendPoll',
 			},
-
-			// Opção = Enviar Lista
-			//{
-			//	// Send List
-			//	name: 'Enviar Lista',
-			//	action: 'Enviar Lista',
-			//	description: 'Envia uma Lista de opções',
-			//	value: 'sendList',
-			//},
 
 			// Opção = Enviar Status
 			{
@@ -294,7 +285,7 @@ const instanceOperation: INodeProperties[] = [
 		default: {},
 		options: [
 			{
-				displayName: 'Configurações',
+				displayName: 'Comportamento',
 				name: 'instanceSettings',
 				type: 'fixedCollection',
 				typeOptions: {
@@ -303,7 +294,7 @@ const instanceOperation: INodeProperties[] = [
 				default: { settings: {} },
 				options: [
 					{
-						displayName: 'Configurações',
+						displayName: 'Comportamento Da Instancia',
 						name: 'settings',
 						values: [
 							{
@@ -358,7 +349,7 @@ const instanceOperation: INodeProperties[] = [
 						],
 					},
 				],
-				description: 'Configurações da instância',
+				description: 'Comportamento da instância',
 			},
 			{
 				displayName: 'Proxy',
@@ -615,7 +606,7 @@ const instanceOperation: INodeProperties[] = [
 	},
 
 
-	// Campos = Definir configurações
+	// Campos = Definir Comportamento
 	{
 		displayName: 'Nome da Instância',
 		name: 'instanceName',
@@ -729,7 +720,7 @@ const instanceOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai ser deletada',
 		displayOptions: {
 			show: {
@@ -847,7 +838,7 @@ const messageOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
@@ -947,7 +938,7 @@ const messageOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai enviar o vídeo',
 		displayOptions: {
 			show: {
@@ -1047,7 +1038,7 @@ const messageOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai enviar o áudio',
 		displayOptions: {
 			show: {
@@ -1105,7 +1096,7 @@ const messageOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai enviar o documento',
 		displayOptions: {
 			show: {
@@ -1284,139 +1275,6 @@ const messageOperation: INodeProperties[] = [
 			},
 		},
 	},
-
-
-	// Campos = Enviar Lista
-	//{
-	//	displayName: 'Nome da Instância',
-	//	name: 'instanceName',
-	//	type: 'string',
-	//	default: '',
-	//	required: true,
-	//	description: 'Digite o nome da instância que vai enviar a lista',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Número do Destinatário',
-	//	name: 'remoteJid',
-	//	type: 'string',
-	//	default: '',
-	//	required: true,
-	//	description: 'Número do destinatário',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Título',
-	//	name: 'title',
-	//	type: 'string',
-	//	default: '',
-	//	required: true,
-	//	description: 'Título da lista',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Descrição',
-	//	name: 'description',
-	//	type: 'string',
-	//	default: '',
-	//	required: true,
-	//	description: 'Descrição da lista',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Texto do Rodapé',
-	//	name: 'footerText',
-	//	type: 'string',
-	//	default: '',
-	//	required: false,
-	//	description: 'Texto do rodapé da lista',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Texto do Botão',
-	//	name: 'buttonText',
-	//	type: 'string',
-	//	default: 'Selecionar opção',
-	//	required: true,
-	//	description: 'Texto do botão da lista',
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
-	//{
-	//	displayName: 'Opções',
-	//	name: 'options_display',
-	//	type: 'fixedCollection',
-	//	default: '',
-	//	required: true,
-	//	typeOptions: {
-	//		multipleValues: true,
-	//	},
-	//	description: 'Digite as opções da lista (mínimo 1). Cada opção deve ser única.',
-	//	options: [
-	//		{
-	//			name: 'metadataValues',
-	//			displayName: 'Metadata',
-	//			values: [
-	//				{
-	//					displayName: 'Título da Opção',
-	//					name: 'optionTitle',
-	//					type: 'string',
-	//					default: '',
-	//					required: true,
-	//				},
-	//				{
-	//					displayName: 'Descrição da Opção',
-	//					name: 'optionDescription',
-	//					type: 'string',
-	//					default: '',
-	//					required: false,
-	//				},
-	//				{
-	//					displayName: 'ID da Linha',
-	//					name: 'rowId',
-	//					type: 'string',
-	//					default: '',
-	//					required: true,
-	//				},
-	//			],
-	//		},
-	//	],
-	//	displayOptions: {
-	//		show: {
-	//			resource: ['messages-api'],
-	//			operation: ['sendList'],
-	//		},
-	//	},
-	//},
 
 	// Campos = Enviar Status
 	{
