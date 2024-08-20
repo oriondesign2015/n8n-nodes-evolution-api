@@ -491,24 +491,24 @@ export class HttpBin implements INodeType {
 
 			// Verifica se há pelo menos 2 opções
 			if (pollOptions.length < 2) {
-					throw new Error('É necessário fornecer pelo menos 2 opções para a enquete.');
+				throw new NodeOperationError(this.getNode(), 'É necessário fornecer pelo menos 2 opções para a enquete.');
 			}
 
 			const requestOptions: IRequestOptions = {
-					method: 'POST' as IHttpRequestMethods,
-					headers: {
-							'Content-Type': 'application/json',
-							apikey: apiKey,
-					},
-					uri: `${serverUrl}/message/sendPoll/${instanceName}`,
-					body: {
-							number: remoteJid,
-							name: pollTitle,
-							selectableCount: 1,
-							values: pollOptions,
-							mentionsEveryOne: mentionsEveryOne.toString(), // Convertendo para string
-					},
-					json: true,
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+				body: {
+					number: remoteJid,
+					name: pollTitle,
+					selectableCount: 1,
+					values: pollOptions,
+					mentionsEveryOne: mentionsEveryOne.toString(), // Convertendo para string
+				},
+				json: true,
 			};
 			responseData = await this.helpers.request(requestOptions);
 		}
