@@ -477,6 +477,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Enviar Enquete
+		// Enviar Enquete
 		if (resource === 'messages-api' && operation === 'sendPoll') {
 			try {
 					console.log('Iniciando o envio da enquete...');
@@ -512,7 +513,7 @@ export class HttpBin implements INodeType {
 							body: {
 									number: remoteJid,
 									name: pollTitle,
-									selectableCount: 1, // Definido como 1
+									selectableCount: 1,
 									mentionsEveryOne: mentionsEveryOne,
 									values: pollOptions,
 							},
@@ -525,7 +526,7 @@ export class HttpBin implements INodeType {
 					console.log('Resposta da API:', responseData);
 			} catch (error) {
 					console.error('Erro ao enviar a enquete:', error);
-					throw new Error(`Erro ao enviar a enquete: ${error.message}`);
+					throw new NodeApiError(this.getNode(), error); // Substitua aqui
 			}
 		}
 
