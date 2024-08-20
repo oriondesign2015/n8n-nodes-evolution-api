@@ -108,11 +108,11 @@ export class HttpBin implements INodeType {
 			};
 			if (proxySettings && Object.keys(proxySettings).length > 0) {
 				Object.assign(body, {
-					host: proxySettings.proxyHost || "",
-					port: proxySettings.proxyPort || "",
-					protocol: proxySettings.proxyProtocol || "",
-					username: proxySettings.proxyUsername || "",
-					password: proxySettings.proxyPassword || "",
+					proxyHost: proxySettings.proxyHost || "",
+					proxyPort: proxySettings.proxyPort || "",
+					proxyProtocol: proxySettings.proxyProtocol || "",
+					proxyUsername: proxySettings.proxyUsername || "",
+					proxyPassword: proxySettings.proxyPassword || "",
 				});
 			}
 
