@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, INodeExecutionData, IRequestOptions, IHttpRequestMethods, NodeOperationError } from 'n8n-workflow';
 import { httpVerbFields, httpVerbOperations } from './HttpVerbDescription';
 // Observação deste documento:
 // Este documento serve para a realizar as requisições do node
@@ -477,7 +477,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Enviar Enquete
-		if (resource === 'messages-api' && operation === 'sendPoll') {
+    if (resource === 'messages-api' && operation === 'sendPoll') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -485,30 +485,31 @@ export class HttpBin implements INodeType {
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const pollTitle = this.getNodeParameter('caption', 0);
 			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[];
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0); // Certifique-se de que esta linha está presente
 
 			// Verifica se options é um array e não está vazio
 			const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
 
 			// Verifica se há pelo menos 2 opções
 			if (pollOptions.length < 2) {
-				throw new NodeOperationError(this.getNode(), 'É necessário fornecer pelo menos 2 opções para a enquete.');
+					throw new NodeOperationError(this.getNode(), 'É necessário fornecer pelo menos 2 opções para a enquete.');
 			}
 
 			const requestOptions: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/message/sendPoll/${instanceName}`,
-				body: {
-					number: remoteJid,
-					name: pollTitle,
-					selectableCount: 1,
-					values: pollOptions,
-					mentionsEveryOne: mentionsEveryOne.toString(), // Convertendo para string
-				},
-				json: true,
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+							'Content-Type': 'application/json',
+							apikey: apiKey,
+					},
+					uri: `${serverUrl}/message/sendPoll/${instanceName}`,
+					body: {
+							number: remoteJid,
+							name: pollTitle,
+							selectableCount: 1,
+							values: pollOptions,
+							mentionsEveryOne: mentionsEveryOne.toString(), // Convertendo para string
+					},
+					json: true,
 			};
 			responseData = await this.helpers.request(requestOptions);
 		}
