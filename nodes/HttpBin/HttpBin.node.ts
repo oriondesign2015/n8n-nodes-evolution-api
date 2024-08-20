@@ -63,73 +63,74 @@ export class HttpBin implements INodeType {
 
 		// Criar instancia basica
 		if (resource === 'instances-api' && operation === 'instance-basic') {
-		  const credentials = await this.getCredentials('httpbinApi');
-		  const serverUrl = credentials['server-url'];
-		  const apiKey = credentials.apikey;
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
 
-		  const instanceName = this.getNodeParameter('instanceName', 0);
-		  const token = this.getNodeParameter('token', 0) || '';
-		  const number = this.getNodeParameter('number', 0) || '';
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const token = this.getNodeParameter('token', 0) || '';
+			const number = this.getNodeParameter('number', 0) || '';
 
-		  // Inicializa o corpo básico da requisição
-		  const body: any = {
-		    instanceName,
-		    token,
-		    number,
-		    'integration': 'WHATSAPP-BAILEYS',
-		  };
+			// Inicializa o corpo básico da requisição
+			const body: any = {
+				instanceName,
+				token,
+				number,
+				'integration': 'WHATSAPP-BAILEYS',
+			};
 
-		  // Adiciona configurações da instância, se existirem
-		  const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {});
-		  if (Object.keys(instanceSettings).length > 0) {
-		    Object.assign(body, instanceSettings);
-		  }
+			// Verifica e adiciona configurações da instância se existirem
+			const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {});
+			if (instanceSettings && Object.keys(instanceSettings).length > 0) {
+				Object.assign(body, instanceSettings);
+			}
 
-		  // Adiciona configurações de proxy, se existirem
-		  const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {});
-		  if (Object.keys(proxySettings).length > 0) {
-		    Object.assign(body, {
-		      host: proxySettings.proxyHost,
-		      port: proxySettings.proxyPort,
-		      protocol: proxySettings.proxyProtocol,
-		      username: proxySettings.proxyUsername,
-		      password: proxySettings.proxyPassword,
-		    });
-		  }
+			// Verifica e adiciona configurações de proxy se existirem
+			const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {});
+			if (proxySettings && typeof proxySettings === 'object' && Object.keys(proxySettings).length > 0) {
+				Object.assign(body, {
+					host: proxySettings.proxyHost || undefined,
+					port: proxySettings.proxyPort || undefined,
+					protocol: proxySettings.proxyProtocol || undefined,
+					username: proxySettings.proxyUsername || undefined,
+					password: proxySettings.proxyPassword || undefined,
+				});
+			}
 
-		  // Adiciona configurações do Chatwoot, se existirem
-		  const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {});
-		  if (Object.keys(chatwootSettings).length > 0) {
-		    Object.assign(body, {
-		      chatwootAccountId: chatwootSettings.chatwootAccountId,
-		      chatwootToken: chatwootSettings.chatwootToken,
-		      chatwootUrl: chatwootSettings.chatwootUrl,
-		      chatwootSignMsg: chatwootSettings.chatwootSignMsg,
-		      chatwootReopenConversation: chatwootSettings.chatwootReopenConversation,
-		      chatwootConversationPending: chatwootSettings.chatwootConversationPending,
-		      chatwootImportContacts: chatwootSettings.chatwootImportContacts,
-		      chatwootNameInbox: chatwootSettings.chatwootNameInbox,
-		      chatwootMergeBrazilContacts: chatwootSettings.chatwootMergeBrazilContacts,
-		      chatwootImportMessages: chatwootSettings.chatwootImportMessages,
-		      chatwootDaysLimitImportMessages: chatwootSettings.chatwootDaysLimitImportMessages,
-		      chatwootOrganization: chatwootSettings.chatwootOrganization,
-		      chatwootLogo: chatwootSettings.chatwootLogo,
-		    });
-		  }
+			// Verifica e adiciona configurações do Chatwoot se existirem
+			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {});
+			if (chatwootSettings && typeof chatwootSettings === 'object' && Object.keys(chatwootSettings).length > 0) {
+				Object.assign(body, {
+					chatwootAccountId: chatwootSettings.chatwootAccountId || undefined,
+					chatwootToken: chatwootSettings.chatwootToken || undefined,
+					chatwootUrl: chatwootSettings.chatwootUrl || undefined,
+					chatwootSignMsg: chatwootSettings.chatwootSignMsg || undefined,
+					chatwootReopenConversation: chatwootSettings.chatwootReopenConversation || undefined,
+					chatwootConversationPending: chatwootSettings.chatwootConversationPending || undefined,
+					chatwootImportContacts: chatwootSettings.chatwootImportContacts || undefined,
+					chatwootNameInbox: chatwootSettings.chatwootNameInbox || undefined,
+					chatwootMergeBrazilContacts: chatwootSettings.chatwootMergeBrazilContacts || undefined,
+					chatwootImportMessages: chatwootSettings.chatwootImportMessages || undefined,
+					chatwootDaysLimitImportMessages: chatwootSettings.chatwootDaysLimitImportMessages || undefined,
+					chatwootOrganization: chatwootSettings.chatwootOrganization || undefined,
+					chatwootLogo: chatwootSettings.chatwootLogo || undefined,
+				});
+			}
 
-		  const options: IRequestOptions = {
-		    method: 'POST' as IHttpRequestMethods,
-		    headers: {
-		      'Content-Type': 'application/json',
-		      apikey: apiKey,
-		    },
-		    uri: `${serverUrl}/instance/create`,
-		    body,
-		    json: true,
-		  };
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/instance/create`,
+				body,
+				json: true,
+			};
 
-		  responseData = await this.helpers.request(options);
+			responseData = await this.helpers.request(options);
 		}
+
 
 		// Criar instancia com Proxy
 		if (resource === 'instances-api' && operation === 'instance-proxy') {
