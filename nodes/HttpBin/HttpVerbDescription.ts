@@ -191,13 +191,13 @@ export const httpVerbOperations: INodeProperties[] = [
 			},
 
 			// Opção = Enviar Lista
-			{
-				// Send List
-				name: 'Enviar Lista',
-				action: 'Enviar Lista',
-				description: 'Envia uma Lista de opções',
-				value: 'sendList',
-			},
+			//{
+			//	// Send List
+			//	name: 'Enviar Lista',
+			//	action: 'Enviar Lista',
+			//	description: 'Envia uma Lista de opções',
+			//	value: 'sendList',
+			//},
 
 			// Opção = Enviar Status
 			{
@@ -769,7 +769,7 @@ const instanceOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai ser deletada',
 		displayOptions: {
 			show: {
@@ -898,34 +898,34 @@ const messageOperation: INodeProperties[] = [
 			},
 		},
 	},
-	{
-		displayName: 'Mimetype',
-		name: 'mimetype',
-		type: 'string',
-		default: 'image/png',
-		required: false,
-		description: 'Tipo MIME da imagem',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendImage'],
-			},
-		},
-	},
-	{
-		displayName: 'Nome do Arquivo',
-		name: 'fileName',
-		type: 'string',
-		default: 'Imagem.png',
-		required: false,
-		description: 'Nome do arquivo da imagem',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendImage'],
-			},
-		},
-	},
+	//{
+	//	displayName: 'Mimetype',
+	//	name: 'mimetype',
+	//	type: 'string',
+	//	default: 'image/png',
+	//	required: false,
+	//	description: 'Tipo MIME da imagem',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendImage'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Nome do Arquivo',
+	//	name: 'fileName',
+	//	type: 'string',
+	//	default: 'Imagem.png',
+	//	required: false,
+	//	description: 'Nome do arquivo da imagem',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendImage'],
+	//		},
+	//	},
+	//},
 	{
 		displayName: 'Enviar com Marcação Fantasma?',
 		name: 'mentionsEveryOne',
@@ -998,34 +998,34 @@ const messageOperation: INodeProperties[] = [
 			},
 		},
 	},
-	{
-		displayName: 'Mimetype',
-		name: 'mimetype',
-		type: 'string',
-		default: 'video/mp4',
-		required: false,
-		description: 'Tipo MIME do vídeo',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendVideo'],
-			},
-		},
-	},
-	{
-		displayName: 'Nome do Arquivo',
-		name: 'fileName',
-		type: 'string',
-		default: 'Video.mp4',
-		required: false,
-		description: 'Nome do arquivo do vídeo',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendVideo'],
-			},
-		},
-	},
+	// {
+	// 	displayName: 'Mimetype',
+	// 	name: 'mimetype',
+	// 	type: 'string',
+	// 	default: 'video/mp4',
+	// 	required: false,
+	// 	description: 'Tipo MIME do vídeo',
+	// 	displayOptions: {
+	// 		show: {
+	// 			resource: ['messages-api'],
+	// 			operation: ['sendVideo'],
+	// 		},
+	// 	},
+	// },
+	// {
+	// 	displayName: 'Nome do Arquivo',
+	// 	name: 'fileName',
+	// 	type: 'string',
+	// 	default: 'Video.mp4',
+	// 	required: false,
+	// 	description: 'Nome do arquivo do vídeo',
+	// 	displayOptions: {
+	// 		show: {
+	// 			resource: ['messages-api'],
+	// 			operation: ['sendVideo'],
+	// 		},
+	// 	},
+	// },
 	{
 		displayName: 'Enviar com Marcação Fantasma?',
 		name: 'mentionsEveryOne',
@@ -1156,20 +1156,20 @@ const messageOperation: INodeProperties[] = [
 			},
 		},
 	},
-	{
-		displayName: 'Nome do Arquivo',
-		name: 'fileName',
-		type: 'string',
-		default: '',
-		required: false,
-		description: 'Nome do arquivo do vídeo',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendDocumento'],
-			},
-		},
-	},
+	//{
+	//	displayName: 'Nome do Arquivo',
+	//	name: 'fileName',
+	//	type: 'string',
+	//	default: '',
+	//	required: false,
+	//	description: 'Nome do arquivo do vídeo',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendDocumento'],
+	//		},
+	//	},
+	//},
 	{
 		displayName: 'Enviar com Marcação Fantasma?',
 		name: 'mentionsEveryOne',
@@ -1287,48 +1287,48 @@ const messageOperation: INodeProperties[] = [
 
 
 	// Campos = Enviar Lista
-	{
-		displayName: 'Nome da Instância',
-		name: 'instanceName',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o nome da instância que vai enviar a lista',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
-	{
-		displayName: 'Número do Destinatário',
-		name: 'remoteJid',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Número do destinatário',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
-	{
-		displayName: 'Título',
-		name: 'title',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Título da lista',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
+	//{
+	//	displayName: 'Nome da Instância',
+	//	name: 'instanceName',
+	//	type: 'string',
+	//	default: '',
+	//	required: true,
+	//	description: 'Digite o nome da instância que vai enviar a lista',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Número do Destinatário',
+	//	name: 'remoteJid',
+	//	type: 'string',
+	//	default: '',
+	//	required: true,
+	//	description: 'Número do destinatário',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Título',
+	//	name: 'title',
+	//	type: 'string',
+	//	default: '',
+	//	required: true,
+	//	description: 'Título da lista',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
 	{
 		displayName: 'Descrição',
 		name: 'description',

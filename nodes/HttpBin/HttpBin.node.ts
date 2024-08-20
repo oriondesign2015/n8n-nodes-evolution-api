@@ -356,9 +356,9 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const media = this.getNodeParameter('media', 0);
-			const mimetype = this.getNodeParameter('mimetype', 0);
+			// const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
-			const fileName = this.getNodeParameter('fileName', 0);
+			// const fileName = this.getNodeParameter('fileName', 0);
 			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
@@ -372,9 +372,9 @@ export class HttpBin implements INodeType {
 					number: remoteJid,
 					'mediatype': 'image',
 					media: media,
-					mimetype: mimetype,
+					'mimetype': '',
 					caption: caption,
-					fileName: fileName,
+					'fileName': '',
 					mentionsEveryOne: mentionsEveryOne,
 
 				},
@@ -391,9 +391,9 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const media = this.getNodeParameter('media', 0);
-			const mimetype = this.getNodeParameter('mimetype', 0);
+			// const mimetype = this.getNodeParameter('mimetype', 0);
 			const caption = this.getNodeParameter('caption', 0);
-			const fileName = this.getNodeParameter('fileName', 0);
+			// const fileName = this.getNodeParameter('fileName', 0);
 			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
@@ -407,9 +407,9 @@ export class HttpBin implements INodeType {
 					number: remoteJid,
 					'mediatype': 'video',
 					media: media,
-					mimetype: mimetype,
+					'mimetype': '',
 					caption: caption,
-					fileName: fileName,
+					'fileName': '',
 					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
@@ -453,7 +453,7 @@ export class HttpBin implements INodeType {
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const media = this.getNodeParameter('media', 0);
 			const caption = this.getNodeParameter('caption', 0);
-			const fileName = this.getNodeParameter('fileName', 0);
+			// const fileName = this.getNodeParameter('fileName', 0);
 			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
 			const options: IRequestOptions = {
@@ -468,7 +468,7 @@ export class HttpBin implements INodeType {
 					'mediatype': 'document',
 					media: media,
 					caption: caption,
-					fileName: fileName,
+					'fileName': '',
 					mentionsEveryOne: mentionsEveryOne,
 				},
 				json: true,
@@ -509,51 +509,51 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(requestOptions);
 		}
 
-		// Enviar Lista
-		if (resource === 'messages-api' && operation === 'sendList') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const remoteJid = this.getNodeParameter('remoteJid', 0);
-			const listTitle = this.getNodeParameter('title', 0);
-			const listDescription = this.getNodeParameter('description', 0) || ''; // Permite que description seja vazia
-			const footerText = this.getNodeParameter('footerText', 0);
-			const buttonText = this.getNodeParameter('buttonText', 0);
-			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, optionDescription: string, rowId: string }[];
-
-			// Verifica se options é um array e não está vazio
-			const listOptions = Array.isArray(options) ? options.map(option => ({
-				title: option.optionTitle,
-				description: option.optionDescription,
-				rowId: option.rowId,
-			})) : [];
-
-			const requestOptions: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/message/sendList/${instanceName}`,
-				body: {
-					number: remoteJid,
-					title: listTitle,
-					description: listDescription,
-					footerText: footerText,
-					buttonText: buttonText,
-					sections: [
-						{
-							title: listTitle,
-							description: listOptions.map(option => option.description),
-							rows: listOptions,
-						},
-					],
-				},
-				json: true,
-			};
-			responseData = await this.helpers.request(requestOptions);
-		}
+		//// Enviar Lista
+		//if (resource === 'messages-api' && operation === 'sendList') {
+		//	const credentials = await this.getCredentials('httpbinApi');
+		//	const serverUrl = credentials['server-url'];
+		//	const apiKey = credentials.apikey;
+		//	const instanceName = this.getNodeParameter('instanceName', 0);
+		//	const remoteJid = this.getNodeParameter('remoteJid', 0);
+		//	const listTitle = this.getNodeParameter('title', 0);
+		//	const listDescription = this.getNodeParameter('description', 0) || ''; // Permite que description seja vazia
+		//	const footerText = this.getNodeParameter('footerText', 0);
+		//	const buttonText = this.getNodeParameter('buttonText', 0);
+		//	const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionTitle: string, optionDescription: string, rowId: string }[];
+		//
+		//	// Verifica se options é um array e não está vazio
+		//	const listOptions = Array.isArray(options) ? options.map(option => ({
+		//		title: option.optionTitle,
+		//		description: option.optionDescription,
+		//		rowId: option.rowId,
+		//	})) : [];
+		//
+		//	const requestOptions: IRequestOptions = {
+		//		method: 'POST' as IHttpRequestMethods,
+		//		headers: {
+		//			'Content-Type': 'application/json',
+		//			apikey: apiKey,
+		//		},
+		//		uri: `${serverUrl}/message/sendList/${instanceName}`,
+		//		body: {
+		//			number: remoteJid,
+		//			title: listTitle,
+		//			description: listDescription,
+		//			footerText: footerText,
+		//			buttonText: buttonText,
+		//			sections: [
+		//				{
+		//					title: listTitle,
+		//					description: listOptions.map(option => option.description),
+		//					rows: listOptions,
+		//				},
+		//			],
+		//		},
+		//		json: true,
+		//	};
+		//	responseData = await this.helpers.request(requestOptions);
+		//}
 
 		// Enviar status
 		if (resource === 'messages-api' && operation === 'sendStories') {
