@@ -138,44 +138,44 @@ export class HttpBin implements INodeType {
 		return [responseData];
 	}
 
-		// Criar instancia com Proxy
-		if (resource === 'instances-api' && operation === 'instance-proxy') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
-			const integration = this.getNodeParameter('integration', 0);
-			const proxyHost = this.getNodeParameter('proxyHost', 0);
-			const proxyPort = this.getNodeParameter('proxyPort', 0);
-			const proxyProtocol = this.getNodeParameter('proxyProtocol', 0);
-			const proxyUsername = this.getNodeParameter('proxyUsername', 0);
-			const proxyPassword = this.getNodeParameter('proxyPassword', 0);
-
-			const options: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/instance/create`,
-				body: {
-					instanceName,
-					token,
-					integration,
-					proxy: {
-						host: proxyHost,
-						port: proxyPort,
-						protocol: proxyProtocol,
-						username: proxyUsername,
-						password: proxyPassword,
-					},
-				},
-				json: true,
-			};
-
-			responseData = await this.helpers.request(options);
-		}
+//		// Criar instancia com Proxy
+//		if (resource === 'instances-api' && operation === 'instance-proxy') {
+//			const credentials = await this.getCredentials('httpbinApi');
+//			const serverUrl = credentials['server-url'];
+//			const apiKey = credentials.apikey;
+//			const instanceName = this.getNodeParameter('instanceName', 0);
+//			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
+//			const integration = this.getNodeParameter('integration', 0);
+//			const proxyHost = this.getNodeParameter('proxyHost', 0);
+//			const proxyPort = this.getNodeParameter('proxyPort', 0);
+//			const proxyProtocol = this.getNodeParameter('proxyProtocol', 0);
+//			const proxyUsername = this.getNodeParameter('proxyUsername', 0);
+//			const proxyPassword = this.getNodeParameter('proxyPassword', 0);
+//
+//			const options: IRequestOptions = {
+//				method: 'POST' as IHttpRequestMethods,
+//				headers: {
+//					'Content-Type': 'application/json',
+//					apikey: apiKey,
+//				},
+//				uri: `${serverUrl}/instance/create`,
+//				body: {
+//					instanceName,
+//					token,
+//					integration,
+//					proxy: {
+//						host: proxyHost,
+//						port: proxyPort,
+//						protocol: proxyProtocol,
+//						username: proxyUsername,
+//						password: proxyPassword,
+//					},
+//				},
+//				json: true,
+//			};
+//
+//			responseData = await this.helpers.request(options);
+//		}
 
 		// Conectar Instância
 		if (resource === 'instances-api' && operation === 'instance-connect') {
