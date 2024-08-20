@@ -63,87 +63,72 @@ export class HttpBin implements INodeType {
 
 		// Criar instancia basica
 		if (resource === 'instances-api' && operation === 'instance-basic') {
-			const credentials = await this.getCredentials('httpbinApi');
-			const serverUrl = credentials['server-url'];
-			const apiKey = credentials.apikey;
+		  const credentials = await this.getCredentials('httpbinApi');
+		  const serverUrl = credentials['server-url'];
+		  const apiKey = credentials.apikey;
 
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const token = this.getNodeParameter('token', 0) || ''; // Define um valor padrão vazio
-			const number = this.getNodeParameter('number', 0) || ''; // Define um valor padrão vazio
+		  const instanceName = this.getNodeParameter('instanceName', 0);
+		  const token = this.getNodeParameter('token', 0) || '';
+		  const number = this.getNodeParameter('number', 0) || '';
 
-			// Obter configurações da instância
-			const rejectCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.rejectCall', 0, false);
-			const msgCall = this.getNodeParameter('options_Create_instance.instanceSettings.settings.msgCall', 0, 'teste');
-			const groupsIgnore = this.getNodeParameter('options_Create_instance.instanceSettings.settings.groupsIgnore', 0, false);
-			const alwaysOnline = this.getNodeParameter('options_Create_instance.instanceSettings.settings.alwaysOnline', 0);
-			const readMessages = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readMessages', 0);
-			const readStatus = this.getNodeParameter('options_Create_instance.instanceSettings.settings.readStatus', 0);
-			const syncFullHistory = this.getNodeParameter('options_Create_instance.instanceSettings.settings.syncFullHistory', 0);
+		  // Inicializa o corpo básico da requisição
+		  const body: any = {
+		    instanceName,
+		    token,
+		    number,
+		    'integration': 'WHATSAPP-BAILEYS',
+		  };
 
-			// Obter configurações do proxy
-			const proxyHost = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyHost', 0);
-			const proxyPort = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyPort', 0);
-			const proxyProtocol = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyProtocol', 0);
-			const proxyUsername = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyUsername', 0);
-			const proxyPassword = this.getNodeParameter('options_Create_instance.proxy.proxySettings.proxyPassword', 0);
+		  // Adiciona configurações da instância, se existirem
+		  const instanceSettings = this.getNodeParameter('options_Create_instance.instanceSettings.settings', 0, {});
+		  if (Object.keys(instanceSettings).length > 0) {
+		    Object.assign(body, instanceSettings);
+		  }
 
-			// Obter configurações do Chatwoot
-			const chatwootAccountId = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootAccountId', 0);
-			const chatwootToken = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootToken', 0);
-			const chatwootUrl = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootUrl', 0);
-			const chatwootSignMsg = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootSignMsg', 0);
-			const chatwootReopenConversation = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootReopenConversation', 0);
-			const chatwootConversationPending = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootConversationPending', 0);
-			const chatwootImportContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootImportContacts', 0);
-			const chatwootNameInbox = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootNameInbox', 0) || '';
-			const chatwootMergeBrazilContacts = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootMergeBrazilContacts', 0);
-			const chatwootImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootImportMessages', 0);
-			const chatwootDaysLimitImportMessages = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootDaysLimitImportMessages', 0) || '';
-			const chatwootOrganization = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootOrganization', 0) || '';
-			const chatwootLogo = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings.chatwootLogo', 0) || '';
+		  // Adiciona configurações de proxy, se existirem
+		  const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {});
+		  if (Object.keys(proxySettings).length > 0) {
+		    Object.assign(body, {
+		      host: proxySettings.proxyHost,
+		      port: proxySettings.proxyPort,
+		      protocol: proxySettings.proxyProtocol,
+		      username: proxySettings.proxyUsername,
+		      password: proxySettings.proxyPassword,
+		    });
+		  }
 
-			const options: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/instance/create`,
-				body: {
-					instanceName,
-					token,
-					number,
-					'integration': 'WHATSAPP-BAILEYS',
-					rejectCall,
-					msgCall,
-					groupsIgnore,
-					alwaysOnline,
-					readMessages,
-					readStatus,
-					syncFullHistory,
-					host: proxyHost,
-					port: proxyPort,
-					protocol: proxyProtocol,
-					username: proxyUsername,
-					password: proxyPassword,
-					chatwootAccountId,
-					chatwootToken,
-					chatwootUrl,
-					chatwootSignMsg,
-					chatwootReopenConversation,
-					chatwootConversationPending,
-					chatwootImportContacts,
-					chatwootNameInbox,
-					chatwootMergeBrazilContacts,
-					chatwootImportMessages,
-					chatwootDaysLimitImportMessages,
-					chatwootOrganization,
-					chatwootLogo,
-				},
-				json: true,
-			};
+		  // Adiciona configurações do Chatwoot, se existirem
+		  const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {});
+		  if (Object.keys(chatwootSettings).length > 0) {
+		    Object.assign(body, {
+		      chatwootAccountId: chatwootSettings.chatwootAccountId,
+		      chatwootToken: chatwootSettings.chatwootToken,
+		      chatwootUrl: chatwootSettings.chatwootUrl,
+		      chatwootSignMsg: chatwootSettings.chatwootSignMsg,
+		      chatwootReopenConversation: chatwootSettings.chatwootReopenConversation,
+		      chatwootConversationPending: chatwootSettings.chatwootConversationPending,
+		      chatwootImportContacts: chatwootSettings.chatwootImportContacts,
+		      chatwootNameInbox: chatwootSettings.chatwootNameInbox,
+		      chatwootMergeBrazilContacts: chatwootSettings.chatwootMergeBrazilContacts,
+		      chatwootImportMessages: chatwootSettings.chatwootImportMessages,
+		      chatwootDaysLimitImportMessages: chatwootSettings.chatwootDaysLimitImportMessages,
+		      chatwootOrganization: chatwootSettings.chatwootOrganization,
+		      chatwootLogo: chatwootSettings.chatwootLogo,
+		    });
+		  }
 
-			responseData = await this.helpers.request(options);
+		  const options: IRequestOptions = {
+		    method: 'POST' as IHttpRequestMethods,
+		    headers: {
+		      'Content-Type': 'application/json',
+		      apikey: apiKey,
+		    },
+		    uri: `${serverUrl}/instance/create`,
+		    body,
+		    json: true,
+		  };
+
+		  responseData = await this.helpers.request(options);
 		}
 
 		// Criar instancia com Proxy
