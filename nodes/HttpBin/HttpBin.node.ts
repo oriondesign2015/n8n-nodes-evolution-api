@@ -485,7 +485,7 @@ export class HttpBin implements INodeType {
 			const remoteJid = this.getNodeParameter('remoteJid', 0);
 			const pollTitle = this.getNodeParameter('caption', 0);
 			const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[];
-			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0); // Certifique-se de que esta linha está presente
+			const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0) ?? false; // Usando coalescência nula
 
 			// Verifica se options é um array e não está vazio
 			const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
