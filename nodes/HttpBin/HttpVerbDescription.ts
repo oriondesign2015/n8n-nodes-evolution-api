@@ -233,7 +233,7 @@ export const httpVerbOperations: INodeProperties[] = [
 //	██╔════╝██║     ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝██╔════╝
 //	█████╗  ██║     █████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ███████╗
 //	██╔══╝  ██║     ██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
-//	███████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████║
+//	██���████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████║
 //	╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
 
 // Elements = Os campos que aparecem em cada Operation
@@ -392,8 +392,8 @@ const instanceOperation: INodeProperties[] = [
 							{
 								displayName: 'Porta Do Proxy',
 								name: 'proxyPort',
-								type: 'number',
-								default: 0,
+								type: 'string',
+								default: '1234',
 								description: 'Digite a porta do proxy',
 							},
 							{
@@ -625,8 +625,8 @@ const instanceOperation: INodeProperties[] = [
 	{
 		displayName: 'Proxy Port',
 		name: 'proxyPort',
-		type: 'number',
-		default: 1234,
+		type: 'string',
+		default: '1234',
 		required: true,
 		description: 'Digite a porta do proxy',
 		displayOptions: {
