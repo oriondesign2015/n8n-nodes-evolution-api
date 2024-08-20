@@ -1191,7 +1191,7 @@ const messageOperation: INodeProperties[] = [
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Digite o nome da instância que vai enviar a enquete',
 		displayOptions: {
 			show: {
@@ -1244,7 +1244,7 @@ const messageOperation: INodeProperties[] = [
 		displayName: 'Opções',
 		name: 'options_display',
 		type: 'fixedCollection',
-		default: '',
+		default: { metadataValues: [] },
 		required: true,
 		typeOptions: {
 			multipleValues: true,
@@ -1329,94 +1329,95 @@ const messageOperation: INodeProperties[] = [
 	//		},
 	//	},
 	//},
-	{
-		displayName: 'Descrição',
-		name: 'description',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Descrição da lista',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
-	{
-		displayName: 'Texto do Rodapé',
-		name: 'footerText',
-		type: 'string',
-		default: '',
-		required: false,
-		description: 'Texto do rodapé da lista',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
-	{
-		displayName: 'Texto do Botão',
-		name: 'buttonText',
-		type: 'string',
-		default: 'Selecionar opção',
-		required: true,
-		description: 'Texto do botão da lista',
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
-	{
-		displayName: 'Opções',
-		name: 'options_display',
-		type: 'fixedCollection',
-		default: '',
-		required: true,
-		typeOptions: {
-			multipleValues: true,
-		},
-		description: 'Digite as opções da lista (mínimo 1). Cada opção deve ser única.',
-		options: [
-			{
-				name: 'metadataValues',
-				displayName: 'Metadata',
-				values: [
-					{
-						displayName: 'Título da Opção',
-						name: 'optionTitle',
-						type: 'string',
-						default: '',
-						required: true,
-					},
-					{
-						displayName: 'Descrição da Opção',
-						name: 'optionDescription',
-						type: 'string',
-						default: '',
-						required: false,
-					},
-					{
-						displayName: 'ID da Linha',
-						name: 'rowId',
-						type: 'string',
-						default: '',
-						required: true,
-					},
-				],
-			},
-		],
-		displayOptions: {
-			show: {
-				resource: ['messages-api'],
-				operation: ['sendList'],
-			},
-		},
-	},
+	//{
+	//	displayName: 'Descrição',
+	//	name: 'description',
+	//	type: 'string',
+	//	default: '',
+	//	required: true,
+	//	description: 'Descrição da lista',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Texto do Rodapé',
+	//	name: 'footerText',
+	//	type: 'string',
+	//	default: '',
+	//	required: false,
+	//	description: 'Texto do rodapé da lista',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Texto do Botão',
+	//	name: 'buttonText',
+	//	type: 'string',
+	//	default: 'Selecionar opção',
+	//	required: true,
+	//	description: 'Texto do botão da lista',
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+	//{
+	//	displayName: 'Opções',
+	//	name: 'options_display',
+	//	type: 'fixedCollection',
+	//	default: '',
+	//	required: true,
+	//	typeOptions: {
+	//		multipleValues: true,
+	//	},
+	//	description: 'Digite as opções da lista (mínimo 1). Cada opção deve ser única.',
+	//	options: [
+	//		{
+	//			name: 'metadataValues',
+	//			displayName: 'Metadata',
+	//			values: [
+	//				{
+	//					displayName: 'Título da Opção',
+	//					name: 'optionTitle',
+	//					type: 'string',
+	//					default: '',
+	//					required: true,
+	//				},
+	//				{
+	//					displayName: 'Descrição da Opção',
+	//					name: 'optionDescription',
+	//					type: 'string',
+	//					default: '',
+	//					required: false,
+	//				},
+	//				{
+	//					displayName: 'ID da Linha',
+	//					name: 'rowId',
+	//					type: 'string',
+	//					default: '',
+	//					required: true,
+	//				},
+	//			],
+	//		},
+	//	],
+	//	displayOptions: {
+	//		show: {
+	//			resource: ['messages-api'],
+	//			operation: ['sendList'],
+	//		},
+	//	},
+	//},
+
 	// Campos = Enviar Status
 	{
 		displayName: 'Nome da Instância',

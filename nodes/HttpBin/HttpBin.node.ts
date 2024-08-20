@@ -477,7 +477,6 @@ export class HttpBin implements INodeType {
 		}
 
 		// Enviar Enquete
-		// Enviar Enquete
 		if (resource === 'messages-api' && operation === 'sendPoll') {
 			try {
 					console.log('Iniciando o envio da enquete...');
