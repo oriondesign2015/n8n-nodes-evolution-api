@@ -625,8 +625,8 @@ const instanceOperation: INodeProperties[] = [
 	{
 		displayName: 'Proxy Port',
 		name: 'proxyPort',
-		type: 'string',
-		default: "",
+		type: 'number',
+		default: 1234,
 		required: true,
 		description: 'Digite a porta do proxy',
 		displayOptions: {

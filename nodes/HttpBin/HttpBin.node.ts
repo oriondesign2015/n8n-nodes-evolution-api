@@ -101,7 +101,7 @@ export class HttpBin implements INodeType {
 			// Verifica e adiciona configurações de proxy se existirem
 			const proxySettings = this.getNodeParameter('options_Create_instance.proxy.proxySettings', 0, {}) as {
 				proxyHost?: string;
-				proxyPort?: string;
+				proxyPort?: number;
 				proxyProtocol?: string;
 				proxyUsername?: string;
 				proxyPassword?: string;
