@@ -116,6 +116,23 @@ export class HttpBin implements INodeType {
 				});
 			}
 
+			// Verifica e adiciona configurações do Webhook se existirem
+			const webhookSettings = this.getNodeParameter('options_Create_instance.webhook.webhookSettings', 0, {}) as {
+				webhookUrl?: string;
+				webhookByEvents?: boolean;
+				webhookBase64?: boolean;
+				webhookEvents?: string[];
+			};
+
+			if (webhookSettings && Object.keys(webhookSettings).length > 0) {
+				Object.assign(body, {
+						webhookUrl: webhookSettings.webhookUrl || "",
+						webhookByEvents: webhookSettings.webhookByEvents || false,
+						webhookBase64: webhookSettings.webhookBase64 || false,
+						webhookEvents: webhookSettings.webhookEvents || [],
+				});
+			}
+
 			// Verifica e adiciona configurações do Chatwoot se existirem
 			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {}) as {
 				chatwootAccountId?: string;
