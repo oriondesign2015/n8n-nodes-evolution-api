@@ -597,7 +597,7 @@ export class HttpBin implements INodeType {
 			if (resourceForWebhook === 'setWebhook') {
 				// Configurações do Webhook
 				const enabled = this.getNodeParameter('enabled', 0);
-				const webhookUrl = this.getNodeParameter('webhookUrl', 0);
+				const webhookUrl = this.getNodeParameter('webhookUrl', 0) || '';
 				const webhookByEvents = this.getNodeParameter('webhookByEvents', 0);
 				const webhookBase64 = this.getNodeParameter('webhookBase64', 0);
 				const webhookEvents = this.getNodeParameter('webhookEvents', 0) || [];
@@ -681,6 +681,63 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de RabbitMQ não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de RabbitMQ.',
+			});
+		}
+
+			responseData = await this.helpers.request(options);
+		}
+
+		// Definir/Buscar Proxy
+		if (resource === 'integrations-api' && operation === 'proxy') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForProxy = this.getNodeParameter('resourceForProxy', 0);
+
+			let options: IRequestOptions; // Declare a variável antes de usá-la
+
+			if (resourceForProxy === 'setProxy') {
+				// Configurações do Proxy
+				const enabled = this.getNodeParameter('enabled', 0) || '';
+				const proxyHost = this.getNodeParameter('proxyHost', 0) || "1234";
+				const proxyPort = this.getNodeParameter('proxyPort', 0) || '';
+				const proxyProtocol = this.getNodeParameter('proxyProtocol', 0) || '';
+				const proxyUsername = this.getNodeParameter('proxyUsername', 0) || '';
+				const proxyPassword = this.getNodeParameter('proxyPassword', 0) || '';
+
+				const body = {
+					enabled: enabled,
+					proxyHost: proxyHost,
+					proxyPort: proxyPort,
+					proxyProtocol: proxyProtocol,
+					proxyUsername: proxyUsername,
+					proxyPassword: proxyPassword,
+				};
+
+				options = {
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/proxy/set/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForProxy === 'findProxy') {
+				options = {
+					method: 'GET' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/proxy/find/${instanceName}`,
+					json: true,
+				};
+			} else {
+				throw new NodeApiError(this.getNode(), {
+					message: 'Operação de Proxy não reconhecida.',
+					description: 'A operação solicitada não é válida para o recurso de Proxy.',
 			});
 		}
 
