@@ -48,7 +48,7 @@ export class HttpBin implements INodeType {
 						value: 'messages-api',
 					},
 					{
-						name: 'Integrações',
+						name: 'Integração',
 						value: 'integrations-api',
 					},
 				],
@@ -550,6 +550,39 @@ export class HttpBin implements INodeType {
 			}
 		}
 
+
+		// Enviar status
+		if (resource === 'messages-api' && operation === 'sendStories') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const type = this.getNodeParameter('type', 0);
+			const content = this.getNodeParameter('content', 0);
+			const caption = this.getNodeParameter('caption', 0);
+			const backgroundColor = this.getNodeParameter('backgroundColor', 0);
+			const font = this.getNodeParameter('font', 0);
+
+			const options: IRequestOptions = {
+				method: 'POST' as IHttpRequestMethods,
+				headers: {
+					'Content-Type': 'application/json',
+					apikey: apiKey,
+				},
+				uri: `${serverUrl}/message/sendStatus/${instanceName}`,
+				body: {
+					type: type,
+					content: content,
+					caption: caption,
+					backgroundColor: backgroundColor,
+					font: font,
+					'allContacts': true,
+				},
+				json: true,
+			};
+			responseData = await this.helpers.request(options);
+		}
+
 		// Definir/Buscar Webhook
 		if (resource === 'integrations-api' && operation === 'webhook') {
 			const credentials = await this.getCredentials('httpbinApi');
@@ -563,13 +596,14 @@ export class HttpBin implements INodeType {
 
 			if (resourceForWebhook === 'setWebhook') {
 				// Configurações do Webhook
+				const enabled = this.getNodeParameter('enabled', 0);
 				const webhookUrl = this.getNodeParameter('webhookUrl', 0);
 				const webhookByEvents = this.getNodeParameter('webhookByEvents', 0);
 				const webhookBase64 = this.getNodeParameter('webhookBase64', 0);
 				const webhookEvents = this.getNodeParameter('webhookEvents', 0) || [];
 
 				const body = {
-					enabled: true,
+					enabled: enabled,
 					url: webhookUrl,
 					webhookByEvents,
 					webhookBase64,
@@ -604,35 +638,52 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
-		// Enviar status
-		if (resource === 'messages-api' && operation === 'sendStories') {
+		// Definir/Buscar RabbitMQ
+		if (resource === 'integrations-api' && operation === 'rabbitMQ') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
-			const instanceName = this.getNodeParameter('instanceName', 0);
-			const type = this.getNodeParameter('type', 0);
-			const content = this.getNodeParameter('content', 0);
-			const caption = this.getNodeParameter('caption', 0);
-			const backgroundColor = this.getNodeParameter('backgroundColor', 0);
-			const font = this.getNodeParameter('font', 0);
 
-			const options: IRequestOptions = {
-				method: 'POST' as IHttpRequestMethods,
-				headers: {
-					'Content-Type': 'application/json',
-					apikey: apiKey,
-				},
-				uri: `${serverUrl}/message/sendStatus/${instanceName}`,
-				body: {
-					type: type,
-					content: content,
-					caption: caption,
-					backgroundColor: backgroundColor,
-					font: font,
-					'allContacts': true,
-				},
-				json: true,
-			};
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForRabbitMQ = this.getNodeParameter('resourceForRabbitMQ', 0);
+
+			let options: IRequestOptions; // Declare a variável antes de usá-la
+
+			if (resourceForRabbitMQ === 'setRabbitMQ') {
+				// Configurações do RabbitMQ
+				const enabled = this.getNodeParameter('enabled', 0);
+				const rabbitMQEvents = this.getNodeParameter('rabbitMQEvents', 0) || [];
+
+				const body = {
+					enabled: enabled,
+					events: rabbitMQEvents,
+				};
+
+				options = {
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/rabbitmq/set/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForRabbitMQ === 'findRabbitMQ') {
+				options = {
+					method: 'GET' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/rabbitmq/find/${instanceName}`,
+					json: true,
+				};
+			} else {
+				throw new NodeApiError(this.getNode(), {
+					message: 'Operação de RabbitMQ não reconhecida.',
+					description: 'A operação solicitada não é válida para o recurso de RabbitMQ.',
+			});
+		}
+
 			responseData = await this.helpers.request(options);
 		}
 
