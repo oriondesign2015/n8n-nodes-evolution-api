@@ -443,14 +443,14 @@ const instanceOperation: INodeProperties[] = [
 								name: 'webhookByEvents',
 								type: 'boolean',
 								default: false,
-								description: 'Criar uma rota para cada evento adicionando o nome do evento ao final da URL', // Atualizado
+								description: 'Whether to create a route for each event by appending the event name to the end of the URL', // Atualizado
 							},
 							{
 								displayName: 'Base64 no Webhook',
 								name: 'webhookBase64',
 								type: 'boolean',
 								default: false,
-								description: 'Enviar os dados em base64 da mídia no webhook', // Atualizado
+								description: 'Whether to send media data in base64 format in the webhook', // Atualizado
 							},
 							{
 								displayName: 'Eventos',
