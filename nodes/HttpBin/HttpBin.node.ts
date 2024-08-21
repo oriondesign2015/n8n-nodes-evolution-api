@@ -595,8 +595,8 @@ export class HttpBin implements INodeType {
 					json: true,
 				};
 			} else {
-				throw new Error('Operação de webhook não reconhecida.'); // Adiciona um tratamento de erro
-			}
+				throw new NodeApiError(this.getNode(), new Error('Operação de webhook não reconhecida.')); // Usando NodeApiError
+		}
 
 			responseData = await this.helpers.request(options);
 		}
