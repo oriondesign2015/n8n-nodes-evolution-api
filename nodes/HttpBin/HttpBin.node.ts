@@ -592,6 +592,7 @@ export class HttpBin implements INodeType {
 						apikey: apiKey,
 					},
 					uri: `${serverUrl}/webhook/find/${instanceName}`,
+					json: true,
 				};
 			}
 
