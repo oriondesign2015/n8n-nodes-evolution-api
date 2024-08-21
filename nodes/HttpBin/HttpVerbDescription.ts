@@ -30,7 +30,6 @@ export const httpVerbOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
-
 		displayOptions: {
 			show: {
 				resource: ['instances-api'], // Value do Resource
@@ -58,6 +57,32 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'instance-connect',
 			},
 
+			// Opção = Buscar Instancia
+			{
+				// Fetch Instances
+				name: 'Buscar Instancia',
+				action: 'Buscar Instancia',
+				description: 'Busca e lista as Instancias criadas',
+				value: 'fetch-instances',
+			},
+
+			// Opção = Definir Comportamento da instancia
+			{
+				name: 'Definir Comportamento',
+				action: 'Definir Comportamento',
+				description: 'Define o comportamento da instancia',
+				value: 'instanceSettings',
+			},
+
+			// Opção = Definir presença
+			{
+				// Set Presence
+				name: 'Definir Presença',
+				action: 'Definir Presença',
+				description: 'Define a presença na instancia',
+				value: 'setPresence',
+			},
+
 			// Opção = Reiniciar instancia
 			{
 				// Restart Instance
@@ -76,32 +101,6 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'logout-instance',
 			},
 
-			// Opção = Definir presença
-			{
-				// Set Presence
-				name: 'Definir Presença',
-				action: 'Definir Presença',
-				description: 'Define a presença na instancia',
-				value: 'setPresence',
-			},
-
-
-			// Opção = Buscar Instancia
-			{
-				// Fetch Instances
-				name: 'Buscar Instancia',
-				action: 'Buscar Instancia',
-				description: 'Busca e lista as Instancias criadas',
-				value: 'fetch-instances',
-			},
-
-			// Opção = Definir Comportamento da instancia
-			{
-				name: 'Definir Comportamento',
-				action: 'Definir Comportamento',
-				description: 'Define o comportamento da instancia',
-				value: 'instanceSettings',
-			},
 			// Opção = Deletar instancia
 			{
 				// Delete Instance
@@ -203,6 +202,60 @@ export const httpVerbOperations: INodeProperties[] = [
 		// Definindo como padrão a opção "Enviar Texto"
 		default: 'sendText',
 	},
+
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+
+
+	// Opções da integrations-api (Integrações)
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'], // Value do Resource
+			},
+		},
+		options: [
+
+			// Opção = Enviar mensagem de Texto
+			{
+				// Set/find Webhook
+				name: 'Webhook',
+				action: 'Webhook',
+				description: 'Define/Busca integração com Webhook',
+				value: 'webhook',
+			},
+			{
+				// Set/find Rabbitmq
+				name: 'RabbitMQ',
+				action: 'RabbitMQ',
+				description: 'Define/Busca integração com RabbitMQ',
+				value: 'rabbitMQ',
+			},
+			{
+				// Set/find Chatwoot
+				name: 'Chatwoot',
+				action: 'Chatwoot',
+				description: 'Define/Busca integração com Chatwoot',
+				value: 'chatwoot',
+			},
+			{
+				// Set/find Proxy
+				name: 'Proxy',
+				action: 'Proxy',
+				description: 'Define/Busca integração com Proxy',
+				value: 'proxy',
+			},
+
+		],
+		// Definindo como padrão a opção "Enviar Texto"
+		default: 'webhook',
+	},
+
 ];
 
 
@@ -576,7 +629,7 @@ const instanceOperation: INodeProperties[] = [
 								name: 'rabbitmqEnabled',
 								type: 'boolean',
 								default: false,
-								description: 'Whether to send media data in base64 format in the webhook', // Atualizado
+								description: 'Whether to send media data in base64 format in the RabbitMQ', // Atualizado
 							},
 							{
 								displayName: 'Eventos',
@@ -821,41 +874,6 @@ const instanceOperation: INodeProperties[] = [
 		},
 	},
 
-
-	// Campos = Reiniciar instancia
-	{
-		displayName: 'Nome da Insticância',
-		name: 'instanceName',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o nome da instância que deseja pesquisar',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['restart-instance'],
-			},
-		},
-	},
-
-
-	// Campos = Desconectar instancia
-	{
-		displayName: 'Nome da Insticância',
-		name: 'instanceName',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o nome da instância que deseja pesquisar',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['logout-instance'],
-			},
-		},
-	},
-
-
 	// Campos = Buscar Instancia
 	{
 		displayName: 'Nome da Instância',
@@ -871,7 +889,6 @@ const instanceOperation: INodeProperties[] = [
 			},
 		},
 	},
-
 
 	// Campos = Definir Comportamento
 	{
@@ -1020,6 +1037,38 @@ const instanceOperation: INodeProperties[] = [
 		default: 'available',
 	},
 
+	// Campos = Reiniciar instancia
+	{
+		displayName: 'Nome da Insticância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que deseja pesquisar',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['restart-instance'],
+			},
+		},
+	},
+
+
+	// Campos = Desconectar instancia
+	{
+		displayName: 'Nome da Insticância',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que deseja pesquisar',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['logout-instance'],
+			},
+		},
+	},
 
 	// Campos = Deletar instancia
 	{
@@ -1665,11 +1714,203 @@ const messageOperation: INodeProperties[] = [
 		default: 1,
 	},
 
-
-
 ];
+
+// Campo das Mensagens
+const integrationsOperation: INodeProperties[] = [
+
+	// Campos = Webhook
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+			},
+		},
+	},
+	{
+		displayName: 'O que deseja fazer',
+		name: 'resourceForWebhook',
+		type: 'options',
+		options: [
+			{
+				name: 'Definir Webhook',
+				value: 'setWebhook',
+			},
+			{
+				name: 'Verificar Webhook',
+				value: 'findWebhook',
+			},
+		],
+		default: 'setWebhook',
+		description: 'Escolha entre definir um novo webhook ou verificar o webhook',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+			},
+		},
+	}
+	{
+		displayName: 'Url do Webhook',
+		name: 'webhookUrl',
+		type: 'string',
+		default: '',
+		description: 'Digite a Url que vai receber os eventos do Webhook',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+				resourceForWebhook: ['setWebhook'],
+			},
+		},
+	},
+	{
+		displayName: 'Webhook por Eventos',
+		name: 'webhookByEvents',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to create a route for each event by appending the event name to the end of the URL',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+				resourceForWebhook: ['setWebhook'],
+			},
+		},
+	},
+	{
+		displayName: 'Base64 no Webhook',
+		name: 'webhookBase64',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to send media data in base64 format in the webhook',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+				resourceForWebhook: ['setWebhook'],
+			},
+		},
+	},
+	{
+		displayName: 'Eventos',
+		name: 'webhookEvents',
+		type: 'multiOptions',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['webhook'],
+				resourceForWebhook: ['setWebhook'],
+			},
+		},
+		default: [],
+		options: [
+			{
+				name: 'CALL',
+				value: 'CALL',
+			},
+			{
+				name: 'CHATS_DELETE',
+				value: 'CHATS_DELETE',
+			},
+			{
+				name: 'CHATS_SET',
+				value: 'CHATS_SET',
+			},
+			{
+				name: 'CHATS_UPDATE',
+				value: 'CHATS_UPDATE',
+			},
+			{
+				name: 'CHATS_UPSERT',
+				value: 'CHATS_UPSERT',
+			},
+			{
+				name: 'CONNECTION_UPDATE',
+				value: 'CONNECTION_UPDATE',
+			},
+			{
+				name: 'CONTACTS_SET',
+				value: 'CONTACTS_SET',
+			},
+			{
+				name: 'CONTACTS_UPDATE',
+				value: 'CONTACTS_UPDATE',
+			},
+			{
+				name: 'CONTACTS_UPSERT',
+				value: 'CONTACTS_UPSERT',
+			},
+			{
+				name: 'GROUP_PARTICIPANTS_UPDATE',
+				value: 'GROUP_PARTICIPANTS_UPDATE',
+			},
+			{
+				name: 'GROUP_UPDATE',
+				value: 'GROUP_UPDATE',
+			},
+			{
+				name: 'GROUPS_UPSERT',
+				value: 'GROUPS_UPSERT',
+			},
+			{
+				name: 'LABELS_ASSOCIATION',
+				value: 'LABELS_ASSOCIATION',
+			},
+			{
+				name: 'LABELS_EDIT',
+				value: 'LABELS_EDIT',
+			},
+			{
+				name: 'MESSAGES_DELETE',
+				value: 'MESSAGES_DELETE',
+			},
+			{
+				name: 'MESSAGES_SET',
+				value: 'MESSAGES_SET',
+			},
+			{
+				name: 'MESSAGES_UPDATE',
+				value: 'MESSAGES_UPDATE',
+			},
+			{
+				name: 'MESSAGES_UPSERT',
+				value: 'MESSAGES_UPSERT',
+			},
+			{
+				name: 'PRESENCE_UPDATE',
+				value: 'PRESENCE_UPDATE',
+			},
+			{
+				name: 'QRCODE_UPDATED',
+				value: 'QRCODE_UPDATED',
+			},
+			{
+				name: 'SEND_MESSAGE',
+				value: 'SEND_MESSAGE',
+			},
+			{
+				name: 'TYPEBOT_CHANGE_STATUS',
+				value: 'TYPEBOT_CHANGE_STATUS',
+			},
+			{
+				name: 'TYPEBOT_START',
+				value: 'TYPEBOT_START',
+			},
+		]
+	},
+
+]
 
 export const httpVerbFields: INodeProperties[] = [
 	...instanceOperation,
 	...messageOperation,
+	...integrationsOperation,
 ];

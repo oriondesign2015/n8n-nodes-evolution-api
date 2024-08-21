@@ -47,6 +47,10 @@ export class HttpBin implements INodeType {
 						name: 'Mensagem',
 						value: 'messages-api',
 					},
+					{
+						name: 'Integrações',
+						value: 'integrations-api',
+					},
 				],
 				default: 'instances-api',
 			},
@@ -509,15 +513,9 @@ export class HttpBin implements INodeType {
 		// Enviar Enquete
 		if (resource === 'messages-api' && operation === 'sendPoll') {
 			try {
-					console.log('Iniciando o envio da enquete...');
-
 					const credentials = await this.getCredentials('httpbinApi');
-					console.log('Credenciais obtidas:', credentials);
-
 					const serverUrl = credentials['server-url'];
 					const apiKey = credentials.apikey;
-					console.log('URL do servidor:', serverUrl);
-					console.log('API Key:', apiKey);
 
 					const instanceName = this.getNodeParameter('instanceName', 0);
 					const remoteJid = this.getNodeParameter('remoteJid', 0);
@@ -525,12 +523,8 @@ export class HttpBin implements INodeType {
 					const options = this.getNodeParameter('options_display.metadataValues', 0) as { optionValue: string }[];
 					const mentionsEveryOne = this.getNodeParameter('mentionsEveryOne', 0);
 
-					// Log para verificar os valores
-					console.log('Valores recebidos:', { instanceName, remoteJid, pollTitle, options, mentionsEveryOne });
-
 					// Verifica se options é um array e não está vazio
 					const pollOptions = Array.isArray(options) ? options.map(option => option.optionValue) : [];
-					console.log('Opções da enquete:', pollOptions);
 
 					const requestOptions: IRequestOptions = {
 							method: 'POST' as IHttpRequestMethods,
@@ -549,14 +543,59 @@ export class HttpBin implements INodeType {
 							json: true,
 					};
 
-					console.log('Opções da requisição:', requestOptions);
-
 					responseData = await this.helpers.request(requestOptions);
-					console.log('Resposta da API:', responseData);
 			} catch (error) {
 					console.error('Erro ao enviar a enquete:', error);
 					throw new NodeApiError(this.getNode(), error); // Substitua aqui
 			}
+		}
+
+		// Definir/Buscar Webhook
+		if (resource === 'integrations-api' && operation === 'webhook') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForWebhook = this.getNodeParameter('resourceForWebhook', 0);
+
+			let options: IRequestOptions;
+
+			if (resourceForWebhook === 'setWebhook') {
+				// Configurações do Webhook
+				const webhookUrl = this.getNodeParameter('webhookUrl', 0);
+				const webhookByEvents = this.getNodeParameter('webhookByEvents', 0);
+				const webhookBase64 = this.getNodeParameter('webhookBase64', 0);
+				const webhookEvents = this.getNodeParameter('webhookEvents', 0) || [];
+
+				const body = {
+					enabled: true,
+					url: webhookUrl,
+					webhookByEvents,
+					webhookBase64,
+					events: webhookEvents,
+				};
+
+				options = {
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/webhook/set/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForWebhook === 'findWebhook') {
+				options = {
+					method: 'GET' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/webhook/find/${instanceName}`,
+				};
+			}
+
+			responseData = await this.helpers.request(options);
 		}
 
 		// Enviar status
