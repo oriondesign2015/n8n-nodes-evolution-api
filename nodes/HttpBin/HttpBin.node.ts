@@ -559,7 +559,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const resourceForWebhook = this.getNodeParameter('resourceForWebhook', 0);
 
-			let options: IRequestOptions;
+			let options: IRequestOptions; // Declare a variável antes de usá-la
 
 			if (resourceForWebhook === 'setWebhook') {
 				// Configurações do Webhook
@@ -594,6 +594,8 @@ export class HttpBin implements INodeType {
 					uri: `${serverUrl}/webhook/find/${instanceName}`,
 					json: true,
 				};
+			} else {
+				throw new Error('Operação de webhook não reconhecida.'); // Adiciona um tratamento de erro
 			}
 
 			responseData = await this.helpers.request(options);
