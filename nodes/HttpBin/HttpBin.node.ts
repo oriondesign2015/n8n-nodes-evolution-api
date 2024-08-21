@@ -714,11 +714,11 @@ export class HttpBin implements INodeType {
 
 				const body = {
 					enabled: enabled,
-					proxyHost: proxyHost,
-					proxyPort: proxyPort,
-					proxyProtocol: proxyProtocol,
-					proxyUsername: proxyUsername,
-					proxyPassword: proxyPassword,
+					host: proxyHost,
+					port: proxyPort,
+					protocol: proxyProtocol,
+					username: proxyUsername,
+					password: proxyPassword,
 				};
 
 				options = {
