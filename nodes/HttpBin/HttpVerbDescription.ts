@@ -559,6 +559,132 @@ const instanceOperation: INodeProperties[] = [
 			},
 
 			{
+				displayName: 'RabbitMQ',
+				name: 'rabbitmq',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: { settings: {} },
+				options: [
+					{
+						displayName: 'Configurações Do RabbitMQ',
+						name: 'rabbitmqSettings',
+						values: [
+							{
+								displayName: 'Ativa ou desativa o RabbitMQ',
+								name: 'rabbitmqEnabled',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to send media data in base64 format in the webhook', // Atualizado
+							},
+							{
+								displayName: 'Eventos',
+								name: 'rabbitmqEvents',
+								type: 'multiOptions',
+								default: [], // Adicionado para resolver o erro
+								options: [
+									{
+										name: 'CALL',
+										value: 'CALL',
+									},
+									{
+										name: 'CHATS_DELETE',
+										value: 'CHATS_DELETE',
+									},
+									{
+										name: 'CHATS_SET',
+										value: 'CHATS_SET',
+									},
+									{
+										name: 'CHATS_UPDATE',
+										value: 'CHATS_UPDATE',
+									},
+									{
+										name: 'CHATS_UPSERT',
+										value: 'CHATS_UPSERT',
+									},
+									{
+										name: 'CONNECTION_UPDATE',
+										value: 'CONNECTION_UPDATE',
+									},
+									{
+										name: 'CONTACTS_SET',
+										value: 'CONTACTS_SET',
+									},
+									{
+										name: 'CONTACTS_UPDATE',
+										value: 'CONTACTS_UPDATE',
+									},
+									{
+										name: 'CONTACTS_UPSERT',
+										value: 'CONTACTS_UPSERT',
+									},
+									{
+										name: 'GROUP_PARTICIPANTS_UPDATE',
+										value: 'GROUP_PARTICIPANTS_UPDATE',
+									},
+									{
+										name: 'GROUP_UPDATE',
+										value: 'GROUP_UPDATE',
+									},
+									{
+										name: 'GROUPS_UPSERT',
+										value: 'GROUPS_UPSERT',
+									},
+									{
+										name: 'LABELS_ASSOCIATION',
+										value: 'LABELS_ASSOCIATION',
+									},
+									{
+										name: 'LABELS_EDIT',
+										value: 'LABELS_EDIT',
+									},
+									{
+										name: 'MESSAGES_DELETE',
+										value: 'MESSAGES_DELETE',
+									},
+									{
+										name: 'MESSAGES_SET',
+										value: 'MESSAGES_SET',
+									},
+									{
+										name: 'MESSAGES_UPDATE',
+										value: 'MESSAGES_UPDATE',
+									},
+									{
+										name: 'MESSAGES_UPSERT',
+										value: 'MESSAGES_UPSERT',
+									},
+									{
+										name: 'PRESENCE_UPDATE',
+										value: 'PRESENCE_UPDATE',
+									},
+									{
+										name: 'QRCODE_UPDATED',
+										value: 'QRCODE_UPDATED',
+									},
+									{
+										name: 'SEND_MESSAGE',
+										value: 'SEND_MESSAGE',
+									},
+									{
+										name: 'TYPEBOT_CHANGE_STATUS',
+										value: 'TYPEBOT_CHANGE_STATUS',
+									},
+									{
+										name: 'TYPEBOT_START',
+										value: 'TYPEBOT_START',
+									},
+								]
+							},
+						],
+					},
+				],
+				description: 'Os eventos a serem monitorados',
+			},
+
+			{
 				displayName: 'Chatwoot',
 				name: 'chatwoot',
 				type: 'fixedCollection',

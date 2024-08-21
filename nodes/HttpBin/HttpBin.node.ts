@@ -133,6 +133,19 @@ export class HttpBin implements INodeType {
 				});
 			}
 
+			// Verifica e adiciona configurações do RabbitMQ se existirem
+			const rabbitmqSettings = this.getNodeParameter('options_Create_instance.rabbitmq.rabbitmqSettings', 0, {}) as {
+				rabbitmqEnabled?: boolean;
+				rabbitmqEvents?: string[];
+			};
+
+			if (rabbitmqSettings && Object.keys(rabbitmqSettings).length > 0) {
+				Object.assign(body, {
+						rabbitmqEnabled: rabbitmqSettings.rabbitmqEnabled || false,
+						rabbitmqEvents: rabbitmqSettings.rabbitmqEvents || [],
+				});
+			}
+
 			// Verifica e adiciona configurações do Chatwoot se existirem
 			const chatwootSettings = this.getNodeParameter('options_Create_instance.chatwoot.chatwootSettings', 0, {}) as {
 				chatwootAccountId?: string;
