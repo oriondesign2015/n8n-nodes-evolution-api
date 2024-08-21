@@ -597,7 +597,7 @@ export class HttpBin implements INodeType {
 			if (resourceForWebhook === 'setWebhook') {
 				// Configurações do Webhook
 				const enabled = this.getNodeParameter('enabled', 0);
-				const webhookUrl = this.getNodeParameter('webhookUrl', 0) || '';
+				const webhookUrl = this.getNodeParameter('webhookUrl', 0) || 'vazio';
 				const webhookByEvents = this.getNodeParameter('webhookByEvents', 0);
 				const webhookBase64 = this.getNodeParameter('webhookBase64', 0);
 				const webhookEvents = this.getNodeParameter('webhookEvents', 0) || [];
@@ -684,7 +684,12 @@ export class HttpBin implements INodeType {
 			});
 		}
 
-			responseData = await this.helpers.request(options);
+			try {
+				responseData = await this.helpers.request(options);
+			} catch (error) {
+				console.error('Erro ao fazer a requisição:', error);
+				throw new NodeApiError(this.getNode(), error); // Lança o erro com mais informações
+			}
 		}
 
 		// Definir/Buscar Proxy
