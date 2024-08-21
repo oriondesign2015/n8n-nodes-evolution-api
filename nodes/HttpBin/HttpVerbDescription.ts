@@ -1756,7 +1756,7 @@ const integrationsOperation: INodeProperties[] = [
 				operation: ['webhook'],
 			},
 		},
-	}
+	},
 	{
 		displayName: 'Url do Webhook',
 		name: 'webhookUrl',
