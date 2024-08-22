@@ -1360,7 +1360,7 @@ export class HttpBin implements INodeType {
 			const startSession = this.getNodeParameter('startSession', 0);
 			const variablesDisplay = this.getNodeParameter('variables_display.metadataValues', 0) as { name: string; value: string }[];
 
-			let options: IRequestOptions; // Declare options sem inicializar
+			let options: IRequestOptions | undefined; // Inicializa como undefined
 
 			if (resourceForTypebot === 'createTypebot') {
 				const body: any = {
