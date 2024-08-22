@@ -754,6 +754,8 @@ export class HttpBin implements INodeType {
 					description: 'A operação solicitada não é válida para o recurso de Chatwoot.',
 				});
 			}
+
+			responseData = await this.helpers.request(options);
 		}
 
 		// Definir/Buscar Proxy
