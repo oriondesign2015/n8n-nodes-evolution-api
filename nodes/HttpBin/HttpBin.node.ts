@@ -760,7 +760,8 @@ export class HttpBin implements INodeType {
 					message: 'Operação de Chatwoot não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de Chatwoot.',
 				});
-			}
+			} // Certifique-se de que esta chave de fechamento está correta
+		} // Verifique se este fechamento está correto
 
 		// Definir/Buscar Proxy
 		if (resource === 'integrations-api' && operation === 'proxy') {
@@ -822,4 +823,3 @@ export class HttpBin implements INodeType {
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
-}
