@@ -694,40 +694,42 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const resourceForChatwoot = this.getNodeParameter('resourceForChatwoot', 0);
 
-			let options: IRequestOptions; // Declare a variável antes de usá-la
+			let options: IRequestOptions;
 
 			if (resourceForChatwoot === 'setChatwoot') {
 				// Configurações do Chatwoot
-				const enabled = this.getNodeParameter('enabled', 0) || false;
-				const chatwootAccountId = this.getNodeParameter('chatwootAccountId', 0) || '';
-				const chatwootToken = this.getNodeParameter('chatwootToken', 0) || '';
-				const chatwootUrl = this.getNodeParameter('chatwootUrl', 0) || '';
-				const chatwootSignMsg = this.getNodeParameter('chatwootSignMsg', 0) || 'false';
-				const chatwootReopenConversation = this.getNodeParameter('chatwootReopenConversation', 0) || 'false';
-				const chatwootConversationPending = this.getNodeParameter('chatwootConversationPending', 0) || 'false';
-				const chatwootImportContacts = this.getNodeParameter('chatwootImportContacts', 0) || 'false';
-				const chatwootNameInbox = this.getNodeParameter('chatwootNameInbox', 0) || '';
-				const chatwootMergeBrazilContacts = this.getNodeParameter('chatwootMergeBrazilContacts', 0) || '';
-				const chatwootImportMessages = this.getNodeParameter('chatwootImportMessages', 0) || 'false';
-				const chatwootDaysLimitImportMessages = this.getNodeParameter('chatwootDaysLimitImportMessages', 0) || '0';
-				const chatwootOrganization = this.getNodeParameter('chatwootOrganization', 0) || '';
-				const chatwootLogo = this.getNodeParameter('chatwootLogo', 0) || 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63';
+				const enabled = this.getNodeParameter('enabled', 0) as boolean;
+				const chatwootAccountId = this.getNodeParameter('chatwootAccountId', 0) as string;
+				const chatwootToken = this.getNodeParameter('chatwootToken', 0) as string;
+				const chatwootUrl = this.getNodeParameter('chatwootUrl', 0) as string;
+				const chatwootSignMsg = this.getNodeParameter('chatwootSignMsg', 0) as boolean;
+				const chatwootReopenConversation = this.getNodeParameter('chatwootReopenConversation', 0) as boolean;
+				const chatwootConversationPending = this.getNodeParameter('chatwootConversationPending', 0) as boolean;
+				const chatwootImportContacts = this.getNodeParameter('chatwootImportContacts', 0) as boolean;
+				const chatwootNameInbox = this.getNodeParameter('chatwootNameInbox', 0) as string;
+				const chatwootMergeBrazilContacts = this.getNodeParameter('chatwootMergeBrazilContacts', 0) as boolean;
+				const chatwootImportMessages = this.getNodeParameter('chatwootImportMessages', 0) as boolean;
+				const chatwootDaysLimitImportMessages = this.getNodeParameter('chatwootDaysLimitImportMessages', 0) as number;
+				const chatwootOrganization = this.getNodeParameter('chatwootOrganization', 0) as string;
+				const chatwootLogo = this.getNodeParameter('chatwootLogo', 0, 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63') as string;
 
 				const body = {
 					enabled: enabled,
-					chatwootAccountId: chatwootAccountId,
-					chatwootToken: chatwootToken,
-					chatwootUrl: chatwootUrl,
-					chatwootSignMsg: chatwootSignMsg,
-					chatwootReopenConversation: chatwootReopenConversation,
-					chatwootConversationPending: chatwootConversationPending,
-					chatwootImportContacts: chatwootImportContacts,
-					chatwootNameInbox: chatwootNameInbox,
-					chatwootMergeBrazilContacts: chatwootMergeBrazilContacts,
-					chatwootImportMessages: chatwootImportMessages,
-					chatwootDaysLimitImportMessages: chatwootDaysLimitImportMessages,
-					chatwootOrganization: chatwootOrganization,
-					chatwootLogo: chatwootLogo,
+					accountId: chatwootAccountId,
+					token: chatwootToken,
+					url: chatwootUrl,
+					signMsg: chatwootSignMsg,
+					reopenConversation: chatwootReopenConversation,
+					conversationPending: chatwootConversationPending,
+					nameInbox: chatwootNameInbox,
+					mergeBrazilContacts: chatwootMergeBrazilContacts,
+					importContacts: chatwootImportContacts,
+					importMessages: chatwootImportMessages,
+					daysLimitImportMessages: chatwootDaysLimitImportMessages,
+					'signDelimiter': '\n',
+					'autoCreate': 'true'
+					organization: chatwootOrganization,
+					logo: chatwootLogo,
 				};
 
 				options = {
