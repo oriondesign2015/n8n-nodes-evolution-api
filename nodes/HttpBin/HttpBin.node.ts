@@ -34,7 +34,7 @@ export class HttpBin implements INodeType {
 		},
 		properties: [
 			{
-				displayName: 'Resource',
+				displayName: 'Função',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,

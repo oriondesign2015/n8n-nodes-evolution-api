@@ -26,7 +26,7 @@ export const httpVerbOperations: INodeProperties[] = [
 // Cada Resource adicionada tera um desse para listar as opções/funções de cada Resource
 // Opções da instances-api (Instancias)
 	{
-		displayName: 'Operation',
+		displayName: 'Categoria',
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
@@ -232,7 +232,7 @@ export const httpVerbOperations: INodeProperties[] = [
 			{
 				// Set/find Rabbitmq
 				name: 'RabbitMQ',
-				action: 'RabbitMQ',
+				action: 'Rabbitmq',
 				description: 'Define/Busca integração com RabbitMQ',
 				value: 'rabbitMQ',
 			},
