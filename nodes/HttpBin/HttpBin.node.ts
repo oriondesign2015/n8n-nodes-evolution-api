@@ -727,7 +727,7 @@ export class HttpBin implements INodeType {
 					importMessages: chatwootImportMessages,
 					daysLimitImportMessages: chatwootDaysLimitImportMessages,
 					'signDelimiter': '\n',
-					'autoCreate': 'true'
+					'autoCreate': 'true',
 					organization: chatwootOrganization,
 					logo: chatwootLogo,
 				};
