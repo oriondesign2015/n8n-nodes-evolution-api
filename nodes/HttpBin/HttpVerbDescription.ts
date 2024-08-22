@@ -2500,22 +2500,7 @@ const integrationsOperation: INodeProperties[] = [
 		},
 	},
 
-	// updateTypebot
-	{
-		displayName: 'Id do Typebot',
-		name: 'typebotId',
-		type: 'string',
-		default: '',
-		required: false,
-		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['typebot'],
-				resourceForTypebot: ['updateTypebot', 'findTypebot', 'deleteTypebot', 'fetchSessionsTypebot', 'changeStatusTypebot'],
-			},
-		},
-	},
+
 
 	{
 		displayName: 'O Que Deseja Fazer',
@@ -2560,6 +2545,24 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// updateTypebot
+	{
+		displayName: 'Id do Typebot',
+		name: 'typebotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['updateTypebot', 'findTypebot', 'deleteTypebot', 'fetchSessionsTypebot', 'changeStatusTypebot'],
+			},
+		},
+	},
+
 	//Se createTypebot ou updateTypebot
 	{
 		displayName: 'URL Da API Do Typebot',
