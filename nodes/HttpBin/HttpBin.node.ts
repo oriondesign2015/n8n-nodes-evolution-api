@@ -1229,7 +1229,7 @@ export class HttpBin implements INodeType {
 			const startSession = this.getNodeParameter('startSession', 0);
 			const variablesDisplay = this.getNodeParameter('variables_display.metadataValues', 0) as { name: string; value: string }[];
 
-			let options: IRequestOptions = {}; // Inicializa como um objeto vazio
+			let options: IRequestOptions | undefined; // Inicializa como undefined
 
 			if (resourceForTypebot === 'createTypebot') {
 				const body: any = {
@@ -1345,7 +1345,7 @@ export class HttpBin implements INodeType {
 			}
 
 			// Verifica se options foi definida
-			if (!options || Object.keys(options).length === 0) {
+			if (!options) {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Nenhuma opção de requisição foi definida.',
 					description: 'Verifique a operação e os parâmetros fornecidos.',
@@ -1354,6 +1354,7 @@ export class HttpBin implements INodeType {
 
 			responseData = await this.helpers.request(options);
 		}
+
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
