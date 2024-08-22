@@ -967,10 +967,38 @@ export class HttpBin implements INodeType {
 							body,
 							json: true,
 					};
-			} else {
+				} else if (resourceForTypebot === 'fetchSessionsTypebot') {
+					const typebotId = this.getNodeParameter('typebotId', 0) as string;
+
+					options = {
+						method: 'GET' as IHttpRequestMethods,
+						headers: {
+							apikey: apiKey,
+						},
+						uri: `${serverUrl}/typebot/fetchSessions/${typebotId}/${instanceName}`,
+						json: true,
+					};
+				} else if (resourceForTypebot === 'changeStatusTypebot') {
+					const remoteJid = this.getNodeParameter('remoteJid', 0) as string;
+					const status = this.getNodeParameter('status', 0) as string;
+
+					options = {
+						method: 'POST' as IHttpRequestMethods,
+						headers: {
+							apikey: apiKey,
+						},
+						uri: `${serverUrl}/typebot/changeStatus/${instanceName}`,
+						body: {
+							remoteJid,
+							status,
+						},
+						json: true,
+					};
+				} else {
+					console.error('Operação de Typebot não reconhecida:', resourceForTypebot); // Adiciona log no console
 					throw new NodeApiError(this.getNode(), {
-							message: 'Operação de Typebot não reconhecida.',
-							description: 'A operação solicitada não é válida para o recurso de Typebot.',
+							message: 'Erro na requisição.',
+							description: `Verifique se você preencheu todos os campos... Segue o erro: ${resourceForTypebot}.`,
 					});
 			}
 

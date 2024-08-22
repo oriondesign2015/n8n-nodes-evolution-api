@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-evolution-api",
-  "version": "0.2.53",
+  "version": "0.2.54",
   "description": "Api não oficial do WhatsApp",
   "keywords": [
     "n8n-community-node-package"

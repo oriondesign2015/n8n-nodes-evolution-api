@@ -254,7 +254,7 @@ export const httpVerbOperations: INodeProperties[] = [
 				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Typebot
 				name: 'Typebot',
 				action: 'Typebot',
-				description: 'Define/Busca integração com Proxy',
+				description: 'Controla a integração com Typebot',
 				value: 'typebot',
 			},
 
@@ -2358,6 +2358,7 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		},
 	},
+
 	{
 		displayName: 'O que deseja fazer',
 		name: 'resourceForProxy',
@@ -2498,6 +2499,24 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// updateTypebot
+	{
+		displayName: 'Id do Typebot',
+		name: 'typebotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['updateTypebot', 'findTypebot', 'deleteTypebot', 'fetchSessionsTypebot', 'changeStatusTypebot'],
+			},
+		},
+	},
+
 	{
 		displayName: 'O Que Deseja Fazer',
 		name: 'resourceForTypebot',
@@ -2767,23 +2786,6 @@ const integrationsOperation: INodeProperties[] = [
 		},
 	},
 
-  // updateTypebot
-	{
-		displayName: 'Id do Typebot',
-		name: 'typebotId',
-		type: 'string',
-		default: '',
-		required: false,
-		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['typebot'],
-				resourceForTypebot: ['updateTypebot', 'findTypebot', 'deleteTypebot'],
-			},
-		},
-	},
-
 	// startTypebot
 	{
 		displayName: 'Numero Do Destinatario',
@@ -2796,7 +2798,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['typebot'],
-				resourceForTypebot: ['startTypebot'],
+				resourceForTypebot: ['startTypebot', 'changeStatusTypebot'],
 			},
 		},
 	},
@@ -2849,6 +2851,36 @@ const integrationsOperation: INodeProperties[] = [
 				resource: ['integrations-api'],
 				operation: ['typebot'],
 				resourceForTypebot: ['startTypebot'],
+			},
+		},
+	},
+
+	// Change Session Status
+	{
+		displayName: 'Status',
+		name: 'triggerOperator',
+		type: 'status',
+		options: [
+			{
+				name: 'Aberta',
+				value: 'opened',
+			},
+			{
+				name: 'Pausada',
+				value: 'paused',
+			},
+			{
+				name: 'Fechada',
+				value: 'closed',
+			},
+		],
+		default: 'opened',
+		description: 'Escolha qual será o status da seção',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['changeStatusTypebot'],
 			},
 		},
 	},
