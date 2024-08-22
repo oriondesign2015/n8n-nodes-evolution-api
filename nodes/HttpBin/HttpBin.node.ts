@@ -634,7 +634,6 @@ export class HttpBin implements INodeType {
 					description: 'A operação solicitada não é válida para o recurso de webhook.',
 			});
 		}
-
 			responseData = await this.helpers.request(options);
 		}
 
@@ -683,13 +682,7 @@ export class HttpBin implements INodeType {
 					description: 'A operação solicitada não é válida para o recurso de RabbitMQ.',
 			});
 		}
-
-			try {
-				responseData = await this.helpers.request(options);
-			} catch (error) {
-				console.error('Erro ao fazer a requisição:', error);
-				throw new NodeApiError(this.getNode(), error); // Lança o erro com mais informações
-			}
+			responseData = await this.helpers.request(options);
 		}
 
 		// Definir/Buscar Chatwoot
