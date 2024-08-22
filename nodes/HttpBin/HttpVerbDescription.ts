@@ -2858,8 +2858,8 @@ const integrationsOperation: INodeProperties[] = [
 	// Change Session Status
 	{
 		displayName: 'Status',
-		name: 'triggerOperator',
-		type: 'status',
+		name: 'status',
+		type: 'options',
 		options: [
 			{
 				name: 'Aberta',
