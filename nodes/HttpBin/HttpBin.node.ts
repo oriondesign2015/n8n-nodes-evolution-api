@@ -1360,7 +1360,7 @@ export class HttpBin implements INodeType {
 			const startSession = this.getNodeParameter('startSession', 0);
 			const variablesDisplay = this.getNodeParameter('variables_display.metadataValues', 0) as { name: string; value: string }[];
 
-			let options: IRequestOptions | undefined;
+			let options: IRequestOptions; // Declare options sem inicializar
 
 			if (resourceForTypebot === 'createTypebot') {
 				const body: any = {
@@ -1468,6 +1468,19 @@ export class HttpBin implements INodeType {
 					body,
 					json: true,
 				};
+			} else {
+				throw new NodeApiError(this.getNode(), {
+					message: 'Operação de Typebot não reconhecida.',
+					description: 'A operação solicitada não é válida para o recurso de Typebot.',
+				});
+			}
+
+			// Verifica se options foi definida
+			if (!options) {
+				throw new NodeApiError(this.getNode(), {
+					message: 'Nenhuma opção de requisição foi definida.',
+					description: 'Verifique a operação e os parâmetros fornecidos.',
+				});
 			}
 
 			responseData = await this.helpers.request(options);
