@@ -2294,6 +2294,20 @@ const integrationsOperation: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Criar Caixa De Entrada',
+		name: 'chatwootAutoCreate',
+		type: 'boolean',
+		default: true,
+		description: 'Whether to create an inbox automatically',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
+			},
+		},
+	},
+	{
 		displayName: 'Nome Do Contato De QRCode No Chatwoot',
 		name: 'chatwootOrganization',
 		type: 'string',

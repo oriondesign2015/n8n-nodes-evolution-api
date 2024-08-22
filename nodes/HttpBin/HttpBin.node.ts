@@ -709,6 +709,7 @@ export class HttpBin implements INodeType {
 				const chatwootNameInbox = this.getNodeParameter('chatwootNameInbox', 0) as string;
 				const chatwootMergeBrazilContacts = this.getNodeParameter('chatwootMergeBrazilContacts', 0) as boolean;
 				const chatwootImportMessages = this.getNodeParameter('chatwootImportMessages', 0) as boolean;
+				const chatwootAutoCreate = this.getNodeParameter('chatwootAutoCreate', 0) as boolean;
 				const chatwootDaysLimitImportMessages = this.getNodeParameter('chatwootDaysLimitImportMessages', 0) as number;
 				const chatwootOrganization = this.getNodeParameter('chatwootOrganization', 0) as string;
 				const chatwootLogo = this.getNodeParameter('chatwootLogo', 0, 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63') as string;
@@ -727,7 +728,7 @@ export class HttpBin implements INodeType {
 					importMessages: chatwootImportMessages,
 					daysLimitImportMessages: chatwootDaysLimitImportMessages,
 					'signDelimiter': '\n',
-					'autoCreate': 'true',
+					autoCreate: chatwootAutoCreate,
 					organization: chatwootOrganization,
 					logo: chatwootLogo,
 				};
