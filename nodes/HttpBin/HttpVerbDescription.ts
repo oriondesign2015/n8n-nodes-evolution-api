@@ -2081,6 +2081,247 @@ const integrationsOperation: INodeProperties[] = [
 		]
 	},
 
+	// Campos = Chatwoot
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'O que deseja fazer',
+		name: 'resourceForChatwoot',
+		type: 'options',
+		options: [
+			{
+				name: 'Definir Chatwoot',
+				value: 'setChatwoot',
+			},
+			{
+				name: 'Verificar Chatwoot',
+				value: 'findChatwoot',
+			},
+		],
+		default: 'setChatwoot',
+		description: 'Escolha entre ativar/desativar Chatwoot ou verificar o Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Ativar Chatwoot',
+		name: 'enabled',
+		type: 'boolean',
+		default: true,
+		description: 'Whether to enable or disable integration with Chatwoot.',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'ID Da Conta Do Chatwoot',
+		name: 'chatwootAccountId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o ID da conta do Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Token De Admin Do Chatwoot',
+		name: 'chatwootToken',
+		type: 'string',
+		required: true,
+		typeOptions: {
+			password: true,
+		},
+		default: '',
+		description: 'Digite o token de admin do Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Link Do Chatwoot',
+		name: 'chatwootUrl',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o link do Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Assinatura Do Agente Do Chatwoot',
+		name: 'chatwootSignMsg',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to enable or disable the Chatwoot agent signature',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Reabrir Mensagens No Chatwoot',
+		name: 'chatwootReopenConversation',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to enable or disable reopening messages in Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Iniciar Conversas Como Pendentes No Chatwoot',
+		name: 'chatwootConversationPending',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to start conversations as pending in Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Importar Contatos Para O Chatwoot',
+		name: 'chatwootImportContacts',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to import contacts to Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome Da Inbox Do Chatwoot',
+		name: 'chatwootNameInbox',
+		type: 'string',
+		default: '',
+		description: 'Opicional: Digite o nome da Inbox do Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Mesclar Contatos Brasileiros No Chatwoot',
+		name: 'chatwootMergeBrazilContacts',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to merge Brazilian contacts in Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Importar Mensagens Para O Chatwoot',
+		name: 'chatwootImportMessages',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to import messages to Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Importar Mensagens De Quantos Dias Para O Chatwoot',
+		name: 'chatwootDaysLimitImportMessages',
+		type: 'number',
+		default: 0,
+		description: 'Opicional: Digite o número de dias para limitar a importação de mensagens para o Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome Do Contato De QRCode No Chatwoot',
+		name: 'chatwootOrganization',
+		type: 'string',
+		default: '',
+		description: 'Opicional: Digite o nome do contato de QRCode no Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+	{
+		displayName: 'Url Do Logo Para O Contato No Chatwoot',
+		name: 'chatwootLogo',
+		type: 'string',
+		default: 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63',
+		description: 'Opicional: Digite a URL do logo para o contato no Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForProxy: ['setChatwoot'],
+			},
+		},
+	},
+
 	// Campos = Proxy
 	{
 		displayName: 'Nome da Instancia',

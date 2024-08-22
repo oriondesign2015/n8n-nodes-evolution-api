@@ -692,6 +692,76 @@ export class HttpBin implements INodeType {
 			}
 		}
 
+		// Definir/Buscar Chatwoot
+		if (resource === 'integrations-api' && operation === 'chatwoot') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForChatwoot = this.getNodeParameter('resourceForChatwoot', 0);
+
+			let options: IRequestOptions; // Declare a variável antes de usá-la
+
+			if (resourceForChatwoot === 'setChatwoot') {
+				// Configurações do Chatwoot
+				const enabled = this.getNodeParameter('enabled', 0) || false;
+				const chatwootAccountId = this.getNodeParameter('chatwootAccountId', 0) || '';
+				const chatwootToken = this.getNodeParameter('chatwootToken', 0) || '';
+				const chatwootUrl = this.getNodeParameter('chatwootUrl', 0) || '';
+				const chatwootSignMsg = this.getNodeParameter('chatwootSignMsg', 0) || 'false';
+				const chatwootReopenConversation = this.getNodeParameter('chatwootReopenConversation', 0) || 'false';
+				const chatwootConversationPending = this.getNodeParameter('chatwootConversationPending', 0) || 'false';
+				const chatwootImportContacts = this.getNodeParameter('chatwootImportContacts', 0) || 'false';
+				const chatwootNameInbox = this.getNodeParameter('chatwootNameInbox', 0) || '';
+				const chatwootMergeBrazilContacts = this.getNodeParameter('chatwootMergeBrazilContacts', 0) || '';
+				const chatwootImportMessages = this.getNodeParameter('chatwootImportMessages', 0) || 'false';
+				const chatwootDaysLimitImportMessages = this.getNodeParameter('chatwootDaysLimitImportMessages', 0) || '0';
+				const chatwootOrganization = this.getNodeParameter('chatwootOrganization', 0) || '';
+				const chatwootLogo = this.getNodeParameter('chatwootLogo', 0) || 'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63';
+
+				const body = {
+					enabled: enabled,
+					chatwootAccountId: chatwootAccountId,
+					chatwootToken: chatwootToken,
+					chatwootUrl: chatwootUrl,
+					chatwootSignMsg: chatwootSignMsg,
+					chatwootReopenConversation: chatwootReopenConversation,
+					chatwootConversationPending: chatwootConversationPending,
+					chatwootImportContacts: chatwootImportContacts,
+					chatwootNameInbox: chatwootNameInbox,
+					chatwootMergeBrazilContacts: chatwootMergeBrazilContacts,
+					chatwootImportMessages: chatwootImportMessages,
+					chatwootDaysLimitImportMessages: chatwootDaysLimitImportMessages,
+					chatwootOrganization: chatwootOrganization,
+					chatwootLogo: chatwootLogo,
+				};
+
+				options = {
+					method: 'POST' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/chatwoot/set/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForChatwoot === 'findChatwoot') {
+				options = {
+					method: 'GET' as IHttpRequestMethods,
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/chatwoot/find/${instanceName}`,
+					json: true,
+				};
+			} else {
+				throw new NodeApiError(this.getNode(), {
+					message: 'Operação de Chatwoot não reconhecida.',
+					description: 'A operação solicitada não é válida para o recurso de Chatwoot.',
+			});
+		}
+
 		// Definir/Buscar Proxy
 		if (resource === 'integrations-api' && operation === 'proxy') {
 			const credentials = await this.getCredentials('httpbinApi');
