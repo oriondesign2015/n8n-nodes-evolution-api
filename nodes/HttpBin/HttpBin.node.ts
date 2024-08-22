@@ -818,6 +818,137 @@ export class HttpBin implements INodeType {
 			responseData = await this.helpers.request(options);
 		}
 
+		// Requisição do Typebot
+		if (resource === 'integrations-api' && operation === 'typebot') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForTypebot = this.getNodeParameter('resourceForTypebot', 0);
+			const url = this.getNodeParameter('url', 0);
+			const typebot = this.getNodeParameter('typebot', 0);
+			const triggerType = this.getNodeParameter('triggerType', 0);
+			const triggerOperator = this.getNodeParameter('triggerOperator', 0);
+			const triggerValue = this.getNodeParameter('triggerValue', 0);
+			const typebotId = this.getNodeParameter('typebotId', 0);
+			const remoteJid = this.getNodeParameter('remoteJid', 0);
+			const startSession = this.getNodeParameter('startSession', 0);
+			const variablesDisplay = this.getNodeParameter('variables_display.metadataValues', 0) as { name: string; value: string }[];
+
+			let options: IRequestOptions;
+
+			if (resourceForTypebot === 'createTypebot') {
+				const body: any = {
+					enabled: true,
+					url,
+					typebot,
+					triggerType,
+				};
+
+				if (triggerType === 'keyword') {
+					body.triggerOperator = triggerOperator;
+					body.triggerValue = triggerValue;
+				} else {
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0);
+					body.delayMessage = this.getNodeParameter('delayMessage', 0);
+					body.unknownMessage = 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0);
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0);
+					body.keepOpen = this.getNodeParameter('keepOpen', 0);
+					body.debounceTime = this.getNodeParameter('debounceTime', 0);
+				}
+
+				options = {
+					method: 'POST',
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/typebot/create/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForTypebot === 'findTypebot') {
+				const endpoint = typebotId ?
+					`${serverUrl}/typebot/fetch/${typebotId}/${instanceName}` :
+					`${serverUrl}/typebot/find/${instanceName}`;
+
+				options = {
+					method: 'GET',
+					headers: {
+						apikey: apiKey,
+					},
+					uri: endpoint,
+					json: true,
+				};
+			} else if (resourceForTypebot === 'updateTypebot') {
+				const body: any = {
+					enabled: true,
+					url,
+					typebot,
+					triggerType,
+				};
+
+				if (triggerType === 'keyword') {
+					body.triggerOperator = triggerOperator;
+					body.triggerValue = triggerValue;
+				} else {
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0);
+					body.delayMessage = this.getNodeParameter('delayMessage', 0);
+					body.unknownMessage = 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0);
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0);
+					body.keepOpen = this.getNodeParameter('keepOpen', 0);
+					body.debounceTime = this.getNodeParameter('debounceTime', 0);
+				}
+
+				options = {
+					method: 'PUT',
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/typebot/update/${typebotId}/${instanceName}`,
+					body,
+					json: true,
+				};
+			} else if (resourceForTypebot === 'deleteTypebot') {
+				options = {
+					method: 'DELETE',
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/typebot/delete/${typebotId}/${instanceName}`,
+					json: true,
+				};
+			} else if (resourceForTypebot === 'startTypebot') {
+				const body: any = {
+					url,
+					typebot,
+					remoteJid,
+					startSession,
+				};
+
+				if (variablesDisplay.length > 0) {
+					body.variables = variablesDisplay.map(variable => ({
+						name: variable.name,
+						value: variable.value,
+					}));
+				}
+
+				options = {
+					method: 'POST',
+					headers: {
+						apikey: apiKey,
+					},
+					uri: `${serverUrl}/typebot/start/${instanceName}`,
+					body,
+					json: true,
+				};
+			}
+
+			responseData = await this.helpers.request(options);
+		}
+
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];

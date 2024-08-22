@@ -250,6 +250,13 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Define/Busca integração com Proxy',
 				value: 'proxy',
 			},
+			{
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Typebot
+				name: 'Typebot',
+				action: 'Typebot',
+				description: 'Define/Busca integração com Proxy',
+				value: 'typebot',
+			},
 
 		],
 		// Definindo como padrão a opção "Enviar Texto"
@@ -268,7 +275,7 @@ export const httpVerbOperations: INodeProperties[] = [
 //	██╔════╝██║     ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝██╔════╝
 //	█████╗  ██║     █████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ███████╗
 //	██╔══╝  ██║     ██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
-//	██���████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████║
+//	███████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ███████║
 //	╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
 
 // Elements = Os campos que aparecem em cada Operation
@@ -2475,6 +2482,377 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		},
 	},
+
+	// Campos = Typebot
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+			},
+		},
+	},
+	{
+		displayName: 'O Que Deseja Fazer',
+		name: 'resourceForTypebot',
+		type: 'options',
+		options: [
+			{
+				name: 'Adicionar Typebot',
+				value: 'createTypebot',
+			},
+			{
+				name: 'Verificar Typebot',
+				value: 'findTypebot',
+			},
+			{
+				name: 'Atualizar Typebot',
+				value: 'updateTypebot',
+			},
+			{
+				name: 'Deletar Typebot',
+				value: 'deleteTypebot',
+			},
+			{
+				name: 'Iniciar Typebot',
+				value: 'startTypebot',
+			},
+			{
+				name: 'Procurar Sessão No Typebot',
+				value: 'fetchSessionsTypebot',
+			},
+			{
+				name: 'Alterar Status Da Sessão No Typebot',
+				value: 'changeStatusTypebot',
+			},
+		],
+		default: 'createTypebot',
+		description: 'Escolha uma opção para realizar com a integração do Typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+			},
+		},
+	},
+	//Se createTypebot ou updateTypebot
+	{
+		displayName: 'URL Da API Do Typebot',
+		name: 'url',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a URL do seu typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot', 'startTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Nome Do Typebot',
+		name: 'typebot',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome do seu fluxo no typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot', 'startTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo De Gatilho',
+		name: 'triggerType',
+		type: 'options',
+		options: [
+			{
+				name: 'Palavra Chave',
+				value: 'keyword',
+			},
+			{
+				name: 'Todos',
+				value: 'all',
+			},
+		],
+		default: 'keyword',
+		description: 'Escolha uma opção para realizar com a integração do Typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Operador Do Gatilho',
+		name: 'triggerOperator',
+		type: 'options',
+		options: [
+			{
+				name: 'Contem',
+				value: 'contains',
+			},
+			{
+				name: 'Igual à',
+				value: 'equals',
+			},
+			{
+				name: 'Começa com',
+				value: 'startsWith',
+			},
+			{
+				name: 'Termina com',
+				value: 'endsWith',
+			},
+			{
+				name: 'Regex',
+				value: 'regex',
+			},
+		],
+		default: 'contains',
+		description: 'Escolha uma opção para realizar com a integração do Typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Gatilho',
+		name: 'triggerValue',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a palavra/frase ou regex para ser usado como gatilho para iniciar o Typebot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Expira Em (Minutos)',
+		name: 'expire',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Digite quantos minutos sem respostas o bot devera ser desativado',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'keywordFinish',
+		type: 'string',
+		default: '#sair',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Delay Padrão Da Mensagem (Em Milésimos)',
+		name: 'delayMessage',
+		type: 'number',
+		default: 1000,
+		required: true,
+		description: 'Digite quantos milisegundos o bot terá de delay',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'unknownMessage',
+		type: 'string',
+		default: 'Mensagem não reconhecida',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Escuta mensagens enviadas por mim',
+		name: 'listeningFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		name: 'stopBotFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Mantem a sessão do bot aberta',
+		name: 'keepOpen',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tempo de Espera (Em Segundos)',
+		name: 'debounceTime',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Este é o tempo que o bot ficará esperando as proximas mensagens após receber uma mensagem, depois ele juntará todas as mensagens em uma só',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['createTypebot', 'updateTypebot'],
+			},
+		},
+	},
+
+  // updateTypebot
+	{
+		displayName: 'Id do Typebot',
+		name: 'typebotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['updateTypebot', 'findTypebot', 'deleteTypebot'],
+			},
+		},
+	},
+
+	// startTypebot
+	{
+		displayName: 'Numero Do Destinatario',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'RemoteJid do destinarario',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['startTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Iniciar Seção',
+		name: 'startSession',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['startTypebot'],
+			},
+		},
+	},
+	{
+		displayName: 'Variaveis',
+		name: 'variables_display',
+		type: 'fixedCollection',
+		default: { metadataValues: [] },
+		required: false,
+		typeOptions: {
+			multipleValues: true,
+		},
+		description: 'Digite as opções da enquete (mínimo 2, máximo 12). Cada opção deve ser única.',
+		options: [
+			{
+				name: 'metadataValues',
+				displayName: 'Metadata',
+				values: [
+					{
+						displayName: 'Nome Da Variavel',
+						name: 'name',
+						type: 'string',
+						default: '',
+					},
+					{
+						displayName: 'Valor Da Variavel',
+						name: 'value',
+						type: 'string',
+						default: '',
+					},
+				],
+			},
+		],
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['typebot'],
+				resourceForTypebot: ['startTypebot'],
+			},
+		},
+	},
+
 
 ]
 
