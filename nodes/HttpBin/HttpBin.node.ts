@@ -632,8 +632,8 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de webhook não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de webhook.',
-			});
-		}
+				});
+			}
 
 			responseData = await this.helpers.request(options);
 		}
@@ -681,8 +681,8 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de RabbitMQ não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de RabbitMQ.',
-			});
-		}
+				});
+			}
 
 			try {
 				responseData = await this.helpers.request(options);
@@ -759,8 +759,8 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de Chatwoot não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de Chatwoot.',
-			});
-		}
+				});
+			}
 
 		// Definir/Buscar Proxy
 		if (resource === 'integrations-api' && operation === 'proxy') {
@@ -813,16 +813,13 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de Proxy não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de Proxy.',
-			});
-		}
+				});
+			}
 
 			responseData = await this.helpers.request(options);
 		}
 
-
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
 	}
-
-
 }
