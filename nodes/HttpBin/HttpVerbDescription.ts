@@ -2144,7 +2144,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2162,7 +2162,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2177,7 +2177,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2191,7 +2191,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2205,7 +2205,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2219,7 +2219,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2233,7 +2233,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2247,7 +2247,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2261,7 +2261,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2275,7 +2275,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2289,7 +2289,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2303,7 +2303,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
@@ -2317,7 +2317,7 @@ const integrationsOperation: INodeProperties[] = [
 			show: {
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
-				resourceForProxy: ['setChatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
 			},
 		},
 	},
