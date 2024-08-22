@@ -26,7 +26,7 @@ export const httpVerbOperations: INodeProperties[] = [
 // Cada Resource adicionada tera um desse para listar as opções/funções de cada Resource
 // Opções da instances-api (Instancias)
 	{
-		displayName: 'Categoria',
+		displayName: 'Função',
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
