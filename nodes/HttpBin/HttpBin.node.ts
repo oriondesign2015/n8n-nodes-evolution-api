@@ -122,31 +122,37 @@ export class HttpBin implements INodeType {
 
 			// Verifica e adiciona configurações do Webhook se existirem
 			const webhookSettings = this.getNodeParameter('options_Create_instance.webhook.webhookSettings', 0, {}) as {
-				webhookUrl?: string;
-				webhookByEvents?: boolean;
-				webhookBase64?: boolean;
-				webhookEvents?: string[];
+				webhook?: {
+					url?: string;
+					byEvents?: boolean;
+					base64?: boolean;
+					events?: string[];
+				};
 			};
 
-			if (webhookSettings && Object.keys(webhookSettings).length > 0) {
+			if (webhookSettings?.webhook && Object.keys(webhookSettings.webhook).length > 0) {
 				Object.assign(body, {
-						webhookUrl: webhookSettings.webhookUrl || "",
-						webhookByEvents: webhookSettings.webhookByEvents || false,
-						webhookBase64: webhookSettings.webhookBase64 || false,
-						webhookEvents: webhookSettings.webhookEvents || [],
+					webhook: {
+						url: webhookSettings.webhook.url || "",
+						byEvents: webhookSettings.webhook.byEvents || false,
+						base64: webhookSettings.webhook.base64 || true,
+						events: webhookSettings.webhook.events || [],
+					},
 				});
 			}
 
 			// Verifica e adiciona configurações do RabbitMQ se existirem
 			const rabbitmqSettings = this.getNodeParameter('options_Create_instance.rabbitmq.rabbitmqSettings', 0, {}) as {
-				rabbitmqEnabled?: boolean;
-				rabbitmqEvents?: string[];
+				rabbitmq?: {
+					enabled?: boolean;
+					events?: string[];
+				};
 			};
 
-			if (rabbitmqSettings && Object.keys(rabbitmqSettings).length > 0) {
+			if (rabbitmqSettings?.rabbitmq && Object.keys(rabbitmqSettings.rabbitmq).length > 0) {
 				Object.assign(body, {
-						rabbitmqEnabled: rabbitmqSettings.rabbitmqEnabled || false,
-						rabbitmqEvents: rabbitmqSettings.rabbitmqEvents || [],
+					rabbitmqEnabled: rabbitmqSettings.rabbitmq.enabled || false,
+					rabbitmqEvents: rabbitmqSettings.rabbitmq.events || [],
 				});
 			}
 
@@ -604,10 +610,12 @@ export class HttpBin implements INodeType {
 
 				const body = {
 					enabled: enabled,
-					url: webhookUrl,
-					webhookByEvents,
-					webhookBase64,
-					events: webhookEvents,
+					webhook: {
+						url: webhookUrl,
+						byEvents: webhookByEvents,
+						base64: webhookBase64,
+						events: webhookEvents,
+					},
 				};
 
 				options = {
@@ -632,8 +640,8 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de webhook não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de webhook.',
-			});
-		}
+				});
+			}
 			responseData = await this.helpers.request(options);
 		}
 
@@ -655,7 +663,10 @@ export class HttpBin implements INodeType {
 
 				const body = {
 					enabled: enabled,
-					events: rabbitMQEvents,
+					rabbitmq: {
+						enabled: enabled,
+						events: rabbitMQEvents,
+					},
 				};
 
 				options = {
@@ -680,8 +691,8 @@ export class HttpBin implements INodeType {
 				throw new NodeApiError(this.getNode(), {
 					message: 'Operação de RabbitMQ não reconhecida.',
 					description: 'A operação solicitada não é válida para o recurso de RabbitMQ.',
-			});
-		}
+				});
+			}
 			responseData = await this.helpers.request(options);
 		}
 
