@@ -48,9 +48,9 @@ Como já descrito, existe o campo de Opções, do qual você pode adicionar nova
 
   | Campo | Descrição | Obrigatório |
   |----------|----------|----------|
-  | Rejeitar Ligações | Porta do Porxy | ✅ |
-  | Porta Do Proxy | Rejeitar automaticamente todas as ligações recebidas no Whatsapp | ✅ |
-  | Protocolo Do Proxy | Porta do Porxy | ✅ |
+  | Host do Proxy | Endereço ip/url do Proxy | ✅ |
+  | Porta Do Proxy | Porta do seu Proxy | ✅ |
+  | Protocolo Do Proxy | Protocolo Http (para IP ou URL sem SSL) ou Https (para URL com SSL) | ✅ |
   | Usuário Do Proxy | Usuario do Proxy | ✅ |
   | Senha Do Proxy | Senha do Proxy | ✅ |
  
