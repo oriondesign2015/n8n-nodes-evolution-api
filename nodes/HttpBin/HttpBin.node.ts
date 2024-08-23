@@ -131,10 +131,10 @@ export class HttpBin implements INodeType {
 			if (webhookSettings && Object.keys(webhookSettings).length > 0) {
 				Object.assign(body, {
 					  'webhook': {
-							webhookUrl: webhookSettings.webhookUrl || "",
-							webhookByEvents: webhookSettings.webhookByEvents || false,
-							webhookBase64: webhookSettings.webhookBase64 || false,
-							webhookEvents: webhookSettings.webhookEvents || [],
+							url: webhookSettings.webhookUrl || "",
+							byEvents: webhookSettings.webhookByEvents || false,
+							base64: webhookSettings.webhookBase64 || false,
+							events: webhookSettings.webhookEvents || [],
 						}
 				});
 			}
@@ -147,8 +147,10 @@ export class HttpBin implements INodeType {
 
 			if (rabbitmqSettings && Object.keys(rabbitmqSettings).length > 0) {
 				Object.assign(body, {
-						rabbitmqEnabled: rabbitmqSettings.rabbitmqEnabled || false,
-						rabbitmqEvents: rabbitmqSettings.rabbitmqEvents || [],
+						'rabbitmq': {
+							enabled: rabbitmqSettings.rabbitmqEnabled || false,
+							events: rabbitmqSettings.rabbitmqEvents || [],
+						}
 				});
 			}
 
@@ -605,11 +607,13 @@ export class HttpBin implements INodeType {
 				const webhookEvents = this.getNodeParameter('webhookEvents', 0) || [];
 
 				const body = {
-					enabled: enabled,
-					url: webhookUrl,
-					webhookByEvents,
-					webhookBase64,
-					events: webhookEvents,
+					'webhook': {
+						enabled: enabled,
+						url: webhookUrl,
+						webhookByEvents,
+						webhookBase64,
+						events: webhookEvents,
+					}
 				};
 
 				options = {
@@ -656,8 +660,10 @@ export class HttpBin implements INodeType {
 				const rabbitMQEvents = this.getNodeParameter('rabbitMQEvents', 0) || [];
 
 				const body = {
-					enabled: enabled,
-					events: rabbitMQEvents,
+					'rabbitmq': {
+						enabled: enabled,
+						events: rabbitMQEvents,
+					}
 				};
 
 				options = {
