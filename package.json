@@ -43,19 +43,15 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.3.0",
-    "eslint": "^9.9.1",
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",
-    "gulp": "^5.0.0",
-    "n8n-workflow": "^1.48.0",
-    "prettier": "^3.3.3",
-    "typescript": "^5.5.4"
+    "gulp": "^4.0.2",
+    "n8n-workflow": "*",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "^1.48.0"
-  },
-  "dependencies": {
-    "n8n": "^1.56.2",
-    "tslib": "^2.7.0"
+    "n8n-workflow": "*"
   }
 }
