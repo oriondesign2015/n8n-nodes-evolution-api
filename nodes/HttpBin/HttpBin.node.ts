@@ -1153,7 +1153,7 @@ export class HttpBin implements INodeType {
 							headers: {
 									apikey: apiKey,
 							},
-							uri: `${serverUrl}/typebot/changeStatus/${instanceName}`,
+							uri: `${serverUrl}/evolutionBot/changeStatus/${instanceName}`,
 							body: {
 									remoteJid,
 									status,
@@ -1176,6 +1176,174 @@ export class HttpBin implements INodeType {
 					});
 				}
 			}
+
+		// Dify
+		if (resource === 'integrations-api' && operation === 'difyBot') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForDifyBot = this.getNodeParameter('resourceForDifyBot', 0);
+
+			let options: IRequestOptions | undefined;
+
+			if (resourceForDifyBot === 'createDify') {
+					const botType = this.getNodeParameter('botType', 0) as string;
+					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
+					const triggerType = this.getNodeParameter('triggerType', 0) as string;
+
+					const body: any = {
+							enabled: true,
+							botType,
+							apiUrl,
+							apiKey: apiKeyBot,
+							triggerType,
+					};
+
+					if (triggerType === 'keyword') {
+							const triggerOperator = this.getNodeParameter('triggerOperator', 0) as string;
+							const triggerValue = this.getNodeParameter('triggerValue', 0) as string;
+							body.triggerOperator = triggerOperator;
+							body.triggerValue = triggerValue;
+					}
+
+					// Campos adicionais
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0) || '';
+					body.delayMessage = this.getNodeParameter('delayMessage', 0) || 1000;
+					body.unknownMessage = this.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0) || false;
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0) || false;
+					body.keepOpen = this.getNodeParameter('keepOpen', 0) || false;
+					body.debounceTime = this.getNodeParameter('debounceTime', 0) || 0;
+
+					options = {
+							method: 'POST' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/dify/create/${instanceName}`,
+							body,
+							json: true,
+					};
+			} else if (resourceForDifyBot === 'findDify') {
+					const difyBotId = this.getNodeParameter('difyBotId', 0) as string;
+
+					if (difyBotId) {
+							options = {
+									method: 'GET' as IHttpRequestMethods,
+									headers: {
+											apikey: apiKey,
+									},
+									uri: `${serverUrl}/dify/fetch/${difyBotId}/${instanceName}`,
+									json: true,
+							};
+					} else {
+							options = {
+									method: 'GET' as IHttpRequestMethods,
+									headers: {
+											apikey: apiKey,
+									},
+									uri: `${serverUrl}/dify/find/${instanceName}`,
+									json: true,
+							};
+					}
+			} else if (resourceForDifyBot === 'updateDify') {
+					const difyBotId = this.getNodeParameter('difyBotId', 0) as string;
+					const botType = this.getNodeParameter('botType', 0) as string;
+					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
+					const triggerType = this.getNodeParameter('triggerType', 0) as string;
+
+					const body: any = {
+							enabled: true,
+							botType,
+							apiUrl,
+							apiKey: apiKeyBot,
+							triggerType,
+					};
+
+					if (triggerType === 'keyword') {
+							const triggerOperator = this.getNodeParameter('triggerOperator', 0) as string;
+							const triggerValue = this.getNodeParameter('triggerValue', 0) as string;
+							body.triggerOperator = triggerOperator;
+							body.triggerValue = triggerValue;
+					}
+
+					// Campos adicionais
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0) || '';
+					body.delayMessage = this.getNodeParameter('delayMessage', 0) || 1000;
+					body.unknownMessage = this.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0) || false;
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0) || false;
+					body.keepOpen = this.getNodeParameter('keepOpen', 0) || false;
+					body.debounceTime = this.getNodeParameter('debounceTime', 0) || 0;
+
+					options = {
+							method: 'PUT' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/dify/update/${difyBotId}/${instanceName}`,
+							body,
+							json: true,
+					};
+			} else if (resourceForDifyBot === 'deleteDify') {
+					const difyBotId = this.getNodeParameter('difyBotId', 0) as string;
+
+					options = {
+							method: 'DELETE' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/dify/delete/${difyBotId}/${instanceName}`,
+							json: true,
+					};
+			} else if (resourceForDifyBot === 'fetchSessionsDify') {
+					const difyBotId = this.getNodeParameter('difyBotId', 0) as string;
+
+					options = {
+							method: 'GET' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/dify/fetchSessions/${difyBotId}/${instanceName}`,
+							json: true,
+					};
+			} else if (resourceForDifyBot === 'changeStatusDify') {
+					const remoteJid = this.getNodeParameter('remoteJid', 0) as string;
+					const status = this.getNodeParameter('status', 0) as string;
+
+					options = {
+							method: 'POST' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/dify/changeStatus/${instanceName}`,
+							body: {
+									remoteJid,
+									status,
+							},
+							json: true,
+					};
+			} else {
+					throw new NodeApiError(this.getNode(), {
+							message: 'Operação de Dify não reconhecida.',
+							description: 'A operação solicitada não é válida para o recurso de Dify.',
+					});
+			}
+
+			if (options) {
+					responseData = await this.helpers.request(options);
+			} else {
+					throw new NodeApiError(this.getNode(), {
+							message: 'Nenhuma opção de requisição foi definida.',
+							description: 'Verifique a operação solicitada.',
+					});
+			}
+		}
+
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];

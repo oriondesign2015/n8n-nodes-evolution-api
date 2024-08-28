@@ -3237,6 +3237,381 @@ const integrationsOperation: INodeProperties[] = [
 		},
 	},
 
+	// Dify
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+			},
+		},
+	},
+	{
+		displayName: 'O Que Deseja Fazer',
+		name: 'resourceForDifyBot',
+		type: 'options',
+		options: [
+			{
+				name: 'Adicionar Dify',
+				value: 'createDify',
+			},
+			{
+				name: 'Verificar Dify',
+				value: 'findDify',
+			},
+			{
+				name: 'Atualizar Dify',
+				value: 'updateDify',
+			},
+			{
+				name: 'Deletar Dify',
+				value: 'deleteDify',
+			},
+			{
+				name: 'Procurar Sessão No Dify',
+				value: 'fetchSessionsDify',
+			},
+			{
+				name: 'Alterar Status Da Sessão No Dify',
+				value: 'changeStatusDify',
+			},
+		],
+		default: 'createDify',
+		description: 'Escolha uma opção para realizar com a integração do Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo do Bot',
+		name: 'botType',
+		type: 'options',
+		options: [
+			{
+				name: 'Bot de Chat',
+				value: 'chatBot',
+			},
+			{
+				name: 'Gerador de Texto',
+				value: 'textGenerator',
+			},
+			{
+				name: 'Agente',
+				value: 'agent',
+			},
+			{
+				name: 'Fluxo de Trabalho',
+				value: 'workflow',
+			},
+		],
+		default: 'chatBot',
+		description: 'Escolha qual o tipo de bot que você deseja vincular',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+
+	// update Dify
+	{
+		displayName: 'Id do Dify',
+		name: 'difyBotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do Dify que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['updateDify', 'findDify', 'deleteDify', 'fetchSessionsDify', 'changeStatusDify'],
+			},
+		},
+	},
+
+	//Se createDify ou updateDify
+	{
+		displayName: 'Url do Dify',
+		name: 'apiUrl',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a URL do seu Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'ApiKey do Dify',
+		name: 'apiKeyBot',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a ApiKey do seu bot do Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo De Gatilho',
+		name: 'triggerType',
+		type: 'options',
+		options: [
+			{
+				name: 'Palavra Chave',
+				value: 'keyword',
+			},
+			{
+				name: 'Todos',
+				value: 'all',
+			},
+		],
+		default: 'keyword',
+		description: 'Escolha uma opção para realizar com a integração do Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Operador Do Gatilho',
+		name: 'triggerOperator',
+		type: 'options',
+		options: [
+			{
+				name: 'Contem',
+				value: 'contains',
+			},
+			{
+				name: 'Igual à',
+				value: 'equals',
+			},
+			{
+				name: 'Começa com',
+				value: 'startsWith',
+			},
+			{
+				name: 'Termina com',
+				value: 'endsWith',
+			},
+			{
+				name: 'Regex',
+				value: 'regex',
+			},
+		],
+		default: 'contains',
+		description: 'Escolha uma opção para realizar com a integração do Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Gatilho',
+		name: 'triggerValue',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a palavra/frase ou regex para ser usado como gatilho para iniciar o Dify',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Expira Em (Minutos)',
+		name: 'expire',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Digite quantos minutos sem respostas o bot devera ser desativado',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'keywordFinish',
+		type: 'string',
+		default: '#sair',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Delay Padrão Da Mensagem (Em Milésimos)',
+		name: 'delayMessage',
+		type: 'number',
+		default: 1000,
+		required: true,
+		description: 'Digite quantos milisegundos o bot terá de delay',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'unknownMessage',
+		type: 'string',
+		default: 'Mensagem não reconhecida',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Escuta mensagens enviadas por mim',
+		name: 'listeningFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		name: 'stopBotFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Mantem a sessão do bot aberta',
+		name: 'keepOpen',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Tempo de Espera (Em Segundos)',
+		name: 'debounceTime',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Este é o tempo que o bot ficará esperando as proximas mensagens após receber uma mensagem, depois ele juntará todas as mensagens em uma só',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['createDify', 'updateDify'],
+			},
+		},
+	},
+
+	// Change Session Status Dify
+	{
+		displayName: 'Numero Do Destinatario',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'RemoteJid do destinarario',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['changeStatusDify'],
+			},
+		},
+	},
+	{
+		displayName: 'Status',
+		name: 'status',
+		type: 'options',
+		options: [
+			{
+				name: 'Aberta',
+				value: 'opened',
+			},
+			{
+				name: 'Pausada',
+				value: 'paused',
+			},
+			{
+				name: 'Fechada',
+				value: 'closed',
+			},
+		],
+		default: 'opened',
+		description: 'Escolha qual será o status da seção',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['difyBot'],
+				resourceForDifyBot: ['changeStatusDify'],
+			},
+		},
+	},
+
 
 ]
 
