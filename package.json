@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-evolution-api",
-  "version": "0.2.61",
+  "version": "0.2.62",
   "description": "Api não oficial do WhatsApp",
   "keywords": [
     "n8n-community-node-package"
@@ -43,18 +43,18 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.15.0",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "n8n-workflow": "*",
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
   },
   "dependencies": {
-    "n8n": "^1.54.4"
+    "n8n": "^1.56.2"
   }
 }
