@@ -257,6 +257,13 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Controla a integração com Typebot',
 				value: 'typebot',
 			},
+			{
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Generic Bot
+				name: 'Bot Generico',
+				action: 'Bot generico',
+				description: 'Controla a integração com Bot Generico',
+				value: 'botGeneric',
+			},
 
 		],
 		// Definindo como padrão a opção "Enviar Texto"
@@ -2499,8 +2506,6 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		},
 	},
-
-
 
 	{
 		displayName: 'O Que Deseja Fazer',
