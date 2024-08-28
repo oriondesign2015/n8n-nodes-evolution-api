@@ -549,7 +549,7 @@ export class HttpBin implements INodeType {
 
 					responseData = await this.helpers.request(requestOptions);
 			} catch (error) {
-					console.error('Erro ao enviar a enquete:', error);
+					// console.error('Erro ao enviar a enquete:', error);
 					throw new NodeApiError(this.getNode(), error); // Substitua aqui
 			}
 		}
@@ -1003,7 +1003,7 @@ export class HttpBin implements INodeType {
 						json: true,
 					};
 				} else {
-					console.error('Operação de Typebot não reconhecida:', resourceForTypebot); // Adiciona log no console
+					// console.error('Operação de Typebot não reconhecida:', resourceForTypebot); // Adiciona log no console
 					throw new NodeApiError(this.getNode(), {
 							message: 'Erro na requisição.',
 							description: `Verifique se você preencheu todos os campos... Segue o erro: ${resourceForTypebot}.`,
