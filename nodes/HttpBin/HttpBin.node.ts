@@ -48,6 +48,10 @@ export class HttpBin implements INodeType {
 						value: 'messages-api',
 					},
 					{
+						name: 'Evento',
+						value: 'events-api',
+					},
+					{
 						name: 'Integração',
 						value: 'integrations-api',
 					},
