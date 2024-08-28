@@ -258,11 +258,11 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'typebot',
 			},
 			{
-				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Generic Bot
-				name: 'Bot Generico',
-				action: 'Bot generico',
-				description: 'Controla a integração com Bot Generico',
-				value: 'botGeneric',
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Evolution Bot
+				name: 'Evolution Bot',
+				action: 'Evolution bot',
+				description: 'Controla a integração com Evolution Bot',
+				value: 'evolutionBot',
 			},
 
 		],
@@ -2889,6 +2889,350 @@ const integrationsOperation: INodeProperties[] = [
 				resource: ['integrations-api'],
 				operation: ['typebot'],
 				resourceForTypebot: ['changeStatusTypebot'],
+			},
+		},
+	},
+
+	// EVOLUTION BOT
+	{
+		displayName: 'Nome Da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+			},
+		},
+	},
+
+	{
+		displayName: 'O Que Deseja Fazer',
+		name: 'resourceForEvolutionBot',
+		type: 'options',
+		options: [
+			{
+				name: 'Adicionar Evolution Bot',
+				value: 'createEvolutionBot',
+			},
+			{
+				name: 'Verificar Evolution Bot',
+				value: 'findEvolutionBot',
+			},
+			{
+				name: 'Atualizar Evolution Bot',
+				value: 'updateEvolutionBot',
+			},
+			{
+				name: 'Deletar Evolution Bot',
+				value: 'deleteEvolutionBot',
+			},
+			{
+				name: 'Procurar Sessão No Evolution Bot',
+				value: 'fetchSessionsEvolutionBot',
+			},
+			{
+				name: 'Alterar Status Da Sessão No Evolution Bot',
+				value: 'changeStatusEvolutionBot',
+			},
+		],
+		default: 'createEvolutionBot',
+		description: 'Escolha uma opção para realizar com a integração do EvolutionBot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+			},
+		},
+	},
+
+	// update EvolutionBot
+	{
+		displayName: 'Id do Evolution Bot',
+		name: 'evolutionBotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do EvolutionBot que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['updateEvolutionBot', 'findEvolutionBot', 'deleteEvolutionBot', 'fetchSessionsEvolutionBot', 'changeStatusEvolutionBot'],
+			},
+		},
+	},
+
+	//Se createEvolutionBot ou updateEvolutionBot
+	{
+		displayName: 'URL Da API Do Evolution Bot',
+		name: 'apiUrl',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a URL do seu Evolution Bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'ApiKey da Evolution Bot',
+		name: 'apiKey',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite a ApiKey do seu Evolution Bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo De Gatilho',
+		name: 'triggerType',
+		type: 'options',
+		options: [
+			{
+				name: 'Palavra Chave',
+				value: 'keyword',
+			},
+			{
+				name: 'Todos',
+				value: 'all',
+			},
+		],
+		default: 'keyword',
+		description: 'Escolha uma opção para realizar com a integração do EvolutionBot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Operador Do Gatilho',
+		name: 'triggerOperator',
+		type: 'options',
+		options: [
+			{
+				name: 'Contem',
+				value: 'contains',
+			},
+			{
+				name: 'Igual à',
+				value: 'equals',
+			},
+			{
+				name: 'Começa com',
+				value: 'startsWith',
+			},
+			{
+				name: 'Termina com',
+				value: 'endsWith',
+			},
+			{
+				name: 'Regex',
+				value: 'regex',
+			},
+		],
+		default: 'contains',
+		description: 'Escolha uma opção para realizar com a integração do EvolutionBot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Gatilho',
+		name: 'triggerValue',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a palavra/frase ou regex para ser usado como gatilho para iniciar o EvolutionBot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Expira Em (Minutos)',
+		name: 'expire',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Digite quantos minutos sem respostas o bot devera ser desativado',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'keywordFinish',
+		type: 'string',
+		default: '#sair',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Delay Padrão Da Mensagem (Em Milésimos)',
+		name: 'delayMessage',
+		type: 'number',
+		default: 1000,
+		required: true,
+		description: 'Digite quantos milisegundos o bot terá de delay',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'unknownMessage',
+		type: 'string',
+		default: 'Mensagem não reconhecida',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Escuta mensagens enviadas por mim',
+		name: 'listeningFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		name: 'stopBotFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Mantem a sessão do bot aberta',
+		name: 'keepOpen',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tempo de Espera (Em Segundos)',
+		name: 'debounceTime',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Este é o tempo que o bot ficará esperando as proximas mensagens após receber uma mensagem, depois ele juntará todas as mensagens em uma só',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+
+	// Change Session Status EvolutionBot
+	{
+		displayName: 'Numero Do Destinatario',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'RemoteJid do destinarario',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['changeStatusEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Status',
+		name: 'status',
+		type: 'options',
+		options: [
+			{
+				name: 'Aberta',
+				value: 'opened',
+			},
+			{
+				name: 'Pausada',
+				value: 'paused',
+			},
+			{
+				name: 'Fechada',
+				value: 'closed',
+			},
+		],
+		default: 'opened',
+		description: 'Escolha qual será o status da seção',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolutionBot'],
+				resourceForEvolutionBot: ['changeStatusEvolutionBot'],
 			},
 		},
 	},
