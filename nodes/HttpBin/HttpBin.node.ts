@@ -1023,7 +1023,7 @@ export class HttpBin implements INodeType {
 			const instanceName = this.getNodeParameter('instanceName', 0);
 			const resourceForEvolutionBot = this.getNodeParameter('resourceForEvolutionBot', 0);
 
-			let options: IRequestOptions;
+			let options: IRequestOptions | undefined;
 
 			if (resourceForEvolutionBot === 'createEvolutionBot') {
 					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
@@ -1160,10 +1160,22 @@ export class HttpBin implements INodeType {
 							},
 							json: true,
 					};
-			}
+				} else {
+					throw new NodeApiError(this.getNode(), {
+						message: 'Operação de Evolution Bot não reconhecida.',
+						description: 'A operação solicitada não é válida para o recurso de Evolution Bot.',
+					});
+				}
 
-			responseData = await this.helpers.request(options);
-		}
+				if (options) { // Verifique se options foi inicializado
+					responseData = await this.helpers.request(options);
+				} else {
+					throw new NodeApiError(this.getNode(), {
+						message: 'Nenhuma opção de requisição foi definida.',
+						description: 'Verifique a operação solicitada.',
+					});
+				}
+			}
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];
