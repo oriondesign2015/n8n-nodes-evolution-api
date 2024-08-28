@@ -208,7 +208,7 @@ export const httpVerbOperations: INodeProperties[] = [
 // =====  Espaço para dividir melhor uma coisa da outra  ===== //
 
 
-	// Opções da integrations-api (Integração)
+	// Opções da events-api (Integração)
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -216,7 +216,7 @@ export const httpVerbOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'], // Value do Resource
+				resource: ['events-api'], // Value do Resource
 			},
 		},
 		options: [
@@ -236,6 +236,29 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Define/Busca integração com RabbitMQ',
 				value: 'rabbitMQ',
 			},
+
+		],
+		// Definindo como padrão a opção "Enviar Texto"
+		default: 'webhook',
+	},
+
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+// =====  Espaço para dividir melhor uma coisa da outra  ===== //
+
+
+	// Opções da integrations-api (Integração)
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'], // Value do Resource
+			},
+		},
+		options: [
 			{
 				// Set/find Chatwoot
 				name: 'Chatwoot',
@@ -281,7 +304,7 @@ export const httpVerbOperations: INodeProperties[] = [
 
 		],
 		// Definindo como padrão a opção "Enviar Texto"
-		default: 'webhook',
+		default: 'chatwoot',
 	},
 
 ];
@@ -1743,11 +1766,9 @@ const messageOperation: INodeProperties[] = [
 	},
 
 ];
-
-// Campo das Mensagens
-const integrationsOperation: INodeProperties[] = [
-
-	// Campos = Webhook
+// Campo das Eventos
+const eventsOperation: INodeProperties[] = [
+   // Campos = Webhook
 	{
 		displayName: 'Nome da Instancia',
 		name: 'instanceName',
@@ -1757,7 +1778,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Digite o nome da instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 			},
 		},
@@ -1780,7 +1801,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Escolha entre definir um novo webhook ou verificar o webhook',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 			},
 		},
@@ -1793,7 +1814,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Whether to enable or disable integration with Webhook',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 				resourceForWebhook: ['setWebhook'],
 			},
@@ -1807,7 +1828,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Digite a Url que vai receber os eventos do Webhook',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 				resourceForWebhook: ['setWebhook'],
 			},
@@ -1821,7 +1842,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Whether to create a route for each event by appending the event name to the end of the URL',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 				resourceForWebhook: ['setWebhook'],
 			},
@@ -1835,7 +1856,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Whether to send media data in base64 format in the webhook',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 				resourceForWebhook: ['setWebhook'],
 			},
@@ -1847,7 +1868,7 @@ const integrationsOperation: INodeProperties[] = [
 		type: 'multiOptions',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['webhook'],
 				resourceForWebhook: ['setWebhook'],
 			},
@@ -1959,7 +1980,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Digite o nome da instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['rabbitMQ'],
 			},
 		},
@@ -1982,7 +2003,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Escolha entre ativar/desativar RabbitMQ ou verificar o RabbitMQ',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['rabbitMQ'],
 			},
 		},
@@ -1995,7 +2016,7 @@ const integrationsOperation: INodeProperties[] = [
 		description: 'Whether to enable or disable integration with RabbitMQ.',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['rabbitMQ'],
 				resourceForRabbitMQ: ['setRabbitMQ'],
 			},
@@ -2007,7 +2028,7 @@ const integrationsOperation: INodeProperties[] = [
 		type: 'multiOptions',
 		displayOptions: {
 			show: {
-				resource: ['integrations-api'],
+				resource: ['events-api'],
 				operation: ['rabbitMQ'],
 				resourceForRabbitMQ: ['setRabbitMQ'],
 			},
@@ -2108,6 +2129,10 @@ const integrationsOperation: INodeProperties[] = [
 			},
 		]
 	},
+]
+
+// Campo das Integrações
+const integrationsOperation: INodeProperties[] = [
 
 	// Campos = Chatwoot
 	{
@@ -3974,5 +3999,6 @@ const integrationsOperation: INodeProperties[] = [
 export const httpVerbFields: INodeProperties[] = [
 	...instanceOperation,
 	...messageOperation,
+	...eventsOperation,
 	...integrationsOperation,
 ];

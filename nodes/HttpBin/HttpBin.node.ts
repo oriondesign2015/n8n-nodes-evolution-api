@@ -588,7 +588,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Definir/Buscar Webhook
-		if (resource === 'integrations-api' && operation === 'webhook') {
+		if (resource === 'events-api' && operation === 'webhook') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
@@ -644,7 +644,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Definir/Buscar RabbitMQ
-		if (resource === 'integrations-api' && operation === 'rabbitMQ') {
+		if (resource === 'events-api' && operation === 'rabbitMQ') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
