@@ -251,6 +251,13 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'proxy',
 			},
 			{
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Evolution Bot
+				name: 'Evolution Bot',
+				action: 'Evolution bot',
+				description: 'Controla a integração com Evolution Bot',
+				value: 'evolutionBot',
+			},
+			{
 				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Typebot
 				name: 'Typebot',
 				action: 'Typebot',
@@ -258,11 +265,11 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'typebot',
 			},
 			{
-				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Evolution Bot
-				name: 'Evolution Bot',
-				action: 'Evolution bot',
-				description: 'Controla a integração com Evolution Bot',
-				value: 'evolutionBot',
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Dify
+				name: 'Dify',
+				action: 'Dify',
+				description: 'Controla a integração com Dify',
+				value: 'difyBot',
 			},
 
 		],
