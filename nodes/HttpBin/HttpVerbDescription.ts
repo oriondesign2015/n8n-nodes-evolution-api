@@ -260,18 +260,18 @@ export const httpVerbOperations: INodeProperties[] = [
 		},
 		options: [
 			{
-				// Set/find Chatwoot
-				name: 'Chatwoot',
-				action: 'Chatwoot',
-				description: 'Define/Busca integração com Chatwoot',
-				value: 'chatwoot',
-			},
-			{
 				// Set/find Proxy
 				name: 'Proxy',
 				action: 'Proxy',
 				description: 'Define/Busca integração com Proxy',
 				value: 'proxy',
+			},
+			{
+				// Set/find Chatwoot
+				name: 'Chatwoot',
+				action: 'Chatwoot',
+				description: 'Define/Busca integração com Chatwoot',
+				value: 'chatwoot',
 			},
 			{
 				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Evolution Bot
