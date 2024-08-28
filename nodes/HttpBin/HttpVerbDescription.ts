@@ -3718,7 +3718,7 @@ const integrationsOperation: INodeProperties[] = [
 		name: 'apiKeyBot',
 		type: 'string',
 		default: '',
-		required: true,
+		required: false,
 		description: 'Digite a ApiKey do seu bot do Flowise',
 		displayOptions: {
 			show: {
