@@ -2984,7 +2984,7 @@ const integrationsOperation: INodeProperties[] = [
 	},
 	{
 		displayName: 'ApiKey da Evolution Bot',
-		name: 'apiKey',
+		name: 'apiKeyBot',
 		type: 'string',
 		default: '',
 		required: false,

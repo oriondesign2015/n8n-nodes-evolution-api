@@ -1027,13 +1027,13 @@ export class HttpBin implements INodeType {
 
 			if (resourceForEvolutionBot === 'createEvolutionBot') {
 					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
-					const apiKey = this.getNodeParameter('apiKey', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
 					const triggerType = this.getNodeParameter('triggerType', 0) as string;
 
 					const body: any = {
 							enabled: true,
 							apiUrl,
-							apiKey,
+							'apiKey': apiKeyBot,
 							triggerType,
 					};
 
@@ -1087,13 +1087,13 @@ export class HttpBin implements INodeType {
 			} else if (resourceForEvolutionBot === 'updateEvolutionBot') {
 					const evolutionBotId = this.getNodeParameter('evolutionBotId', 0) as string;
 					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
-					const apiKey = this.getNodeParameter('apiKey', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
 					const triggerType = this.getNodeParameter('triggerType', 0) as string;
 
 					const body: any = {
 							enabled: true,
 							apiUrl,
-							apiKey,
+							'apiKey': apiKeyBot,
 							triggerType,
 					};
 
