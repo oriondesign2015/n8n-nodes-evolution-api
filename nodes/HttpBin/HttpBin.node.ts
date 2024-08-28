@@ -1344,6 +1344,169 @@ export class HttpBin implements INodeType {
 			}
 		}
 
+		// Flowise
+		if (resource === 'integrations-api' && operation === 'flowiseBot') {
+			const credentials = await this.getCredentials('httpbinApi');
+			const serverUrl = credentials['server-url'];
+			const apiKey = credentials.apikey;
+
+			const instanceName = this.getNodeParameter('instanceName', 0);
+			const resourceForFlowiseBot = this.getNodeParameter('resourceForFlowiseBot', 0);
+
+			let options: IRequestOptions | undefined;
+
+			if (resourceForFlowiseBot === 'createFlowise') {
+					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
+					const triggerType = this.getNodeParameter('triggerType', 0) as string;
+
+					const body: any = {
+							enabled: true,
+							apiUrl,
+							apiKey: apiKeyBot,
+							triggerType,
+					};
+
+					if (triggerType === 'keyword') {
+							const triggerOperator = this.getNodeParameter('triggerOperator', 0) as string;
+							const triggerValue = this.getNodeParameter('triggerValue', 0) as string;
+							body.triggerOperator = triggerOperator;
+							body.triggerValue = triggerValue;
+					}
+
+					// Campos adicionais
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0) || '';
+					body.delayMessage = this.getNodeParameter('delayMessage', 0) || 1000;
+					body.unknownMessage = this.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0) || false;
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0) || false;
+					body.keepOpen = this.getNodeParameter('keepOpen', 0) || false;
+					body.debounceTime = this.getNodeParameter('debounceTime', 0) || 0;
+
+					options = {
+							method: 'POST' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/flowise/create/${instanceName}`,
+							body,
+							json: true,
+					};
+			} else if (resourceForFlowiseBot === 'findFlowise') {
+					const flowiseBotId = this.getNodeParameter('flowiseBotId', 0) as string;
+
+					if (flowiseBotId) {
+							options = {
+									method: 'GET' as IHttpRequestMethods,
+									headers: {
+											apikey: apiKey,
+									},
+									uri: `${serverUrl}/flowise/fetch/${flowiseBotId}/${instanceName}`,
+									json: true,
+							};
+					} else {
+							options = {
+									method: 'GET' as IHttpRequestMethods,
+									headers: {
+											apikey: apiKey,
+									},
+									uri: `${serverUrl}/flowise/find/${instanceName}`,
+									json: true,
+							};
+					}
+			} else if (resourceForFlowiseBot === 'updateFlowise') {
+					const flowiseBotId = this.getNodeParameter('flowiseBotId', 0) as string;
+					const apiUrl = this.getNodeParameter('apiUrl', 0) as string;
+					const apiKeyBot = this.getNodeParameter('apiKeyBot', 0) as string;
+					const triggerType = this.getNodeParameter('triggerType', 0) as string;
+
+					const body: any = {
+							enabled: true,
+							apiUrl,
+							apiKey: apiKeyBot,
+							triggerType,
+					};
+
+					if (triggerType === 'keyword') {
+							const triggerOperator = this.getNodeParameter('triggerOperator', 0) as string;
+							const triggerValue = this.getNodeParameter('triggerValue', 0) as string;
+							body.triggerOperator = triggerOperator;
+							body.triggerValue = triggerValue;
+					}
+
+					// Campos adicionais
+					body.keywordFinish = this.getNodeParameter('keywordFinish', 0) || '';
+					body.delayMessage = this.getNodeParameter('delayMessage', 0) || 1000;
+					body.unknownMessage = this.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
+					body.listeningFromMe = this.getNodeParameter('listeningFromMe', 0) || false;
+					body.stopBotFromMe = this.getNodeParameter('stopBotFromMe', 0) || false;
+					body.keepOpen = this.getNodeParameter('keepOpen', 0) || false;
+					body.debounceTime = this.getNodeParameter('debounceTime', 0) || 0;
+
+					options = {
+							method: 'PUT' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/flowise/update/${flowiseBotId}/${instanceName}`,
+							body,
+							json: true,
+					};
+			} else if (resourceForFlowiseBot === 'deleteFlowise') {
+					const flowiseBotId = this.getNodeParameter('flowiseBotId', 0) as string;
+
+					options = {
+							method: 'DELETE' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/flowise/delete/${flowiseBotId}/${instanceName}`,
+							json: true,
+					};
+			} else if (resourceForFlowiseBot === 'fetchSessionsFlowise') {
+					const flowiseBotId = this.getNodeParameter('flowiseBotId', 0) as string;
+
+					options = {
+							method: 'GET' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/flowise/fetchSessions/${flowiseBotId}/${instanceName}`,
+							json: true,
+					};
+			} else if (resourceForFlowiseBot === 'changeStatusFlowise') {
+					const remoteJid = this.getNodeParameter('remoteJid', 0) as string;
+					const status = this.getNodeParameter('status', 0) as string;
+
+					options = {
+							method: 'POST' as IHttpRequestMethods,
+							headers: {
+									apikey: apiKey,
+							},
+							uri: `${serverUrl}/flowise/changeStatus/${instanceName}`,
+							body: {
+									remoteJid,
+									status,
+							},
+							json: true,
+					};
+			} else {
+					throw new NodeApiError(this.getNode(), {
+							message: 'Operação de Flowise não reconhecida.',
+							description: 'A operação solicitada não é válida para o recurso de Flowise.',
+					});
+			}
+
+			if (options) {
+					responseData = await this.helpers.request(options);
+			} else {
+					throw new NodeApiError(this.getNode(), {
+							message: 'Nenhuma opção de requisição foi definida.',
+							description: 'Verifique a operação solicitada.',
+					});
+			}
+		}
+
 
 		// Retornar apenas o JSON
 		return [this.helpers.returnJsonArray(responseData)];

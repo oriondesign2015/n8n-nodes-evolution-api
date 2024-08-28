@@ -271,6 +271,13 @@ export const httpVerbOperations: INodeProperties[] = [
 				description: 'Controla a integração com Dify',
 				value: 'difyBot',
 			},
+			{
+				// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions da Dify
+				name: 'Flowise',
+				action: 'Flowise',
+				description: 'Controla a integração com Flowise',
+				value: 'flowiseBot',
+			},
 
 		],
 		// Definindo como padrão a opção "Enviar Texto"
@@ -3615,6 +3622,348 @@ const integrationsOperation: INodeProperties[] = [
 				resource: ['integrations-api'],
 				operation: ['difyBot'],
 				resourceForDifyBot: ['changeStatusDify'],
+			},
+		},
+	},
+
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+			},
+		},
+	},
+	{
+		displayName: 'O Que Deseja Fazer',
+		name: 'resourceForFlowiseBot',
+		type: 'options',
+		options: [
+			{
+				name: 'Adicionar Flowise',
+				value: 'createFlowise',
+			},
+			{
+				name: 'Verificar Flowise',
+				value: 'findFlowise',
+			},
+			{
+				name: 'Atualizar Flowise',
+				value: 'updateFlowise',
+			},
+			{
+				name: 'Deletar Flowise',
+				value: 'deleteFlowise',
+			},
+			{
+				name: 'Procurar Sessão No Flowise',
+				value: 'fetchSessionsFlowise',
+			},
+			{
+				name: 'Alterar Status Da Sessão No Flowise',
+				value: 'changeStatusFlowise',
+			},
+		],
+		default: 'createFlowise',
+		description: 'Escolha uma opção para realizar com a integração do Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+			},
+		},
+	},
+
+	// update Flowise
+	{
+		displayName: 'Id do Flowise',
+		name: 'flowiseBotId',
+		type: 'string',
+		default: '',
+		required: false,
+		description: 'Digite o ID do Flowise que deseja buscar, deixe vazio para procurar todos',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['updateFlowise', 'findFlowise', 'deleteFlowise', 'fetchSessionsFlowise', 'changeStatusFlowise'],
+			},
+		},
+	},
+
+	//Se createFlowise ou updateFlowise
+	{
+		displayName: 'Url do Flowise',
+		name: 'apiUrl',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a URL do seu Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'ApiKey do Flowise',
+		name: 'apiKeyBot',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a ApiKey do seu bot do Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo De Gatilho',
+		name: 'triggerType',
+		type: 'options',
+		options: [
+			{
+				name: 'Palavra Chave',
+				value: 'keyword',
+			},
+			{
+				name: 'Todos',
+				value: 'all',
+			},
+		],
+		default: 'keyword',
+		description: 'Escolha uma opção para realizar com a integração do Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Operador Do Gatilho',
+		name: 'triggerOperator',
+		type: 'options',
+		options: [
+			{
+				name: 'Contem',
+				value: 'contains',
+			},
+			{
+				name: 'Igual à',
+				value: 'equals',
+			},
+			{
+				name: 'Começa com',
+				value: 'startsWith',
+			},
+			{
+				name: 'Termina com',
+				value: 'endsWith',
+			},
+			{
+				name: 'Regex',
+				value: 'regex',
+			},
+		],
+		default: 'contains',
+		description: 'Escolha uma opção para realizar com a integração do Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Gatilho',
+		name: 'triggerValue',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite a palavra/frase ou regex para ser usado como gatilho para iniciar o Flowise',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+				triggerType: ['keyword'],
+			},
+		},
+	},
+	{
+		displayName: 'Expira Em (Minutos)',
+		name: 'expire',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Digite quantos minutos sem respostas o bot devera ser desativado',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'keywordFinish',
+		type: 'string',
+		default: '#sair',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Delay Padrão Da Mensagem (Em Milésimos)',
+		name: 'delayMessage',
+		type: 'number',
+		default: 1000,
+		required: true,
+		description: 'Digite quantos milisegundos o bot terá de delay',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Palavra Chave de Finalização',
+		name: 'unknownMessage',
+		type: 'string',
+		default: 'Mensagem não reconhecida',
+		required: true,
+		description: 'Digite a palavra/frase que sera usado para fechar o bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Escuta mensagens enviadas por mim',
+		name: 'listeningFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		name: 'stopBotFromMe',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Mantem a sessão do bot aberta',
+		name: 'keepOpen',
+		type: 'boolean',
+		default: false,
+		description: 'Whether...',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Tempo de Espera (Em Segundos)',
+		name: 'debounceTime',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'Este é o tempo que o bot ficará esperando as proximas mensagens após receber uma mensagem, depois ele juntará todas as mensagens em uma só',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['createFlowise', 'updateFlowise'],
+			},
+		},
+	},
+
+	// Change Session Status Flowise
+	{
+		displayName: 'Numero Do Destinatario',
+		name: 'remoteJid',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'RemoteJid do destinarario',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['changeStatusFlowise'],
+			},
+		},
+	},
+	{
+		displayName: 'Status',
+		name: 'status',
+		type: 'options',
+		options: [
+			{
+				name: 'Aberta',
+				value: 'opened',
+			},
+			{
+				name: 'Pausada',
+				value: 'paused',
+			},
+			{
+				name: 'Fechada',
+				value: 'closed',
+			},
+		],
+		default: 'opened',
+		description: 'Escolha qual será o status da seção',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['flowiseBot'],
+				resourceForFlowiseBot: ['changeStatusFlowise'],
 			},
 		},
 	},
