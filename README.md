@@ -143,7 +143,7 @@ Como já descrito, existe o campo de Opções, do qual você pode adicionar nova
 </details>
 
 <h1></h1>
-<h3>📌 Recurso: Integração</h3>
+<h3>📌 Recurso: Evento</h3>
 <details>
   <summary>✅ <b> Webhook</b></summary>
   
@@ -152,32 +152,35 @@ Como já descrito, existe o campo de Opções, do qual você pode adicionar nova
   <summary>✅ <b> RabbitMQ</b></summary>
   
 </details>
-<details>
-  <summary>✅ <b> Chatwoot</b></summary>
-  
-</details>
+<h1></h1>
+<h3>📌 Recurso: Integração</h3>
 <details>
   <summary>✅ <b> Proxy</b></summary>
   
 </details>
 <details>
+  <summary>✅ <b> Evolution Bot</b></summary>
+  
+</details>
+<details>
+  <summary>✅ <b> Chatwoot</b></summary>
+  
+</details>
+
+<details>
   <summary>✅ <b> Typebot</b></summary>
   
 </details>
 <details>
+  <summary>✅ <b> Flowise</b></summary>
+  
+</details>
+<details>
+  <summary>✅ <b> Dify</b></summary>
+  
+</details>
+<details>
   <summary>❌ <b> OpenAI</b></summary>
-  
-</details>
-<details>
-  <summary>❌ <b> Flowise</b></summary>
-  
-</details>
-<details>
-  <summary>❌ <b> Dify</b></summary>
-  
-</details>
-<details>
-  <summary>❌ <b> Generic Bot</b></summary>
   
 </details>
 <details>
