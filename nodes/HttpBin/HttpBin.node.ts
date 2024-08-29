@@ -774,7 +774,7 @@ export class HttpBin implements INodeType {
 		}
 
 		// Definir/Buscar Proxy
-		if (resource === 'integrations-api' && operation === 'proxy') {
+		if (resource === 'instances-api' && operation === 'proxy') {
 			const credentials = await this.getCredentials('httpbinApi');
 			const serverUrl = credentials['server-url'];
 			const apiKey = credentials.apikey;
