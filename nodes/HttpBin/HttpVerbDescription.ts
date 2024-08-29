@@ -86,7 +86,7 @@ export const httpVerbOperations: INodeProperties[] = [
 			// Opção = Definit Proxy
 			{
 				// Set/find Proxy
-				name: 'Proxy',
+				name: 'Definir/Buscar Proxy',
 				action: 'Proxy',
 				description: 'Define um Proxy na instancia',
 				value: 'proxy',
