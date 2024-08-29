@@ -83,6 +83,15 @@ export const httpVerbOperations: INodeProperties[] = [
 				value: 'setPresence',
 			},
 
+			// Opção = Definit Proxy
+			{
+				// Set/find Proxy
+				name: 'Proxy',
+				action: 'Proxy',
+				description: 'Define um Proxy na instancia',
+				value: 'proxy',
+			},
+
 			// Opção = Reiniciar instancia
 			{
 				// Restart Instance
@@ -259,13 +268,6 @@ export const httpVerbOperations: INodeProperties[] = [
 			},
 		},
 		options: [
-			{
-				// Set/find Proxy
-				name: 'Proxy',
-				action: 'Proxy',
-				description: 'Define/Busca integração com Proxy',
-				value: 'proxy',
-			},
 			{
 				// Set/find Chatwoot
 				name: 'Chatwoot',
@@ -1086,6 +1088,147 @@ const instanceOperation: INodeProperties[] = [
 			},
 		],
 		default: 'available',
+	},
+
+	// Campos = Proxy
+	{
+		displayName: 'Nome da Instancia',
+		name: 'instanceName',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai enviar a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+			},
+		},
+	},
+
+	{
+		displayName: 'O que deseja fazer',
+		name: 'resourceForProxy',
+		type: 'options',
+		options: [
+			{
+				name: 'Definir Proxy',
+				value: 'setProxy',
+			},
+			{
+				name: 'Verificar proxy',
+				value: 'findProxy',
+			},
+		],
+		default: 'setProxy',
+		description: 'Escolha entre ativar/desativar proxy ou verificar o proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Ativar proxy',
+		name: 'enabled',
+		type: 'boolean',
+		default: true,
+		description: 'Whether to enable or disable integration with proxy.',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Host Do Proxy',
+		name: 'proxyHost',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o host do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Porta Do Proxy',
+		name: 'proxyPort',
+		type: 'string',
+		default: '1234',
+		required: true,
+		description: 'Digite a porta do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Protocolo Do Proxy',
+		name: 'proxyProtocol',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+		type: 'options',
+		options: [
+			{
+				name: 'HTTP',
+				value: 'http',
+			},
+			{
+				name: 'HTTPS',
+				value: 'https',
+			},
+		],
+		default: 'http',
+		description: 'Selecione o protocolo do proxy',
+	},
+	{
+		displayName: 'Usuário Do Proxy',
+		name: 'proxyUsername',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o usuário do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Senha Do Proxy',
+		name: 'proxyPassword',
+		type: 'string',
+		required: true,
+		typeOptions: {
+			password: true,
+		},
+		default: '',
+		description: 'Digite a senha do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
 	},
 
 	// Campos = Reiniciar instancia
@@ -2385,147 +2528,6 @@ const integrationsOperation: INodeProperties[] = [
 				resource: ['integrations-api'],
 				operation: ['chatwoot'],
 				resourceForChatwoot: ['setChatwoot'],
-			},
-		},
-	},
-
-	// Campos = Proxy
-	{
-		displayName: 'Nome da Instancia',
-		name: 'instanceName',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o nome da instância que vai enviar a mensagem',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-			},
-		},
-	},
-
-	{
-		displayName: 'O que deseja fazer',
-		name: 'resourceForProxy',
-		type: 'options',
-		options: [
-			{
-				name: 'Definir Proxy',
-				value: 'setProxy',
-			},
-			{
-				name: 'Verificar proxy',
-				value: 'findProxy',
-			},
-		],
-		default: 'setProxy',
-		description: 'Escolha entre ativar/desativar proxy ou verificar o proxy',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Ativar proxy',
-		name: 'enabled',
-		type: 'boolean',
-		default: true,
-		description: 'Whether to enable or disable integration with proxy.',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Host Do Proxy',
-		name: 'proxyHost',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o host do proxy',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Porta Do Proxy',
-		name: 'proxyPort',
-		type: 'string',
-		default: '1234',
-		required: true,
-		description: 'Digite a porta do proxy',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Protocolo Do Proxy',
-		name: 'proxyProtocol',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-		type: 'options',
-		options: [
-			{
-				name: 'HTTP',
-				value: 'http',
-			},
-			{
-				name: 'HTTPS',
-				value: 'https',
-			},
-		],
-		default: 'http',
-		description: 'Selecione o protocolo do proxy',
-	},
-	{
-		displayName: 'Usuário Do Proxy',
-		name: 'proxyUsername',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o usuário do proxy',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Senha Do Proxy',
-		name: 'proxyPassword',
-		type: 'string',
-		required: true,
-		typeOptions: {
-			password: true,
-		},
-		default: '',
-		description: 'Digite a senha do proxy',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
 			},
 		},
 	},
