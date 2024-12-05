@@ -1,4 +1,4 @@
-import { evolutionRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../evolutionRequest';
 import { IExecuteFunctions, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
 
 export async function instanceSettings(ef: IExecuteFunctions) {

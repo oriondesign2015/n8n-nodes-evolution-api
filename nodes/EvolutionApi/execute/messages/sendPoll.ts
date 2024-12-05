@@ -4,7 +4,7 @@ import {
 	IHttpRequestMethods,
 	NodeApiError,
 } from 'n8n-workflow';
-import { evolutionRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../evolutionRequest';
 
 export async function sendPoll(ef: IExecuteFunctions) {
 	try {

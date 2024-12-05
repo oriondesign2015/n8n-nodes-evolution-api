@@ -1,5 +1,5 @@
 import { IExecuteFunctions, IHttpRequestMethods } from 'n8n-workflow';
-import { evolutionRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../evolutionRequest';
 
 // if (resource === 'instances-api' && operation === 'restart-instance') {
 export async function restartInstance(ef: IExecuteFunctions) {

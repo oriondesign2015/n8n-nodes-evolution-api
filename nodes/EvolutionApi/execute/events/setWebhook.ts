@@ -4,7 +4,7 @@ import {
 	IHttpRequestMethods,
 	NodeApiError,
 } from 'n8n-workflow';
-import { evolutionRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../evolutionRequest';
 
 export async function setWebhook(ef: IExecuteFunctions) {
 	const instanceName = ef.getNodeParameter('instanceName', 0);
