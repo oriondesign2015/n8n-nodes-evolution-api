@@ -4,7 +4,7 @@ import {
 	IHttpRequestMethods,
 	NodeApiError,
 } from 'n8n-workflow';
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 
 export async function setRabbitMQ(ef: IExecuteFunctions) {
 	const instanceName = ef.getNodeParameter('instanceName', 0);
@@ -43,5 +43,5 @@ export async function setRabbitMQ(ef: IExecuteFunctions) {
 		});
 	}
 
-	return await chatwootRequest(ef, options);
+	return await evolutionRequest(ef, options);
 }

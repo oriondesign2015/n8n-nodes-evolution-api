@@ -1,4 +1,4 @@
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 import { IExecuteFunctions, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
 
 export async function sendText(ef: IExecuteFunctions) {
@@ -21,5 +21,5 @@ export async function sendText(ef: IExecuteFunctions) {
 		json: true,
 	};
 
-	return await chatwootRequest(ef, options);
+	return await evolutionRequest(ef, options);
 }

@@ -1,4 +1,4 @@
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 import {
 	IExecuteFunctions,
 	IRequestOptions,
@@ -138,7 +138,7 @@ export async function setDifyBot(ef: IExecuteFunctions) {
 	}
 
 	if (options) {
-		return await chatwootRequest(ef, options);
+		return await evolutionRequest(ef, options);
 	} else {
 		throw new NodeApiError(ef.getNode(), {
 			message: 'Nenhuma opção de requisição foi definida.',

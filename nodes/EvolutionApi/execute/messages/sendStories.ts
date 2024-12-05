@@ -1,5 +1,5 @@
 import { IExecuteFunctions, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 
 export async function sendStories(ef: IExecuteFunctions) {
 	const instanceName = ef.getNodeParameter('instanceName', 0);
@@ -26,5 +26,5 @@ export async function sendStories(ef: IExecuteFunctions) {
 		json: true,
 	};
 
-	return await chatwootRequest(ef, options);
+	return await evolutionRequest(ef, options);
 }

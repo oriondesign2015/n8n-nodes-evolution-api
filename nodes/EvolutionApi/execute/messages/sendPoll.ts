@@ -4,7 +4,7 @@ import {
 	IHttpRequestMethods,
 	NodeApiError,
 } from 'n8n-workflow';
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 
 export async function sendPoll(ef: IExecuteFunctions) {
 	try {
@@ -35,7 +35,7 @@ export async function sendPoll(ef: IExecuteFunctions) {
 			json: true,
 		};
 
-		return await chatwootRequest(ef, requestOptions);
+		return await evolutionRequest(ef, requestOptions);
 	} catch (error) {
 		// console.error('Erro ao enviar a enquete:', error);
 		throw new NodeApiError(ef.getNode(), error); // Substitua aqui

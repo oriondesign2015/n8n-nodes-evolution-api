@@ -1,4 +1,4 @@
-import { chatwootRequest } from '../chatwootRequest';
+import { evolutionRequest } from '../chatwootRequest';
 import {
 	IExecuteFunctions,
 	IRequestOptions,
@@ -163,5 +163,5 @@ export async function setTypebot(ef: IExecuteFunctions) {
 		});
 	}
 
-	return await chatwootRequest(ef, options);
+	return await evolutionRequest(ef, options);
 }

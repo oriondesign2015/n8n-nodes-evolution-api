@@ -1,6 +1,6 @@
 import { IExecuteFunctions, IRequestOptions } from 'n8n-workflow';
 
-export async function chatwootRequest(ef: IExecuteFunctions, options: IRequestOptions) {
+export async function evolutionRequest(ef: IExecuteFunctions, options: IRequestOptions) {
 	const credentials = await ef.getCredentials('httpbinApi');
 	const serverUrl = credentials['server-url'];
 	const apiKey = credentials.apikey;
