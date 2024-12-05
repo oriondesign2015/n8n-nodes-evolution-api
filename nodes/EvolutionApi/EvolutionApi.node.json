@@ -1,8 +1,11 @@
 {
 	"node": "n8n-nodes-base.httpbin",
-	"nodeVersion": "1.0",
-	"codexVersion": "1.0",
-	"categories": ["Development", "Developer Tools"],
+	"nodeVersion": "1.1",
+	"codexVersion": "1.1",
+	"categories": [
+		"Development",
+		"Developer Tools"
+	],
 	"resources": {
 		"credentialDocumentation": [
 			{

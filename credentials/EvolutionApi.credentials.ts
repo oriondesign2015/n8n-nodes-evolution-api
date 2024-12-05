@@ -5,7 +5,7 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class HttpBinApi implements ICredentialType {
+export class EvolutionApiApi implements ICredentialType {
 	name = 'httpbinApi';
 	displayName = 'Evolution API';
 	documentationUrl = 'https://doc.evolution-api.com/pt';
@@ -23,7 +23,7 @@ export class HttpBinApi implements ICredentialType {
 			default: '',
 			typeOptions: {
 				password: true,
-			}
+			},
 		},
 	];
 
@@ -38,7 +38,8 @@ export class HttpBinApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials["server-url"].startsWith("http") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}',
+			baseURL:
+				'={{$credentials["server-url"].startsWith("http") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}',
 			url: '/instance/fetchInstances',
 			method: 'GET',
 			headers: {

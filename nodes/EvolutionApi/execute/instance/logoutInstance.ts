@@ -1,0 +1,14 @@
+import { IExecuteFunctions, IRequestOptions, IHttpRequestMethods } from 'n8n-workflow';
+import { chatwootRequest } from '../chatwootRequest';
+
+export async function logoutInstance(ef: IExecuteFunctions) {
+	const instanceName = ef.getNodeParameter('instanceName', 0);
+
+	const options: IRequestOptions = {
+		method: 'DELETE' as IHttpRequestMethods,
+		uri: `/instance/logout/${instanceName}`,
+		json: true,
+	};
+
+	return await chatwootRequest(ef, options);
+}
