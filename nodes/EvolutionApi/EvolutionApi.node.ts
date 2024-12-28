@@ -11,7 +11,7 @@ import { resourceOperationsFunctions } from './execute';
 export class EvolutionApi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Evolution API',
-		name: 'httpbinApi',
+		name: 'evolutionApi',
 		icon: 'file:evolutionapi.svg',
 		group: ['transform'],
 		version: 1,
@@ -24,7 +24,7 @@ export class EvolutionApi implements INodeType {
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'httpbinApi',
+				name: 'evolutionApi',
 				required: true,
 			},
 		],
