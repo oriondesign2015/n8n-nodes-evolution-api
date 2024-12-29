@@ -34,9 +34,9 @@ export const messagesOperationsOptions: INodeProperties = {
 		{
 			// Send Media
 			name: 'Enviar Video',
-			value: 'sendVideo',
-			description: 'Enviar mensagem de Video',
 			action: 'Enviar Video',
+			description: 'Enviar mensagem de Video',
+			value: 'sendVideo',
 		},
 
 		// Opção = Enviar Audio
@@ -66,13 +66,52 @@ export const messagesOperationsOptions: INodeProperties = {
 			value: 'sendPoll',
 		},
 
+		// Opção = Enviar Contato
+		{
+			name: 'Enviar Contato',
+			action: 'Enviar Contato',
+			description: 'Envia um contato no whatsapp',
+			value: 'sendContact',
+		},
+
+		// Opção = Enviar Lista
+		{
+			name: 'Enviar Lista',
+			action: 'Enviar Lista',
+			description: 'Envia uma lista de opções interativa',
+			value: 'sendList',
+		},
+
+		// Opção = Enviar Botões
+		{
+			name: 'Enviar Botões',
+			action: 'Enviar Botões',
+			description: 'Envia mensagem com botões interativos',
+			value: 'sendButtons',
+		},
+
+		// Opção = Enviar PIX
+		{
+			name: 'Enviar PIX',
+			action: 'Enviar PIX',
+			description: 'Envia botão de pagamento PIX',
+			value: 'sendPix',
+		},
+
 		// Opção = Enviar Status
 		{
-			// Send Status/Stories
 			name: 'Enviar Status',
 			action: 'Enviar Status',
 			description: 'Publicar um Status/Stories',
 			value: 'sendStories',
+		},
+
+		// Opção = Reagir Mensagem
+		{
+			name: 'Reagir Mensagem',
+			action: 'Reagir Mensagem',
+			description: 'Adiciona uma reação em uma mensagem',
+			value: 'sendReaction',
 		},
 	],
 	// Definindo como padrão a opção "Enviar Texto"

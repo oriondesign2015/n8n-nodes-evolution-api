@@ -15,6 +15,7 @@ import { sendAudio } from './messages/sendAudio';
 import { sendDocument } from './messages/sendDocument';
 import { sendImage } from './messages/sendImage';
 import { sendPoll } from './messages/sendPoll';
+import { sendContact } from './messages/sendContact';
 import { sendStories } from './messages/sendStories';
 import { sendText } from './messages/sendText';
 import { sendVideo } from './messages/sendVideo';
@@ -22,7 +23,10 @@ import { setRabbitMQ } from './events/setRabbitMQ';
 import { setWebhook } from './events/setWebhook';
 import { setDifyBot } from './integrations/setDifyBot';
 import { setFlowiseBot } from './integrations/setFlowiseBot';
-
+import { sendList } from './messages/sendList';
+import { sendButtons } from './messages/sendButtons';
+import { sendPix } from './messages/sendPix';
+import { sendReaction } from './messages/sendReaction';
 type ResourceOperationFunctions = {
 	[resource: string]: {
 		[operation: string]: (ef: IExecuteFunctions) => Promise<any>;
@@ -49,7 +53,12 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		sendAudio: sendAudio,
 		sendDocumento: sendDocument,
 		sendPoll: sendPoll,
+		sendContact: sendContact,
+		sendList: sendList,
+		sendButtons: sendButtons,
 		sendStories: sendStories,
+		sendPix: sendPix,
+		sendReaction: sendReaction,
 	},
 	'events-api': {
 		webhook: setWebhook,

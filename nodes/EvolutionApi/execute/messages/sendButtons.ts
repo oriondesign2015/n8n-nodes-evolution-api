@@ -1,22 +1,27 @@
-import { evolutionRequest } from '../evolutionRequest';
 import {
-	NodeApiError,
 	IExecuteFunctions,
 	IRequestOptions,
-	IHttpRequestMethods
+	IHttpRequestMethods,
+	NodeApiError,
 } from 'n8n-workflow';
+import { evolutionRequest } from '../evolutionRequest';
 
-export async function sendVideo(ef: IExecuteFunctions) {
+export async function sendButtons(ef: IExecuteFunctions) {
 	try {
 		// Parâmetros obrigatórios
 		const instanceName = ef.getNodeParameter('instanceName', 0) as string;
 		const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
-		const media = ef.getNodeParameter('media', 0) as string;
-
-		// Parâmetros opcionais com valores padrão
-		const mimetype = (ef.getNodeParameter('mimetype', 0, 'video/mp4') as string) || 'video/mp4';
-		const caption = ef.getNodeParameter('caption', 0, '') as string;
-		const fileName = (ef.getNodeParameter('fileName', 0, 'video.mp4') as string) || 'video.mp4';
+		const title = ef.getNodeParameter('title', 0) as string;
+		const description = ef.getNodeParameter('description', 0) as string;
+		const footer = ef.getNodeParameter('footer', 0, '') as string;
+		const buttons = ef.getNodeParameter('buttons.buttonValues', 0, []) as Array<{
+			type: 'reply' | 'copy' | 'url' | 'call';
+			displayText: string;
+			id?: string;
+			copyCode?: string;
+			url?: string;
+			phoneNumber?: string;
+		}>;
 
 		// Opções adicionais
 		const options = ef.getNodeParameter('options_message', 0, {}) as {
@@ -29,23 +34,38 @@ export async function sendVideo(ef: IExecuteFunctions) {
 			mentions?: {
 				mentionsSettings: {
 					mentionsEveryOne: boolean;
-					mentioned?: string;
+					mentioned: string;
 				};
 			};
 		};
 
 		const body: any = {
 			number: remoteJid,
-			mediatype: 'video',
-			media: media,
-			mimetype: mimetype,
-			caption: caption || '',
-			fileName: fileName,
+			title,
+			description,
+			buttons: buttons.map(button => {
+				const baseButton = {
+					type: button.type,
+					displayText: button.displayText,
+				};
+
+				switch (button.type) {
+					case 'reply':
+						return { ...baseButton, id: button.id };
+					case 'copy':
+						return { ...baseButton, copyCode: button.copyCode };
+					case 'url':
+						return { ...baseButton, url: button.url };
+					case 'call':
+						return { ...baseButton, phoneNumber: button.phoneNumber };
+					default:
+						return baseButton;
+				}
+			}),
 		};
 
-		if (options.delay) {
-			body.delay = options.delay;
-		}
+		if (footer) body.footer = footer;
+		if (options.delay) body.delay = options.delay;
 
 		if (options.quoted?.messageQuoted?.messageId) {
 			body.quoted = {
@@ -61,9 +81,10 @@ export async function sendVideo(ef: IExecuteFunctions) {
 			if (mentionsEveryOne) {
 				body.mentionsEveryOne = true;
 			} else if (mentioned) {
-				const mentionedNumbers = mentioned.split(',')
+				const mentionedNumbers = mentioned
+					.split(',')
 					.map(num => num.trim())
-					.map(num => num.includes('@s.whatsapp.net') ? num : `${num}@s.whatsapp.net`);
+					.map(num => (num.includes('@s.whatsapp.net') ? num : `${num}@s.whatsapp.net`));
 
 				body.mentioned = mentionedNumbers;
 			}
@@ -74,7 +95,7 @@ export async function sendVideo(ef: IExecuteFunctions) {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			uri: `/message/sendMedia/${instanceName}`,
+			uri: `/message/sendButtons/${instanceName}`,
 			body,
 			json: true,
 		};
