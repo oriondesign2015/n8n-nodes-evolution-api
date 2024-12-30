@@ -1,10 +1,10 @@
-import { evolutionRequest } from '../evolutionRequest';
 import {
-	NodeApiError,
 	IExecuteFunctions,
 	IRequestOptions,
-	IHttpRequestMethods
+	IHttpRequestMethods,
+	NodeOperationError,
 } from 'n8n-workflow';
+import { evolutionRequest } from '../evolutionRequest';
 
 export async function sendImage(ef: IExecuteFunctions) {
 	try {
@@ -79,14 +79,38 @@ export async function sendImage(ef: IExecuteFunctions) {
 			json: true,
 		};
 
-		return await evolutionRequest(ef, requestOptions);
+		const response = await evolutionRequest(ef, requestOptions);
+		return {
+			json: {
+				success: true,
+				data: response,
+			},
+		};
 	} catch (error) {
-		if (error.message.includes('Could not get parameter')) {
-			throw new NodeApiError(ef.getNode(), {
-				message: 'Parâmetros inválidos ou ausentes',
-				description: 'Verifique se todos os campos obrigatórios foram preenchidos corretamente',
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao enviar imagem',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
+		};
+
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
 			});
 		}
-		throw new NodeApiError(ef.getNode(), error);
+
+		return {
+			json: errorData,
+			error: errorData,
+		};
 	}
 }

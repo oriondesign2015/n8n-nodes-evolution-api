@@ -2,7 +2,7 @@ import {
 	IExecuteFunctions,
 	IRequestOptions,
 	IHttpRequestMethods,
-	NodeApiError,
+	NodeOperationError,
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
@@ -28,6 +28,22 @@ export async function sendPoll(ef: IExecuteFunctions) {
 
 		// Verifica se options é um array e não está vazio
 		const pollOptions = Array.isArray(options) ? options.map((option) => option.optionValue) : [];
+
+		if (pollOptions.length === 0) {
+			const errorData = {
+				success: false,
+				error: {
+					message: 'Opções da enquete inválidas',
+					details: 'A enquete precisa ter pelo menos uma opção',
+					code: 'INVALID_POLL_OPTIONS',
+					timestamp: new Date().toISOString(),
+				},
+			};
+			return {
+				json: errorData,
+				error: errorData,
+			};
+		}
 
 		const body: any = {
 			number: remoteJid,
@@ -60,14 +76,38 @@ export async function sendPoll(ef: IExecuteFunctions) {
 			json: true,
 		};
 
-		return await evolutionRequest(ef, requestOptions);
+		const response = await evolutionRequest(ef, requestOptions);
+		return {
+			json: {
+				success: true,
+				data: response,
+			},
+		};
 	} catch (error) {
-		if (error.message.includes('Could not get parameter')) {
-			throw new NodeApiError(ef.getNode(), {
-				message: 'Parâmetros inválidos ou ausentes',
-				description: 'Verifique se todos os campos obrigatórios foram preenchidos corretamente',
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao enviar enquete',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
+		};
+
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
 			});
 		}
-		throw new NodeApiError(ef.getNode(), error);
+
+		return {
+			json: errorData,
+			error: errorData,
+		};
 	}
 }

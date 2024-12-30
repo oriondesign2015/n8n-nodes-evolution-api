@@ -1,16 +1,16 @@
 import {
-	NodeApiError,
 	IExecuteFunctions,
 	IRequestOptions,
 	IHttpRequestMethods,
+	NodeOperationError,
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
 export async function sendText(ef: IExecuteFunctions) {
 	try {
-		const instanceName = ef.getNodeParameter('instanceName', 0);
-		const remoteJid = ef.getNodeParameter('remoteJid', 0);
-		const messageText = ef.getNodeParameter('messageText', 0);
+		const instanceName = ef.getNodeParameter('instanceName', 0) as string;
+		const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
+		const messageText = ef.getNodeParameter('messageText', 0) as string;
 		const options = ef.getNodeParameter('options_message', 0, {}) as {
 			delay?: number;
 			linkPreview?: boolean;
@@ -54,7 +54,6 @@ export async function sendText(ef: IExecuteFunctions) {
 			if (mentionsEveryOne) {
 				body.mentionsEveryOne = true;
 			} else if (mentioned) {
-				// Garante que cada número tenha o formato correto para menção
 				const mentionedNumbers = mentioned.split(',')
 					.map(num => num.trim())
 					.map(num => num.includes('@s.whatsapp.net') ? num : `${num}@s.whatsapp.net`);
@@ -73,8 +72,38 @@ export async function sendText(ef: IExecuteFunctions) {
 			json: true,
 		};
 
-		return await evolutionRequest(ef, requestOptions);
+		const response = await evolutionRequest(ef, requestOptions);
+		return {
+			json: {
+				success: true,
+				data: response,
+			},
+		};
 	} catch (error) {
-		throw new NodeApiError(ef.getNode(), error);
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao enviar mensagem de texto',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
+		};
+
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
+			});
+		}
+
+		return {
+			json: errorData,
+			error: errorData,
+		};
 	}
 }

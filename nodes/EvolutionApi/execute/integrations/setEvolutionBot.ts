@@ -1,144 +1,95 @@
-import { evolutionRequest } from '../evolutionRequest';
 import {
 	IExecuteFunctions,
 	IRequestOptions,
 	IHttpRequestMethods,
-	NodeApiError,
+	NodeOperationError,
 } from 'n8n-workflow';
+import { evolutionRequest } from '../evolutionRequest';
 
 export async function setEvolutionBot(ef: IExecuteFunctions) {
-	const instanceName = ef.getNodeParameter('instanceName', 0);
-	const resourceForEvolutionBot = ef.getNodeParameter('resourceForEvolutionBot', 0);
+	try {
+		const instanceName = ef.getNodeParameter('instanceName', 0);
+		const resourceForEvolutionBot = ef.getNodeParameter('resourceForEvolutionBot', 0);
 
-	let options: IRequestOptions | undefined;
+		let options: IRequestOptions;
 
-	if (resourceForEvolutionBot === 'createEvolutionBot') {
-		const apiUrl = ef.getNodeParameter('apiUrl', 0) as string;
-		const apiKeyBot = ef.getNodeParameter('apiKeyBot', 0) as string;
-		const triggerType = ef.getNodeParameter('triggerType', 0) as string;
+		if (resourceForEvolutionBot === 'createEvolutionBot') {
+			const apiKey = ef.getNodeParameter('apiKey', 0) as string;
+			const url = ef.getNodeParameter('url', 0) as string;
+			const enabled = ef.getNodeParameter('enabled', 0) as boolean;
 
-		const body: any = {
-			enabled: true,
-			apiUrl,
-			apiKey: apiKeyBot,
-			triggerType,
-		};
+			const body = {
+				apiKey,
+				url,
+				enabled,
+			};
 
-		if (triggerType === 'keyword') {
-			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
-			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
-			body.triggerOperator = triggerOperator;
-			body.triggerValue = triggerValue;
-		}
-
-		// Campos adicionais
-		body.keywordFinish = ef.getNodeParameter('keywordFinish', 0) || '';
-		body.delayMessage = ef.getNodeParameter('delayMessage', 0) || 1000;
-		body.unknownMessage = ef.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
-		body.listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) || false;
-		body.stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) || false;
-		body.keepOpen = ef.getNodeParameter('keepOpen', 0) || false;
-		body.debounceTime = ef.getNodeParameter('debounceTime', 0) || 0;
-
-		options = {
-			method: 'POST' as IHttpRequestMethods,
-			uri: `/evolutionBot/create/${instanceName}`,
-			body,
-			json: true,
-		};
-	} else if (resourceForEvolutionBot === 'findEvolutionBot') {
-		const evolutionBotId = ef.getNodeParameter('evolutionBotId', 0) as string;
-
-		if (evolutionBotId) {
+			options = {
+				method: 'POST' as IHttpRequestMethods,
+				uri: `/evolutionai/set/${instanceName}`,
+				body,
+				json: true,
+			};
+		} else if (resourceForEvolutionBot === 'findEvolutionBot') {
 			options = {
 				method: 'GET' as IHttpRequestMethods,
-				uri: `/evolutionBot/fetch/${evolutionBotId}/${instanceName}`,
+				uri: `/evolutionai/find/${instanceName}`,
+				json: true,
+			};
+		} else if (resourceForEvolutionBot === 'deleteEvolutionBot') {
+			options = {
+				method: 'DELETE' as IHttpRequestMethods,
+				uri: `/evolutionai/delete/${instanceName}`,
 				json: true,
 			};
 		} else {
-			options = {
-				method: 'GET' as IHttpRequestMethods,
-				uri: `/evolutionBot/find/${instanceName}`,
-				json: true,
+			const errorData = {
+				success: false,
+				error: {
+					message: 'Operação do Evolution Bot não reconhecida',
+					details: 'A operação solicitada não é válida para o recurso do Evolution Bot',
+					code: 'INVALID_OPERATION',
+					timestamp: new Date().toISOString(),
+				},
 			};
-		}
-	} else if (resourceForEvolutionBot === 'updateEvolutionBot') {
-		const evolutionBotId = ef.getNodeParameter('evolutionBotId', 0) as string;
-		const apiUrl = ef.getNodeParameter('apiUrl', 0) as string;
-		const apiKeyBot = ef.getNodeParameter('apiKeyBot', 0) as string;
-		const triggerType = ef.getNodeParameter('triggerType', 0) as string;
-
-		const body: any = {
-			enabled: true,
-			apiUrl,
-			apiKey: apiKeyBot,
-			triggerType,
-		};
-
-		if (triggerType === 'keyword') {
-			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
-			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
-			body.triggerOperator = triggerOperator;
-			body.triggerValue = triggerValue;
+			throw new NodeOperationError(ef.getNode(), errorData.error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
+			});
 		}
 
-		// Campos adicionais
-		body.keywordFinish = ef.getNodeParameter('keywordFinish', 0) || '';
-		body.delayMessage = ef.getNodeParameter('delayMessage', 0) || 1000;
-		body.unknownMessage = ef.getNodeParameter('unknownMessage', 0) || 'Mensagem não reconhecida';
-		body.listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) || false;
-		body.stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) || false;
-		body.keepOpen = ef.getNodeParameter('keepOpen', 0) || false;
-		body.debounceTime = ef.getNodeParameter('debounceTime', 0) || 0;
-
-		options = {
-			method: 'PUT' as IHttpRequestMethods,
-			uri: `/evolutionBot/update/${evolutionBotId}/${instanceName}`,
-			body,
-			json: true,
-		};
-	} else if (resourceForEvolutionBot === 'deleteEvolutionBot') {
-		const evolutionBotId = ef.getNodeParameter('evolutionBotId', 0) as string;
-
-		options = {
-			method: 'DELETE' as IHttpRequestMethods,
-			uri: `/evolutionBot/delete/${evolutionBotId}/${instanceName}`,
-			json: true,
-		};
-	} else if (resourceForEvolutionBot === 'fetchSessionsEvolutionBot') {
-		const evolutionBotId = ef.getNodeParameter('evolutionBotId', 0) as string;
-
-		options = {
-			method: 'GET' as IHttpRequestMethods,
-			uri: `/evolutionBot/fetchSessions/${evolutionBotId}/${instanceName}`,
-			json: true,
-		};
-	} else if (resourceForEvolutionBot === 'changeStatusEvolutionBot') {
-		const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
-		const status = ef.getNodeParameter('status', 0) as string;
-
-		options = {
-			method: 'POST' as IHttpRequestMethods,
-			uri: `/evolutionBot/changeStatus/${instanceName}`,
-			body: {
-				remoteJid,
-				status,
+		const response = await evolutionRequest(ef, options);
+		return {
+			json: {
+				success: true,
+				data: response,
 			},
-			json: true,
 		};
-	} else {
-		throw new NodeApiError(ef.getNode(), {
-			message: 'Operação de Evolution Bot não reconhecida.',
-			description: 'A operação solicitada não é válida para o recurso de Evolution Bot.',
-		});
-	}
+	} catch (error) {
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao configurar Evolution Bot',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
+		};
 
-	if (options) {
-		return await evolutionRequest(ef, options);
-	} else {
-		throw new NodeApiError(ef.getNode(), {
-			message: 'Nenhuma opção de requisição foi definida.',
-			description: 'Verifique a operação solicitada.',
-		});
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
+			});
+		}
+
+		return {
+			json: errorData,
+			error: errorData,
+		};
 	}
 }

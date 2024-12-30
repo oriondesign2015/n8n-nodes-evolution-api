@@ -2,30 +2,47 @@ import {
 	IExecuteFunctions,
 	IRequestOptions,
 	IHttpRequestMethods,
-	NodeApiError,
+	NodeOperationError,
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
 export async function sendList(ef: IExecuteFunctions) {
 	try {
-		const instanceName = ef.getNodeParameter('instanceName', 0) as string;
-		const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
-		const title = ef.getNodeParameter('title', 0) as string;
-		const description = ef.getNodeParameter('description', 0) as string;
-		const buttonText = ef.getNodeParameter('buttonText', 0, 'Clique Aqui') as string;
-		const footerText = ef.getNodeParameter('footerText', 0, '') as string;
-		const sections = ef.getNodeParameter('sections.sectionValues', 0, []) as Array<{
+		// Parâmetros obrigatórios
+		const instanceName = ef.getNodeParameter('instanceName', 0);
+		const remoteJid = ef.getNodeParameter('remoteJid', 0);
+		const title = ef.getNodeParameter('title', 0);
+		const description = ef.getNodeParameter('description', 0);
+		const buttonText = ef.getNodeParameter('buttonText', 0);
+		const sections = ef.getNodeParameter('sections.sectionValues', 0) as {
 			title: string;
 			rows: {
-				rowValues: Array<{
-					title: string;
-					description: string;
-					rowId: string;
-				}>;
-			};
-		}>;
+				title: string;
+				description?: string;
+				rowId?: string;
+			}[];
+		}[];
 
+		// Validação das seções
+		if (!Array.isArray(sections) || sections.length === 0) {
+			const errorData = {
+				success: false,
+				error: {
+					message: 'Lista de seções inválida',
+					details: 'É necessário fornecer pelo menos uma seção com opções',
+					code: 'INVALID_SECTIONS',
+					timestamp: new Date().toISOString(),
+				},
+			};
+			return {
+				json: errorData,
+				error: errorData,
+			};
+		}
+
+		// Opções adicionais
 		const options = ef.getNodeParameter('options_message', 0, {}) as {
+			footer?: string;
 			delay?: number;
 			quoted?: {
 				messageQuoted: {
@@ -35,7 +52,7 @@ export async function sendList(ef: IExecuteFunctions) {
 			mentions?: {
 				mentionsSettings: {
 					mentionsEveryOne: boolean;
-					mentioned: string;
+					mentioned?: string;
 				};
 			};
 		};
@@ -44,18 +61,11 @@ export async function sendList(ef: IExecuteFunctions) {
 			number: remoteJid,
 			title,
 			description,
-			footerText: footerText || ' ',
 			buttonText,
-			sections: sections.map(section => ({
-				title: section.title,
-				rows: section.rows.rowValues.map(row => ({
-					title: row.title,
-					description: row.description || ' ',
-					rowId: row.rowId,
-				})),
-			})),
+			sections,
 		};
 
+		if (options.footer) body.footer = options.footer;
 		if (options.delay) body.delay = options.delay;
 
 		if (options.quoted?.messageQuoted?.messageId) {
@@ -75,7 +85,7 @@ export async function sendList(ef: IExecuteFunctions) {
 				const mentionedNumbers = mentioned
 					.split(',')
 					.map(num => num.trim())
-					.map(num => (num.includes('@s.whatsapp.net') ? num : `${num}@s.whatsapp.net`));
+					.map(num => num.includes('@s.whatsapp.net') ? num : `${num}@s.whatsapp.net`);
 
 				body.mentioned = mentionedNumbers;
 			}
@@ -91,14 +101,38 @@ export async function sendList(ef: IExecuteFunctions) {
 			json: true,
 		};
 
-		return await evolutionRequest(ef, requestOptions);
+		const response = await evolutionRequest(ef, requestOptions);
+		return {
+			json: {
+				success: true,
+				data: response,
+			},
+		};
 	} catch (error) {
-		if (error.message.includes('Could not get parameter')) {
-			throw new NodeApiError(ef.getNode(), {
-				message: 'Parâmetros inválidos ou ausentes',
-				description: 'Verifique se todos os campos obrigatórios foram preenchidos corretamente',
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao enviar lista',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
+		};
+
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
 			});
 		}
-		throw new NodeApiError(ef.getNode(), error);
+
+		return {
+			json: errorData,
+			error: errorData,
+		};
 	}
 }

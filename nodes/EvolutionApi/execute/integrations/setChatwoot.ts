@@ -2,87 +2,90 @@ import {
 	IExecuteFunctions,
 	IRequestOptions,
 	IHttpRequestMethods,
-	NodeApiError,
+	NodeOperationError,
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
 export async function setChatwoot(ef: IExecuteFunctions) {
-	const instanceName = ef.getNodeParameter('instanceName', 0);
-	const resourceForChatwoot = ef.getNodeParameter('resourceForChatwoot', 0);
+	try {
+		const instanceName = ef.getNodeParameter('instanceName', 0);
+		const resourceForChatwoot = ef.getNodeParameter('resourceForChatwoot', 0);
 
-	let options: IRequestOptions;
+		let options: IRequestOptions;
 
-	if (resourceForChatwoot === 'setChatwoot') {
-		// Configurações do Chatwoot
-		const enabled = ef.getNodeParameter('enabled', 0) as boolean;
-		const chatwootAccountId = ef.getNodeParameter('chatwootAccountId', 0) as number;
-		const chatwootToken = ef.getNodeParameter('chatwootToken', 0) as string;
-		const chatwootUrl = ef.getNodeParameter('chatwootUrl', 0) as string;
-		const chatwootSignMsg = ef.getNodeParameter('chatwootSignMsg', 0) as boolean;
-		const chatwootReopenConversation = ef.getNodeParameter(
-			'chatwootReopenConversation',
-			0,
-		) as boolean;
-		const chatwootConversationPending = ef.getNodeParameter(
-			'chatwootConversationPending',
-			0,
-		) as boolean;
-		const chatwootImportContacts = ef.getNodeParameter('chatwootImportContacts', 0) as boolean;
-		const chatwootNameInbox = ef.getNodeParameter('chatwootNameInbox', 0) as string;
-		const chatwootMergeBrazilContacts = ef.getNodeParameter(
-			'chatwootMergeBrazilContacts',
-			0,
-		) as boolean;
-		const chatwootImportMessages = ef.getNodeParameter('chatwootImportMessages', 0) as boolean;
-		const chatwootAutoCreate = ef.getNodeParameter('chatwootAutoCreate', 0) as boolean;
-		const chatwootDaysLimitImportMessages = ef.getNodeParameter(
-			'chatwootDaysLimitImportMessages',
-			0,
-		) as number;
-		const chatwootOrganization = ef.getNodeParameter('chatwootOrganization', 0) as string;
-		const chatwootLogo = ef.getNodeParameter(
-			'chatwootLogo',
-			0,
-			'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63',
-		) as string;
+		if (resourceForChatwoot === 'createChatwoot') {
+			const accountId = ef.getNodeParameter('accountId', 0) as string;
+			const token = ef.getNodeParameter('token', 0) as string;
+			const url = ef.getNodeParameter('url', 0) as string;
+			const signMsg = ef.getNodeParameter('signMsg', 0) as boolean;
 
-		const body = {
-			enabled: enabled,
-			accountId: chatwootAccountId,
-			token: chatwootToken,
-			url: chatwootUrl,
-			signMsg: chatwootSignMsg,
-			reopenConversation: chatwootReopenConversation,
-			conversationPending: chatwootConversationPending,
-			nameInbox: chatwootNameInbox,
-			mergeBrazilContacts: chatwootMergeBrazilContacts,
-			importContacts: chatwootImportContacts,
-			importMessages: chatwootImportMessages,
-			daysLimitImportMessages: chatwootDaysLimitImportMessages,
-			signDelimiter: '\n',
-			autoCreate: chatwootAutoCreate,
-			organization: chatwootOrganization,
-			logo: chatwootLogo,
+			const body = {
+				accountId,
+				token,
+				url,
+				signMsg,
+			};
+
+			options = {
+				method: 'POST' as IHttpRequestMethods,
+				uri: `/chatwoot/set/${instanceName}`,
+				body,
+				json: true,
+			};
+		} else if (resourceForChatwoot === 'findChatwoot') {
+			options = {
+				method: 'GET' as IHttpRequestMethods,
+				uri: `/chatwoot/find/${instanceName}`,
+				json: true,
+			};
+		} else {
+			const errorData = {
+				success: false,
+				error: {
+					message: 'Operação do Chatwoot não reconhecida',
+					details: 'A operação solicitada não é válida para o recurso do Chatwoot',
+					code: 'INVALID_OPERATION',
+					timestamp: new Date().toISOString(),
+				},
+			};
+			throw new NodeOperationError(ef.getNode(), errorData.error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
+			});
+		}
+
+		const response = await evolutionRequest(ef, options);
+		return {
+			json: {
+				success: true,
+				data: response,
+			},
+		};
+	} catch (error) {
+		const errorData = {
+			success: false,
+			error: {
+				message: error.message.includes('Could not get parameter')
+					? 'Parâmetros inválidos ou ausentes'
+					: 'Erro ao configurar Chatwoot',
+				details: error.message.includes('Could not get parameter')
+					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
+					: error.message,
+				code: error.code || 'UNKNOWN_ERROR',
+				timestamp: new Date().toISOString(),
+			},
 		};
 
-		options = {
-			method: 'POST' as IHttpRequestMethods,
-			uri: `/chatwoot/set/${instanceName}`,
-			body,
-			json: true,
+		if (!ef.continueOnFail()) {
+			throw new NodeOperationError(ef.getNode(), error.message, {
+				message: errorData.error.message,
+				description: errorData.error.details,
+			});
+		}
+
+		return {
+			json: errorData,
+			error: errorData,
 		};
-	} else if (resourceForChatwoot === 'findChatwoot') {
-		options = {
-			method: 'GET' as IHttpRequestMethods,
-			uri: `/chatwoot/find/${instanceName}`,
-			json: true,
-		};
-	} else {
-		throw new NodeApiError(ef.getNode(), {
-			message: 'Operação de Chatwoot não reconhecida.',
-			description: 'A operação solicitada não é válida para o recurso de Chatwoot.',
-		});
 	}
-
-	return await evolutionRequest(ef, options);
 }
