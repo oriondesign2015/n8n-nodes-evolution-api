@@ -27,6 +27,19 @@ import { sendList } from './messages/sendList';
 import { sendButtons } from './messages/sendButtons';
 import { sendPix } from './messages/sendPix';
 import { sendReaction } from './messages/sendReaction';
+import { createGroup } from './groups/createGroup';
+import { updateGroupPicture } from './groups/updateGroupPicture';
+import { updateGroupName } from './groups/updateGroupName';
+import { updateGroupDescription } from './groups/updateGroupDescription';
+import { fetchInviteCode } from './groups/fetchInviteCode';
+import { revokeInviteCode } from './groups/revokeInviteCode';
+import { sendInviteLink } from './groups/sendInviteLink';
+import { fetchGroups } from './groups/fetchGroups';
+import { findParticipants } from './groups/findParticipants';
+import { updateParticipants } from './groups/updateParticipants';
+import { updateSettings } from './groups/updateSettings';
+import { toggleEphemeral } from './groups/toggleEphemeral';
+import { leaveGroup } from './groups/leaveGroup';
 type ResourceOperationFunctions = {
 	[resource: string]: {
 		[operation: string]: (ef: IExecuteFunctions) => Promise<any>;
@@ -70,5 +83,20 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		evolutionBot: setEvolutionBot,
 		difyBot: setDifyBot,
 		flowiseBot: setFlowiseBot,
+	},
+	'groups-api': {
+		'create-group': createGroup,
+		'update-group-picture': updateGroupPicture,
+		'update-group-name': updateGroupName,
+		'update-group-description': updateGroupDescription,
+		'fetch-invite-code': fetchInviteCode,
+		'revoke-invite-code': revokeInviteCode,
+		'send-invite-link': sendInviteLink,
+		'fetch-groups': fetchGroups,
+		'find-participants': findParticipants,
+		'update-participants': updateParticipants,
+		'update-settings': updateSettings,
+		'toggle-ephemeral': toggleEphemeral,
+		'leave-group': leaveGroup,
 	},
 };
