@@ -11,7 +11,8 @@ import { groupsFields } from './groups.fields';
 import { groupsOperations } from './groups.operations';
 import { chatFields } from './chat.fields';
 import { chatOperations } from './chat.operations';
-
+import { profileFields } from './profile.fields';
+import { profileOperationsOptions } from './profile.operations';
 const resourcesOptions: INodeProperties = {
 	displayName: 'Recurso',
 	name: 'resource',
@@ -42,6 +43,10 @@ const resourcesOptions: INodeProperties = {
 			name: 'Integração',
 			value: 'integrations-api',
 		},
+		{
+			name: 'Perfil',
+			value: 'profile-api',
+		},
 	],
 	default: 'instances-api',
 };
@@ -58,6 +63,8 @@ export const evolutionNodeProperties = [
 	eventsOperationsOptions,
 	// Funções disponíveis quando selecionado o recurso "Integrações"
 	integrationsOperationsOptions,
+	// Funções disponíveis quando selecionado o recurso "Perfil"
+	profileOperationsOptions,
 	// Funções disponíveis quando selecionado o recurso "Chat"
 	chatOperations,
 	// Campos disponíveis quando selecionado o recurso e alguma operação
@@ -67,4 +74,5 @@ export const evolutionNodeProperties = [
 	...eventsFields,
 	...integrationsFields,
 	...chatFields,
+	...profileFields,
 ];

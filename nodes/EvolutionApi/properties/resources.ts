@@ -30,6 +30,10 @@ export const resources: INodeProperties = {
 			name: 'Integrações',
 			value: 'integrations-api',
 		},
+		{
+			name: 'Perfil',
+			value: 'profile-api',
+		},
 	],
 	default: 'instances-api',
 };

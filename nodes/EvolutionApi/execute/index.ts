@@ -54,6 +54,15 @@ import { findContacts } from './chat/findContacts';
 import { findMessages } from './chat/findMessages';
 import { findStatusMessages } from './chat/findStatusMessages';
 import { findChats } from './chat/findChats';
+import { fetchBusinessProfile } from './profile/fetchBusinessProfile';
+import { fetchProfile } from './profile/fetchProfile';
+import { updateProfileName } from './profile/updateProfileName';
+import { updateProfileStatus } from './profile/updateProfileStatus';
+import { updateProfilePicture } from './profile/updateProfilePicture';
+import { removeProfilePicture } from './profile/removeProfilePicture';
+import { fetchPrivacySettings } from './profile/fetchPrivacySettings';
+import { updatePrivacySettings } from './profile/updatePrivacySettings';
+
 type ResourceOperationFunctions = {
 	[resource: string]: {
 		[operation: string]: (ef: IExecuteFunctions) => Promise<any>;
@@ -128,5 +137,15 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		'find-messages': findMessages,
 		'find-status-messages': findStatusMessages,
 		'find-chats': findChats,
+	},
+	'profile-api': {
+		'fetch-profile': fetchProfile,
+		'fetch-business-profile': fetchBusinessProfile,
+		'update-profile-name': updateProfileName,
+		'update-profile-status': updateProfileStatus,
+		'update-profile-picture': updateProfilePicture,
+		'remove-profile-picture': removeProfilePicture,
+		'fetch-privacy-settings': fetchPrivacySettings,
+		'update-privacy-settings': updatePrivacySettings,
 	},
 };
