@@ -40,6 +40,20 @@ import { updateParticipants } from './groups/updateParticipants';
 import { updateSettings } from './groups/updateSettings';
 import { toggleEphemeral } from './groups/toggleEphemeral';
 import { leaveGroup } from './groups/leaveGroup';
+import { checkNumber } from './chat/checkNumber';
+import { readMessages } from './chat/readMessages';
+import { manageArchive } from './chat/manageArchive';
+import { markChatUnread } from './chat/markChatUnread';
+import { deleteMessage } from './chat/deleteMessage';
+import { fetchProfilePicture } from './chat/fetchProfilePicture';
+import { getMediaBase64 } from './chat/getMediaBase64';
+import { updateMessage } from './chat/updateMessage';
+import { sendPresence } from './chat/sendPresence';
+import { blockContact } from './chat/blockContact';
+import { findContacts } from './chat/findContacts';
+import { findMessages } from './chat/findMessages';
+import { findStatusMessages } from './chat/findStatusMessages';
+import { findChats } from './chat/findChats';
 type ResourceOperationFunctions = {
 	[resource: string]: {
 		[operation: string]: (ef: IExecuteFunctions) => Promise<any>;
@@ -98,5 +112,21 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		'update-settings': updateSettings,
 		'toggle-ephemeral': toggleEphemeral,
 		'leave-group': leaveGroup,
+	},
+	'chat-api': {
+		'check-number': checkNumber,
+		'read-messages': readMessages,
+		'manage-archive': manageArchive,
+		'mark-unread': markChatUnread,
+		'delete-message': deleteMessage,
+		'fetch-profile-picture': fetchProfilePicture,
+		'get-media-base64': getMediaBase64,
+		'update-message': updateMessage,
+		'send-presence': sendPresence,
+		'block-contact': blockContact,
+		'find-contacts': findContacts,
+		'find-messages': findMessages,
+		'find-status-messages': findStatusMessages,
+		'find-chats': findChats,
 	},
 };

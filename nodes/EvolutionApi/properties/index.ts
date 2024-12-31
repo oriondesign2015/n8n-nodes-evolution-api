@@ -9,6 +9,8 @@ import { integrationsOperationsOptions } from './integrations.operations';
 import { messagesOperationsOptions } from './messages.operations';
 import { groupsFields } from './groups.fields';
 import { groupsOperations } from './groups.operations';
+import { chatFields } from './chat.fields';
+import { chatOperations } from './chat.operations';
 
 const resourcesOptions: INodeProperties = {
 	displayName: 'Recurso',
@@ -27,6 +29,10 @@ const resourcesOptions: INodeProperties = {
 		{
 			name: 'Grupos',
 			value: 'groups-api',
+		},
+		{
+			name: 'Chat',
+			value: 'chat-api',
 		},
 		{
 			name: 'Evento',
@@ -52,10 +58,13 @@ export const evolutionNodeProperties = [
 	eventsOperationsOptions,
 	// Funções disponíveis quando selecionado o recurso "Integrações"
 	integrationsOperationsOptions,
+	// Funções disponíveis quando selecionado o recurso "Chat"
+	chatOperations,
 	// Campos disponíveis quando selecionado o recurso e alguma operação
 	...instancesFields,
 	...messagesFields,
 	...groupsFields,
 	...eventsFields,
 	...integrationsFields,
+	...chatFields,
 ];
