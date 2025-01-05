@@ -3,7 +3,7 @@ import { INodeProperties } from 'n8n-workflow';
 export const integrationsFields: INodeProperties[] = [
 	// Campos = Chatwoot
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -17,7 +17,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'O que deseja fazer',
+		displayName: 'O Que Deseja Fazer',
 		name: 'resourceForChatwoot',
 		type: 'options',
 		options: [
@@ -44,7 +44,7 @@ export const integrationsFields: INodeProperties[] = [
 		name: 'enabled',
 		type: 'boolean',
 		default: true,
-		description: 'Whether to enable or disable integration with Chatwoot.',
+		description: 'Whether to enable or disable integration with Chatwoot',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -259,7 +259,7 @@ export const integrationsFields: INodeProperties[] = [
 
 	// Campos = Typebot
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -319,11 +319,10 @@ export const integrationsFields: INodeProperties[] = [
 
 	// updateTypebot
 	{
-		displayName: 'Id do Typebot',
+		displayName: 'ID Do Typebot',
 		name: 'typebotId',
 		type: 'string',
 		default: '',
-		required: false,
 		description: 'Digite o ID do Typebot que deseja buscar, deixe vazio para procurar todos',
 		displayOptions: {
 			show: {
@@ -405,7 +404,7 @@ export const integrationsFields: INodeProperties[] = [
 				value: 'contains',
 			},
 			{
-				name: 'Igual à',
+				name: 'Igual À',
 				value: 'equals',
 			},
 			{
@@ -465,7 +464,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'keywordFinish',
 		type: 'string',
 		default: '#sair',
@@ -495,7 +494,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'unknownMessage',
 		type: 'string',
 		default: 'Mensagem não reconhecida',
@@ -510,11 +509,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Escuta mensagens enviadas por mim',
+		displayName: 'Escuta Mensagens Enviadas Por Mim',
 		name: 'listeningFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -524,11 +523,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		displayName: 'Pausa O Bot Quando Eu Enviar Uma Mensagem',
 		name: 'stopBotFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -538,11 +537,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mantem a sessão do bot aberta',
+		displayName: 'Mantem a Sessão Do Bot Aberta',
 		name: 'keepOpen',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -552,7 +551,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tempo de Espera (Em Segundos)',
+		displayName: 'Tempo De Espera (Em Segundos)',
 		name: 'debounceTime',
 		type: 'number',
 		default: 0,
@@ -589,7 +588,7 @@ export const integrationsFields: INodeProperties[] = [
 		name: 'startSession',
 		type: 'boolean',
 		default: false,
-		description: 'Se deve iniciar uma nova sessão',
+		description: 'Whether to enable or disable integration with Chatwoot',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -726,11 +725,10 @@ export const integrationsFields: INodeProperties[] = [
 
 	// update EvolutionBot
 	{
-		displayName: 'Id do Evolution Bot',
+		displayName: 'ID Do Evolution Bot',
 		name: 'evolutionBotId',
 		type: 'string',
 		default: '',
-		required: false,
 		description: 'Digite o ID do Evolution Bot que deseja buscar, deixe vazio para procurar todos',
 		displayOptions: {
 			show: {
@@ -764,11 +762,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ApiKey da Evolution Bot',
+		displayName: 'ApiKey Da Evolution Bot',
 		name: 'apiKeyBot',
 		type: 'string',
+		typeOptions: { password: true },
 		default: '',
-		required: false,
 		description: 'Digite a ApiKey do seu Evolution Bot',
 		displayOptions: {
 			show: {
@@ -812,7 +810,7 @@ export const integrationsFields: INodeProperties[] = [
 				value: 'contains',
 			},
 			{
-				name: 'Igual à',
+				name: 'Igual À',
 				value: 'equals',
 			},
 			{
@@ -872,7 +870,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'keywordFinish',
 		type: 'string',
 		default: '#sair',
@@ -902,7 +900,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'unknownMessage',
 		type: 'string',
 		default: 'Mensagem não reconhecida',
@@ -917,11 +915,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Escuta mensagens enviadas por mim',
+		displayName: 'Escuta Mensagens Enviadas Por Mim',
 		name: 'listeningFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -931,11 +929,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		displayName: 'Pausa O Bot Quando Eu Enviar Uma Mensagem',
 		name: 'stopBotFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -945,11 +943,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mantem a sessão do bot aberta',
+		displayName: 'Mantem a Sessão Do Bot Aberta',
 		name: 'keepOpen',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -959,7 +957,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tempo de Espera (Em Segundos)',
+		displayName: 'Tempo De Espera (Em Segundos)',
 		name: 'debounceTime',
 		type: 'number',
 		default: 0,
@@ -1022,7 +1020,7 @@ export const integrationsFields: INodeProperties[] = [
 
 	// Dify
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1075,16 +1073,16 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tipo do Bot',
+		displayName: 'Tipo Do Bot',
 		name: 'botType',
 		type: 'options',
 		options: [
 			{
-				name: 'Bot de Chat',
+				name: 'Bot De Chat',
 				value: 'chatBot',
 			},
 			{
-				name: 'Gerador de Texto',
+				name: 'Gerador De Texto',
 				value: 'textGenerator',
 			},
 			{
@@ -1092,7 +1090,7 @@ export const integrationsFields: INodeProperties[] = [
 				value: 'agent',
 			},
 			{
-				name: 'Fluxo de Trabalho',
+				name: 'Fluxo De Trabalho',
 				value: 'workflow',
 			},
 		],
@@ -1110,11 +1108,10 @@ export const integrationsFields: INodeProperties[] = [
 
 	// update Dify
 	{
-		displayName: 'Id do Dify',
+		displayName: 'ID Do Dify',
 		name: 'difyBotId',
 		type: 'string',
 		default: '',
-		required: false,
 		description: 'Digite o ID do Dify que deseja buscar, deixe vazio para procurar todos',
 		displayOptions: {
 			show: {
@@ -1133,7 +1130,7 @@ export const integrationsFields: INodeProperties[] = [
 
 	//Se createDify ou updateDify
 	{
-		displayName: 'Url do Dify',
+		displayName: 'Url Do Dify',
 		name: 'apiUrl',
 		type: 'string',
 		default: '',
@@ -1148,9 +1145,10 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ApiKey do Dify',
+		displayName: 'ApiKey Do Dify',
 		name: 'apiKeyBot',
 		type: 'string',
+		typeOptions: { password: true },
 		default: '',
 		required: true,
 		description: 'Digite a ApiKey do seu bot do Dify',
@@ -1196,7 +1194,7 @@ export const integrationsFields: INodeProperties[] = [
 				value: 'contains',
 			},
 			{
-				name: 'Igual à',
+				name: 'Igual À',
 				value: 'equals',
 			},
 			{
@@ -1255,7 +1253,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'keywordFinish',
 		type: 'string',
 		default: '#sair',
@@ -1285,7 +1283,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'unknownMessage',
 		type: 'string',
 		default: 'Mensagem não reconhecida',
@@ -1300,11 +1298,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Escuta mensagens enviadas por mim',
+		displayName: 'Escuta Mensagens Enviadas Por Mim',
 		name: 'listeningFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1314,11 +1312,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		displayName: 'Pausa O Bot Quando Eu Enviar Uma Mensagem',
 		name: 'stopBotFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1328,11 +1326,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mantem a sessão do bot aberta',
+		displayName: 'Mantem a Sessão Do Bot Aberta',
 		name: 'keepOpen',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1342,7 +1340,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tempo de Espera (Em Segundos)',
+		displayName: 'Tempo De Espera (Em Segundos)',
 		name: 'debounceTime',
 		type: 'number',
 		default: 0,
@@ -1404,7 +1402,7 @@ export const integrationsFields: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1459,11 +1457,10 @@ export const integrationsFields: INodeProperties[] = [
 
 	// update Flowise
 	{
-		displayName: 'Id do Flowise',
+		displayName: 'ID Do Flowise',
 		name: 'flowiseBotId',
 		type: 'string',
 		default: '',
-		required: false,
 		description: 'Digite o ID do Flowise que deseja buscar, deixe vazio para procurar todos',
 		displayOptions: {
 			show: {
@@ -1482,7 +1479,7 @@ export const integrationsFields: INodeProperties[] = [
 
 	//Se createFlowise ou updateFlowise
 	{
-		displayName: 'Url do Flowise',
+		displayName: 'Url Do Flowise',
 		name: 'apiUrl',
 		type: 'string',
 		default: '',
@@ -1497,11 +1494,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ApiKey do Flowise',
+		displayName: 'ApiKey Do Flowise',
 		name: 'apiKeyBot',
 		type: 'string',
+		typeOptions: { password: true },
 		default: '',
-		required: false,
 		description: 'Digite a ApiKey do seu bot do Flowise',
 		displayOptions: {
 			show: {
@@ -1545,7 +1542,7 @@ export const integrationsFields: INodeProperties[] = [
 				value: 'contains',
 			},
 			{
-				name: 'Igual à',
+				name: 'Igual À',
 				value: 'equals',
 			},
 			{
@@ -1605,7 +1602,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'keywordFinish',
 		type: 'string',
 		default: '#sair',
@@ -1635,7 +1632,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Palavra Chave de Finalização',
+		displayName: 'Palavra Chave De Finalização',
 		name: 'unknownMessage',
 		type: 'string',
 		default: 'Mensagem não reconhecida',
@@ -1650,11 +1647,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Escuta mensagens enviadas por mim',
+		displayName: 'Escuta Mensagens Enviadas Por Mim',
 		name: 'listeningFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1664,11 +1661,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Pausa o bot quando eu enviar uma mensagem',
+		displayName: 'Pausa O Bot Quando Eu Enviar Uma Mensagem',
 		name: 'stopBotFromMe',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1678,11 +1675,11 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mantem a sessão do bot aberta',
+		displayName: 'Mantem a Sessão Do Bot Aberta',
 		name: 'keepOpen',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Whether',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -1692,7 +1689,7 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tempo de Espera (Em Segundos)',
+		displayName: 'Tempo De Espera (Em Segundos)',
 		name: 'debounceTime',
 		type: 'number',
 		default: 0,

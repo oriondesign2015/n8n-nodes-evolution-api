@@ -4,7 +4,7 @@ import { INodeProperties } from 'n8n-workflow';
 export const instancesFields: INodeProperties[] = [
 	// Campos = Criar Instancia
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -18,14 +18,14 @@ export const instancesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Apikey para instancia',
+		displayName: 'Apikey Para Instancia',
 		name: 'token',
 		type: 'string',
 		typeOptions: {
 			password: true,
 		},
 		default: '',
-		required: false,
+
 		description: 'Opicional: Digite um Token para a instancia',
 		displayOptions: {
 			show: {
@@ -35,11 +35,11 @@ export const instancesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do WhatsApp',
+		displayName: 'Número Do WhatsApp',
 		name: 'number',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description:
 			'Opicional: Numero que vai ser conectado na instancia, para receber o Código de pareamento',
 		displayOptions: {
@@ -56,6 +56,120 @@ export const instancesFields: INodeProperties[] = [
 		placeholder: 'Adicionar Campo',
 		default: {},
 		options: [
+			{
+				displayName: 'Chatwoot',
+				name: 'chatwoot',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: false,
+				},
+				default: { settings: {} },
+				options: [
+					{
+						displayName: 'Configurações Do Chatwoot',
+						name: 'chatwootSettings',
+						values: [
+							{
+								displayName: 'ID Da Conta Do Chatwoot',
+								name: 'chatwootAccountId',
+								type: 'string',
+								default: '',
+								description: 'Digite o ID da conta do Chatwoot',
+							},
+							{
+								displayName: 'Token De Admin Do Chatwoot',
+								name: 'chatwootToken',
+								type: 'string',
+								typeOptions: {
+									password: true,
+								},
+								default: '',
+								description: 'Digite o token de admin do Chatwoot',
+							},
+							{
+								displayName: 'Link Do Chatwoot',
+								name: 'chatwootUrl',
+								type: 'string',
+								default: '',
+								description: 'Digite o link do Chatwoot',
+							},
+							{
+								displayName: 'Assinatura Do Agente Do Chatwoot',
+								name: 'chatwootSignMsg',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to enable or disable the Chatwoot agent signature',
+							},
+							{
+								displayName: 'Reabrir Mensagens No Chatwoot',
+								name: 'chatwootReopenConversation',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to enable or disable reopening messages in Chatwoot',
+							},
+							{
+								displayName: 'Iniciar Conversas Como Pendentes No Chatwoot',
+								name: 'chatwootConversationPending',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to start conversations as pending in Chatwoot',
+							},
+							{
+								displayName: 'Importar Contatos Para O Chatwoot',
+								name: 'chatwootImportContacts',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to import contacts to Chatwoot',
+							},
+							{
+								displayName: 'Nome Da Inbox Do Chatwoot',
+								name: 'chatwootNameInbox',
+								type: 'string',
+								default: '',
+								description: 'Digite o nome da Inbox do Chatwoot',
+							},
+							{
+								displayName: 'Mesclar Contatos Brasileiros No Chatwoot',
+								name: 'chatwootMergeBrazilContacts',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to merge Brazilian contacts in Chatwoot',
+							},
+							{
+								displayName: 'Importar Mensagens Para O Chatwoot',
+								name: 'chatwootImportMessages',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to import messages to Chatwoot',
+							},
+							{
+								displayName: 'Importar Mensagens De Quantos Dias Para O Chatwoot',
+								name: 'chatwootDaysLimitImportMessages',
+								type: 'number',
+								default: 0,
+								description:
+									'Digite o número de dias para limitar a importação de mensagens para o Chatwoot',
+							},
+							{
+								displayName: 'Nome Do Contato De QRCode No Chatwoot',
+								name: 'chatwootOrganization',
+								type: 'string',
+								default: '',
+								description: 'Digite o nome do contato de QRCode no Chatwoot',
+							},
+							{
+								displayName: 'Url Do Logo Para O Contato No Chatwoot',
+								name: 'chatwootLogo',
+								type: 'string',
+								default:
+									'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63',
+								description: 'Digite a URL do logo para o contato no Chatwoot',
+							},
+						],
+					},
+				],
+				description: 'Configurações do Chatwoot',
+			},
 			{
 				displayName: 'Comportamento',
 				name: 'instanceSettings',
@@ -190,148 +304,6 @@ export const instancesFields: INodeProperties[] = [
 				],
 				description: 'Configurações do proxy',
 			},
-
-			{
-				displayName: 'Webhook',
-				name: 'webhook',
-				type: 'fixedCollection',
-				typeOptions: {
-					multipleValues: false,
-				},
-				default: { settings: {} },
-				options: [
-					{
-						displayName: 'Configurações Do Webhook',
-						name: 'webhookSettings',
-						values: [
-							{
-								displayName: 'Url do Webhook',
-								name: 'webhookUrl',
-								type: 'string',
-								default: '',
-								description: 'Digite a Url que vai receber os eventos do Webhook',
-							},
-							{
-								displayName: 'Webhook por Eventos',
-								name: 'webhookByEvents',
-								type: 'boolean',
-								default: false,
-								description:
-									'Whether to create a route for each event by appending the event name to the end of the URL', // Atualizado
-							},
-							{
-								displayName: 'Base64 no Webhook',
-								name: 'webhookBase64',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to send media data in base64 format in the webhook', // Atualizado
-							},
-							{
-								displayName: 'Eventos',
-								name: 'webhookEvents',
-								type: 'multiOptions',
-								default: [], // Adicionado para resolver o erro
-								options: [
-									{
-										name: 'CALL',
-										value: 'CALL',
-									},
-									{
-										name: 'CHATS_DELETE',
-										value: 'CHATS_DELETE',
-									},
-									{
-										name: 'CHATS_SET',
-										value: 'CHATS_SET',
-									},
-									{
-										name: 'CHATS_UPDATE',
-										value: 'CHATS_UPDATE',
-									},
-									{
-										name: 'CHATS_UPSERT',
-										value: 'CHATS_UPSERT',
-									},
-									{
-										name: 'CONNECTION_UPDATE',
-										value: 'CONNECTION_UPDATE',
-									},
-									{
-										name: 'CONTACTS_SET',
-										value: 'CONTACTS_SET',
-									},
-									{
-										name: 'CONTACTS_UPDATE',
-										value: 'CONTACTS_UPDATE',
-									},
-									{
-										name: 'CONTACTS_UPSERT',
-										value: 'CONTACTS_UPSERT',
-									},
-									{
-										name: 'GROUP_PARTICIPANTS_UPDATE',
-										value: 'GROUP_PARTICIPANTS_UPDATE',
-									},
-									{
-										name: 'GROUP_UPDATE',
-										value: 'GROUP_UPDATE',
-									},
-									{
-										name: 'GROUPS_UPSERT',
-										value: 'GROUPS_UPSERT',
-									},
-									{
-										name: 'LABELS_ASSOCIATION',
-										value: 'LABELS_ASSOCIATION',
-									},
-									{
-										name: 'LABELS_EDIT',
-										value: 'LABELS_EDIT',
-									},
-									{
-										name: 'MESSAGES_DELETE',
-										value: 'MESSAGES_DELETE',
-									},
-									{
-										name: 'MESSAGES_SET',
-										value: 'MESSAGES_SET',
-									},
-									{
-										name: 'MESSAGES_UPDATE',
-										value: 'MESSAGES_UPDATE',
-									},
-									{
-										name: 'MESSAGES_UPSERT',
-										value: 'MESSAGES_UPSERT',
-									},
-									{
-										name: 'PRESENCE_UPDATE',
-										value: 'PRESENCE_UPDATE',
-									},
-									{
-										name: 'QRCODE_UPDATED',
-										value: 'QRCODE_UPDATED',
-									},
-									{
-										name: 'SEND_MESSAGE',
-										value: 'SEND_MESSAGE',
-									},
-									{
-										name: 'TYPEBOT_CHANGE_STATUS',
-										value: 'TYPEBOT_CHANGE_STATUS',
-									},
-									{
-										name: 'TYPEBOT_START',
-										value: 'TYPEBOT_START',
-									},
-								],
-							},
-						],
-					},
-				],
-				description: 'Os eventos a serem monitorados',
-			},
-
 			{
 				displayName: 'RabbitMQ',
 				name: 'rabbitmq',
@@ -346,7 +318,7 @@ export const instancesFields: INodeProperties[] = [
 						name: 'rabbitmqSettings',
 						values: [
 							{
-								displayName: 'Ativa ou desativa o RabbitMQ',
+								displayName: 'Ativa Ou Desativa O RabbitMQ',
 								name: 'rabbitmqEnabled',
 								type: 'boolean',
 								default: false,
@@ -457,10 +429,9 @@ export const instancesFields: INodeProperties[] = [
 				],
 				description: 'Os eventos a serem monitorados',
 			},
-
 			{
-				displayName: 'Chatwoot',
-				name: 'chatwoot',
+				displayName: 'Webhook',
+				name: 'webhook',
 				type: 'fixedCollection',
 				typeOptions: {
 					multipleValues: false,
@@ -468,109 +439,135 @@ export const instancesFields: INodeProperties[] = [
 				default: { settings: {} },
 				options: [
 					{
-						displayName: 'Configurações Do Chatwoot',
-						name: 'chatwootSettings',
+						displayName: 'Configurações Do Webhook',
+						name: 'webhookSettings',
 						values: [
 							{
-								displayName: 'ID Da Conta Do Chatwoot',
-								name: 'chatwootAccountId',
+								displayName: 'Url Do Webhook',
+								name: 'webhookUrl',
 								type: 'string',
 								default: '',
-								description: 'Digite o ID da conta do Chatwoot',
+								description: 'Digite a URL que vai receber os eventos do Webhook',
 							},
 							{
-								displayName: 'Token De Admin Do Chatwoot',
-								name: 'chatwootToken',
-								type: 'string',
-								typeOptions: {
-									password: true,
-								},
-								default: '',
-								description: 'Digite o token de admin do Chatwoot',
-							},
-							{
-								displayName: 'Link Do Chatwoot',
-								name: 'chatwootUrl',
-								type: 'string',
-								default: '',
-								description: 'Digite o link do Chatwoot',
-							},
-							{
-								displayName: 'Assinatura Do Agente Do Chatwoot',
-								name: 'chatwootSignMsg',
+								displayName: 'Webhook Por Eventos',
+								name: 'webhookByEvents',
 								type: 'boolean',
 								default: false,
-								description: 'Whether to enable or disable the Chatwoot agent signature',
-							},
-							{
-								displayName: 'Reabrir Mensagens No Chatwoot',
-								name: 'chatwootReopenConversation',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to enable or disable reopening messages in Chatwoot',
-							},
-							{
-								displayName: 'Iniciar Conversas Como Pendentes No Chatwoot',
-								name: 'chatwootConversationPending',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to start conversations as pending in Chatwoot',
-							},
-							{
-								displayName: 'Importar Contatos Para O Chatwoot',
-								name: 'chatwootImportContacts',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to import contacts to Chatwoot',
-							},
-							{
-								displayName: 'Nome Da Inbox Do Chatwoot',
-								name: 'chatwootNameInbox',
-								type: 'string',
-								default: '',
-								description: 'Digite o nome da Inbox do Chatwoot',
-							},
-							{
-								displayName: 'Mesclar Contatos Brasileiros No Chatwoot',
-								name: 'chatwootMergeBrazilContacts',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to merge Brazilian contacts in Chatwoot',
-							},
-							{
-								displayName: 'Importar Mensagens Para O Chatwoot',
-								name: 'chatwootImportMessages',
-								type: 'boolean',
-								default: false,
-								description: 'Whether to import messages to Chatwoot',
-							},
-							{
-								displayName: 'Importar Mensagens De Quantos Dias Para O Chatwoot',
-								name: 'chatwootDaysLimitImportMessages',
-								type: 'number',
-								default: 0,
 								description:
-									'Digite o número de dias para limitar a importação de mensagens para o Chatwoot',
+									'Whether to create a route for each event by appending the event name to the end of the URL', // Atualizado
 							},
 							{
-								displayName: 'Nome Do Contato De QRCode No Chatwoot',
-								name: 'chatwootOrganization',
-								type: 'string',
-								default: '',
-								description: 'Digite o nome do contato de QRCode no Chatwoot',
+								displayName: 'Base64 No Webhook',
+								name: 'webhookBase64',
+								type: 'boolean',
+								default: false,
+								description: 'Whether to send media data in base64 format in the webhook', // Atualizado
 							},
 							{
-								displayName: 'Url Do Logo Para O Contato No Chatwoot',
-								name: 'chatwootLogo',
-								type: 'string',
-								default:
-									'https://github.com/user-attachments/assets/4d1e9cd6-377a-4383-820a-9a97e6cfbb63',
-								description: 'Digite a URL do logo para o contato no Chatwoot',
+								displayName: 'Eventos',
+								name: 'webhookEvents',
+								type: 'multiOptions',
+								default: [], // Adicionado para resolver o erro
+								options: [
+									{
+										name: 'CALL',
+										value: 'CALL',
+									},
+									{
+										name: 'CHATS_DELETE',
+										value: 'CHATS_DELETE',
+									},
+									{
+										name: 'CHATS_SET',
+										value: 'CHATS_SET',
+									},
+									{
+										name: 'CHATS_UPDATE',
+										value: 'CHATS_UPDATE',
+									},
+									{
+										name: 'CHATS_UPSERT',
+										value: 'CHATS_UPSERT',
+									},
+									{
+										name: 'CONNECTION_UPDATE',
+										value: 'CONNECTION_UPDATE',
+									},
+									{
+										name: 'CONTACTS_SET',
+										value: 'CONTACTS_SET',
+									},
+									{
+										name: 'CONTACTS_UPDATE',
+										value: 'CONTACTS_UPDATE',
+									},
+									{
+										name: 'CONTACTS_UPSERT',
+										value: 'CONTACTS_UPSERT',
+									},
+									{
+										name: 'GROUP_PARTICIPANTS_UPDATE',
+										value: 'GROUP_PARTICIPANTS_UPDATE',
+									},
+									{
+										name: 'GROUP_UPDATE',
+										value: 'GROUP_UPDATE',
+									},
+									{
+										name: 'GROUPS_UPSERT',
+										value: 'GROUPS_UPSERT',
+									},
+									{
+										name: 'LABELS_ASSOCIATION',
+										value: 'LABELS_ASSOCIATION',
+									},
+									{
+										name: 'LABELS_EDIT',
+										value: 'LABELS_EDIT',
+									},
+									{
+										name: 'MESSAGES_DELETE',
+										value: 'MESSAGES_DELETE',
+									},
+									{
+										name: 'MESSAGES_SET',
+										value: 'MESSAGES_SET',
+									},
+									{
+										name: 'MESSAGES_UPDATE',
+										value: 'MESSAGES_UPDATE',
+									},
+									{
+										name: 'MESSAGES_UPSERT',
+										value: 'MESSAGES_UPSERT',
+									},
+									{
+										name: 'PRESENCE_UPDATE',
+										value: 'PRESENCE_UPDATE',
+									},
+									{
+										name: 'QRCODE_UPDATED',
+										value: 'QRCODE_UPDATED',
+									},
+									{
+										name: 'SEND_MESSAGE',
+										value: 'SEND_MESSAGE',
+									},
+									{
+										name: 'TYPEBOT_CHANGE_STATUS',
+										value: 'TYPEBOT_CHANGE_STATUS',
+									},
+									{
+										name: 'TYPEBOT_START',
+										value: 'TYPEBOT_START',
+									},
+								],
 							},
 						],
 					},
 				],
-				description: 'Configurações do Chatwoot',
+				description: 'Os eventos a serem monitorados',
 			},
 		],
 		displayOptions: {
@@ -583,7 +580,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Conectar Instância
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -599,11 +596,11 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Buscar Instancia
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Digite o nome da instância que deseja pesquisar',
 		displayOptions: {
 			show: {
@@ -615,7 +612,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Definir Comportamento
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -633,7 +630,7 @@ export const instancesFields: INodeProperties[] = [
 		name: 'rejectCall',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to reject calls or not.',
+		description: 'Whether to reject calls or not',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -642,12 +639,12 @@ export const instancesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem de Chamadas',
+		displayName: 'Mensagem De Chamadas',
 		name: 'msgCall',
 		type: 'string',
 		default: 'Não aceitamos ligações telefônicas.',
-		required: false,
-		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas.',
+
+		description: 'Mensagem a ser enviada se as chamadas forem rejeitadas',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -673,7 +670,7 @@ export const instancesFields: INodeProperties[] = [
 		name: 'alwaysOnline',
 		type: 'boolean',
 		default: false,
-		description: 'Whether the instance should always be online or not.',
+		description: 'Whether the instance should always be online or not',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -699,7 +696,7 @@ export const instancesFields: INodeProperties[] = [
 		name: 'syncFullHistory',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to mention them all history or not.',
+		description: 'Whether to mention them all history or not',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -723,7 +720,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Definir presença
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -763,7 +760,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Proxy
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -778,7 +775,7 @@ export const instancesFields: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'O que deseja fazer',
+		displayName: 'O Que Deseja Fazer',
 		name: 'resourceForProxy',
 		type: 'options',
 		options: [
@@ -787,7 +784,7 @@ export const instancesFields: INodeProperties[] = [
 				value: 'setProxy',
 			},
 			{
-				name: 'Verificar proxy',
+				name: 'Verificar Proxy',
 				value: 'findProxy',
 			},
 		],
@@ -801,11 +798,11 @@ export const instancesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Ativar proxy',
+		displayName: 'Ativar Proxy',
 		name: 'enabled',
 		type: 'boolean',
 		default: true,
-		description: 'Whether to enable or disable integration with proxy.',
+		description: 'Whether to enable or disable integration with proxy',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
@@ -904,7 +901,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Reiniciar instancia
 	{
-		displayName: 'Nome da Insticância',
+		displayName: 'Nome Da Insticância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -920,7 +917,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Desconectar instancia
 	{
-		displayName: 'Nome da Insticância',
+		displayName: 'Nome Da Insticância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -936,7 +933,7 @@ export const instancesFields: INodeProperties[] = [
 
 	// Campos = Deletar instancia
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',

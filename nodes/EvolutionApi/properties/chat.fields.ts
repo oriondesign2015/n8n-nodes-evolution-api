@@ -3,7 +3,7 @@ import { INodeProperties, NodePropertyTypes } from 'n8n-workflow';
 export const chatFields: INodeProperties[] = [
 	// Campos comuns para todas as operações
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -48,12 +48,12 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
 		required: true,
-		description: 'ID da mensagem',
+
 		displayOptions: {
 			show: {
 				resource: ['chat-api'],
@@ -62,7 +62,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem é Minha',
+		displayName: 'Mensagem É Minha',
 		name: 'fromMe',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
@@ -116,7 +116,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -130,7 +130,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem é Minha',
+		displayName: 'Mensagem É Minha',
 		name: 'fromMe',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
@@ -160,7 +160,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -174,7 +174,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem é Minha',
+		displayName: 'Mensagem É Minha',
 		name: 'fromMe',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
@@ -204,7 +204,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -218,7 +218,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem é Minha',
+		displayName: 'Mensagem É Minha',
 		name: 'fromMe',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
@@ -250,7 +250,7 @@ export const chatFields: INodeProperties[] = [
 
 	// Campos para obter mídia em Base64
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -264,7 +264,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Converter para MP4',
+		displayName: 'Converter Para MP4',
 		name: 'convertToMp4',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
@@ -294,7 +294,7 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -467,7 +467,7 @@ export const chatFields: INodeProperties[] = [
 		name: 'page',
 		type: 'number' as NodePropertyTypes,
 		default: 1,
-		required: false,
+
 		description: 'Número da página',
 		displayOptions: {
 			show: {
@@ -477,11 +477,11 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Quantidade por Página',
+		displayName: 'Quantidade Por Página',
 		name: 'offset',
 		type: 'number' as NodePropertyTypes,
 		default: 10,
-		required: false,
+
 		description: 'Quantidade de mensagens por página',
 		displayOptions: {
 			show: {
@@ -507,12 +507,12 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
 		required: true,
-		description: 'ID da mensagem',
+
 		displayOptions: {
 			show: {
 				resource: ['chat-api'],
@@ -525,7 +525,7 @@ export const chatFields: INodeProperties[] = [
 		name: 'page',
 		type: 'number' as NodePropertyTypes,
 		default: 1,
-		required: false,
+
 		description: 'Número da página',
 		displayOptions: {
 			show: {
@@ -535,11 +535,11 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Quantidade por Página',
+		displayName: 'Quantidade Por Página',
 		name: 'offset',
 		type: 'number' as NodePropertyTypes,
 		default: 10,
-		required: false,
+
 		description: 'Quantidade de mensagens por página',
 		displayOptions: {
 			show: {
@@ -565,12 +565,12 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string' as NodePropertyTypes,
 		default: '',
 		required: true,
-		description: 'ID da mensagem',
+
 		displayOptions: {
 			show: {
 				resource: ['chat-api'],
@@ -583,7 +583,7 @@ export const chatFields: INodeProperties[] = [
 		name: 'page',
 		type: 'number' as NodePropertyTypes,
 		default: 1,
-		required: false,
+
 		description: 'Número da página',
 		displayOptions: {
 			show: {
@@ -593,11 +593,11 @@ export const chatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Quantidade por Página',
+		displayName: 'Quantidade Por Página',
 		name: 'offset',
 		type: 'number' as NodePropertyTypes,
 		default: 10,
-		required: false,
+
 		description: 'Quantidade de chats por página',
 		displayOptions: {
 			show: {

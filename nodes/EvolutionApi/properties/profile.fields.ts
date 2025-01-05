@@ -2,7 +2,7 @@ import { INodeProperties, NodePropertyTypes } from 'n8n-workflow';
 
 export const profileFields: INodeProperties[] = [
     {
-        displayName: 'Nome da Instância',
+        displayName: 'Nome Da Instância',
         name: 'instanceName',
         type: 'string' as NodePropertyTypes,
         default: '',
@@ -64,7 +64,7 @@ export const profileFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'URL da Imagem',
+        displayName: 'URL Da Imagem',
         name: 'picture',
         type: 'string' as NodePropertyTypes,
         default: '',
@@ -78,7 +78,7 @@ export const profileFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Confirmação de Leitura',
+        displayName: 'Confirmação De Leitura',
         name: 'readreceipts',
         type: 'options' as NodePropertyTypes,
         options: [
@@ -102,7 +102,7 @@ export const profileFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Foto do Perfil',
+        displayName: 'Foto Do Perfil',
         name: 'profile',
         type: 'options' as NodePropertyTypes,
         options: [
@@ -175,7 +175,7 @@ export const profileFields: INodeProperties[] = [
                 value: 'all',
             },
             {
-                name: 'Igual ao Visto por Último',
+                name: 'Igual Ao Visto Por Último',
                 value: 'match_last_seen',
             },
         ],
@@ -190,7 +190,7 @@ export const profileFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Visto por Último',
+        displayName: 'Visto Por Último',
         name: 'last',
         type: 'options' as NodePropertyTypes,
         options: [

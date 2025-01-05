@@ -4,7 +4,7 @@ import { INodeProperties } from 'n8n-workflow';
 export const eventsFields: INodeProperties[] = [
 	// Campos = Webhook
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -18,7 +18,7 @@ export const eventsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'O que deseja fazer',
+		displayName: 'O Que Deseja Fazer',
 		name: 'resourceForWebhook',
 		type: 'options',
 		options: [
@@ -55,11 +55,11 @@ export const eventsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Url do Webhook',
+		displayName: 'Url Do Webhook',
 		name: 'webhookUrl',
 		type: 'string',
 		default: '',
-		description: 'Digite a Url que vai receber os eventos do Webhook',
+		description: 'Digite a URL que vai receber os eventos do Webhook',
 		displayOptions: {
 			show: {
 				resource: ['events-api'],
@@ -69,7 +69,7 @@ export const eventsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Webhook por Eventos',
+		displayName: 'Webhook Por Eventos',
 		name: 'webhookByEvents',
 		type: 'boolean',
 		default: false,
@@ -84,7 +84,7 @@ export const eventsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Base64 no Webhook',
+		displayName: 'Base64 No Webhook',
 		name: 'webhookBase64',
 		type: 'boolean',
 		default: false,
@@ -207,7 +207,7 @@ export const eventsFields: INodeProperties[] = [
 
 	// Campos = RabbitMQ
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -221,7 +221,7 @@ export const eventsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'O que deseja fazer',
+		displayName: 'O Que Deseja Fazer',
 		name: 'resourceForRabbitMQ',
 		type: 'options',
 		options: [
@@ -248,7 +248,7 @@ export const eventsFields: INodeProperties[] = [
 		name: 'enabled',
 		type: 'boolean',
 		default: true,
-		description: 'Whether to enable or disable integration with RabbitMQ.',
+		description: 'Whether to enable or disable integration with RabbitMQ',
 		displayOptions: {
 			show: {
 				resource: ['events-api'],

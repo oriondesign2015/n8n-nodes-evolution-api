@@ -13,7 +13,7 @@ export const chatOperations: INodeProperties = {
 	options: [
 		{
 			name: 'Verificar Número',
-			action: 'Verificar número no WhatsApp',
+			action: 'Verificar n mero no whats app',
 			description: 'Verifica se um número está registrado no WhatsApp',
 			value: 'check-number',
 		},
@@ -31,7 +31,7 @@ export const chatOperations: INodeProperties = {
 		},
 		{
 			name: 'Marcar Como Não Lido',
-			action: 'Marcar conversa como não lida',
+			action: 'Marcar conversa como n o lida',
 			description: 'Marca uma conversa específica como não lida',
 			value: 'mark-unread',
 		},
@@ -42,14 +42,14 @@ export const chatOperations: INodeProperties = {
 			value: 'delete-message',
 		},
 		{
-			name: 'Buscar Foto do Perfil',
+			name: 'Buscar Foto Do Perfil',
 			action: 'Buscar foto do perfil',
 			description: 'Obtém a URL da foto do perfil de um contato',
 			value: 'fetch-profile-picture',
 		},
 		{
-			name: 'Obter Mídia em Base64',
-			action: 'Obter mídia em Base64',
+			name: 'Obter Mídia Em Base64',
+			action: 'Obter m dia em base64',
 			description: 'Obtém o conteúdo de uma mídia em formato Base64',
 			value: 'get-media-base64',
 		},
@@ -61,13 +61,13 @@ export const chatOperations: INodeProperties = {
 		},
 		{
 			name: 'Enviar Presença',
-			action: 'Enviar presença',
+			action: 'Enviar presen a',
 			description: 'Envia o status de presença (digitando/gravando) para um contato',
 			value: 'send-presence',
 		},
 		{
 			name: 'Bloquear Contato',
-			action: 'Bloquear Contato',
+			action: 'Bloquear contato',
 			description: 'Bloqueia ou desbloqueia um contato',
 			value: 'block-contact',
 		},
