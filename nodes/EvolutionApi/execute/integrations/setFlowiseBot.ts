@@ -14,19 +14,42 @@ export async function setFlowiseBot(ef: IExecuteFunctions) {
 		let options: IRequestOptions;
 
 		if (resourceForFlowiseBot === 'createFlowise') {
-			const apiKey = ef.getNodeParameter('apiKey', 0) as string;
-			const url = ef.getNodeParameter('url', 0) as string;
-			const enabled = ef.getNodeParameter('enabled', 0) as boolean;
+			const apiUrl = ef.getNodeParameter('apiUrl', 0) as string;
+			const apiKey = ef.getNodeParameter('apiKeyBot', 0) as string;
+			const triggerType = ef.getNodeParameter('triggerType', 0) as string;
+			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
+			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
+			const expire = ef.getNodeParameter('expire', 0) as number;
+			const keywordFinish = ef.getNodeParameter('keywordFinish', 0) as string;
+			const delayMessage = ef.getNodeParameter('delayMessage', 0) as number;
+			const unknownMessage = ef.getNodeParameter('unknownMessage', 0) as string;
+			const listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) as boolean;
+			const stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) as boolean;
+			const keepOpen = ef.getNodeParameter('keepOpen', 0) as boolean;
+			const debounceTime = ef.getNodeParameter('debounceTime', 0) as number;
+			const ignoreJids = ef.getNodeParameter('ignoreJids', 0) as string[];
 
 			const body = {
+				enabled: true,
+				apiUrl,
 				apiKey,
-				url,
-				enabled,
+				triggerType,
+				triggerOperator,
+				triggerValue,
+				expire,
+				keywordFinish,
+				delayMessage,
+				unknownMessage,
+				listeningFromMe,
+				stopBotFromMe,
+				keepOpen,
+				debounceTime,
+				ignoreJids: ignoreJids || []
 			};
 
 			options = {
 				method: 'POST' as IHttpRequestMethods,
-				uri: `/flowise/set/${instanceName}`,
+				uri: `/flowise/create/${instanceName}`,
 				body,
 				json: true,
 			};
@@ -35,19 +58,44 @@ export async function setFlowiseBot(ef: IExecuteFunctions) {
 
 			options = {
 				method: 'GET' as IHttpRequestMethods,
-				uri: `/flowise/find/${flowiseBotId}/${instanceName}`,
+				uri: flowiseBotId
+					? `/flowise/fetch/${flowiseBotId}/${instanceName}`
+					: `/flowise/find/${instanceName}`,
 				json: true,
 			};
 		} else if (resourceForFlowiseBot === 'updateFlowise') {
 			const flowiseBotId = ef.getNodeParameter('flowiseBotId', 0) as string;
-			const apiKey = ef.getNodeParameter('apiKey', 0) as string;
-			const url = ef.getNodeParameter('url', 0) as string;
-			const enabled = ef.getNodeParameter('enabled', 0) as boolean;
+			const apiUrl = ef.getNodeParameter('apiUrl', 0) as string;
+			const apiKey = ef.getNodeParameter('apiKeyBot', 0) as string;
+			const triggerType = ef.getNodeParameter('triggerType', 0) as string;
+			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
+			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
+			const expire = ef.getNodeParameter('expire', 0) as number;
+			const keywordFinish = ef.getNodeParameter('keywordFinish', 0) as string;
+			const delayMessage = ef.getNodeParameter('delayMessage', 0) as number;
+			const unknownMessage = ef.getNodeParameter('unknownMessage', 0) as string;
+			const listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) as boolean;
+			const stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) as boolean;
+			const keepOpen = ef.getNodeParameter('keepOpen', 0) as boolean;
+			const debounceTime = ef.getNodeParameter('debounceTime', 0) as number;
+			const ignoreJids = ef.getNodeParameter('ignoreJids', 0) as string[];
 
 			const body = {
+				enabled: true,
+				apiUrl,
 				apiKey,
-				url,
-				enabled,
+				triggerType,
+				triggerOperator,
+				triggerValue,
+				expire,
+				keywordFinish,
+				delayMessage,
+				unknownMessage,
+				listeningFromMe,
+				stopBotFromMe,
+				keepOpen,
+				debounceTime,
+				ignoreJids: ignoreJids || []
 			};
 
 			options = {

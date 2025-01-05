@@ -25,7 +25,7 @@ export const eventsOperationsOptions: INodeProperties = {
 			name: 'RabbitMQ',
 			action: 'Rabbitmq',
 			description: 'Define/Busca integração com RabbitMQ',
-			value: 'rabbitMQ',
+			value: 'rabbitmq',
 		},
 	],
 	// Definindo como padrão a opção "Enviar Texto"

@@ -624,7 +624,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -637,7 +637,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -651,7 +651,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -664,7 +664,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -677,7 +677,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -690,7 +690,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -703,7 +703,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
@@ -716,23 +716,23 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['instanceSettings'],
+				operation: ['instance-settings'],
 			},
 		},
 	},
 
 	// Campos = Definir presença
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Digite o nome da instância que vai ser deletada',
+		description: 'Digite o nome da instância',
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['setPresence'],
+				operation: ['set-presence'],
 			},
 		},
 	},
@@ -740,16 +740,9 @@ export const instancesFields: INodeProperties[] = [
 		displayName: 'Presença',
 		name: 'presence',
 		type: 'options',
-		description: 'Define o status da presença na instancia',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['setPresence'],
-			},
-		},
 		options: [
 			{
-				name: 'Disponivel',
+				name: 'Disponível',
 				value: 'available',
 			},
 			{
@@ -758,6 +751,14 @@ export const instancesFields: INodeProperties[] = [
 			},
 		],
 		default: 'available',
+		required: true,
+		description: 'Status de presença da instância',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['set-presence'],
+			},
+		},
 	},
 
 	// Campos = Proxy
@@ -771,7 +772,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 			},
 		},
 	},
@@ -795,7 +796,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 			},
 		},
 	},
@@ -808,37 +809,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Host Do Proxy',
-		name: 'proxyHost',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o host do proxy',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['proxy'],
-				resourceForProxy: ['setProxy'],
-			},
-		},
-	},
-	{
-		displayName: 'Porta Do Proxy',
-		name: 'proxyPort',
-		type: 'string',
-		default: '1234',
-		required: true,
-		description: 'Digite a porta do proxy',
-		displayOptions: {
-			show: {
-				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 				resourceForProxy: ['setProxy'],
 			},
 		},
@@ -849,7 +820,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 				resourceForProxy: ['setProxy'],
 			},
 		},
@@ -868,6 +839,36 @@ export const instancesFields: INodeProperties[] = [
 		description: 'Selecione o protocolo do proxy',
 	},
 	{
+		displayName: 'Host Do Proxy',
+		name: 'proxyHost',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o host do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['set-proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
+		displayName: 'Porta Do Proxy',
+		name: 'proxyPort',
+		type: 'string',
+		default: '1234',
+		required: true,
+		description: 'Digite a porta do proxy',
+		displayOptions: {
+			show: {
+				resource: ['instances-api'],
+				operation: ['set-proxy'],
+				resourceForProxy: ['setProxy'],
+			},
+		},
+	},
+	{
 		displayName: 'Usuário Do Proxy',
 		name: 'proxyUsername',
 		type: 'string',
@@ -877,7 +878,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 				resourceForProxy: ['setProxy'],
 			},
 		},
@@ -895,7 +896,7 @@ export const instancesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['instances-api'],
-				operation: ['proxy'],
+				operation: ['set-proxy'],
 				resourceForProxy: ['setProxy'],
 			},
 		},

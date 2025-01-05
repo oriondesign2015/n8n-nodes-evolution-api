@@ -12,7 +12,7 @@ export async function fetchInstances(ef: IExecuteFunctions) {
 
 		const options: IRequestOptions = {
 			method: 'GET' as IHttpRequestMethods,
-			uri: `/instance/fetchInstances/${instanceName}`,
+			uri: `/instance/fetchInstances${instanceName ? `?instanceName=${instanceName}` : ''}`,
 			json: true,
 		};
 

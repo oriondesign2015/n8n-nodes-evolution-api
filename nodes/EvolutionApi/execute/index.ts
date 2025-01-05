@@ -62,7 +62,7 @@ import { updateProfilePicture } from './profile/updateProfilePicture';
 import { removeProfilePicture } from './profile/removeProfilePicture';
 import { fetchPrivacySettings } from './profile/fetchPrivacySettings';
 import { updatePrivacySettings } from './profile/updatePrivacySettings';
-
+import { joinGroup } from './groups/joinGroup';
 type ResourceOperationFunctions = {
 	[resource: string]: {
 		[operation: string]: (ef: IExecuteFunctions) => Promise<any>;
@@ -76,36 +76,36 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		'instance-connect': instanceConnect,
 		'restart-instance': restartInstance,
 		'logout-instance': logoutInstance,
-		setPresence: setPresence,
+		'set-presence': setPresence,
 		'delete-instance': deleteInstance,
 		'fetch-instances': fetchInstances,
-		instanceSettings: instanceSettings,
-		proxy: setProxy,
+		'instance-settings': instanceSettings,
+		'set-proxy': setProxy,
 	},
 	'messages-api': {
-		sendText: sendText,
-		sendImage: sendImage,
-		sendVideo: sendVideo,
-		sendAudio: sendAudio,
-		sendDocumento: sendDocument,
-		sendPoll: sendPoll,
-		sendContact: sendContact,
-		sendList: sendList,
-		sendButtons: sendButtons,
-		sendStories: sendStories,
-		sendPix: sendPix,
-		sendReaction: sendReaction,
+		'send-text': sendText,
+		'send-image': sendImage,
+		'send-video': sendVideo,
+		'send-audio': sendAudio,
+		'send-document': sendDocument,
+		'send-poll': sendPoll,
+		'send-contact': sendContact,
+		'send-list': sendList,
+		'send-buttons': sendButtons,
+		'send-stories': sendStories,
+		'send-pix': sendPix,
+		'send-reaction': sendReaction,
 	},
 	'events-api': {
-		webhook: setWebhook,
-		rabbitMQ: setRabbitMQ,
+		'webhook': setWebhook,
+		'rabbitmq': setRabbitMQ,
 	},
 	'integrations-api': {
-		chatwoot: setChatwoot,
-		typebot: setTypebot,
-		evolutionBot: setEvolutionBot,
-		difyBot: setDifyBot,
-		flowiseBot: setFlowiseBot,
+		'chatwoot': setChatwoot,
+		'typebot': setTypebot,
+		'evolution-bot': setEvolutionBot,
+		'dify-bot': setDifyBot,
+		'flowise-bot': setFlowiseBot,
 	},
 	'groups-api': {
 		'create-group': createGroup,
@@ -120,6 +120,7 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		'update-participants': updateParticipants,
 		'update-settings': updateSettings,
 		'toggle-ephemeral': toggleEphemeral,
+		'join-group': joinGroup,
 		'leave-group': leaveGroup,
 	},
 	'chat-api': {

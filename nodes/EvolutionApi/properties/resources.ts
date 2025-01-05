@@ -7,11 +7,11 @@ export const resources: INodeProperties = {
 	noDataExpression: true,
 	options: [
 		{
-			name: 'Instâncias',
+			name: 'Instância',
 			value: 'instances-api',
 		},
 		{
-			name: 'Mensagens',
+			name: 'Mensagem',
 			value: 'messages-api',
 		},
 		{
@@ -19,20 +19,20 @@ export const resources: INodeProperties = {
 			value: 'chat-api',
 		},
 		{
-			name: 'Grupos',
+			name: 'Grupo',
 			value: 'groups-api',
-		},
-		{
-			name: 'Eventos',
-			value: 'events-api',
-		},
-		{
-			name: 'Integrações',
-			value: 'integrations-api',
 		},
 		{
 			name: 'Perfil',
 			value: 'profile-api',
+		},
+		{
+			name: 'Evento',
+			value: 'events-api',
+		},
+		{
+			name: 'Integração',
+			value: 'integrations-api',
 		},
 	],
 	default: 'instances-api',

@@ -24,7 +24,7 @@ export const integrationsOperationsOptions: INodeProperties = {
 			name: 'Evolution Bot',
 			action: 'Evolution bot',
 			description: 'Controla a integração com Evolution Bot',
-			value: 'evolutionBot',
+			value: 'evolution-bot',
 		},
 		{
 			// Create/find/fetch/Update/Delete/Start/Change Status/Fetch Sessions do Typebot

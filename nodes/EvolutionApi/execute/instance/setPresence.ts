@@ -18,7 +18,7 @@ export async function setPresence(ef: IExecuteFunctions) {
 			},
 			uri: `/instance/setPresence/${instanceName}`,
 			body: {
-				presence: presence,
+				'presence': presence
 			},
 			json: true,
 		};

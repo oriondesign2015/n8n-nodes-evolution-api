@@ -14,23 +14,40 @@ export async function setTypebot(ef: IExecuteFunctions) {
 		let options: IRequestOptions;
 
 		if (resourceForTypebot === 'createTypebot') {
-			const apiKey = ef.getNodeParameter('apiKey', 0) as string;
 			const url = ef.getNodeParameter('url', 0) as string;
-			const enabled = ef.getNodeParameter('enabled', 0) as boolean;
-			const expire = ef.getNodeParameter('expire', 0) as boolean;
-			const keyExpiration = ef.getNodeParameter('keyExpiration', 0) as string;
+			const typebot = ef.getNodeParameter('typebot', 0) as string;
+			const triggerType = ef.getNodeParameter('triggerType', 0) as string;
+			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
+			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
+			const expire = ef.getNodeParameter('expire', 0) as number;
+			const keywordFinish = ef.getNodeParameter('keywordFinish', 0) as string;
+			const delayMessage = ef.getNodeParameter('delayMessage', 0) as number;
+			const unknownMessage = ef.getNodeParameter('unknownMessage', 0) as string;
+			const listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) as boolean;
+			const stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) as boolean;
+			const keepOpen = ef.getNodeParameter('keepOpen', 0) as boolean;
+			const debounceTime = ef.getNodeParameter('debounceTime', 0) as number;
 
 			const body = {
-				apiKey,
+				enabled: true,
 				url,
-				enabled,
+				typebot,
+				triggerType,
+				triggerOperator,
+				triggerValue,
 				expire,
-				keyExpiration,
+				keywordFinish,
+				delayMessage,
+				unknownMessage,
+				listeningFromMe,
+				stopBotFromMe,
+				keepOpen,
+				debounceTime
 			};
 
 			options = {
 				method: 'POST' as IHttpRequestMethods,
-				uri: `/typebot/set/${instanceName}`,
+				uri: `/typebot/create/${instanceName}`,
 				body,
 				json: true,
 			};
@@ -39,23 +56,42 @@ export async function setTypebot(ef: IExecuteFunctions) {
 
 			options = {
 				method: 'GET' as IHttpRequestMethods,
-				uri: `/typebot/find/${typebotId}/${instanceName}`,
+				uri: typebotId
+					? `/typebot/fetch/${typebotId}/${instanceName}`
+					: `/typebot/find/${instanceName}`,
 				json: true,
 			};
 		} else if (resourceForTypebot === 'updateTypebot') {
 			const typebotId = ef.getNodeParameter('typebotId', 0) as string;
-			const apiKey = ef.getNodeParameter('apiKey', 0) as string;
 			const url = ef.getNodeParameter('url', 0) as string;
-			const enabled = ef.getNodeParameter('enabled', 0) as boolean;
-			const expire = ef.getNodeParameter('expire', 0) as boolean;
-			const keyExpiration = ef.getNodeParameter('keyExpiration', 0) as string;
+			const typebot = ef.getNodeParameter('typebot', 0) as string;
+			const expire = ef.getNodeParameter('expire', 0) as number;
+			const keywordFinish = ef.getNodeParameter('keywordFinish', 0) as string;
+			const delayMessage = ef.getNodeParameter('delayMessage', 0) as number;
+			const unknownMessage = ef.getNodeParameter('unknownMessage', 0) as string;
+			const listeningFromMe = ef.getNodeParameter('listeningFromMe', 0) as boolean;
+			const stopBotFromMe = ef.getNodeParameter('stopBotFromMe', 0) as boolean;
+			const keepOpen = ef.getNodeParameter('keepOpen', 0) as boolean;
+			const debounceTime = ef.getNodeParameter('debounceTime', 0) as number;
+			const triggerType = ef.getNodeParameter('triggerType', 0) as string;
+			const triggerOperator = ef.getNodeParameter('triggerOperator', 0) as string;
+			const triggerValue = ef.getNodeParameter('triggerValue', 0) as string;
 
 			const body = {
-				apiKey,
+				enabled: true,
 				url,
-				enabled,
+				typebot,
 				expire,
-				keyExpiration,
+				keywordFinish,
+				delayMessage,
+				unknownMessage,
+				listeningFromMe,
+				stopBotFromMe,
+				keepOpen,
+				debounceTime,
+				triggerType,
+				triggerOperator,
+				triggerValue
 			};
 
 			options = {
@@ -70,6 +106,48 @@ export async function setTypebot(ef: IExecuteFunctions) {
 			options = {
 				method: 'DELETE' as IHttpRequestMethods,
 				uri: `/typebot/delete/${typebotId}/${instanceName}`,
+				json: true,
+			};
+		} else if (resourceForTypebot === 'fetchSessionsTypebot') {
+			const typebotId = ef.getNodeParameter('typebotId', 0) as string;
+
+			options = {
+				method: 'GET' as IHttpRequestMethods,
+				uri: `/typebot/fetchSessions/${typebotId}/${instanceName}`,
+				json: true,
+			};
+		} else if (resourceForTypebot === 'changeStatusTypebot') {
+			const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
+			const status = ef.getNodeParameter('status', 0) as string;
+
+			options = {
+				method: 'POST' as IHttpRequestMethods,
+				uri: `/typebot/changeStatus/${instanceName}`,
+				body: {
+					remoteJid,
+					status,
+				},
+				json: true,
+			};
+		} else if (resourceForTypebot === 'startTypebot') {
+			const url = ef.getNodeParameter('url', 0) as string;
+			const typebot = ef.getNodeParameter('typebot', 0) as string;
+			const remoteJid = ef.getNodeParameter('remoteJid', 0) as string;
+			const startSession = ef.getNodeParameter('startSession', 0) as boolean;
+			const variables = ef.getNodeParameter('variables', 0) as Array<{ name: string; value: string }>;
+
+			const body = {
+				url,
+				typebot,
+				remoteJid,
+				startSession,
+				...(variables?.length && { variables }),
+			};
+
+			options = {
+				method: 'POST' as IHttpRequestMethods,
+				uri: `/typebot/start/${instanceName}`,
+				body,
 				json: true,
 			};
 		} else {

@@ -36,6 +36,18 @@ export const groupsOperations: INodeProperties = {
 			value: 'update-group-description',
 		},
 		{
+			name: 'Atualizar Configurações',
+			action: 'Atualizar configurações do grupo',
+			description: 'Atualiza as configurações de permissões do grupo',
+			value: 'update-settings',
+		},
+		{
+			name: 'Atualizar Membros',
+			action: 'Atualizar membros do grupo',
+			description: 'Adiciona, remove ou atualiza permissões de membros',
+			value: 'update-participants',
+		},
+		{
 			name: 'Buscar Link de Convite',
 			action: 'Buscar Link de Convite',
 			description: 'Obtém o link de convite do grupo',
@@ -66,22 +78,16 @@ export const groupsOperations: INodeProperties = {
 			value: 'find-participants',
 		},
 		{
-			name: 'Atualizar Membros',
-			action: 'Atualizar membros do grupo',
-			description: 'Adiciona, remove ou atualiza permissões de membros',
-			value: 'update-participants',
-		},
-		{
-			name: 'Atualizar Configurações',
-			action: 'Atualizar configurações do grupo',
-			description: 'Atualiza as configurações de permissões do grupo',
-			value: 'update-settings',
-		},
-		{
 			name: 'Mensagens Temporárias',
 			action: 'Configurar mensagens temporárias',
 			description: 'Define o tempo de expiração das mensagens no grupo',
 			value: 'toggle-ephemeral',
+		},
+		{
+			name: 'Entrar no Grupo',
+			action: 'Entrar no grupo',
+			description: 'Entra em um grupo usando o código de convite',
+			value: 'join-group',
 		},
 		{
 			name: 'Sair do Grupo',

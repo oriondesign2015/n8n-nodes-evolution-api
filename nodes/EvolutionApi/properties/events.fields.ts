@@ -216,7 +216,7 @@ export const eventsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['events-api'],
-				operation: ['rabbitMQ'],
+				operation: ['rabbitmq'],
 			},
 		},
 	},
@@ -239,7 +239,7 @@ export const eventsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['events-api'],
-				operation: ['rabbitMQ'],
+				operation: ['rabbitmq'],
 			},
 		},
 	},
@@ -252,7 +252,7 @@ export const eventsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['events-api'],
-				operation: ['rabbitMQ'],
+				operation: ['rabbitmq'],
 				resourceForRabbitMQ: ['setRabbitMQ'],
 			},
 		},
@@ -264,7 +264,7 @@ export const eventsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['events-api'],
-				operation: ['rabbitMQ'],
+				operation: ['rabbitmq'],
 				resourceForRabbitMQ: ['setRabbitMQ'],
 			},
 		},

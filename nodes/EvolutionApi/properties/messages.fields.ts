@@ -12,7 +12,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendText'],
+				operation: ['send-text'],
 			},
 		},
 	},
@@ -26,7 +26,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendText'],
+				operation: ['send-text'],
 			},
 		},
 	},
@@ -40,7 +40,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendText'],
+				operation: ['send-text'],
 			},
 		},
 	},
@@ -138,7 +138,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendText'],
+				operation: ['send-text'],
 			},
 		},
 	},
@@ -154,7 +154,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendImage'],
+				operation: ['send-image'],
 			},
 		},
 	},
@@ -168,7 +168,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendImage'],
+				operation: ['send-image'],
 			},
 		},
 	},
@@ -182,7 +182,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendImage'],
+				operation: ['send-image'],
 			},
 		},
 	},
@@ -196,7 +196,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendImage'],
+				operation: ['send-image'],
 			},
 		},
 	},
@@ -287,7 +287,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendImage'],
+				operation: ['send-image'],
 			},
 		},
 	},
@@ -303,7 +303,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendVideo'],
+				operation: ['send-video'],
 			},
 		},
 	},
@@ -317,7 +317,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendVideo'],
+				operation: ['send-video'],
 			},
 		},
 	},
@@ -331,7 +331,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendVideo'],
+				operation: ['send-video'],
 			},
 		},
 	},
@@ -345,7 +345,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendVideo'],
+				operation: ['send-video'],
 			},
 		},
 	},
@@ -436,7 +436,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendVideo'],
+				operation: ['send-video'],
 			},
 		},
 	},
@@ -452,7 +452,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendAudio'],
+				operation: ['send-audio'],
 			},
 		},
 	},
@@ -466,7 +466,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendAudio'],
+				operation: ['send-audio'],
 			},
 		},
 	},
@@ -480,7 +480,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendAudio'],
+				operation: ['send-audio'],
 			},
 		},
 	},
@@ -498,80 +498,81 @@ export const messagesFields: INodeProperties[] = [
 				default: 1200,
 				description: 'Digite quantos milisegundos de delay a mensagem terá antes de ser enviada',
 			},
-			{
-				displayName: 'Responder Mensagem',
-				name: 'quoted',
-				type: 'fixedCollection',
-				typeOptions: {
-					multipleValues: false,
-				},
-				default: {
-					messageQuoted: {
-						messageId: '',
-					},
-				},
-				options: [
-					{
-						name: 'messageQuoted',
-						displayName: 'Mensagem',
-						values: [
-							{
-								displayName: 'ID da Mensagem',
-								name: 'messageId',
-								type: 'string',
-								default: '',
-								description: 'ID da mensagem que será respondida',
-							},
-						],
-					},
-				],
-			},
-			{
-				displayName: 'Menções',
-				name: 'mentions',
-				type: 'fixedCollection',
-				typeOptions: {
-					multipleValues: false,
-				},
-				default: {
-					mentionsSettings: {
-						mentionsEveryOne: false,
-						mentioned: '',
-					},
-				},
-				options: [
-					{
-						name: 'mentionsSettings',
-						displayName: 'Configurações',
-						values: [
-							{
-								displayName: 'Mencionar Todos',
-								name: 'mentionsEveryOne',
-								type: 'boolean',
-								default: false,
-								description: 'Menciona todos os participantes do grupo',
-							},
-							{
-								displayName: 'Números para Mencionar',
-								name: 'mentioned',
-								type: 'string',
-								default: '',
-								displayOptions: {
-									show: {
-										mentionsEveryOne: [false],
-									},
-								},
-								description: 'Digite os números que deseja mencionar separados por vírgula (ex: 5511999999999,5511888888888)',
-							},
-						],
-					},
-				],
-			},
+			//{
+			//	displayName: 'Responder Mensagem',
+			//	name: 'quoted',
+			//	type: 'fixedCollection',
+			//	typeOptions: {
+			//		multipleValues: false,
+			//	},
+			//	default: {
+			//		messageQuoted: {
+			//			messageId: '',
+			//		},
+			//	},
+			//	options: [
+			//		{
+			//			name: 'messageQuoted',
+			//			displayName: 'Mensagem',
+			//			values: [
+			//				{
+			//					displayName: 'ID da Mensagem',
+			//					name: 'messageId',
+			//					type: 'string',
+			//					default: '',
+			//					description: 'ID da mensagem que será respondida',
+			//				},
+			//			],
+			//		},
+			//	],
+			//},
+
+			//{
+			//	displayName: 'Menções',
+			//	name: 'mentions',
+			//	type: 'fixedCollection',
+			//	typeOptions: {
+			//		multipleValues: false,
+			//	},
+			//	default: {
+			//		mentionsSettings: {
+			//			mentionsEveryOne: false,
+			//			mentioned: '',
+			//		},
+			//	},
+			//	options: [
+			//		{
+			//			name: 'mentionsSettings',
+			//			displayName: 'Configurações',
+			//			values: [
+			//				{
+			//					displayName: 'Mencionar Todos',
+			//					name: 'mentionsEveryOne',
+			//					type: 'boolean',
+			//					default: false,
+			//					description: 'Menciona todos os participantes do grupo',
+			//				},
+			//				{
+			//					displayName: 'Números para Mencionar',
+			//					name: 'mentioned',
+			//					type: 'string',
+			//					default: '',
+			//					displayOptions: {
+			//						show: {
+			//							mentionsEveryOne: [false],
+			//						},
+			//					},
+			//					description: 'Digite os números que deseja mencionar separados por vírgula (ex: 5511999999999,5511888888888)',
+			//				},
+			//			],
+			//		},
+			//	],
+			//},
 		],
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendAudio'],
+				operation: ['send-audio'],
 			},
 		},
 	},
@@ -587,7 +588,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -601,7 +602,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -615,7 +616,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -629,7 +630,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -643,7 +644,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -734,7 +735,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendDocumento'],
+				operation: ['send-document'],
 			},
 		},
 	},
@@ -750,7 +751,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-poll'],
 			},
 		},
 	},
@@ -764,7 +765,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-poll'],
 			},
 		},
 	},
@@ -778,7 +779,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-poll'],
 			},
 		},
 	},
@@ -790,7 +791,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-poll'],
 			},
 		},
 	},
@@ -821,7 +822,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-poll'],
 			},
 		},
 	},
@@ -912,7 +913,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPoll'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -928,7 +929,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 	},
@@ -940,7 +941,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 		options: [
@@ -973,7 +974,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 	},
@@ -987,7 +988,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 	},
@@ -999,7 +1000,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 	},
@@ -1011,7 +1012,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 		options: [
@@ -1213,7 +1214,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendContact'],
+				operation: ['send-contact'],
 			},
 		},
 	},
@@ -1227,7 +1228,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendContact'],
+				operation: ['send-contact'],
 			},
 		},
 	},
@@ -1296,7 +1297,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendContact'],
+				operation: ['send-contact'],
 			},
 		},
 	},
@@ -1312,7 +1313,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1326,7 +1327,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1340,7 +1341,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1349,11 +1350,12 @@ export const messagesFields: INodeProperties[] = [
 		name: 'description',
 		type: 'string',
 		default: '',
-		description: 'Descrição da lista (Opcional)',
+		required: true,
+		description: 'Descrição da lista',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1361,13 +1363,13 @@ export const messagesFields: INodeProperties[] = [
 		displayName: 'Texto do Botão',
 		name: 'buttonText',
 		type: 'string',
-		default: 'Clique Aqui',
-		required: false,
+		default: 'Ver Opções',
+		required: true,
 		description: 'Texto que aparecerá no botão da lista',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1376,23 +1378,24 @@ export const messagesFields: INodeProperties[] = [
 		name: 'footerText',
 		type: 'string',
 		default: '',
-		required: false,
+		required: true,
 		description: 'Texto que aparecerá no rodapé da lista',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
 	{
 		displayName: 'Seções',
 		name: 'sections',
+		placeholder: 'Adicionar Seção',
 		type: 'fixedCollection',
 		typeOptions: {
 			multipleValues: true,
 		},
-		default: { sectionValues: [] },
+		default: {},
 		options: [
 			{
 				name: 'sectionValues',
@@ -1403,7 +1406,6 @@ export const messagesFields: INodeProperties[] = [
 						name: 'title',
 						type: 'string',
 						default: '',
-						required: true,
 						description: 'Título da seção',
 					},
 					{
@@ -1413,7 +1415,7 @@ export const messagesFields: INodeProperties[] = [
 						typeOptions: {
 							multipleValues: true,
 						},
-						default: { rowValues: [] },
+						default: {},
 						options: [
 							{
 								name: 'rowValues',
@@ -1439,23 +1441,21 @@ export const messagesFields: INodeProperties[] = [
 										name: 'rowId',
 										type: 'string',
 										default: '',
-										required: true,
-										description: 'ID único para identificar a linha',
-									},
-								],
-							},
-						],
-					},
-				],
-			},
+										description: 'ID único da opção',
+									}
+								]
+							}
+						]
+					}
+				]
+			}
 		],
-		description: 'Seções da lista com suas respectivas linhas',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
-		},
+		}
 	},
 	{
 		displayName: 'Opções',
@@ -1544,7 +1544,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendList'],
+				operation: ['send-list'],
 			},
 		},
 	},
@@ -1560,7 +1560,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1574,7 +1574,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1588,7 +1588,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1602,7 +1602,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1611,12 +1611,12 @@ export const messagesFields: INodeProperties[] = [
 		name: 'footer',
 		type: 'string',
 		default: '',
-		required: false,
+		//required: false,
 		description: 'Texto do rodapé da mensagem',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1721,7 +1721,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendButtons'],
+				operation: ['send-buttons'],
 			},
 		},
 	},
@@ -1737,7 +1737,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPix'],
+				operation: ['send-pix'],
 			},
 		},
 	},
@@ -1751,7 +1751,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPix'],
+				operation: ['send-pix'],
 			},
 		},
 	},
@@ -1765,7 +1765,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPix'],
+				operation: ['send-pix'],
 			},
 		},
 	},
@@ -1801,7 +1801,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPix'],
+				operation: ['send-pix'],
 			},
 		},
 	},
@@ -1815,7 +1815,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendPix'],
+				operation: ['send-pix'],
 			},
 		},
 	},
@@ -1828,7 +1828,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 			},
 		},
 	},
@@ -1842,7 +1842,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendStories'],
+				operation: ['send-stories'],
 				allContacts: [false],
 			},
 		},
@@ -1859,7 +1859,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendReaction'],
+				operation: ['send-reaction'],
 			},
 		},
 	},
@@ -1873,7 +1873,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendReaction'],
+				operation: ['send-reaction'],
 			},
 		},
 	},
@@ -1887,7 +1887,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendReaction'],
+				operation: ['send-reaction'],
 			},
 		},
 	},
@@ -1900,7 +1900,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendReaction'],
+				operation: ['send-reaction'],
 			},
 		},
 	},
@@ -1914,7 +1914,7 @@ export const messagesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
-				operation: ['sendReaction'],
+				operation: ['send-reaction'],
 			},
 		},
 	}

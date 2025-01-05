@@ -94,10 +94,20 @@ export const chatFields: INodeProperties[] = [
 	{
 		displayName: 'Ação',
 		name: 'archive',
-		type: 'boolean' as NodePropertyTypes,
+		type: 'options' as NodePropertyTypes,
+		options: [
+			{
+				name: 'Arquivar',
+				value: true,
+			},
+			{
+				name: 'Desarquivar',
+				value: false,
+			},
+		],
 		default: true,
 		required: true,
-		description: 'Arquivar (true) ou desarquivar (false) a conversa',
+		description: 'Escolha se deseja arquivar ou desarquivar a conversa',
 		displayOptions: {
 			show: {
 				resource: ['chat-api'],

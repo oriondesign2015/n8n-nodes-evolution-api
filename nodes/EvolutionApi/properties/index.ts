@@ -28,12 +28,16 @@ const resourcesOptions: INodeProperties = {
 			value: 'messages-api',
 		},
 		{
-			name: 'Grupos',
+			name: 'Grupo',
 			value: 'groups-api',
 		},
 		{
 			name: 'Chat',
 			value: 'chat-api',
+		},
+		{
+			name: 'Perfil',
+			value: 'profile-api',
 		},
 		{
 			name: 'Evento',
@@ -42,10 +46,6 @@ const resourcesOptions: INodeProperties = {
 		{
 			name: 'Integração',
 			value: 'integrations-api',
-		},
-		{
-			name: 'Perfil',
-			value: 'profile-api',
 		},
 	],
 	default: 'instances-api',

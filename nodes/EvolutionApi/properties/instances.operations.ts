@@ -46,7 +46,7 @@ export const instancesOperationsOptions: INodeProperties = {
 			name: 'Definir Comportamento',
 			action: 'Definir Comportamento',
 			description: 'Define o comportamento da instancia',
-			value: 'instanceSettings',
+			value: 'instance-settings',
 		},
 
 		// Opção = Definir presença
@@ -55,7 +55,7 @@ export const instancesOperationsOptions: INodeProperties = {
 			name: 'Definir Presença',
 			action: 'Definir Presença',
 			description: 'Define a presença na instancia',
-			value: 'setPresence',
+			value: 'set-presence',
 		},
 
 		// Opção = Definit Proxy
@@ -64,7 +64,7 @@ export const instancesOperationsOptions: INodeProperties = {
 			name: 'Definir/Buscar Proxy',
 			action: 'Proxy',
 			description: 'Define um Proxy na instancia',
-			value: 'proxy',
+			value: 'set-proxy',
 		},
 
 		// Opção = Reiniciar instancia

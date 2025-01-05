@@ -13,17 +13,40 @@ export async function setChatwoot(ef: IExecuteFunctions) {
 
 		let options: IRequestOptions;
 
-		if (resourceForChatwoot === 'createChatwoot') {
-			const accountId = ef.getNodeParameter('accountId', 0) as string;
-			const token = ef.getNodeParameter('token', 0) as string;
-			const url = ef.getNodeParameter('url', 0) as string;
-			const signMsg = ef.getNodeParameter('signMsg', 0) as boolean;
+		if (resourceForChatwoot === 'setChatwoot') {
+			const accountId = ef.getNodeParameter('chatwootAccountId', 0) as string;
+			const token = ef.getNodeParameter('chatwootToken', 0) as string;
+			const url = ef.getNodeParameter('chatwootUrl', 0) as string;
+			const signMsg = ef.getNodeParameter('chatwootSignMsg', 0) as boolean;
+			const reopenConversation = ef.getNodeParameter('chatwootReopenConversation', 0) as boolean;
+			const conversationPending = ef.getNodeParameter('chatwootConversationPending', 0) as boolean;
+			const nameInbox = ef.getNodeParameter('chatwootNameInbox', 0) as string;
+			const mergeBrazilContacts = ef.getNodeParameter('chatwootMergeBrazilContacts', 0) as boolean;
+			const importContacts = ef.getNodeParameter('chatwootImportContacts', 0) as boolean;
+			const importMessages = ef.getNodeParameter('chatwootImportMessages', 0) as boolean;
+			const daysLimitImportMessages = ef.getNodeParameter('chatwootDaysLimitImportMessages', 0) as number;
+			const autoCreate = ef.getNodeParameter('chatwootAutoCreate', 0) as boolean;
+			const organization = ef.getNodeParameter('chatwootOrganization', 0) as string;
+			const logo = ef.getNodeParameter('chatwootLogo', 0) as string;
 
 			const body = {
+				enabled: true,
 				accountId,
 				token,
 				url,
 				signMsg,
+				reopenConversation,
+				conversationPending,
+				nameInbox,
+				mergeBrazilContacts,
+				importContacts,
+				importMessages,
+				daysLimitImportMessages,
+				signDelimiter: '\n',
+				autoCreate,
+				organization,
+				logo,
+				ignoreJids: ['']
 			};
 
 			options = {

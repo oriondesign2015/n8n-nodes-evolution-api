@@ -6,17 +6,18 @@ import {
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
-export async function logoutInstance(ef: IExecuteFunctions) {
+export async function joinGroup(ef: IExecuteFunctions) {
 	try {
-		const instanceName = ef.getNodeParameter('instanceName', 0);
+		const instanceName = ef.getNodeParameter('instanceName', 0) as string;
+		const inviteCode = ef.getNodeParameter('inviteCode', 0) as string;
 
-		const options: IRequestOptions = {
-			method: 'DELETE' as IHttpRequestMethods,
-			uri: `/instance/logout/${instanceName}`,
+		const requestOptions: IRequestOptions = {
+			method: 'GET' as IHttpRequestMethods,
+			uri: `/group/acceptInviteCode/${instanceName}?inviteCode=${inviteCode}`,
 			json: true,
 		};
 
-		const response = await evolutionRequest(ef, options);
+		const response = await evolutionRequest(ef, requestOptions);
 		return {
 			json: {
 				success: true,
@@ -27,12 +28,8 @@ export async function logoutInstance(ef: IExecuteFunctions) {
 		const errorData = {
 			success: false,
 			error: {
-				message: error.message.includes('Could not get parameter')
-					? 'Parâmetros inválidos ou ausentes'
-					: 'Erro ao desconectar instância',
-				details: error.message.includes('Could not get parameter')
-					? 'Verifique se todos os campos obrigatórios foram preenchidos corretamente'
-					: error.message,
+				message: error.message,
+				details: 'Erro ao entrar no grupo',
 				code: error.code || 'UNKNOWN_ERROR',
 				timestamp: new Date().toISOString(),
 			},

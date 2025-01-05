@@ -18,7 +18,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Texto',
 			action: 'Enviar Texto',
 			description: 'Envia mensagem de Texto',
-			value: 'sendText',
+			value: 'send-text',
 		},
 
 		// Opção = Enviar Imagem
@@ -27,7 +27,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Imagem',
 			action: 'Enviar Imagem',
 			description: 'Envia mensagem de Imagem',
-			value: 'sendImage',
+			value: 'send-image',
 		},
 
 		// Opção = Enviar Video
@@ -36,7 +36,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Video',
 			action: 'Enviar Video',
 			description: 'Enviar mensagem de Video',
-			value: 'sendVideo',
+			value: 'send-video',
 		},
 
 		// Opção = Enviar Audio
@@ -45,7 +45,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Audio',
 			action: 'Enviar Audio',
 			description: 'Enviar mensagem de Audio',
-			value: 'sendAudio',
+			value: 'send-audio',
 		},
 
 		// Opção = Enviar Documento
@@ -54,7 +54,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Documento',
 			action: 'Enviar Documento',
 			description: 'Enviar mensagem de Video',
-			value: 'sendDocumento',
+			value: 'send-document',
 		},
 
 		// Opção = Enviar Enquete
@@ -63,7 +63,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Enquete',
 			action: 'Enviar Enquete',
 			description: 'Envia uma Enquete de até 12 opções',
-			value: 'sendPoll',
+			value: 'send-poll',
 		},
 
 		// Opção = Enviar Contato
@@ -71,7 +71,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Contato',
 			action: 'Enviar Contato',
 			description: 'Envia um contato no whatsapp',
-			value: 'sendContact',
+			value: 'send-contact',
 		},
 
 		// Opção = Enviar Lista
@@ -79,7 +79,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Lista',
 			action: 'Enviar Lista',
 			description: 'Envia uma lista de opções interativa',
-			value: 'sendList',
+			value: 'send-list',
 		},
 
 		// Opção = Enviar Botões
@@ -87,7 +87,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Botões',
 			action: 'Enviar Botões',
 			description: 'Envia mensagem com botões interativos',
-			value: 'sendButtons',
+			value: 'send-buttons',
 		},
 
 		// Opção = Enviar PIX
@@ -95,7 +95,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar PIX',
 			action: 'Enviar PIX',
 			description: 'Envia botão de pagamento PIX',
-			value: 'sendPix',
+			value: 'send-pix',
 		},
 
 		// Opção = Enviar Status
@@ -103,7 +103,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Enviar Status',
 			action: 'Enviar Status',
 			description: 'Publicar um Status/Stories',
-			value: 'sendStories',
+			value: 'send-stories',
 		},
 
 		// Opção = Reagir Mensagem
@@ -111,9 +111,9 @@ export const messagesOperationsOptions: INodeProperties = {
 			name: 'Reagir Mensagem',
 			action: 'Reagir Mensagem',
 			description: 'Adiciona uma reação em uma mensagem',
-			value: 'sendReaction',
+			value: 'send-reaction',
 		},
 	],
 	// Definindo como padrão a opção "Enviar Texto"
-	default: 'sendText',
+	default: 'send-text',
 };

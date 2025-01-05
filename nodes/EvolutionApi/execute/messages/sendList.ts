@@ -17,10 +17,12 @@ export async function sendList(ef: IExecuteFunctions) {
 		const sections = ef.getNodeParameter('sections.sectionValues', 0) as {
 			title: string;
 			rows: {
-				title: string;
-				description?: string;
-				rowId?: string;
-			}[];
+				rowValues: {
+					title: string;
+					description?: string;
+					rowId?: string;
+				}[];
+			};
 		}[];
 
 		// Validação das seções
@@ -62,10 +64,17 @@ export async function sendList(ef: IExecuteFunctions) {
 			title,
 			description,
 			buttonText,
-			sections,
+			footerText: options.footer || '',
+			sections: sections.map(section => ({
+				title: section.title,
+				rows: section.rows.rowValues.map(row => ({
+					title: row.title,
+					description: row.description || '',
+					rowId: row.rowId || `${section.title}_${row.title}`
+				}))
+			}))
 		};
 
-		if (options.footer) body.footer = options.footer;
 		if (options.delay) body.delay = options.delay;
 
 		if (options.quoted?.messageQuoted?.messageId) {

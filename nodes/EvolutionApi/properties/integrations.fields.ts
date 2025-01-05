@@ -54,6 +54,21 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Link Do Chatwoot',
+		name: 'chatwootUrl',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Digite o link do Chatwoot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['chatwoot'],
+				resourceForChatwoot: ['setChatwoot'],
+			},
+		},
+	},
+	{
 		displayName: 'ID Da Conta Do Chatwoot',
 		name: 'chatwootAccountId',
 		type: 'string',
@@ -78,21 +93,6 @@ export const integrationsFields: INodeProperties[] = [
 		},
 		default: '',
 		description: 'Digite o token de admin do Chatwoot',
-		displayOptions: {
-			show: {
-				resource: ['integrations-api'],
-				operation: ['chatwoot'],
-				resourceForChatwoot: ['setChatwoot'],
-			},
-		},
-	},
-	{
-		displayName: 'Link Do Chatwoot',
-		name: 'chatwootUrl',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Digite o link do Chatwoot',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -589,7 +589,7 @@ export const integrationsFields: INodeProperties[] = [
 		name: 'startSession',
 		type: 'boolean',
 		default: false,
-		description: 'Whether...',
+		description: 'Se deve iniciar uma nova sessão',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -599,35 +599,36 @@ export const integrationsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Variaveis',
-		name: 'variables_display',
+		displayName: 'Variáveis',
+		name: 'variables',
 		type: 'fixedCollection',
-		default: { metadataValues: [] },
-		required: false,
 		typeOptions: {
 			multipleValues: true,
 		},
-		description: 'Digite as opções da enquete (mínimo 2, máximo 12). Cada opção deve ser única.',
+		default: {},
 		options: [
 			{
-				name: 'metadataValues',
-				displayName: 'Metadata',
+				name: 'variable',
+				displayName: 'Variável',
 				values: [
 					{
 						displayName: 'Nome Da Variavel',
 						name: 'name',
 						type: 'string',
 						default: '',
+						description: 'Nome da variável',
 					},
 					{
 						displayName: 'Valor Da Variavel',
 						name: 'value',
 						type: 'string',
 						default: '',
+						description: 'Valor da variável',
 					},
 				],
 			},
 		],
+		description: 'Variáveis para enviar ao typebot',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
@@ -678,7 +679,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 			},
 		},
 	},
@@ -718,7 +719,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 			},
 		},
 	},
@@ -730,14 +731,14 @@ export const integrationsFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: false,
-		description: 'Digite o ID do EvolutionBot que deseja buscar, deixe vazio para procurar todos',
+		description: 'Digite o ID do Evolution Bot que deseja buscar, deixe vazio para procurar todos',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: [
-					'updateEvolutionBot',
 					'findEvolutionBot',
+					'updateEvolutionBot',
 					'deleteEvolutionBot',
 					'fetchSessionsEvolutionBot',
 					'changeStatusEvolutionBot',
@@ -757,7 +758,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -772,7 +773,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -796,7 +797,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -832,7 +833,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 				triggerType: ['keyword'],
 			},
@@ -849,7 +850,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 				triggerType: ['keyword'],
 			},
@@ -865,7 +866,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -880,7 +881,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -895,7 +896,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -910,7 +911,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -924,7 +925,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -938,7 +939,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -952,7 +953,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -968,7 +969,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
 			},
 		},
@@ -985,7 +986,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['changeStatusEvolutionBot'],
 			},
 		},
@@ -1013,7 +1014,7 @@ export const integrationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['evolutionBot'],
+				operation: ['evolution-bot'],
 				resourceForEvolutionBot: ['changeStatusEvolutionBot'],
 			},
 		},
@@ -1096,12 +1097,13 @@ export const integrationsFields: INodeProperties[] = [
 			},
 		],
 		default: 'chatBot',
-		description: 'Escolha qual o tipo de bot que você deseja vincular',
+		required: true,
+		description: 'Escolha o tipo do bot Dify',
 		displayOptions: {
 			show: {
 				resource: ['integrations-api'],
-				operation: ['difyBot'],
-				resourceForDifyBot: ['createDify', 'updateDify'],
+				operation: ['dify'],
+				resourceForDifyBot: ['createDify'],
 			},
 		},
 	},
@@ -1119,8 +1121,8 @@ export const integrationsFields: INodeProperties[] = [
 				resource: ['integrations-api'],
 				operation: ['difyBot'],
 				resourceForDifyBot: [
-					'updateDify',
 					'findDify',
+					'updateDify',
 					'deleteDify',
 					'fetchSessionsDify',
 					'changeStatusDify',
@@ -1750,4 +1752,62 @@ export const integrationsFields: INodeProperties[] = [
 			},
 		},
 	},
+
+	{
+		displayName: 'JIDs Ignorados',
+		name: 'ignoreJids',
+		type: 'string',
+		typeOptions: {
+			multipleValues: true,
+		},
+		default: [],
+		description: 'Lista de JIDs que serão ignorados pelo bot',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolution-bot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	},
+	{
+		displayName: 'Tipo do Operador',
+		name: 'triggerOperator',
+		type: 'options',
+		options: [
+			{
+				name: 'Contém',
+				value: 'contains',
+			},
+			{
+				name: 'Igual',
+				value: 'equals',
+			},
+			{
+				name: 'Começa Com',
+				value: 'startsWith',
+			},
+			{
+				name: 'Termina Com',
+				value: 'endsWith',
+			},
+			{
+				name: 'Regex',
+				value: 'regex',
+			},
+			{
+				name: 'Nenhum',
+				value: 'none',
+			},
+		],
+		default: 'equals',
+		description: 'Escolha o tipo de operador para o gatilho',
+		displayOptions: {
+			show: {
+				resource: ['integrations-api'],
+				operation: ['evolution-bot'],
+				resourceForEvolutionBot: ['createEvolutionBot', 'updateEvolutionBot'],
+			},
+		},
+	}
 ];

@@ -660,4 +660,32 @@ export const groupsFields: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Nome da Instância',
+		name: 'instanceName',
+		type: 'string' as NodePropertyTypes,
+		default: '',
+		required: true,
+		description: 'Digite o nome da instância que vai entrar no grupo',
+		displayOptions: {
+			show: {
+				resource: ['groups-api'],
+				operation: ['join-group'],
+			},
+		},
+	},
+	{
+		displayName: 'Código do Convite',
+		name: 'inviteCode',
+		type: 'string' as NodePropertyTypes,
+		default: '',
+		required: true,
+		description: 'Digite o código do convite do grupo (ex: JZNHJLvnNd04UvGefiEZAA)',
+		displayOptions: {
+			show: {
+				resource: ['groups-api'],
+				operation: ['join-group'],
+			},
+		},
+	},
 ];
