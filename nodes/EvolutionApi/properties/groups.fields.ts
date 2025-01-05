@@ -2,7 +2,7 @@ import { INodeProperties, NodePropertyTypes } from 'n8n-workflow';
 
 export const groupsFields: INodeProperties[] = [
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -16,7 +16,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome do Grupo',
+		displayName: 'Nome Do Grupo',
 		name: 'subject',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -34,7 +34,7 @@ export const groupsFields: INodeProperties[] = [
 		name: 'description',
 		type: 'string' as NodePropertyTypes,
 		default: '',
-		required: false,
+
 		description: 'Digite a descrição do grupo (opcional)',
 		displayOptions: {
 			show: {
@@ -58,7 +58,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -72,7 +72,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -86,7 +86,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'URL da Imagem',
+		displayName: 'URL Da Imagem',
 		name: 'image',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -100,7 +100,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -114,7 +114,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -128,7 +128,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Novo Nome do Grupo',
+		displayName: 'Novo Nome Do Grupo',
 		name: 'subject',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -142,7 +142,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -156,7 +156,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -184,7 +184,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -198,7 +198,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -212,7 +212,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -226,7 +226,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -240,7 +240,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -254,7 +254,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -268,7 +268,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Mensagem do Convite',
+		displayName: 'Mensagem Do Convite',
 		name: 'description',
 		type: 'string' as NodePropertyTypes,
 		default: 'Segue o link do grupo',
@@ -296,7 +296,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -310,7 +310,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Código do Convite',
+		displayName: 'Código Do Convite',
 		name: 'inviteCode',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -324,7 +324,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -338,20 +338,20 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Método de Busca',
+		displayName: 'Método De Busca',
 		name: 'searchMethod',
 		type: 'options' as NodePropertyTypes,
 		options: [
 			{
-				name: 'Por Código de Convite',
+				name: 'Por Código De Convite',
 				value: 'inviteCode',
 			},
 			{
-				name: 'Por ID do Grupo',
+				name: 'Por ID Do Grupo',
 				value: 'groupJid',
 			},
 			{
-				name: 'Buscar Todos os Grupos',
+				name: 'Buscar Todos Os Grupos',
 				value: 'fetchAll',
 			},
 		],
@@ -366,7 +366,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Código do Convite',
+		displayName: 'Código Do Convite',
 		name: 'inviteCode',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -381,7 +381,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -400,7 +400,7 @@ export const groupsFields: INodeProperties[] = [
 		name: 'getParticipants',
 		type: 'boolean' as NodePropertyTypes,
 		default: false,
-		required: false,
+
 		description: 'Se deve obter a lista de participantes dos grupos',
 		displayOptions: {
 			show: {
@@ -411,7 +411,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -425,7 +425,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -439,7 +439,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -453,7 +453,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -484,7 +484,7 @@ export const groupsFields: INodeProperties[] = [
 				value: 'promote',
 			},
 			{
-				name: 'Rebaixar para Membro',
+				name: 'Rebaixar Para Membro',
 				value: 'demote',
 			},
 		],
@@ -513,7 +513,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -527,7 +527,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -573,7 +573,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -587,7 +587,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -633,7 +633,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -647,7 +647,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID do Grupo',
+		displayName: 'ID Do Grupo',
 		name: 'groupJid',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -661,7 +661,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string' as NodePropertyTypes,
 		default: '',
@@ -675,7 +675,7 @@ export const groupsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Código do Convite',
+		displayName: 'Código Do Convite',
 		name: 'inviteCode',
 		type: 'string' as NodePropertyTypes,
 		default: '',

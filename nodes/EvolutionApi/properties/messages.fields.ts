@@ -3,11 +3,11 @@ import { INodeProperties } from 'n8n-workflow';
 export const messagesFields: INodeProperties[] = [
 	// Campos = Enviar mensagem de texto
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Digite o nome da instância que vai enviar a mensagem',
 		displayOptions: {
 			show: {
@@ -17,12 +17,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Numero do destinatario',
+		displayName: 'Numero Do Destinatario',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'remoteJid do destinarario',
+		description: 'RemoteJid do destinarario',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -76,7 +76,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -109,10 +109,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -128,11 +128,11 @@ export const messagesFields: INodeProperties[] = [
 				],
 			},
 			{
-				displayName: 'Preview de Link',
+				displayName: 'Preview De Link',
 				name: 'linkPreview',
 				type: 'boolean',
 				default: true,
-				description: 'Habilita ou desabilita a prévia de links na mensagem',
+				description: 'Whether to enable or disable link preview in the message',
 			},
 		],
 		displayOptions: {
@@ -145,7 +145,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Imagem
 	{
-		displayName: 'Nome da Instancia',
+		displayName: 'Nome Da Instancia',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -159,12 +159,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -191,7 +191,7 @@ export const messagesFields: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Texto a ser enviado junto a imagem',
 		displayOptions: {
 			show: {
@@ -232,7 +232,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -265,10 +265,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -294,7 +294,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Video
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -308,12 +308,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -340,7 +340,7 @@ export const messagesFields: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Texto a ser enviado junto ao vídeo',
 		displayOptions: {
 			show: {
@@ -381,7 +381,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -414,10 +414,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -443,7 +443,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Audio
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -457,12 +457,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -579,7 +579,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Documento
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -593,12 +593,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -625,7 +625,7 @@ export const messagesFields: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Texto a ser enviado junto ao documento',
 		displayOptions: {
 			show: {
@@ -635,11 +635,11 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome do Arquivo',
+		displayName: 'Nome Do Arquivo',
 		name: 'fileName',
 		type: 'string',
 		default: 'document.pdf',
-		required: false,
+
 		description: 'Nome do arquivo do documento',
 		displayOptions: {
 			show: {
@@ -680,7 +680,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -713,10 +713,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -742,7 +742,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Enquete
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -756,12 +756,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -770,7 +770,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Titulo da Enquete',
+		displayName: 'Titulo Da Enquete',
 		name: 'caption',
 		type: 'string',
 		default: '',
@@ -796,7 +796,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Opções da Enquete',
+		displayName: 'Opções Da Enquete',
 		name: 'options_display',
 		type: 'fixedCollection',
 		default: { metadataValues: [] },
@@ -858,7 +858,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -891,10 +891,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -920,7 +920,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Status
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -934,7 +934,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tipo do status',
+		displayName: 'Tipo Do Status',
 		name: 'type',
 		type: 'options',
 		description: 'Escolha o tipo de status você vai postar',
@@ -946,31 +946,31 @@ export const messagesFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Status de Texto',
+				name: 'Status De Texto',
 				value: 'text',
 			},
 			{
-				name: 'Status de imagem',
+				name: 'Status De Imagem',
 				value: 'image',
 			},
 			{
-				name: 'Status de Video',
+				name: 'Status De Video',
 				value: 'video',
 			},
 			{
-				name: 'Status de Audio',
+				name: 'Status De Audio',
 				value: 'audio',
 			},
 		],
 		default: 'text',
 	},
 	{
-		displayName: 'Conteudo ou URL',
+		displayName: 'Conteudo Ou URL',
 		name: 'content',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Digite o conteudo ou Url da imagem/video/audio a ser postado',
+		description: 'Digite o conteudo ou URL da imagem/video/audio a ser postado',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -979,11 +979,11 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Texto para status de Imagem/Video',
+		displayName: 'Texto Para Status De Imagem/Video',
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Digite o texto para status de Imagem/Video',
 		displayOptions: {
 			show: {
@@ -993,7 +993,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Cor do Background',
+		displayName: 'Cor Do Background',
 		name: 'backgroundColor',
 		type: 'color',
 		default: '#000000',
@@ -1005,7 +1005,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Font do texto',
+		displayName: 'Font Do Texto',
 		name: 'font',
 		type: 'options',
 		description: 'Escolha o tipo da font do seu texto',
@@ -1042,7 +1042,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Documento
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1056,12 +1056,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1088,7 +1088,7 @@ export const messagesFields: INodeProperties[] = [
 		name: 'caption',
 		type: 'string',
 		default: '',
-		required: false,
+
 		description: 'Texto a ser enviado junto ao documento',
 		displayOptions: {
 			show: {
@@ -1098,11 +1098,11 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome do Arquivo',
+		displayName: 'Nome Do Arquivo',
 		name: 'fileName',
 		type: 'string',
 		default: 'document.pdf',
-		required: false,
+
 		description: 'Nome do arquivo do documento',
 		displayOptions: {
 			show: {
@@ -1143,7 +1143,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -1176,10 +1176,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -1205,7 +1205,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Contato
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1219,12 +1219,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1254,7 +1254,7 @@ export const messagesFields: INodeProperties[] = [
 						description: 'Nome completo do contato',
 					},
 					{
-						displayName: 'Número do WhatsApp',
+						displayName: 'Número Do WhatsApp',
 						name: 'wuid',
 						type: 'string',
 						default: '',
@@ -1280,6 +1280,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Email',
 						name: 'email',
 						type: 'string',
+						placeholder: 'name@email.com',
 						default: '',
 						description: 'Endereço de email do contato',
 					},
@@ -1304,7 +1305,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Lista
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1318,12 +1319,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1332,7 +1333,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Título da Lista',
+		displayName: 'Título Da Lista',
 		name: 'title',
 		type: 'string',
 		default: '',
@@ -1360,7 +1361,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Texto do Botão',
+		displayName: 'Texto Do Botão',
 		name: 'buttonText',
 		type: 'string',
 		default: 'Ver Opções',
@@ -1374,7 +1375,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Texto do Rodapé',
+		displayName: 'Texto Do Rodapé',
 		name: 'footerText',
 		type: 'string',
 		default: '',
@@ -1402,11 +1403,11 @@ export const messagesFields: INodeProperties[] = [
 				displayName: 'Seção',
 				values: [
 					{
-						displayName: 'Título da Seção',
+						displayName: 'Título Da Seção',
 						name: 'title',
 						type: 'string',
 						default: '',
-						description: 'Título da seção',
+
 					},
 					{
 						displayName: 'Linhas',
@@ -1437,7 +1438,7 @@ export const messagesFields: INodeProperties[] = [
 										description: 'Descrição da linha (Opcional)',
 									},
 									{
-										displayName: 'ID da Linha',
+										displayName: 'ID Da Linha',
 										name: 'rowId',
 										type: 'string',
 										default: '',
@@ -1489,7 +1490,7 @@ export const messagesFields: INodeProperties[] = [
 						displayName: 'Mensagem',
 						values: [
 							{
-								displayName: 'ID da Mensagem',
+								displayName: 'ID Da Mensagem',
 								name: 'messageId',
 								type: 'string',
 								default: '',
@@ -1522,10 +1523,10 @@ export const messagesFields: INodeProperties[] = [
 								name: 'mentionsEveryOne',
 								type: 'boolean',
 								default: false,
-								description: 'Menciona todos os participantes do grupo',
+								description: 'Whether to mention all participants in the group',
 							},
 							{
-								displayName: 'Números para Mencionar',
+								displayName: 'Números Para Mencionar',
 								name: 'mentioned',
 								type: 'string',
 								default: '',
@@ -1551,7 +1552,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar Botões
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1565,12 +1566,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1660,7 +1661,7 @@ export const messagesFields: INodeProperties[] = [
 						default: 'reply',
 					},
 					{
-						displayName: 'Texto do Botão',
+						displayName: 'Texto Do Botão',
 						name: 'displayText',
 						type: 'string',
 						default: '',
@@ -1679,7 +1680,7 @@ export const messagesFields: INodeProperties[] = [
 						},
 					},
 					{
-						displayName: 'Código para Copiar',
+						displayName: 'Código Para Copiar',
 						name: 'copyCode',
 						type: 'string',
 						default: '',
@@ -1703,7 +1704,7 @@ export const messagesFields: INodeProperties[] = [
 						},
 					},
 					{
-						displayName: 'Número de Telefone',
+						displayName: 'Número De Telefone',
 						name: 'phoneNumber',
 						type: 'string',
 						default: '',
@@ -1728,7 +1729,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Enviar PIX
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1742,12 +1743,12 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Destinatário',
+		displayName: 'Número Do Destinatário',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
 		required: true,
-		description: 'Número do destinatário',
+
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1756,7 +1757,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Nome do Beneficiário',
+		displayName: 'Nome Do Beneficiário',
 		name: 'name',
 		type: 'string',
 		default: '',
@@ -1770,7 +1771,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Tipo da Chave',
+		displayName: 'Tipo Da Chave',
 		name: 'keyType',
 		type: 'options',
 		options: [
@@ -1779,7 +1780,7 @@ export const messagesFields: INodeProperties[] = [
 				value: 'phone',
 			},
 			{
-				name: 'E-mail',
+				name: 'E-Mail',
 				value: 'email',
 			},
 			{
@@ -1820,11 +1821,11 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Enviar para Todos',
+		displayName: 'Enviar Para Todos',
 		name: 'allContacts',
 		type: 'boolean',
 		default: false,
-		description: 'Envia o status para todos os contatos',
+		description: 'Whether to send status to all contacts',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1833,7 +1834,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Lista de Contatos',
+		displayName: 'Lista De Contatos',
 		name: 'statusJidList',
 		type: 'string',
 		default: '',
@@ -1850,7 +1851,7 @@ export const messagesFields: INodeProperties[] = [
 
 	// Campos = Reagir Mensagem
 	{
-		displayName: 'Nome da Instância',
+		displayName: 'Nome Da Instância',
 		name: 'instanceName',
 		type: 'string',
 		default: '',
@@ -1864,7 +1865,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Número do Chat',
+		displayName: 'Número Do Chat',
 		name: 'remoteJid',
 		type: 'string',
 		default: '',
@@ -1878,7 +1879,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'ID da Mensagem',
+		displayName: 'ID Da Mensagem',
 		name: 'messageId',
 		type: 'string',
 		default: '',
@@ -1896,7 +1897,7 @@ export const messagesFields: INodeProperties[] = [
 		name: 'fromMe',
 		type: 'boolean',
 		default: true,
-		description: 'A mensagem foi enviada por você?',
+		description: 'Whether this is your own message',
 		displayOptions: {
 			show: {
 				resource: ['messages-api'],
@@ -1905,7 +1906,7 @@ export const messagesFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Emoji da Reação',
+		displayName: 'Emoji Da Reação',
 		name: 'reaction',
 		type: 'string',
 		default: '👍',
