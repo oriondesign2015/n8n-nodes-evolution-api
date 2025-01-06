@@ -15,6 +15,8 @@ export class EvolutionApi implements ICredentialType {
 			name: 'server-url',
 			type: 'string',
 			default: '',
+			placeholder: 'https://exemplo.com',
+			description: 'Digite a URL completa da sua Evolution API (ex: https://api.exemplo.com)',
 		},
 		{
 			displayName: 'ApiKey',
@@ -24,6 +26,7 @@ export class EvolutionApi implements ICredentialType {
 			typeOptions: {
 				password: true,
 			},
+			description: 'Digite a ApiKey da Instancia ou Global da sua Evolution API',
 		},
 	];
 
@@ -38,9 +41,8 @@ export class EvolutionApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL:
-				'={{$credentials["server-url"].startsWith("http") ? $credentials["server-url"] : "https://" + $credentials["server-url"]}}',
-			url: '/instance/fetchInstances',
+			baseURL: '={{$credentials["server-url"]}}',
+			url: '={{$credentials["server-url"].endsWith("/") ? "/erro" : "/instance/fetchInstances"}}',
 			method: 'GET',
 			headers: {
 				apikey: '={{$credentials.apikey}}',

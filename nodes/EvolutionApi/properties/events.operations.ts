@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 // Opções da events-api (Eventos)
 export const eventsOperationsOptions: INodeProperties = {
-	displayName: 'Operation',
+	displayName: 'Operação',
 	name: 'operation',
 	type: 'options',
 	noDataExpression: true,

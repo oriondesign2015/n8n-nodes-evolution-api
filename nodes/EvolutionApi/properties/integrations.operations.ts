@@ -2,7 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 // Opções da integrations-api (Integração)
 export const integrationsOperationsOptions: INodeProperties = {
-	displayName: 'Operation',
+	displayName: 'Operação',
 	name: 'operation',
 	type: 'options',
 	noDataExpression: true,
