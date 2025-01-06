@@ -104,7 +104,7 @@ export const resourceOperationsFunctions: ResourceOperationFunctions = {
 		'chatwoot': setChatwoot,
 		'typebot': setTypebot,
 		'evolution-bot': setEvolutionBot,
-		'dify-bot': setDifyBot,
+		'difyBot': setDifyBot,
 		'flowise-bot': setFlowiseBot,
 	},
 	'groups-api': {
