@@ -53,7 +53,7 @@ export const messagesOperationsOptions: INodeProperties = {
 			// Send Media
 			name: 'Enviar Documento',
 			action: 'Enviar documento',
-			description: 'Enviar mensagem de Video',
+			description: 'Enviar mensagem com Documento',
 			value: 'send-document',
 		},
 

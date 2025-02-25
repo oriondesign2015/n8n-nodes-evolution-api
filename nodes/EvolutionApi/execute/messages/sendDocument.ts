@@ -15,11 +15,20 @@ export async function sendDocument(ef: IExecuteFunctions) {
 		const media = ef.getNodeParameter('media', 0) as string;
 
 		// Validação do campo media
-		if (!media.startsWith('http') && !media.startsWith('data:')) {
+		if (!media.startsWith('http') && !media.startsWith('data:') && !isBase64(media)) {
 			throw new NodeApiError(ef.getNode(), {
 				message: 'Formato de mídia inválido',
 				description: 'O documento deve ser uma URL válida ou um base64',
 			});
+		}
+
+		// Função auxiliar para verificar se é base64
+		function isBase64(str: string) {
+			try {
+				return Buffer.from(str, 'base64').toString('base64') === str;
+			} catch (err) {
+				return false;
+			}
 		}
 
 		// Parâmetros opcionais com valores padrão

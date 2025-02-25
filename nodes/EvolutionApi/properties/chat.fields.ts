@@ -231,6 +231,21 @@ export const chatFields: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Número Do Participante',
+		name: 'participant',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Número do participante que enviou a mensagem',
+		displayOptions: {
+			show: {
+				resource: ['chat-api'],
+				operation: ['delete-message'],
+				fromMe: [false],
+			},
+		},
+	},
 
 	// Campos para buscar foto do perfil
 	{

@@ -6,6 +6,13 @@ import {
 } from 'n8n-workflow';
 import { evolutionRequest } from '../evolutionRequest';
 
+interface DeleteMessageBody {
+	id: string;
+	fromMe: boolean;
+	remoteJid: string;
+	participant?: string;
+}
+
 export async function deleteMessage(ef: IExecuteFunctions) {
 	try {
 		const instanceName = ef.getNodeParameter('instanceName', 0) as string;
@@ -13,11 +20,22 @@ export async function deleteMessage(ef: IExecuteFunctions) {
 		const messageId = ef.getNodeParameter('messageId', 0) as string;
 		const fromMe = ef.getNodeParameter('fromMe', 0) as boolean;
 
-		const body = {
+		const formattedRemoteJid = remoteJid.includes('@g.us') || remoteJid.includes('@s.whatsapp.net') 
+			? remoteJid 
+			: `${remoteJid}@s.whatsapp.net`;
+
+		const body: DeleteMessageBody = {
 			id: messageId,
-			remoteJid,
 			fromMe,
+			remoteJid: formattedRemoteJid,
 		};
+
+		if (!fromMe) {
+			const participant = ef.getNodeParameter('participant', 0) as string;
+			body.participant = participant.includes('@s.whatsapp.net') 
+				? participant 
+				: `${participant}@s.whatsapp.net`;
+		}
 
 		const requestOptions: IRequestOptions = {
 			method: 'DELETE' as IHttpRequestMethods,
