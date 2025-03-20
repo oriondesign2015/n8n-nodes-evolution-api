@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-evolution-api",
-  "version": "1.0.3",
-  "description": "Api não oficial do WhatsApp",
+  "version": "1.0.4",
+  "description": "A Evolution API é um hub de canais com foco no WhatsApp",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -43,19 +43,22 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^22.13.5",
-    "@typescript-eslint/parser": "^8.3.0",
-    "eslint": "^8.3.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "@types/node": "^22.13.10",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^5.0.0",
-    "n8n-workflow": "*",
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.3"
+    "n8n-workflow": "^1.70.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
   },
   "dependencies": {
-    "sqlite3": "^5.1.7"
+    "axios": "^1.8.4"
+  },
+  "resolutions": {
+    "axios": "^1.8.4"
   }
 }

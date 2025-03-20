@@ -20,7 +20,9 @@ export class EvolutionApi implements INodeType {
 		defaults: {
 			name: 'Evolution API',
 		},
+		// @ts-ignore
 		inputs: ['main'],
+		// @ts-ignore
 		outputs: ['main'],
 		credentials: [
 			{
